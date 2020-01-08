@@ -6,7 +6,9 @@ import frc.team4909.robot.operator.controllers.BionicF310;
 
 public class Drive extends CommandBase{
     
-    public Drive(){
+
+    public Drive(DriveTrainSubsystem subsystem){
+        addRequirements(subsystem);
     }
 
     @Override
@@ -16,6 +18,7 @@ public class Drive extends CommandBase{
 
     @Override
     public void execute(){
+        System.out.println("test2");
         Robot.drivetrainsubsystem.arcadeDrive(
             -Robot.driverGamepad.getThresholdAxis(BionicF310.LY),
             Robot.driverGamepad.getThresholdAxis(BionicF310.RX)
