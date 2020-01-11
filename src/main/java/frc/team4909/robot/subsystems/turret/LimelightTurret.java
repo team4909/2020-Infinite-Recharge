@@ -7,10 +7,11 @@ import frc.team4909.robot.operator.controllers.BionicF310;
 
 public class LimelightTurret extends CommandBase{
     
-    private final double kP = 0.025;
-    private final double kD = 0.0005;
-    private double lastError;
+    private final double kP = 0.018;
+    private final double kD = 0.005;
+    private double lastError = Robot.vision.getXOffset();
     private double speed;
+    private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
 
     public LimelightTurret(final TurretSubsystem subsystem, final Vision vsubsystem){
@@ -24,9 +25,18 @@ public class LimelightTurret extends CommandBase{
         Robot.vision.setLights(3);
     }
 
+    public double filterOffset(double off, double last){
+        if (Math.abs(off-last) >= 6.0){
+            off = (3*last + off)/4;
+        }
+        return off; 
+    }
+
     @Override
     public void execute(){
-        speed = (Robot.vision.getXOffset() * kP + (Robot.vision.getXOffset() - lastError) * kD);
+        offset = Robot.vision.getXOffset();
+        filterOffset(offset, lastError);
+        speed = (offset * kP + (offset - lastError) * kD);
         Robot.vision.updateVisionDashboard(); 
         if(Robot.driverGamepad.getRawButton(5))
         {
@@ -36,7 +46,7 @@ public class LimelightTurret extends CommandBase{
         {
             Robot.turretsubsystem.setSpeed(Robot.driverGamepad.getThresholdAxis(BionicF310.RX)*0.2);
         }
-        System.out.println("" + kP + " " + twodec.format(speed) + " " + Robot.vision.getXOffset());
+        System.out.println("" + kP + " " + twodec.format(speed) + " " + twodec.format(offset));
         lastError = Robot.vision.getXOffset();
     }
 }
