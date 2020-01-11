@@ -29,10 +29,10 @@ public class ColorSensor extends SubsystemBase {
      */
     private final ColorMatch m_colorMatcher = new ColorMatch();
 
-    private final Color kBlueTarget = ColorMatch.makeColor(0.120, 0.418, 0.462);
-    private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-    private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-    private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+    private final Color kBlueTarget = ColorMatch.makeColor(0.122, 0.421, 0.457);
+    private final Color kGreenTarget = ColorMatch.makeColor(0.167, 0.578, 0.255);
+    private final Color kRedTarget = ColorMatch.makeColor(0.524, 0.35, 0.131);
+    private final Color kYellowTarget = ColorMatch.makeColor(0.32, 0.562, 0.12);
 
    
     public ColorSensor() {
@@ -74,7 +74,9 @@ public class ColorSensor extends SubsystemBase {
         } else {
             colorString = "Unknown";
         }
+        Color color = detectedColor;
         System.out.println("confidence=" + match.confidence +colorString);
+        //System.out.println(color.red + "/" + color.green + "/" + color.blue);
         // System.out.println(detectedColor.red + "," + detectedColor.green + "," +
         // detectedColor.blue);
     }
