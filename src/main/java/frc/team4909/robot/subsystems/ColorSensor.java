@@ -4,11 +4,16 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ColorSensor extends SubsystemBase {
+
+    
+ 
     /**
      * Change the I2C port below to match the connection of your color sensor
      */
@@ -20,6 +25,13 @@ public class ColorSensor extends SubsystemBase {
      */
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
+    public Color color;
+
+    public String colorString;
+
+
+
+
     /**
      * A Rev Color Match object is used to register and detect known colors. This
      * can be calibrated ahead of time or during operation.
@@ -29,10 +41,13 @@ public class ColorSensor extends SubsystemBase {
      */
     private final ColorMatch m_colorMatcher = new ColorMatch();
 
+
     private final Color kBlueTarget = ColorMatch.makeColor(0.122, 0.421, 0.457);
     private final Color kGreenTarget = ColorMatch.makeColor(0.167, 0.578, 0.255);
     private final Color kRedTarget = ColorMatch.makeColor(0.524, 0.35, 0.131);
     private final Color kYellowTarget = ColorMatch.makeColor(0.32, 0.562, 0.12);
+
+    public CANSparkMax colourMotor;
 
    
     public ColorSensor() {
@@ -41,6 +56,8 @@ public class ColorSensor extends SubsystemBase {
         m_colorMatcher.addColorMatch(kGreenTarget);
         m_colorMatcher.addColorMatch(kRedTarget);
         m_colorMatcher.addColorMatch(kYellowTarget); 
+
+
     }
 
     public void periodic() {
@@ -59,7 +76,7 @@ public class ColorSensor extends SubsystemBase {
         /**
          * Run the color match algorithm on our detected color
          */
-        String colorString;
+        
         final ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
         m_colorMatcher.setConfidenceThreshold(0.95);
 
@@ -74,7 +91,7 @@ public class ColorSensor extends SubsystemBase {
         } else {
             colorString = "Unknown";
         }
-        Color color = detectedColor;
+        color = detectedColor;
         System.out.println("confidence=" + match.confidence +colorString);
         //System.out.println(color.red + "/" + color.green + "/" + color.blue);
         // System.out.println(detectedColor.red + "," + detectedColor.green + "," +
