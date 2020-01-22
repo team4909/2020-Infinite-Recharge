@@ -5,14 +5,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.subsystems.ShooterSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.turret.LimelightTurret;
+import frc.team4909.robot.subsystems.turret.ShooterVelocity;
 import frc.team4909.robot.subsystems.turret.TurretSubsystem;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static TurretSubsystem turretsubsystem;
+  public static ShooterSubsystem shootersubsystem;
   public static Vision vision;
   public static BionicF310 driverGamepad;
 
@@ -25,6 +28,9 @@ public class Robot extends TimedRobot {
 
     turretsubsystem = new TurretSubsystem();
     turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
+
+    shootersubsystem = new ShooterSubsystem();
+    shootersubsystem.setDefaultCommand(new ShooterVelocity(shootersubsystem, 0.5));
 
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
@@ -39,6 +45,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
      
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    SmartDashboard.putNumber("Distance", vision.calculateDistanceFromCameraHeight(-9.5, 43.25, 0));
   }
 
   @Override

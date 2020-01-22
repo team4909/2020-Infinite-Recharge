@@ -153,6 +153,12 @@ public class Vision extends Subsystem {
     return methodDistance;
   }
 
+ // public double calculatevelocity(double distance)
+ // {
+  //  distance=this.calculateDistanceArea();
+  //  yspeed=distance/Robot.
+ // }
+
 //   public double calculateDistanceFromCameraHeightWithMin(double targetHeight, double cameraHeight, double cameraAngle) {
 //     if (porthacth) {
 //       // this.targetHeight = RobotMap.ROCKET_PORT_HEIGHT;
