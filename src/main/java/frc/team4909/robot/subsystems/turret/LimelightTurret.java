@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.Vision;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.subsystems.ShooterSubsystem;
 
 public class LimelightTurret extends CommandBase{
     
@@ -14,7 +15,7 @@ public class LimelightTurret extends CommandBase{
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
 
-    public LimelightTurret(final TurretSubsystem subsystem, final Vision vsubsystem){
+    public LimelightTurret(final ShooterSubsystem subsystem, final Vision vsubsystem){
         super();
         addRequirements(subsystem);
     }
@@ -40,11 +41,11 @@ public class LimelightTurret extends CommandBase{
         Robot.vision.updateVisionDashboard(); 
         if(Robot.driverGamepad.getRawButton(5))
         {
-            Robot.turretsubsystem.setSpeed(speed);
+            Robot.shootersubsystem.setSpeed(speed);
         }
         else
         {
-            Robot.turretsubsystem.setSpeed(Robot.driverGamepad.getThresholdAxis(BionicF310.RX)*0.2);
+            Robot.shootersubsystem.setSpeed(Robot.driverGamepad.getThresholdAxis(BionicF310.RX)*0.2);
         }
         System.out.println("" + kP + " " + twodec.format(speed) + " " + twodec.format(offset));
         lastError = Robot.vision.getXOffset();

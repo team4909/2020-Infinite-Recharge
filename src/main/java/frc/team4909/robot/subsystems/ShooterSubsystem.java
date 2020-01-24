@@ -1,5 +1,6 @@
 package frc.team4909.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -14,6 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
+    WPI_TalonSRX turnMotor;
     SpeedControllerGroup shooters;
     public CANEncoder encoder, encoder2;
     CANPIDController speedPID;
@@ -24,6 +26,8 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1 = new CANSparkMax(7, MotorType.kBrushless);
         shooter2 = new CANSparkMax(8, MotorType.kBrushless);
         shooters = new SpeedControllerGroup(shooter1, shooter2);
+
+        turnMotor = new WPI_TalonSRX(0);
 
         kP = 5e-5; 
         kI = 1e-6;
@@ -59,6 +63,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setVelocity(double velocity){
         speedPID.setReference(velocity, ControlType.kVelocity);
+    }
+
+    public void setTurnSpeed(double speed){
+        turnMotor.set(speed);
     }
 
 }
