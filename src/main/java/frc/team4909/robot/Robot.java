@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.subsystems.Actual_Color_sensing_with_sensor_placement;
 import frc.team4909.robot.subsystems.ColorSensor;
+import frc.team4909.robot.subsystems.Color_sensor_sensing;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 
@@ -45,7 +47,16 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void teleopInit() {
+    CommandScheduler.getInstance().schedule(new Actual_Color_sensing_with_sensor_placement());
+  }
+
+  @Override
   public void teleopPeriodic() {
+
+
+    
+
   }
 
   @Override

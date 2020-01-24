@@ -92,7 +92,8 @@ public class ColorSensor extends SubsystemBase {
             colorString = "Unknown";
         }
         color = detectedColor;
-        System.out.println("confidence=" + match.confidence +colorString);
+        System.out.println(colorString);
+        
         //System.out.println(color.red + "/" + color.green + "/" + color.blue);
         // System.out.println(detectedColor.red + "," + detectedColor.green + "," +
         // detectedColor.blue);

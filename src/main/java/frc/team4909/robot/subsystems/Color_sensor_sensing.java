@@ -1,12 +1,6 @@
 package frc.team4909.robot.subsystems;
 
-import java.util.Set;
-
-import com.revrobotics.ColorSensorV3;
-
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.Robot;
 
 public class Color_sensor_sensing extends CommandBase {
@@ -14,10 +8,15 @@ public class Color_sensor_sensing extends CommandBase {
     boolean colour6timespassed;
     int colourCounter;
     String initaialColour;
+    char sixtynine_nice;
+    String lastColour;
 
-    public Color_sensor_sensing(ColorSensor colorsensor) {
 
-        addRequirements(colorsensor);
+
+
+    public Color_sensor_sensing() {
+
+        addRequirements(Robot.colorsensor);
 
 
     }
@@ -28,29 +27,35 @@ public class Color_sensor_sensing extends CommandBase {
         initaialColour = Robot.colorsensor.colorString;
 
 
-        while (colourCounter < 6) {
+        Robot.drivetrainsubsystem.m_left.set(0.2);
 
-            Robot.drivetrainsubsystem.m_left.set(0.5);
-            
-        }
-
-        Robot.drivetrainsubsystem.m_left.set(0.0);
-
+        lastColour = initaialColour;
 
     }
 
     @Override
     public void execute(){
+        System.out.println("initialcolor:"+initaialColour);
+        Robot.drivetrainsubsystem.m_left.set(0.2);
+        System.out.println(lastColour);
+        if (lastColour != Robot.colorsensor.colorString) {
 
-        Robot.drivetrainsubsystem.m_left.set(0.5);
+            if (Robot.colorsensor.colorString == initaialColour ) {
 
-        if (Robot.colorsensor.colorString == initaialColour ) {
 
-            colourCounter++;
+                colourCounter++;
+                
+                
+            }
+
+            lastColour = Robot.colorsensor.colorString;
+
             
         }
+
+
         
-        System.out.println(colourCounter);
+
 
     }
 
@@ -59,6 +64,7 @@ public class Color_sensor_sensing extends CommandBase {
 
         if (colourCounter == 6) {
             
+            Robot.drivetrainsubsystem.m_left.set(0.0);
             return true;
         }
 
