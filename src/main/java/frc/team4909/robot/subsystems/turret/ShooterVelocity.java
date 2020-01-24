@@ -15,7 +15,7 @@ public class ShooterVelocity extends CommandBase{
     }
 
     public void initialize(){
-        Robot.shootersubsystem.setSpeed(velocity);
+        Robot.shootersubsystem.setVelocity(velocity);
     }
 
     // public boolean isFinished(){

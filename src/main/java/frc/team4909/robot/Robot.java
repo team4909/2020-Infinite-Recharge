@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
     turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new ShooterVelocity(shootersubsystem, 0.5));
+    shootersubsystem.setDefaultCommand(new ShooterVelocity(shootersubsystem, 1500));
 
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
@@ -46,6 +46,8 @@ public class Robot extends TimedRobot {
      
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
     SmartDashboard.putNumber("Distance", vision.calculateDistanceFromCameraHeight(-9.5, 43.25, 0));
+    SmartDashboard.putNumber("Speed1", shootersubsystem.encoder.getVelocity());
+    SmartDashboard.putNumber("Speed2", shootersubsystem.encoder2.getVelocity());
   }
 
   @Override

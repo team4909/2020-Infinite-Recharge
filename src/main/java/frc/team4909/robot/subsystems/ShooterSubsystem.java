@@ -15,45 +15,46 @@ public class ShooterSubsystem extends SubsystemBase {
     CANSparkMax shooter1;
     CANSparkMax shooter2;
     SpeedControllerGroup shooters;
-    public CANEncoder encoder;
+    public CANEncoder encoder, encoder2;
     CANPIDController speedPID;
     double kP, kI, kD;
     
     public ShooterSubsystem()
     {
         shooter1 = new CANSparkMax(7, MotorType.kBrushless);
-        //shooter2 = new CANSparkMax(8, MotorType.kBrushless);
-        //shooters = new SpeedControllerGroup(shooter1, shooter2);
+        shooter2 = new CANSparkMax(8, MotorType.kBrushless);
+        shooters = new SpeedControllerGroup(shooter1, shooter2);
 
-        kP = 1;
-        kI = 0;
+        kP = 5e-5; 
+        kI = 1e-6;
         kD = 0;
 
         shooter1.restoreFactoryDefaults();
-        //shooter2.restoreFactoryDefaults();
+        shooter2.restoreFactoryDefaults();
 
-        //shooter2.setInverted(true);
+        shooter1.follow(shooter2, true);
 
-        //shooter2.follow(shooter1);
+        encoder = shooter2.getEncoder();
+        encoder2 = shooter1.getEncoder();
 
-        encoder = new CANEncoder(shooter1);
-
-        speedPID = new CANPIDController(shooter1);
+        speedPID = new CANPIDController(shooter2);
 
         speedPID.setP(kP);
+        speedPID.setI(kI);
         speedPID.setD(kD);
-        speedPID.setIMaxAccum(1.5, 0);
-        speedPID.setOutputRange(-0.75, 0.75);
+        //speedPID.setIMaxAccum(1.5, 0);
+        //speedPID.setOutputRange(-0.75, 0.75);
+        //speedPID.setFeedbackDevice(encoder);
 
-        encoder.setPosition(0);
+        //encoder.setPosition(0);
 
-        encoder.setVelocityConversionFactor(42);
+        //encoder.setVelocityConversionFactor(42);
 
     }
 
     public void setSpeed(double speed)
     {
-        shooter1.set(speed);
+        shooter2.set(speed);
     }
 
     public void setVelocity(double velocity){
