@@ -11,17 +11,17 @@ public class Drive extends CommandBase{
         addRequirements(subsystem);
     }
 
-    // @Override
-    // public void initialize(){
+    @Override
+    public void initialize(){
 
-    // }
+    }
 
-    // @Override
-    // public void execute(){
-    //     System.out.println("test2");
-    //     Robot.drivetrainsubsystem.arcadeDrive(
-    //         -Robot.driverGamepad.getThresholdAxis(BionicF310.LY),
-    //         Robot.driverGamepad.getThresholdAxis(BionicF310.RX)
-    //     );
-    // }
+    @Override
+    public void execute(){
+        System.out.println("test2");
+        Robot.drivetrainsubsystem.tankDrive(
+            -Robot.driverGamepad.getThresholdAxis(BionicF310.LY),
+            -Robot.driverGamepad.getThresholdAxis(BionicF310.RY)
+        );
+    }
 }

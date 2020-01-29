@@ -21,10 +21,10 @@ public class Robot extends TimedRobot {
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
-    vision = new Vision();
+    //vision = new Vision();
 
-    turretsubsystem = new TurretSubsystem();
-    turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
+    // turretsubsystem = new TurretSubsystem();
+    // turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
 
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
      
-    SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    //SmartDashboard.putNumber("X Offset", vision.getXOffset());
   }
 
   @Override
