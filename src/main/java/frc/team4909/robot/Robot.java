@@ -20,8 +20,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    drivetrainsubsystem = new DriveTrainSubsystem();
-    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+    //drivetrainsubsystem = new DriveTrainSubsystem();
+    //drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
     //vision = new Vision();
 

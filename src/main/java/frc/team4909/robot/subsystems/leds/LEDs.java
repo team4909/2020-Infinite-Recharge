@@ -16,13 +16,14 @@ public class LEDs extends SubsystemBase{
     }
 
     public void setBlue() {
-        for (int i = 0; i <= ledBuffer.getLength(); i++) {
+        for (int i = 0; i <= ledBuffer.getLength()-1; i++) {
             ledBuffer.setRGB(i, 0, 255, 0);
         }
         Strip.setData(ledBuffer);
     }
 
-    public void initialize(){
+    public void periodic(){
         setBlue();
+        Strip.start();
     }
 }
