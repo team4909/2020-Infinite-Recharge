@@ -1,9 +1,9 @@
-package frc.team4909.robot.subsystems;
+package frc.team4909.robot.subsystems.controlpanel;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 
-public class Color_sensor_sensing extends CommandBase {
+public class StageTwoControlPanel extends CommandBase {
 
     boolean colour6timespassed;
     int colourCounter;
@@ -11,10 +11,7 @@ public class Color_sensor_sensing extends CommandBase {
     char sixtynine_nice;
     String lastColour;
 
-
-
-
-    public Color_sensor_sensing() {
+    public StageTwoControlPanel() {
 
         addRequirements(Robot.colorsensor);
 

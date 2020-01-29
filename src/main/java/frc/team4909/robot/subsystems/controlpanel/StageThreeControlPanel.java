@@ -1,11 +1,11 @@
-package frc.team4909.robot.subsystems;
+package frc.team4909.robot.subsystems.controlpanel;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 
-public class Actual_Color_sensing_with_sensor_placement extends CommandBase {
+public class StageThreeControlPanel extends CommandBase {
 
     boolean colour6timespassed;
     int colourCounter;
@@ -13,7 +13,7 @@ public class Actual_Color_sensing_with_sensor_placement extends CommandBase {
     char sixtynine_nice;
     String lastColour;
 
-    public Actual_Color_sensing_with_sensor_placement() {
+    public StageThreeControlPanel() {
         addRequirements(Robot.colorsensor);
         String gameData = DriverStation.getInstance().getGameSpecificMessage(); //fms stuff;
         if(gameData.length() > 0){

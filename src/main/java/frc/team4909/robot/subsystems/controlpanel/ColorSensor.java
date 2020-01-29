@@ -1,4 +1,4 @@
-package frc.team4909.robot.subsystems;
+package frc.team4909.robot.subsystems.controlpanel;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
@@ -17,7 +17,7 @@ public class ColorSensor extends SubsystemBase {
     /**
      * Change the I2C port below to match the connection of your color sensor
      */
-    private final I2C.Port i2cPort = I2C.Port.kOnboard;
+    private final I2C.Port i2cPort = I2C.Port.kMXP;
 
     /**
      * A Rev Color Sensor V3 object is constructed with an I2C port as a parameter.
