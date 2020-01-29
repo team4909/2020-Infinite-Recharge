@@ -37,13 +37,10 @@ public class PixycamSubsystem extends SubsystemBase {
 
             ycoord = blocks.get(0).getY(); // y position of the largest
 
-            String data = blocks.get(0).toString();
-
             SmartDashboard.putBoolean("present", true);
 
             SmartDashboard.putNumber("Xccord", xcoord);
             SmartDashboard.putNumber("Ycoord", ycoord);
-            SmartDashboard.putString("Data", data);
         } else{
             SmartDashboard.putBoolean("present", false);
             SmartDashboard.putNumber("size", blocks.size());
