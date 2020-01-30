@@ -46,6 +46,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void disabledInit() {
+    leds.setDisabled();  
+  }
+
+  @Override
   public void autonomousInit() {
 
   }
