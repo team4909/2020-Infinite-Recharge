@@ -7,12 +7,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
+import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.turret.LimelightTurret;
 import frc.team4909.robot.subsystems.turret.TurretSubsystem;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static TurretSubsystem turretsubsystem;
+  public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
 
@@ -21,10 +23,12 @@ public class Robot extends TimedRobot {
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
-    //vision = new Vision();
+    vision = new Vision();
 
-    // turretsubsystem = new TurretSubsystem();
-    // turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
+    turretsubsystem = new TurretSubsystem();
+    turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
+
+    leds = new LEDs();
 
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
@@ -39,6 +43,16 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
      
     //SmartDashboard.putNumber("X Offset", vision.getXOffset());
+  }
+
+  @Override
+  public void disabledInit() {
+    
+  }
+
+  @Override
+  public void disabledPeriodic() {
+    leds.setAllianceColor();  
   }
 
   @Override
