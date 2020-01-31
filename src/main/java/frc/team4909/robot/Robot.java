@@ -23,10 +23,10 @@ public class Robot extends TimedRobot {
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
-    vision = new Vision();
+    //vision = new Vision();
 
-    turretsubsystem = new TurretSubsystem();
-    turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
+    // turretsubsystem = new TurretSubsystem();
+    // turretsubsystem.setDefaultCommand(new LimelightTurret(turretsubsystem, vision));
 
     pixy = new PixycamSubsystem();
 
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
      
-    SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    //SmartDashboard.putNumber("X Offset", vision.getXOffset());
   }
 
   @Override
