@@ -23,8 +23,8 @@ public class ShooterSubsystem extends SubsystemBase {
     
     public ShooterSubsystem()
     {
-        shooter1 = new CANSparkMax(7, MotorType.kBrushless);
-        shooter2 = new CANSparkMax(8, MotorType.kBrushless);
+        shooter1 = new CANSparkMax(5, MotorType.kBrushless);
+        shooter2 = new CANSparkMax(6, MotorType.kBrushless);
         shooters = new SpeedControllerGroup(shooter1, shooter2);
 
         turnMotor = new WPI_TalonSRX(0);
