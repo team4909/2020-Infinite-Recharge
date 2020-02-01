@@ -15,6 +15,7 @@ public class PixycamSubsystem extends SubsystemBase {
     boolean isCamera = false;
     // private SPILink spi;
     int state = -1;
+    ArrayList<Block> blocks;
 
     public PixycamSubsystem() {
         super();
@@ -31,7 +32,7 @@ public class PixycamSubsystem extends SubsystemBase {
         isCamera = state >= 0;
         SmartDashboard.putBoolean("Camera", isCamera);
         pixycam.getCCC().getBlocks(false, 255, 255);
-        ArrayList<Block> blocks = pixycam.getCCC().getBlocks();
+        blocks = pixycam.getCCC().getBlocks();
         if (blocks.size() > 0) {
             xcoord = blocks.get(0).getX(); // x position of the largest
 
@@ -55,6 +56,18 @@ public class PixycamSubsystem extends SubsystemBase {
 
     public double getY(){
     return ycoord;
+    }
+
+    public int getHeight(){
+        return pixycam.getFrameHeight();
+    }
+
+    public int getWidth(){
+        return pixycam.getFrameWidth();
+    }
+
+    public int getNumBlocks(){
+        return blocks.size();
     }
 
 }
