@@ -10,6 +10,7 @@ import frc.team4909.robot.subsystems.ShooterSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.turret.LimelightShooter;
+import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.turret.LimelightTurret;
 import frc.team4909.robot.subsystems.turret.ShooterLimelightAssist;
 import frc.team4909.robot.subsystems.turret.ShooterVelocity;
@@ -17,6 +18,7 @@ import frc.team4909.robot.subsystems.turret.ShooterVelocity;
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static ShooterSubsystem shootersubsystem;
+  public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
 
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
     shootersubsystem = new ShooterSubsystem();
     shootersubsystem.setDefaultCommand(new ShooterVelocity(shootersubsystem, 1500));
 
+    leds = new LEDs();
+
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
         0.1 // Gamepad sensitivity
@@ -46,10 +50,17 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
      
-    SmartDashboard.putNumber("X Offset", vision.getXOffset());
-    SmartDashboard.putNumber("Distance", vision.calculateDistanceFromCameraHeight(-9.5, 43.25, 0));
-    SmartDashboard.putNumber("Speed1", shootersubsystem.encoder.getVelocity());
-    SmartDashboard.putNumber("Speed2", shootersubsystem.encoder2.getVelocity());
+    //SmartDashboard.putNumber("X Offset", vision.getXOffset());
+  }
+
+  @Override
+  public void disabledInit() {
+    
+  }
+
+  @Override
+  public void disabledPeriodic() {
+    leds.setAllianceColor();  
   }
 
   @Override
