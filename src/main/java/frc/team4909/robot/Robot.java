@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
     shootersubsystem = new ShooterSubsystem();
     shooterLimelightAssist = new ParallelCommandGroup(new ShooterOI(shootersubsystem), new ShooterLimelightAssist(shootersubsystem, vision));
   
-    shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new ShootByDistance(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
     //new CANSparkMax(5, MotorType.kBrushless);
     // new CANSparkMax(6, MotorType.kBrushless)
 
