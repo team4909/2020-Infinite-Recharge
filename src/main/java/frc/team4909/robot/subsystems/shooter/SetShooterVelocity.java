@@ -1,14 +1,13 @@
-package frc.team4909.robot.subsystems.turret;
+package frc.team4909.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
-import frc.team4909.robot.subsystems.ShooterSubsystem;
 
-public class ShooterVelocity extends CommandBase{
-    
+public class SetShooterVelocity extends CommandBase {
+
     double velocity;
 
-    public ShooterVelocity(ShooterSubsystem subsystem, double v){
+    public SetShooterVelocity(ShooterSubsystem subsystem, double v) {
         super();
         addRequirements(subsystem);
         velocity = v;

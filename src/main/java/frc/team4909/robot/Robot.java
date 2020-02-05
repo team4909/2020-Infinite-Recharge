@@ -6,14 +6,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
-import frc.team4909.robot.subsystems.ShooterSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
-import frc.team4909.robot.subsystems.turret.LimelightShooter;
 import frc.team4909.robot.subsystems.leds.LEDs;
-import frc.team4909.robot.subsystems.turret.LimelightTurret;
-import frc.team4909.robot.subsystems.turret.ShooterLimelightAssist;
-import frc.team4909.robot.subsystems.turret.ShooterVelocity;
+import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
+import frc.team4909.robot.subsystems.shooter.*;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
@@ -32,7 +29,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new ShooterVelocity(shootersubsystem, 1500));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(shootersubsystem, 1500));
 
     leds = new LEDs();
 

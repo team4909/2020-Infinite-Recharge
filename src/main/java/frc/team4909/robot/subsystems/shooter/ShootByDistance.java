@@ -1,12 +1,11 @@
-package frc.team4909.robot.subsystems.turret;
+package frc.team4909.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.Vision;
-import frc.team4909.robot.subsystems.ShooterSubsystem;
 
-public class LimelightShooter extends CommandBase{
+public class ShootByDistance extends CommandBase {
     private double accelInS2 = 386.22;
     private double currDist;
     private double timeEstimate;
@@ -14,7 +13,7 @@ public class LimelightShooter extends CommandBase{
     private double yComponent;
     private double releaseRPM;
 
-    public LimelightShooter(ShooterSubsystem subsystem, Vision limelight){
+    public ShootByDistance(ShooterSubsystem subsystem, Vision limelight) {
         super();
         addRequirements(subsystem);
     }

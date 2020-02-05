@@ -1,5 +1,6 @@
-package frc.team4909.robot.subsystems;
+package frc.team4909.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -9,28 +10,27 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team4909.robot.RobotConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
-    WPI_TalonSRX turnMotor;
-    SpeedControllerGroup shooters;
+    CANSparkMax turnMotor;
+    WPI_TalonSRX hoodControl;
+    SpeedControllerGroup shooter;
     public CANEncoder encoder, encoder2;
     CANPIDController speedPID;
-    double kP, kI, kD;
     
     public ShooterSubsystem()
     {
         shooter1 = new CANSparkMax(5, MotorType.kBrushless);
         shooter2 = new CANSparkMax(6, MotorType.kBrushless);
-        shooters = new SpeedControllerGroup(shooter1, shooter2);
+        shooter = new SpeedControllerGroup(shooter1, shooter2);
 
-        turnMotor = new WPI_TalonSRX(0);
+        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
 
-        kP = 5e-5; 
-        kI = 1e-6;
-        kD = 0;
+        hoodControl = new WPI_TalonSRX(9);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
@@ -42,9 +42,19 @@ public class ShooterSubsystem extends SubsystemBase {
 
         speedPID = new CANPIDController(shooter2);
 
-        speedPID.setP(kP);
-        speedPID.setI(kI);
-        speedPID.setD(kD);
+        speedPID.setP(RobotConstants.shooterkP);
+        speedPID.setI(RobotConstants.shooterkI);
+        speedPID.setD(RobotConstants.shooterkD);
+
+        hoodControl.configFactoryDefault();
+
+        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
+        hoodControl.config_kP(0, RobotConstants.hoodkP);
+        hoodControl.config_kI(0, RobotConstants.hoodkI);
+        hoodControl.config_kD(0, RobotConstants.hoodkD);
+
+
         //speedPID.setIMaxAccum(1.5, 0);
         //speedPID.setOutputRange(-0.75, 0.75);
         //speedPID.setFeedbackDevice(encoder);
