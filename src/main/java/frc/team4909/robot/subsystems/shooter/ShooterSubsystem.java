@@ -9,6 +9,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 
@@ -30,7 +31,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
 
-        hoodControl = new WPI_TalonSRX(9);
+        //hoodControl = new WPI_TalonSRX(9);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
@@ -46,13 +47,13 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setI(RobotConstants.shooterkI);
         speedPID.setD(RobotConstants.shooterkD);
 
-        hoodControl.configFactoryDefault();
+        // hoodControl.configFactoryDefault();
 
-        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        // hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-        hoodControl.config_kP(0, RobotConstants.hoodkP);
-        hoodControl.config_kI(0, RobotConstants.hoodkI);
-        hoodControl.config_kD(0, RobotConstants.hoodkD);
+        // hoodControl.config_kP(0, RobotConstants.hoodkP);
+        // hoodControl.config_kI(0, RobotConstants.hoodkI);
+        // hoodControl.config_kD(0, RobotConstants.hoodkD);
 
 
         //speedPID.setIMaxAccum(1.5, 0);
@@ -62,7 +63,11 @@ public class ShooterSubsystem extends SubsystemBase {
         //encoder.setPosition(0);
 
         //encoder.setVelocityConversionFactor(42);
+    }
 
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Speed", encoder2.getVelocity());
     }
 
     public void setSpeed(double speed)

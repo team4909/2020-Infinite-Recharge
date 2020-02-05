@@ -31,8 +31,8 @@ public class DriveTrainSubsystem extends SubsystemBase{
     }
 
     public void arcadeDrive(double leftSpeed, double rightSpeed) {
-        double speedOutput = leftSpeed;
-        double turnOutput = rightSpeed;
+        double speedOutput = leftSpeed*0.5;
+        double turnOutput = rightSpeed*0.5;
 
         bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }

@@ -1,5 +1,8 @@
 package frc.team4909.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -8,13 +11,15 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
+import frc.team4909.robot.subsystems.indexer.IndexerOI;
+import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
-import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 import frc.team4909.robot.subsystems.shooter.*;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static ShooterSubsystem shootersubsystem;
+  public static IndexerSubsystem indexerSubsystem;
   public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
@@ -29,7 +34,14 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(shootersubsystem, 1500));
+    shooterLimelightAssist = new ParallelCommandGroup(new ShooterOI(shootersubsystem), new ShooterLimelightAssist(shootersubsystem, vision));
+  
+    shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision));
+    //new CANSparkMax(5, MotorType.kBrushless);
+    // new CANSparkMax(6, MotorType.kBrushless)
+
+    indexerSubsystem = new IndexerSubsystem();
+    indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
 
     leds = new LEDs();
 

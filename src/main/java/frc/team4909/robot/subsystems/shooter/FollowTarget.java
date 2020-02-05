@@ -1,6 +1,8 @@
 package frc.team4909.robot.subsystems.shooter;
 
 import java.text.DecimalFormat;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.Vision;
@@ -8,10 +10,11 @@ import frc.team4909.robot.operator.controllers.BionicF310;
 
 public class FollowTarget extends CommandBase {
 
-    private final double kP = 0.018;
-    private final double kD = 0.005;
+    private final double kP = 0.022;
+    private final double kD = 0.0005;
     private double lastError = Robot.vision.getXOffset();
-    private double speed;
+    private double speedTurret;
+    private double speedShooter;
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
 
@@ -35,19 +38,25 @@ public class FollowTarget extends CommandBase {
 
     @Override
     public void execute(){
-        offset = Robot.vision.getXOffset();
+        offset = -Robot.vision.getXOffset();
         filterOffset(offset, lastError);
-        speed = (offset * kP + (offset - lastError) * kD);
+        speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
         Robot.vision.updateVisionDashboard(); 
+        speedShooter = SmartDashboard.getNumber("Set RPM", 0);
         if(Robot.driverGamepad.getRawButton(5))
         {
-            Robot.shootersubsystem.setSpeed(speed);
+            Robot.shootersubsystem.setTurnSpeed(speedTurret);
+            System.out.println("Aiming" + speedTurret);
+        }
+        else if(Robot.driverGamepad.getRawButton(1)){
+            Robot.shootersubsystem.setVelocity(speedShooter);
         }
         else
         {
-            Robot.shootersubsystem.setSpeed(Robot.driverGamepad.getThresholdAxis(BionicF310.RX)*0.2);
+            Robot.shootersubsystem.setSpeed(0);
+           Robot.shootersubsystem.setTurnSpeed(0);
         }
-        System.out.println("" + kP + " " + twodec.format(speed) + " " + twodec.format(offset));
+        //System.out.println("" + kP + " " + twodec.format(speedTurret) + " " + twodec.format(offset));
         lastError = Robot.vision.getXOffset();
     }
 }
