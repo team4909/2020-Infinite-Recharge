@@ -42,7 +42,7 @@ public class FollowTarget extends CommandBase {
         // filterOffset(offset, lastError);
         // speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
         // Robot.vision.updateVisionDashboard(); 
-        // speedShooter = 2500;//SmartDashboard.getNumber("Set RPM", 0);
+        speedShooter = SmartDashboard.getNumber("Set RPM", 0);
         if(Robot.driverGamepad.getRawButton(1)){
             Robot.shootersubsystem.setVelocity(speedShooter);
             System.out.print("shooting");
