@@ -12,7 +12,7 @@ public class FollowTarget extends CommandBase {
 
     private final double kP = 0.022;
     private final double kD = 0.0005;
-    private double lastError = Robot.vision.getXOffset();
+    //private double lastError = Robot.vision.getXOffset();
     private double speedTurret;
     private double speedShooter;
     private double offset;
@@ -26,7 +26,7 @@ public class FollowTarget extends CommandBase {
     @Override
     public void initialize() {
         
-        Robot.vision.setLights(3);
+        //Robot.vision.setLights(3);
     }
 
     public double filterOffset(double off, double last){
@@ -38,17 +38,19 @@ public class FollowTarget extends CommandBase {
 
     @Override
     public void execute(){
-        offset = -Robot.vision.getXOffset();
-        filterOffset(offset, lastError);
-        speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
-        Robot.vision.updateVisionDashboard(); 
-        speedShooter = 2500;//SmartDashboard.getNumber("Set RPM", 0);
+        // offset = -Robot.vision.getXOffset();
+        // filterOffset(offset, lastError);
+        // speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
+        // Robot.vision.updateVisionDashboard(); 
+        // speedShooter = 2500;//SmartDashboard.getNumber("Set RPM", 0);
         if(Robot.driverGamepad.getRawButton(5))
         {
-            Robot.shootersubsystem.setTurnSpeed(speedTurret);
-            System.out.println("Aiming" + speedTurret);
+            Robot.shootersubsystem.setHoodPosition(10000);
+            System.out.println(Robot.shootersubsystem.hoodControl.getSelectedSensorPosition());
+            //Robot.shootersubsystem.setTurnSpeed(speedTurret);
+            //System.out.println("Aiming" + speedTurret);
             if(Robot.driverGamepad.getRawButton(1)){
-                Robot.shootersubsystem.setVelocity(speedShooter);
+                //Robot.shootersubsystem.setVelocity(speedShooter);
                 System.out.print("shooting");
             }
         }
@@ -60,6 +62,6 @@ public class FollowTarget extends CommandBase {
            Robot.shootersubsystem.setTurnSpeed(0);
         }
         //System.out.println("" + kP + " " + twodec.format(speedTurret) + " " + twodec.format(offset));
-        lastError = Robot.vision.getXOffset();
+        // lastError = Robot.vision.getXOffset();
     }
 }

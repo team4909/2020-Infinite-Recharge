@@ -1,5 +1,6 @@
 package frc.team4909.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
@@ -31,7 +32,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
 
-        //hoodControl = new WPI_TalonSRX(9);
+        hoodControl = new WPI_TalonSRX(9);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
@@ -47,22 +48,15 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setI(RobotConstants.shooterkI);
         speedPID.setD(RobotConstants.shooterkD);
 
-        // hoodControl.configFactoryDefault();
+        hoodControl.configFactoryDefault();
 
-        // hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-        // hoodControl.config_kP(0, RobotConstants.hoodkP);
-        // hoodControl.config_kI(0, RobotConstants.hoodkI);
-        // hoodControl.config_kD(0, RobotConstants.hoodkD);
+        hoodControl.config_kP(0, RobotConstants.hoodkP);
+        hoodControl.config_kI(0, RobotConstants.hoodkI);
+        hoodControl.config_kD(0, RobotConstants.hoodkD);
 
-
-        //speedPID.setIMaxAccum(1.5, 0);
-        //speedPID.setOutputRange(-0.75, 0.75);
-        //speedPID.setFeedbackDevice(encoder);
-
-        //encoder.setPosition(0);
-
-        //encoder.setVelocityConversionFactor(42);
+        hoodControl.setSelectedSensorPosition(0);
     }
 
     @Override
@@ -70,8 +64,7 @@ public class ShooterSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Speed", encoder2.getVelocity());
     }
 
-    public void setSpeed(double speed)
-    {
+    public void setSpeed(double speed){
         shooter2.set(speed);
     }
 
@@ -81,6 +74,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setTurnSpeed(double speed){
         turnMotor.set(speed);
+    }
+
+    public void setHoodPosition(int pos){
+        hoodControl.set(ControlMode.Position, pos);
     }
 
 }

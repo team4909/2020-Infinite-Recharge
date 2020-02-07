@@ -1,8 +1,5 @@
 package frc.team4909.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,28 +25,29 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    drivetrainsubsystem = new DriveTrainSubsystem();
-    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+    // drivetrainsubsystem = new DriveTrainSubsystem();
+    // drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
-    vision = new Vision();
+    //vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shooterLimelightAssist = new ParallelCommandGroup(new ShooterOI(shootersubsystem), new ShooterLimelightAssist(shootersubsystem, vision));
+    //shooterLimelightAssist = new ParallelCommandGroup(new ShooterOI(shootersubsystem), new ShooterLimelightAssist(shootersubsystem, vision));
   
-    shootersubsystem.setDefaultCommand(new ShootByDistance(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
     //new CANSparkMax(5, MotorType.kBrushless);
     // new CANSparkMax(6, MotorType.kBrushless)
 
-    indexerSubsystem = new IndexerSubsystem();
-    indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
+    // indexerSubsystem = new IndexerSubsystem();
+    // indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
 
-    leds = new LEDs();
+    // leds = new LEDs();
 
     driverGamepad = new BionicF310(0, // Port
         0.6, // Deadzone
         0.1 // Gamepad sensitivity
     );
 
+    driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
     
 }
 
@@ -69,7 +67,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    leds.setAllianceColor();  
+    //leds.setAllianceColor();  
   }
 
   @Override
