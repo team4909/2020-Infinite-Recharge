@@ -37,8 +37,8 @@ public class Robot extends TimedRobot {
     //new CANSparkMax(5, MotorType.kBrushless);
     // new CANSparkMax(6, MotorType.kBrushless)
 
-    // indexerSubsystem = new IndexerSubsystem();
-    // indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
+    indexerSubsystem = new IndexerSubsystem();
+    indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
 
     // leds = new LEDs();
 
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
-    driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
+    //driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
     
 }
 

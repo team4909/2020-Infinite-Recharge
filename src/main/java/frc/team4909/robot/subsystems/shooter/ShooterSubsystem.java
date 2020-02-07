@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2 = new CANSparkMax(6, MotorType.kBrushless);
         shooter = new SpeedControllerGroup(shooter1, shooter2);
 
-        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
+        //turnMotor = new CANSparkMax(10, MotorType.kBrushless);
 
         hoodControl = new WPI_TalonSRX(9);
 
@@ -48,15 +48,15 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setI(RobotConstants.shooterkI);
         speedPID.setD(RobotConstants.shooterkD);
 
-        hoodControl.configFactoryDefault();
+        // hoodControl.configFactoryDefault();
 
-        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        // hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-        hoodControl.config_kP(0, RobotConstants.hoodkP);
-        hoodControl.config_kI(0, RobotConstants.hoodkI);
-        hoodControl.config_kD(0, RobotConstants.hoodkD);
+        // hoodControl.config_kP(0, RobotConstants.hoodkP);
+        // hoodControl.config_kI(0, RobotConstants.hoodkI);
+        // hoodControl.config_kD(0, RobotConstants.hoodkD);
 
-        hoodControl.setSelectedSensorPosition(0);
+        // hoodControl.setSelectedSensorPosition(0);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setHoodPosition(int pos){
-        hoodControl.set(ControlMode.Position, pos);
+        //hoodControl.set(ControlMode.Position, pos);
     }
 
 }

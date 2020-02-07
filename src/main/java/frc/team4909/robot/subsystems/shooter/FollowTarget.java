@@ -43,17 +43,21 @@ public class FollowTarget extends CommandBase {
         // speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
         // Robot.vision.updateVisionDashboard(); 
         // speedShooter = 2500;//SmartDashboard.getNumber("Set RPM", 0);
-        if(Robot.driverGamepad.getRawButton(5))
-        {
-            Robot.shootersubsystem.setHoodPosition(10000);
-            System.out.println(Robot.shootersubsystem.hoodControl.getSelectedSensorPosition());
-            //Robot.shootersubsystem.setTurnSpeed(speedTurret);
-            //System.out.println("Aiming" + speedTurret);
-            if(Robot.driverGamepad.getRawButton(1)){
-                //Robot.shootersubsystem.setVelocity(speedShooter);
-                System.out.print("shooting");
-            }
+        if(Robot.driverGamepad.getRawButton(1)){
+            Robot.shootersubsystem.setVelocity(speedShooter);
+            System.out.print("shooting");
         }
+        // if(Robot.driverGamepad.getRawButton(5))
+        // {
+        //     Robot.shootersubsystem.setHoodPosition(10000);
+        //     System.out.println(Robot.shootersubsystem.hoodControl.getSelectedSensorPosition());
+        //     //Robot.shootersubsystem.setTurnSpeed(speedTurret);
+        //     //System.out.println("Aiming" + speedTurret);
+        //     if(Robot.driverGamepad.getRawButton(1)){
+        //         //Robot.shootersubsystem.setVelocity(speedShooter);
+        //         System.out.print("shooting");
+        //     }
+        // }
         
         
         else
