@@ -80,7 +80,7 @@ public class BionicJoystick extends Joystick {
     public void buttonHeld(BionicButton button, CommandBase command) {
         JoystickButton newButton = new JoystickButton(this, button.getNumber());
 
-        newButton.whileHeld(command);
+        newButton.whenHeld(command);
     }
 
     /**
