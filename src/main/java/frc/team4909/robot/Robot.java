@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
+import frc.team4909.robot.subsystems.indexer.IndexerAndSorterDown;
+import frc.team4909.robot.subsystems.indexer.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.IndexerOI;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.IndexerUp;
 import frc.team4909.robot.subsystems.indexer.SorterOn;
+import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 
@@ -19,6 +22,7 @@ public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static ShooterSubsystem shootersubsystem;
   public static IndexerSubsystem indexerSubsystem;
+  public static SorterSubsystem sorterSubsystem;
   public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
@@ -40,6 +44,8 @@ public class Robot extends TimedRobot {
     indexerSubsystem = new IndexerSubsystem();
     // indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
 
+    sorterSubsystem = new SorterSubsystem();
+
     // leds = new LEDs();
 
     driverGamepad = new BionicF310(0, // Port
@@ -49,8 +55,8 @@ public class Robot extends TimedRobot {
 
     //driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
     driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, SmartDashboard.getNumber("Set RPM", 0)));
-    driverGamepad.buttonHeld(BionicF310.X, new IndexerUp(indexerSubsystem));
-    driverGamepad.buttonHeld(BionicF310.Y, new SorterOn(indexerSubsystem));
+    driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
+    driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
     driverGamepad.buttonHeld(BionicF310.LB, new HoodUp(shootersubsystem));
     driverGamepad.buttonHeld(BionicF310.RB, new HoodDown(shootersubsystem));
     
