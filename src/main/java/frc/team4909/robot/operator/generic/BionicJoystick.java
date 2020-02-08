@@ -1,10 +1,10 @@
 package frc.team4909.robot.operator.generic;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
 /**
@@ -46,17 +46,17 @@ public class BionicJoystick extends Joystick {
 
     }
 
-    public void povActive(BionicPOV povAngle, Command command) {
+    public void povActive(BionicPOV povAngle, CommandBase command) {
         BionicJoystickPOVButton newPov = new BionicJoystickPOVButton(this, povAngle.getNumber());
 
-        newPov.whileActive(command);
+        newPov.whenActive(command);
     }
 
     /**
      * @param button      Button to Create Handler For
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonPressed(BionicButton button, Command command) {
+    public void buttonPressed(BionicButton button, CommandBase command) {
         JoystickButton newButton = new JoystickButton(this, button.getNumber());
 
         newButton.whenPressed(command);
@@ -67,7 +67,7 @@ public class BionicJoystick extends Joystick {
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonPressed(BionicAxis axis, double threshold, Command command) {
+    public void buttonPressed(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
         newButton.whenActive(command);
@@ -77,7 +77,7 @@ public class BionicJoystick extends Joystick {
      * @param button      Button to Create Handler For
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonHeld(BionicButton button, Command command) {
+    public void buttonHeld(BionicButton button, CommandBase command) {
         JoystickButton newButton = new JoystickButton(this, button.getNumber());
 
         newButton.whileHeld(command);
@@ -88,17 +88,17 @@ public class BionicJoystick extends Joystick {
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonHeld(BionicAxis axis, double threshold, Command command) {
+    public void buttonHeld(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
-        newButton.whileActive(command);
+        newButton.whenActive(command);
     }
 
     /**
      * @param button      Button to Create Handler For
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonToggled(BionicButton button, Command command) {
+    public void buttonToggled(BionicButton button, CommandBase command) {
         JoystickButton newButton = new JoystickButton(this, button.getNumber());
 
         newButton.toggleWhenPressed(command);
