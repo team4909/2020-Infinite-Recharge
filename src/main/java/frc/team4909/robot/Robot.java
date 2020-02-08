@@ -9,15 +9,14 @@ import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.turret.LimelightTurret;
 import frc.team4909.robot.subsystems.turret.TurretSubsystem;
-import edu.wpi.first.wpilibj.I2C;
-import frc.team4909.robot.subsystems.Ultrasonic.ultrasonic;
+import frc.team4909.robot.subsystems.ultrasonic.UltrasonicSensor;
+
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static TurretSubsystem turretsubsystem;
+  public static UltrasonicSensor uSensor;
   public static Vision vision;
   public static BionicF310 driverGamepad;
- // public static I2C i2c;
-  public static ultrasonic ultra;
 
   @Override
   public void robotInit() {
@@ -40,8 +39,9 @@ public class Robot extends TimedRobot {
     //System.out.print("test");
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("distance", ultra.read());
+    SmartDashboard.putNumber("distance", uSensor.read());
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    System.out.print(uSensor.read());
   }
 
   @Override
