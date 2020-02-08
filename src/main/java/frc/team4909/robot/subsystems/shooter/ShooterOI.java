@@ -9,8 +9,6 @@ public class ShooterOI extends CommandBase{
     double speed = 0;
 
     public ShooterOI(ShooterSubsystem subsystem){
-        addRequirements(subsystem);
-        SmartDashboard.putNumber("Set RPM", 0);
     }
 
     public void execute(){

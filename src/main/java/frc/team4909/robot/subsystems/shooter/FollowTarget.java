@@ -49,8 +49,8 @@ public class FollowTarget extends CommandBase {
         //System.out.println("" + kP + " " + twodec.format(speedTurret) + " " + twodec.format(offset));
         lastError = Robot.vision.getXOffset();
     }
-
-    public void end(){
+    @Override
+    public void end(boolean interupted){
         Robot.shootersubsystem.setTurnSpeed(0);
     }
 }

@@ -1,9 +1,10 @@
 package frc.team4909.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team4909.robot.Robot;
 
-public class SetShooterVelocity extends CommandBase {
+public class SetShooterVelocity extends InstantCommand {
 
     double velocity;
 
@@ -15,6 +16,10 @@ public class SetShooterVelocity extends CommandBase {
 
     public void initialize(){
         Robot.shootersubsystem.setVelocity(velocity);
+    }
+
+    public void end(){
+        Robot.shootersubsystem.setVelocity(0);
     }
 
     // public boolean isFinished(){
