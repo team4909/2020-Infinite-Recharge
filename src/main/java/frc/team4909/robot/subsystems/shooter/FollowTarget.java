@@ -25,7 +25,6 @@ public class FollowTarget extends CommandBase {
     
     @Override
     public void initialize() {
-        
         Robot.vision.setLights(3);
     }
 
@@ -51,6 +50,7 @@ public class FollowTarget extends CommandBase {
     }
     @Override
     public void end(boolean interupted){
-        Robot.shootersubsystem.setTurnSpeed(0);
+        Robot.shootersubsystem.turnMotor.set(0);
+        Robot.vision.setLights(0);
     }
 }

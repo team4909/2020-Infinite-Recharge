@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team4909.robot.Robot;
 
-public class SetShooterVelocity extends InstantCommand {
+public class SetShooterVelocity extends CommandBase {
 
     double velocity;
 
@@ -18,7 +18,8 @@ public class SetShooterVelocity extends InstantCommand {
         Robot.shootersubsystem.setVelocity(velocity);
     }
 
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
         Robot.shootersubsystem.setVelocity(0);
     }
 

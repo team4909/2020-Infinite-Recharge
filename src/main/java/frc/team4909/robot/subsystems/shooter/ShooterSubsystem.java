@@ -2,6 +2,7 @@ package frc.team4909.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -49,6 +50,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
         hoodControl.configFactoryDefault();
 
+        hoodControl.setNeutralMode(NeutralMode.Brake);
+
         hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         hoodControl.config_kP(0, RobotConstants.hoodkP);
@@ -56,6 +59,8 @@ public class ShooterSubsystem extends SubsystemBase {
         hoodControl.config_kD(0, RobotConstants.hoodkD);
 
         hoodControl.setSelectedSensorPosition(0);
+
+        speedPID.setReference(0, ControlType.kVelocity);
     }
 
     @Override
