@@ -21,7 +21,7 @@ public class ShooterSubsystem extends SubsystemBase {
     CANSparkMax turnMotor;
     WPI_TalonSRX hoodControl;
     SpeedControllerGroup shooter;
-    public CANEncoder encoder, encoder2;
+    CANEncoder encoder;
     CANPIDController speedPID;
     
     public ShooterSubsystem()
@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2 = new CANSparkMax(6, MotorType.kBrushless);
         shooter = new SpeedControllerGroup(shooter1, shooter2);
 
-        //turnMotor = new CANSparkMax(10, MotorType.kBrushless);
+        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
 
         hoodControl = new WPI_TalonSRX(9);
 
@@ -40,7 +40,6 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1.follow(shooter2, true);
 
         encoder = shooter2.getEncoder();
-        encoder2 = shooter1.getEncoder();
 
         speedPID = new CANPIDController(shooter2);
 
@@ -48,20 +47,20 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setI(RobotConstants.shooterkI);
         speedPID.setD(RobotConstants.shooterkD);
 
-        // hoodControl.configFactoryDefault();
+        hoodControl.configFactoryDefault();
 
-        // hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-        // hoodControl.config_kP(0, RobotConstants.hoodkP);
-        // hoodControl.config_kI(0, RobotConstants.hoodkI);
-        // hoodControl.config_kD(0, RobotConstants.hoodkD);
+        hoodControl.config_kP(0, RobotConstants.hoodkP);
+        hoodControl.config_kI(0, RobotConstants.hoodkI);
+        hoodControl.config_kD(0, RobotConstants.hoodkD);
 
-        // hoodControl.setSelectedSensorPosition(0);
+        hoodControl.setSelectedSensorPosition(0);
     }
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Speed", encoder2.getVelocity());
+        SmartDashboard.putNumber("Speed", encoder.getVelocity());
     }
 
     public void setSpeed(double speed){
@@ -77,7 +76,11 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setHoodPosition(int pos){
-        //hoodControl.set(ControlMode.Position, pos);
+        hoodControl.set(ControlMode.Position, pos);
+    }
+
+    public double getRPM(){
+        return encoder.getVelocity();
     }
 
 }

@@ -25,17 +25,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    // drivetrainsubsystem = new DriveTrainSubsystem();
-    // drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+    
+    SmartDashboard.putNumber("Set RPM", 0);
+    drivetrainsubsystem = new DriveTrainSubsystem();
+    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
-    //vision = new Vision();
+    vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    //shooterLimelightAssist = new ParallelCommandGroup(new ShooterOI(shootersubsystem), new ShooterLimelightAssist(shootersubsystem, vision));
-  
     shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
-    //new CANSparkMax(5, MotorType.kBrushless);
-    // new CANSparkMax(6, MotorType.kBrushless)
 
     indexerSubsystem = new IndexerSubsystem();
     indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
@@ -47,7 +45,8 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
-    //driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
+    driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
+    driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, SmartDashboard.getNumber("Set RPM", 0)));
     
 }
 
