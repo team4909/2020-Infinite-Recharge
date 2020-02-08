@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
+    shootersubsystem.setVelocity(0);
+
     driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
     driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 5400));
     driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());

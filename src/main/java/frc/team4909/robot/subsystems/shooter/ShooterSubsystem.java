@@ -8,6 +8,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -32,8 +33,10 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter = new SpeedControllerGroup(shooter1, shooter2);
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
+        turnMotor.setIdleMode(IdleMode.kBrake);
 
         hoodControl = new WPI_TalonSRX(9);
+        hoodControl.setNeutralMode(NeutralMode.Brake);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
@@ -49,8 +52,6 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setD(RobotConstants.shooterkD);
 
         hoodControl.configFactoryDefault();
-
-        hoodControl.setNeutralMode(NeutralMode.Brake);
 
         hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
@@ -69,6 +70,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setSpeed(double speed){
+        shooter1.set(speed);
         shooter2.set(speed);
     }
 
