@@ -18,10 +18,10 @@ public class UltrasonicSensor extends SubsystemBase {
     }
 
     // Return distance from the sensor in inches
-    public double read()
+    public int read()
     {
         ultra.setDistanceUnits(Unit.kInches);
-        return ultra.getRangeInches();
+        return (int) ultra.getRangeInches();
     }
 
 }
