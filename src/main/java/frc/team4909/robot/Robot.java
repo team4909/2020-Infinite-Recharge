@@ -16,7 +16,7 @@ public class Robot extends TimedRobot {
   public static TurretSubsystem turretsubsystem;
   public static Vision vision;
   public static BionicF310 driverGamepad;
-  public static I2C i2c;
+ // public static I2C i2c;
   public static ultrasonic ultra;
 
   @Override
@@ -40,9 +40,7 @@ public class Robot extends TimedRobot {
     //System.out.print("test");
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
-    if (i2c.read()){
-        SmartDashboard.putNumber("distance1", ultra.read());
-    } 
+    SmartDashboard.putNumber("distance", ultra.read());
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
   }
 

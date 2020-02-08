@@ -1,22 +1,16 @@
 import edu.wpi.first.wpilibj.I2C;
-
+import edu.wpi.first.wpilibj.Ultrasonic;
 public class ultrasonic extends SubsystemBase {
-    public I2C i2c;
-    int slave_address;
+    Ultrasonic ultra;
     public ultrasonic() {
-        i2c = new I2C(Port.kOnboard, 0);
+        ultra = new Ultrasonic(0,1);
+        ultra.setAutomaticMode(true);
     }
 
     public String read()
     {
-        byte[] arduinodata;
-        if (i2c.readOnly(arduinodata, 4)){
-            String data = arduinodata;
-        }
-        else {
-            String data = "No communication";
-        }
-        return arduinodata;
+        ultra.setDistanceUnits(inches);
+        return ultra.getRangeInches();
     }
 
 }
