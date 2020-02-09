@@ -2,10 +2,10 @@ package frc.team4909.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Vision extends Subsystem {
+public class Vision extends SubsystemBase {
   private final double slope = -56.4;
   private final double yintercept = 105.95;
   private final double lightOn = 3.0;
@@ -44,6 +44,7 @@ public class Vision extends Subsystem {
    * @param cameraAngle  is used for the distance formulas
    */
   public Vision() {
+    super();
     this.frontCamFeed = NetworkTableInstance.getDefault().getTable("limelight");
     this.setFrontCamFeed();
     this.updateTableVariables();
@@ -68,10 +69,6 @@ public class Vision extends Subsystem {
     ta = activeCamFeed.getEntry("ta").getDouble(0.0);
     ts = activeCamFeed.getEntry("ts").getDouble(0.0);
     tl = activeCamFeed.getEntry("tl").getDouble(0.0);
-  }
-
-  @Override
-  public void initDefaultCommand() {
   }
 
   public void setLights(double ledState){
@@ -152,6 +149,12 @@ public class Vision extends Subsystem {
     double methodDistance = (targetHeight - cameraHeight) / Math.tan(cameraAngle + getYOffset());
     return methodDistance;
   }
+
+ // public double calculatevelocity(double distance)
+ // {
+  //  distance=this.calculateDistanceArea();
+  //  yspeed=distance/Robot.
+ // }
 
 //   public double calculateDistanceFromCameraHeightWithMin(double targetHeight, double cameraHeight, double cameraAngle) {
 //     if (porthacth) {
