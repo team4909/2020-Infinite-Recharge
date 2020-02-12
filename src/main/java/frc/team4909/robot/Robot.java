@@ -79,7 +79,8 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
      
-    //SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
   }
 
   @Override
@@ -109,6 +110,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
+    SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
   }
 
   @Override

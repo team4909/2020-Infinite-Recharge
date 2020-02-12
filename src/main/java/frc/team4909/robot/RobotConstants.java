@@ -3,9 +3,9 @@ package frc.team4909.robot;
 public class RobotConstants{
 
     //Limlight Constants
-    public static final double limelightHeight = 32.06;
-    public static final double powerPortHeight = 98.25;
-    public static final double limelightAngle = 105;
+    public static final double limelightHeight = 34;
+    public static final double powerPortHeight = 90;
+    public static final double limelightAngle = 15;
     public static final double limelightPowerPortDiff = powerPortHeight-limelightHeight;
 
     //Shooter Constants
