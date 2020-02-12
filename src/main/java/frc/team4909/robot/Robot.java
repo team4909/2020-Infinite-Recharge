@@ -19,6 +19,7 @@ import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
 import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
 import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
+import frc.team4909.robot.subsystems.shooter.commands.SetHoodPosition;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 
 public class Robot extends TimedRobot {
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot {
   public static ShooterSubsystem shootersubsystem;
   public static IndexerSubsystem indexerSubsystem;
   public static SorterSubsystem sorterSubsystem;
+  public static HoodSubsystem hoodSubsystem;
   public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
@@ -49,6 +51,8 @@ public class Robot extends TimedRobot {
 
     sorterSubsystem = new SorterSubsystem();
 
+    hoodSubsystem = new HoodSubsystem();
+
     // leds = new LEDs();
 
     driverGamepad = new BionicF310(0, // Port
@@ -59,11 +63,13 @@ public class Robot extends TimedRobot {
     shootersubsystem.setVelocity(0);
 
     driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
-    driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 5400));
+    driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 4000), true);
+    // driverGamepad.buttonPressed(BionicF310.A, new SetHoodPosition(shootersubsystem, 100));
     driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
     driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
-    driverGamepad.buttonHeld(BionicF310.LB, new HoodUp(shootersubsystem));
-    driverGamepad.buttonHeld(BionicF310.RB, new HoodDown(shootersubsystem));
+    driverGamepad.buttonHeld(BionicF310.LB, new HoodUp());
+    driverGamepad.buttonHeld(BionicF310.RB, new HoodDown());
+
     
 }
 
@@ -94,6 +100,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
+  }
+
+  @Override
+  public void teleopInit() {
+    hoodSubsystem.zeroHood();
   }
 
   @Override

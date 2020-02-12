@@ -105,6 +105,17 @@ public class BionicJoystick extends Joystick {
     }
 
     /**
+     * @param button      Button to Create Handler For
+     * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
+     * @param interruptible If Command is Interruuptable
+     */
+    public void buttonToggled(BionicButton button, CommandBase command, boolean interruptible) {
+        JoystickButton newButton = new JoystickButton(this, button.getNumber());
+
+        newButton.toggleWhenPressed(command, interruptible);
+    }
+
+    /**
      * @param axis        Axis to Create Handler For
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups

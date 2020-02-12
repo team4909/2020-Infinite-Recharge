@@ -13,7 +13,7 @@ public class RobotConstants{
     public static final double shooterkI = 2e-7;
     public static final double shooterkD = 0;
 
-    public static final double hoodkP = 0;
+    public static final double hoodkP = 13;
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
     

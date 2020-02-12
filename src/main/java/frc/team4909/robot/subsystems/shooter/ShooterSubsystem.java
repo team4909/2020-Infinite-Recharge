@@ -21,7 +21,6 @@ public class ShooterSubsystem extends SubsystemBase {
     CANSparkMax shooter1;
     CANSparkMax shooter2;
     public CANSparkMax turnMotor;
-    public WPI_TalonSRX hoodControl;
     SpeedControllerGroup shooter;
     CANEncoder encoder;
     CANPIDController speedPID;
@@ -34,9 +33,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kBrake);
-
-        hoodControl = new WPI_TalonSRX(9);
-        hoodControl.setNeutralMode(NeutralMode.Brake);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
@@ -51,22 +47,13 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setI(RobotConstants.shooterkI);
         speedPID.setD(RobotConstants.shooterkD);
 
-        hoodControl.configFactoryDefault();
-
-        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-
-        hoodControl.config_kP(0, RobotConstants.hoodkP);
-        hoodControl.config_kI(0, RobotConstants.hoodkI);
-        hoodControl.config_kD(0, RobotConstants.hoodkD);
-
-        hoodControl.setSelectedSensorPosition(0);
-
         speedPID.setReference(0, ControlType.kVelocity);
     }
 
     @Override
     public void periodic(){
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
+        
     }
 
     public void setSpeed(double speed){
@@ -80,10 +67,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setTurnSpeed(double speed){
         turnMotor.set(speed);
-    }
-
-    public void setHoodPosition(int pos){
-        hoodControl.set(ControlMode.Position, pos);
     }
 
     public double getRPM(){
