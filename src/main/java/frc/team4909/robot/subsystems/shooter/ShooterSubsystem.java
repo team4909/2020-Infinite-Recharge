@@ -20,8 +20,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
-    CANSparkMax turnMotor;
-    WPI_TalonSRX hoodControl;
+    public CANSparkMax turnMotor;
+    public WPI_TalonSRX hoodControl;
     SpeedControllerGroup shooter;
     CANEncoder encoder;
     CANPIDController speedPID;

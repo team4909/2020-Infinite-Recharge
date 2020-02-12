@@ -8,15 +8,18 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
-import frc.team4909.robot.subsystems.indexer.IndexerAndSorterDown;
-import frc.team4909.robot.subsystems.indexer.IndexerAndSorterUp;
-import frc.team4909.robot.subsystems.indexer.IndexerOI;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
-import frc.team4909.robot.subsystems.indexer.IndexerUp;
-import frc.team4909.robot.subsystems.indexer.SorterOn;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
+import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
+import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
+import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
+import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
+import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;

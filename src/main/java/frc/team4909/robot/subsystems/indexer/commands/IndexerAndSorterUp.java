@@ -1,4 +1,4 @@
-package frc.team4909.robot.subsystems.indexer;
+package frc.team4909.robot.subsystems.indexer.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;

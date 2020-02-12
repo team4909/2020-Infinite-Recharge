@@ -1,9 +1,10 @@
-package frc.team4909.robot.subsystems.shooter;
+package frc.team4909.robot.subsystems.shooter.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.Vision;
+import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class ShootByDistance extends CommandBase {
     private double accelInS2 = 386.22;

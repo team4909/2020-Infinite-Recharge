@@ -1,8 +1,9 @@
-package frc.team4909.robot.subsystems.shooter;
+package frc.team4909.robot.subsystems.shooter.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team4909.robot.Robot;
+import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class SetShooterVelocity extends CommandBase {
 

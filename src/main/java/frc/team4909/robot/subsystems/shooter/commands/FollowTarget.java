@@ -1,4 +1,4 @@
-package frc.team4909.robot.subsystems.shooter;
+package frc.team4909.robot.subsystems.shooter.commands;
 
 import java.text.DecimalFormat;
 
@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.Vision;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class FollowTarget extends CommandBase {
 
@@ -18,7 +19,7 @@ public class FollowTarget extends CommandBase {
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
 
-    public FollowTarget(final ShooterSubsystem subsystem, final Vision vsubsystem) {
+    public FollowTarget(ShooterSubsystem subsystem, final Vision vsubsystem) {
         super();
         addRequirements(subsystem);
     }
