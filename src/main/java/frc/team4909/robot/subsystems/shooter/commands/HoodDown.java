@@ -9,7 +9,7 @@ public class HoodDown extends CommandBase{
         super();
     }
 
-    public void initialize(){
-        Robot.hoodSubsystem.moveHood(-10);
+    public void execute(){
+        Robot.hoodSubsystem.moveHood(-1);
     }
 }

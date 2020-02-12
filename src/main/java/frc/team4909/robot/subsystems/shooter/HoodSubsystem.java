@@ -48,6 +48,7 @@ public class HoodSubsystem extends SubsystemBase{
     }
 
     public void zeroHood(){
+        hoodPos = 0;
         hoodControl.setSelectedSensorPosition(0);
     }
 

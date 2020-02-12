@@ -63,8 +63,8 @@ public class Robot extends TimedRobot {
     shootersubsystem.setVelocity(0);
 
     driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
-    driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 4000), true);
-    // driverGamepad.buttonPressed(BionicF310.A, new SetHoodPosition(shootersubsystem, 100));
+    driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 3000), true);
+    driverGamepad.buttonPressed(BionicF310.Start, new SetHoodPosition(shootersubsystem, 100));
     driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
     driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
     driverGamepad.buttonHeld(BionicF310.LB, new HoodUp());

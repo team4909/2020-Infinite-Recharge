@@ -43,9 +43,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
         speedPID = new CANPIDController(shooter2);
 
-        speedPID.setP(RobotConstants.shooterkP);
-        speedPID.setI(RobotConstants.shooterkI);
-        speedPID.setD(RobotConstants.shooterkD);
+        speedPID.setP(0.01);//RobotConstants.shooterkP);
+        speedPID.setI(0);//RobotConstants.shooterkI);
+        speedPID.setD(0);//RobotConstants.shooterkD);
+        // speedPID.setIMaxAccum(10, 0);
 
         speedPID.setReference(0, ControlType.kVelocity);
     }
