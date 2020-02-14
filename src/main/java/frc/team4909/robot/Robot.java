@@ -13,6 +13,7 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
 import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
+import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
@@ -22,6 +23,7 @@ import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodPosition;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.TurretSpeed;
+import frc.team4909.robot.subsystems.shooter.commands.ZeroTurret;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
   public static IndexerSubsystem indexerSubsystem;
   public static SorterSubsystem sorterSubsystem;
   public static HoodSubsystem hoodSubsystem;
+  public static IntakeSubsystem intakeSubsystem;
   public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
@@ -53,6 +56,8 @@ public class Robot extends TimedRobot {
     sorterSubsystem = new SorterSubsystem();
 
     hoodSubsystem = new HoodSubsystem();
+
+    intakeSubsystem = new IntakeSubsystem();
 
     // leds = new LEDs();
 
@@ -106,6 +111,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
   }
