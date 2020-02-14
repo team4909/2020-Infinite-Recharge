@@ -21,6 +21,7 @@ import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
 import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodPosition;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
+import frc.team4909.robot.subsystems.shooter.commands.TurretSpeed;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
@@ -60,15 +61,13 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
-    shootersubsystem.setVelocity(0);
-
     driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
     driverGamepad.buttonToggled(BionicF310.B, new SetShooterVelocity(shootersubsystem, 3000), true);
     driverGamepad.buttonPressed(BionicF310.Start, new SetHoodPosition(shootersubsystem, 100));
     driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
     driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
-    driverGamepad.buttonHeld(BionicF310.LB, new HoodUp());
-    driverGamepad.buttonHeld(BionicF310.RB, new HoodDown());
+    driverGamepad.buttonHeld(BionicF310.LB, new TurretSpeed(0.5));
+    driverGamepad.buttonHeld(BionicF310.RB, new TurretSpeed(-0.5));
 
     
 }
@@ -81,6 +80,8 @@ public class Robot extends TimedRobot {
      
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
+    SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
+    SmartDashboard.putBoolean("Lower Has Ball", indexerSubsystem.hasBallLower());
   }
 
   @Override
@@ -106,6 +107,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     hoodSubsystem.zeroHood();
+    shootersubsystem.setSpeed(0);
   }
 
   @Override

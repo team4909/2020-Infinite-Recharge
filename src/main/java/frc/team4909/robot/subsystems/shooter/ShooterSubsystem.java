@@ -48,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
         speedPID.setD(0);//RobotConstants.shooterkD);
         // speedPID.setIMaxAccum(10, 0);
 
-        speedPID.setReference(0, ControlType.kVelocity);
+        //speedPID.setReference(0, ControlType.kVelocity);
     }
 
     @Override
