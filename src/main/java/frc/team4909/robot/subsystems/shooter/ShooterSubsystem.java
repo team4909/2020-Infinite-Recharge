@@ -25,6 +25,8 @@ public class ShooterSubsystem extends SubsystemBase {
     CANEncoder encoder;
     CANPIDController speedPID;
     DigitalInput endPoint;
+    double speed;
+    public boolean isAtSpeed;
     
     public ShooterSubsystem()
     {
@@ -46,9 +48,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
         speedPID = new CANPIDController(shooter2);
 
-        speedPID.setP(0.01);//RobotConstants.shooterkP);
-        speedPID.setI(0);//RobotConstants.shooterkI);
-        speedPID.setD(0);//RobotConstants.shooterkD);
+        speedPID.setP(RobotConstants.shooterkP);
+        speedPID.setI(RobotConstants.shooterkI);
+        speedPID.setD(RobotConstants.shooterkD);
+        speedPID.setFF(0.0001);
         // speedPID.setIMaxAccum(10, 0);
 
         //speedPID.setReference(0, ControlType.kVelocity);
@@ -65,15 +68,21 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
+        SmartDashboard.putBoolean("At Speed", isAtSpeed);
+        if(Math.abs(speed-encoder.getVelocity())<100){
+            isAtSpeed = true;
+        }else{isAtSpeed = false;}
     }
 
     public void setSpeed(double speed){
         shooter1.set(speed);
         shooter2.set(speed);
+        speed = 0;
     }
 
     public void setVelocity(double velocity){
         speedPID.setReference(velocity, ControlType.kVelocity);
+        speed = velocity;
     }
 
     public void setTurnSpeed(double speed){

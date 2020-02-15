@@ -28,7 +28,7 @@ public class IndexerSubsystem extends SubsystemBase{
     }
 
     public boolean hasBallUpper(){
-        System.out.println(upperPhotoelectric.get());
+        //System.out.println(upperPhotoelectric.get());
         return !upperPhotoelectric.get();
     }
 
@@ -36,22 +36,29 @@ public class IndexerSubsystem extends SubsystemBase{
         return !lowerPhotoelectric.get();
     }
 
-    public void setSpeed(double speed){
+    public void 
+    setSpeed(double speed){
         upperMotor.set(speed);
         lowerMotor.set(speed);
     }
 
     public void setSmartSpeed(double speed){
-        
         if(!hasBallUpper()){
-            upperMotor.set(speed);
-        }else{upperMotor.set(-speed*0.15);}
-        if(ballTimer < timeForBall){
-            lowerMotor.set(speed);
             if(hasBallLower()){
-                ballTimer++;
-            }
-        }else{lowerMotor.set(0);}
+                setSpeed(speed);
+            }else{setSpeed(0);}
+        }else{setSpeed(0);}
+
+
+        // if(!hasBallUpper()){
+        //     upperMotor.set(speed);
+        // }else{upperMotor.set(-speed*0.15);}
+        // if(ballTimer < timeForBall){
+        //     lowerMotor.set(speed);
+        //     if(hasBallLower()){
+        //         ballTimer++;
+        //     }
+        // }else{lowerMotor.set(0);}
         
     }
 
