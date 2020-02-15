@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.generic.BionicAxis;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
+import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
@@ -87,7 +88,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonHeld(BionicF310.RB, new HoodUp());
     manipulatorGamepad.buttonHeld(BionicF310.Y, new ManualIndexerAndSorterUp());
 
-    
+    driverGamepad.buttonToggled(BionicF310.RB, new InvertDrive(drivetrainsubsystem));
 }
 
   @Override   
