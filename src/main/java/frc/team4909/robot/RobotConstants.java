@@ -11,9 +11,9 @@ public class RobotConstants{
     //Shooter Constants
     public static final double shooterkP = 0.005; 
     public static final double shooterkI = 0;
-    public static final double shooterkD = 0;
+    public static final double shooterkD = 0.05;
 
-    public static final double hoodkP = 12;
+    public static final double hoodkP = 24;
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
     

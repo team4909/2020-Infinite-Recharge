@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,10 +20,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
-    public CANSparkMax turnMotor;
+    CANSparkMax turnMotor;
     SpeedControllerGroup shooter;
     CANEncoder encoder;
     CANPIDController speedPID;
+    DigitalInput endPoint;
+    double speed;
+    public boolean isAtSpeed;
     
     public ShooterSubsystem()
     {
@@ -34,6 +37,8 @@ public class ShooterSubsystem extends SubsystemBase {
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kBrake);
 
+        endPoint = new DigitalInput(2);
+
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
 
@@ -43,27 +48,41 @@ public class ShooterSubsystem extends SubsystemBase {
 
         speedPID = new CANPIDController(shooter2);
 
-        speedPID.setP(0.01);//RobotConstants.shooterkP);
-        speedPID.setI(0);//RobotConstants.shooterkI);
-        speedPID.setD(0);//RobotConstants.shooterkD);
+        speedPID.setP(RobotConstants.shooterkP);
+        speedPID.setI(RobotConstants.shooterkI);
+        speedPID.setD(RobotConstants.shooterkD);
+        speedPID.setFF(0.0001);
         // speedPID.setIMaxAccum(10, 0);
 
         //speedPID.setReference(0, ControlType.kVelocity);
     }
 
+    public boolean turretAtZero(){
+        return endPoint.get();
+    }
+
+    public void zeroTurret(){
+        turnMotor.getEncoder().setPosition(0);
+    }
+
     @Override
     public void periodic(){
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
-        
+        SmartDashboard.putBoolean("At Speed", isAtSpeed);
+        if(Math.abs(speed-encoder.getVelocity())<100){
+            isAtSpeed = true;
+        }else{isAtSpeed = false;}
     }
 
     public void setSpeed(double speed){
         shooter1.set(speed);
         shooter2.set(speed);
+        speed = 0;
     }
 
     public void setVelocity(double velocity){
         speedPID.setReference(velocity, ControlType.kVelocity);
+        speed = velocity;
     }
 
     public void setTurnSpeed(double speed){
