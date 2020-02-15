@@ -12,7 +12,7 @@ public class MoveIndexerAtSpeed extends CommandBase {
     public void execute() {
         if (Robot.shootersubsystem.isAtSpeed) {
             Robot.indexerSubsystem.setSpeed(1);
-            Robot.sorterSubsystem.sorterOn(1);
+            Robot.sorterSubsystem.sorterOn(-1);
         } else {
             Robot.indexerSubsystem.setSpeed(0);
             Robot.sorterSubsystem.sorterOn(0);
