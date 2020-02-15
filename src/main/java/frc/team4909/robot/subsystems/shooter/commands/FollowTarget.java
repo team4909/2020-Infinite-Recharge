@@ -23,7 +23,7 @@ public class FollowTarget extends CommandBase {
         super();
         addRequirements(subsystem);
     }
-    
+
     @Override
     public void initialize() {
         Robot.vision.setLights(3);
@@ -41,12 +41,19 @@ public class FollowTarget extends CommandBase {
         offset = -Robot.vision.getXOffset();
         filterOffset(offset, lastError);
         speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
+
+
+        if(Robot.vision.getXOffset() == 0 && Robot.vision.getYOffset() == 0){
+            //System.out.println("No target seen!");
+            SmartDashboard.putBoolean("Target Seen?", false);
+            speedTurret = 0;
+        } else {
+            SmartDashboard.putBoolean("Target Seen?", true);
+        }
+
         Robot.vision.updateVisionDashboard();   
-        //Robot.shootersubsystem.setHoodPosition(10000);
-        //System.out.println(Robot.shootersubsystem.hoodControl.getSelectedSensorPosition());
+
         Robot.shootersubsystem.setTurnSpeed(speedTurret);
-        //System.out.println("Aiming" + speedTurret);
-        //System.out.println("" + kP + " " + twodec.format(speedTurret) + " " + twodec.format(offset));
         lastError = Robot.vision.getXOffset();
     }
     @Override

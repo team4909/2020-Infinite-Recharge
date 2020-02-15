@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.generic.BionicAxis;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
+import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
+import frc.team4909.robot.subsystems.indexer.commands.ManualIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
@@ -27,6 +29,7 @@ import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 import frc.team4909.robot.subsystems.shooter.commands.TurretSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroTurret;
+import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 
 public class Robot extends TimedRobot {
   public static DriveTrainSubsystem drivetrainsubsystem;
@@ -68,22 +71,25 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
-    manipulatorGamepad = new BionicF310(0, // Port
+    manipulatorGamepad = new BionicF310(1, // Port
         0.6, // Deadzone
         0.1 // Gamepad sensitivity
     );
 
-    driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
-    driverGamepad.buttonToggled(BionicF310.B, new ShootBalls(2500), true);
-    // driverGamepad.buttonPressed(BionicF310.Start, new SetHoodPosition(shootersubsystem, 100));
-    driverGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
-    driverGamepad.buttonHeld(BionicF310.Y, new IntakeIn());
-    // driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
-    driverGamepad.buttonHeld(BionicF310.LB, new HoodDown());
-    driverGamepad.buttonHeld(BionicF310.RB, new HoodUp());
-    // driverGamepad.buttonHeld(BionicF310., new IndexerUp(indexerSubsystem));
-
+    manipulatorGamepad.buttonToggled(BionicF310.A, new FollowTarget(shootersubsystem, vision));
+    manipulatorGamepad.buttonToggled(BionicF310.RT, 0.2, new ShootBalls(1000));
+    manipulatorGamepad.buttonHeld(BionicF310.RX, 0.2, new MoveTurret(shootersubsystem));
+    manipulatorGamepad.buttonPressed(BionicF310.Start, new SetShooterVelocity(shootersubsystem, 4000));
+    manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterVelocity(shootersubsystem, 0));
+    manipulatorGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
+    manipulatorGamepad.buttonToggled(BionicF310.LT, 0.2 , new IntakeIn());
+    manipulatorGamepad.buttonHeld(BionicF310.B, new IndexerAndSorterDown());
     
+    manipulatorGamepad.buttonHeld(BionicF310.LB, new HoodDown());
+    manipulatorGamepad.buttonHeld(BionicF310.RB, new HoodUp());
+    manipulatorGamepad.buttonHeld(BionicF310.Y, new ManualIndexerAndSorterUp());
+
+    driverGamepad.buttonToggled(BionicF310.RB, new InvertDrive(drivetrainsubsystem));
 }
 
   @Override   
