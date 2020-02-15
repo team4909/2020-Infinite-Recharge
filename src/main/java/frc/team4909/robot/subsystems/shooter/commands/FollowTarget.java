@@ -23,7 +23,7 @@ public class FollowTarget extends CommandBase {
         super();
         addRequirements(subsystem);
     }
-    
+
     @Override
     public void initialize() {
         Robot.vision.setLights(3);
