@@ -83,6 +83,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterVelocity(shootersubsystem, 0));
     manipulatorGamepad.buttonHeld(BionicF310.X, new IndexerAndSorterUp());
     manipulatorGamepad.buttonHeld(BionicF310.LT, 0.1, new IntakeIn());
+    manipulatorGamepad.buttonHeld(BionicF310.B, new IndexerAndSorterDown());
     
     manipulatorGamepad.buttonHeld(BionicF310.LB, new HoodDown());
     manipulatorGamepad.buttonHeld(BionicF310.RB, new HoodUp());
