@@ -91,7 +91,7 @@ public class BionicJoystick extends Joystick {
     public void buttonHeld(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
-        newButton.whenActive(command);
+        newButton.whenActive(command, true);
     }
 
     /**
@@ -120,7 +120,7 @@ public class BionicJoystick extends Joystick {
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonToggled(BionicAxis axis, double threshold, InstantCommand command) {
+    public void buttonToggled(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
         newButton.toggleWhenActive(command);
