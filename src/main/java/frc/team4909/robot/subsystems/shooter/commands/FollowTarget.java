@@ -42,9 +42,13 @@ public class FollowTarget extends CommandBase {
         filterOffset(offset, lastError);
         speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
 
+
         if(Robot.vision.getXOffset() == 0 && Robot.vision.getYOffset() == 0){
-            System.out.println("No target seen!");
+            //System.out.println("No target seen!");
+            SmartDashboard.putBoolean("Target Seen?", false);
             speedTurret = 0;
+        } else {
+            SmartDashboard.putBoolean("Target Seen?", true);
         }
 
         Robot.vision.updateVisionDashboard();   
