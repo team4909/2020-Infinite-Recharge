@@ -1,5 +1,6 @@
 package frc.team4909.robot.subsystems.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -23,6 +24,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
         frontLeft = new WPI_TalonFX(3);
         backLeft = new WPI_TalonFX(4);
+
+        frontLeft.setNeutralMode(NeutralMode.Coast);
+        frontRight.setNeutralMode(NeutralMode.Coast);
+        backLeft.setNeutralMode(NeutralMode.Coast);
+        backRight.setNeutralMode(NeutralMode.Coast);
         // frontLeft = new CANSparkMax(3, MotorType.kBrushless);
         // backLeft = new CANSparkMax(4, MotorType.kBrushless);
         m_left = new SpeedControllerGroup(frontLeft, backLeft);
@@ -30,9 +36,9 @@ public class DriveTrainSubsystem extends SubsystemBase{
         bionicDrive = new DifferentialDrive(m_left, m_right);
     }
 
-    public void arcadeDrive(double leftSpeed, double rightSpeed) {
-        double speedOutput = leftSpeed*0.5;
-        double turnOutput = rightSpeed*0.5;
+    public void arcadeDrive(double speed, double turn) {
+        double speedOutput = Math.pow(speed, 3)*0.75;
+        double turnOutput = turn*0.5;//Math.pow(rightSpeed, 3);
 
         bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }

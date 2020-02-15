@@ -58,7 +58,8 @@ public class FollowTarget extends CommandBase {
     }
     @Override
     public void end(boolean interupted){
+        System.out.println("Limelight End");
         Robot.shootersubsystem.setTurnSpeed(0);
-        Robot.vision.setLights(0);
+        Robot.vision.setLights(1);
     }
 }
