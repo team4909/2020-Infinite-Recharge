@@ -91,7 +91,7 @@ public class BionicJoystick extends Joystick {
     public void buttonHeld(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
-        newButton.whenActive(command, true);
+        newButton.whileActiveContinuous(command, true);
     }
 
     /**

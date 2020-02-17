@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
 
     driverGamepad = new BionicF310(0, // Port
         0, // Deadzone
-        0 // Gamepad sensitivity
+        0.6 // Gamepad sensitivity
     );
 
     manipulatorGamepad = new BionicF310(1, // Port
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(BionicF310.LB, new SetHoodInit());
     manipulatorGamepad.buttonPressed(BionicF310.RB, new SetHoodFar());
 
-    driverGamepad.buttonToggled(BionicF310.RB, new InvertDrive());
+    driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
 }
 
   @Override   

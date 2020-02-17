@@ -39,11 +39,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
     public void arcadeDrive(double speed, double turn) {
         double speedOutput = Math.pow(speed, 3)*0.75;
-        double turnOutput = turn*0.5;//Math.pow(rightSpeed, 3);
+        double turnOutput = turn*0.65;//Math.pow(rightSpeed, 3);
 
         if(inverted){
-            speedOutput = -speedOutput;
-            turnOutput = -turnOutput;
+            speedOutput = speedOutput*-1;
+            turnOutput = turnOutput*-1;
         }
 
         bionicDrive.arcadeDrive(speedOutput, turnOutput);
