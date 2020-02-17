@@ -20,13 +20,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
-    CANSparkMax turnMotor;
     SpeedControllerGroup shooter;
     CANEncoder encoder;
     CANPIDController speedPID;
-    DigitalInput endPoint;
-    double speed;
+    double speed = 0;
     public boolean isAtSpeed;
+    public DigitalInput endPoint;
+
+    CANSparkMax turnMotor;
     
     public ShooterSubsystem()
     {
@@ -36,7 +37,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kBrake);
-
+        SmartDashboard.putBoolean("induction", true);
         endPoint = new DigitalInput(2);
 
         shooter1.restoreFactoryDefaults();
@@ -57,10 +58,6 @@ public class ShooterSubsystem extends SubsystemBase {
         //speedPID.setReference(0, ControlType.kVelocity);
     }
 
-    public boolean turretAtZero(){
-        return endPoint.get();
-    }
-
     public void zeroTurret(){
         turnMotor.getEncoder().setPosition(0);
     }
@@ -69,9 +66,12 @@ public class ShooterSubsystem extends SubsystemBase {
     public void periodic(){
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
-        if(Math.abs(speed-encoder.getVelocity())<100){
+        if(Math.abs(speed = 0-encoder.getVelocity())<100){
             isAtSpeed = true;
-        }else{isAtSpeed = false;}
+        }
+        else {
+            isAtSpeed = false;
+        }
     }
 
     public void setSpeed(double speed){
@@ -86,7 +86,9 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setTurnSpeed(double speed){
+
         turnMotor.set(speed);
+
     }
 
     public double getRPM(){
