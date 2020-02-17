@@ -1,31 +1,29 @@
 package frc.team4909.robot.subsystems.climber.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import frc.team4909.robot.Robot;
+import frc.team4909.robot.subsystems.climber.Climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ClimberExtend extends CommandBase {
+public class HookHold extends CommandBase {
 
-    public ClimberExtend(Climber climberSubsystem) {
+    public HookHold(Climber subsystem) {
         // @TODO add in reqs
-        super();
-        addRequirements(climberSubsystem);
+        addRequirements(subsystem);
     }
-
 
     @Override
     public void initialize() {
-        
+
     }
 
     @Override
     public void execute() {
-        Robot.climberSubsystem.set(0.2);
+        Robot.climberSubsystem.setHookSpeed(10);
     }
 
     @Override
     public void end(boolean interupted){
-        Robot.climberSubsystem.set(0);
+        Robot.climberSubsystem.hookset.set(0);
     }
 }
