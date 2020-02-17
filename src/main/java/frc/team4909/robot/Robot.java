@@ -7,32 +7,22 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
-import frc.team4909.robot.operator.generic.BionicAxis;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
-import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
-import frc.team4909.robot.subsystems.indexer.commands.ManualIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
-import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
-import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
-import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
 import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
-import frc.team4909.robot.subsystems.shooter.commands.SetHoodPosition;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
-import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
-import frc.team4909.robot.subsystems.shooter.commands.TurretSpeed;
-import frc.team4909.robot.subsystems.shooter.commands.ZeroTurret;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
@@ -84,19 +74,18 @@ public class Robot extends TimedRobot {
     );
 
     manipulatorGamepad.buttonHeld(BionicF310.B, new FollowTarget(shootersubsystem, vision));
-    manipulatorGamepad.buttonHeld(BionicF310.R, new IndexerAndSorterUp());
+    manipulatorGamepad.buttonHeld(BionicF310.RT, 0.1, new IndexerAndSorterUp());
     manipulatorGamepad.buttonHeld(BionicF310.RX, 0.2, new MoveTurret(shootersubsystem));
     manipulatorGamepad.buttonPressed(BionicF310.Start, new SetShooterVelocity(shootersubsystem, 4000));
     manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterSpeed(0));
-    manipulatorGamepad.buttonHeld(BionicF310.X, new SmartIndexerAndSorterUp());
+    manipulatorGamepad.buttonHeld(BionicF310.LT, 0.1, new SmartIndexerAndSorterUp());
     manipulatorGamepad.buttonHeld(BionicF310.L, new IntakeIn());
     manipulatorGamepad.buttonHeld(BionicF310.A, new IndexerAndSorterDown());
     
     manipulatorGamepad.buttonPressed(BionicF310.LB, new SetHoodInit());
     manipulatorGamepad.buttonPressed(BionicF310.RB, new SetHoodFar());
-    manipulatorGamepad.buttonHeld(BionicF310.Y, new ManualIndexerAndSorterUp());
 
-    driverGamepad.buttonToggled(BionicF310.RB, new InvertDrive(drivetrainsubsystem));
+    driverGamepad.buttonToggled(BionicF310.RB, new InvertDrive());
 }
 
   @Override   

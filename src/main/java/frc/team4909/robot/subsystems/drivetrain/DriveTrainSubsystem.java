@@ -14,6 +14,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
     //CANSparkMax frontRight, frontLeft, backRight, backLeft;
     SpeedControllerGroup m_right, m_left;
     DifferentialDrive bionicDrive;
+    boolean inverted;
 
     public DriveTrainSubsystem() {
         frontRight = new WPI_TalonFX(1);
@@ -40,6 +41,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
         double speedOutput = Math.pow(speed, 3)*0.75;
         double turnOutput = turn*0.5;//Math.pow(rightSpeed, 3);
 
+        if(inverted){
+            speedOutput = -speedOutput;
+            turnOutput = -turnOutput;
+        }
+
         bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
@@ -48,6 +54,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
         double rightOutput = rightSpeed;
 
         bionicDrive.tankDrive(leftOutput, rightOutput);
+    }
+
+    public void invertDriveDirection(){
+        inverted = !inverted;
     }
 
     public void initialize(){
