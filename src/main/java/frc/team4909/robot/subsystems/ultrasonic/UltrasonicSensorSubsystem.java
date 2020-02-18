@@ -1,3 +1,6 @@
+/**
+ * @author Billerica bionics
+ */
 package frc.team4909.robot.subsystems.ultrasonic;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -44,13 +47,14 @@ public class UltrasonicSensorSubsystem extends SubsystemBase {
      * @param values The number of readings you want in the data set.
      * @return An average distance, for a more accurate reading.
      */
-    public int readAverageDistance(int values) {
+    public double readAverageDistance(int values) {
         int[] dataSet = new int[values];
         int distSum = 0;
         for (int i = 0; i < values; i++) {
             dataSet[i] = this.read();
             distSum += dataSet[i];
         }
-        return distSum / values;
+        double average = Math.round(distSum / values);
+        return average;
     } 
 }
