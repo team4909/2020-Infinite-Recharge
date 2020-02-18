@@ -20,10 +20,10 @@ public class RobotConstants{
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
 
-    public static final double intakeP = 0;
-    public static final double intakeI = 0;
-    public static final double intakeD = 0;
-    public static final double intakeFF = 0;
+    public static final double intakekP = 0;
+    public static final double intakekI = 0;
+    public static final double intakekD = 0;
+    public static final double intakekF = 0;
     public static final int deploySetpoint = 0;
     
 }

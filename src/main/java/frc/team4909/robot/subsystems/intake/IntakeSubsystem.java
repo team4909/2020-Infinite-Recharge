@@ -20,10 +20,10 @@ public class IntakeSubsystem extends SubsystemBase{
         deployMotor = new CANSparkMax(13, MotorType.kBrushless);
 
         deployPID = new CANPIDController(deployMotor);
-        deployPID.setP(RobotConstants.intakeP);
-        deployPID.setI(RobotConstants.intakeI);
-        deployPID.setD(RobotConstants.intakeD);
-        deployPID.setFF(RobotConstants.intakeFF);
+        deployPID.setP(RobotConstants.intakekP);
+        deployPID.setI(RobotConstants.intakekI);
+        deployPID.setD(RobotConstants.intakekD);
+        deployPID.setFF(RobotConstants.intakekF);
     }
 
     public void setSpeed(double speed){
