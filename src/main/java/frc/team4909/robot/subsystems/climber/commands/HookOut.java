@@ -25,4 +25,3 @@ public class HookOut extends CommandBase{
         Robot.climberSubsystem.hookMotor.set(0);
     }
 }
-}

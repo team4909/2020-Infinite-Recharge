@@ -9,10 +9,10 @@ public class rachetHold extends CommandBase {
 
     int a;
 
-    public rachetHold(int angle) {
+    public rachetHold(int speed) {
         super();
         addRequirements(Robot.climberSubsystem);
-        a = angle;
+        a = speed;
     }   
 
     @Override
@@ -23,6 +23,6 @@ public class rachetHold extends CommandBase {
     @Override
     public void end(boolean interrupted){
         Robot.climberSubsystem.setrachetAngle(0);
-        System.out.println("rachetHold inturrpted");
+        System.out.println("rachetHold interrupted");
     }
 }

@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimberExtend extends CommandBase {
 
-    
+    double pos;
 
-    public ClimberExtend() {
+    public ClimberExtend(double setpoint){
         super();
         addRequirements(Robot.climberSubsystem);
+        pos = setpoint;
     }
 
 
     @Override
     public void initialize() {
+
+        Robot.climberSubsystem.setClimberPosition(pos);
         
     }
 
@@ -24,11 +27,17 @@ public class ClimberExtend extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.climberSubsystem.setSpeed(0.2);
     }
 
     @Override
     public void end(boolean interupted){
-        Robot.climberSubsystem.setSpeed(0);
+    }
+
+    @Override
+    public boolean isFinished() {
+        if(Math.abs(Robot.climberSubsystem.climbEncoder1.getPosition()-pos) <= 10){
+            return true;
+        }
+        return false;
     }
 }

@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
-    CANSparkMax climberMotor1;
+    public CANSparkMax climberMotor1;
     CANSparkMax climberMotor2;
     public CANSparkMax hookMotor;
-    CANEncoder climbEncoder1;
+    public CANEncoder climbEncoder1;
     CANEncoder climbEncoder2;
     CANEncoder hookEncoder;
-    CANPIDController climberPID1;
+    public CANPIDController climberPID1;
     CANPIDController climberPID2;
     CANPIDController hookPID;
 
@@ -74,11 +74,19 @@ public class ClimberSubsystem extends SubsystemBase {
         hookMotor.set(hSpeed);
     }
 
-    public void setHookPosition(double pos){
+    public void setHookPosition(double Hpos){
 
-        hookPID.setReference(pos, ControlType.kPosition);
+        hookPID.setReference(Hpos, ControlType.kPosition);
 
     }
+
+    public void setClimberPosition(double pos){
+
+        climberPID1.setReference(pos, ControlType.kPosition);
+
+    }
+
+
 
     @Override
     public void periodic() {
