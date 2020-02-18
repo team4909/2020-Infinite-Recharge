@@ -3,6 +3,7 @@ package frc.team4909.robot.subsystems.climber;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.PWM;
@@ -17,8 +18,11 @@ public class ClimberSubsystem extends SubsystemBase {
     public CANSparkMax hookMotor;
     CANEncoder climbEncoder1;
     CANEncoder climbEncoder2;
+    CANEncoder hookEncoder;
     CANPIDController climberPID1;
     CANPIDController climberPID2;
+    CANPIDController hookPID;
+
     PWM rachet;
 
     public ClimberSubsystem() {
@@ -33,8 +37,11 @@ public class ClimberSubsystem extends SubsystemBase {
 
         climbEncoder1 = new CANEncoder(climberMotor1);
         climbEncoder2 = new CANEncoder(climberMotor2);
+        hookEncoder = new CANEncoder(hookMotor);
+
         climberPID1 = new CANPIDController(climberMotor1);
         climberPID2 = new CANPIDController(climberMotor2);
+        hookPID = new CANPIDController(hookMotor);
 
         climberMotor2.follow(climberMotor1);
 
@@ -43,6 +50,11 @@ public class ClimberSubsystem extends SubsystemBase {
         climberPID1.setI(RobotConstants.climberkI);
         climberPID1.setD(RobotConstants.climberkD);
         climberPID1.setFF(RobotConstants.climberkF);
+
+        hookPID.setP(RobotConstants.hookkP);
+        hookPID.setP(RobotConstants.hookkI);
+        hookPID.setP(RobotConstants.hookkD);
+        hookPID.setP(RobotConstants.hookkF);
     
 
     }
@@ -60,6 +72,12 @@ public class ClimberSubsystem extends SubsystemBase {
     public void setHSpeed(double hSpeed){
 
         hookMotor.set(hSpeed);
+    }
+
+    public void setHookPosition(double pos){
+
+        hookPID.setReference(pos, ControlType.kPosition);
+
     }
 
     @Override

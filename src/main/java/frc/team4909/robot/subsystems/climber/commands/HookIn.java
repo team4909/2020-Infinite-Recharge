@@ -1,9 +1,13 @@
 package frc.team4909.robot.subsystems.climber.commands;
 
+import com.revrobotics.CANPIDController;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 
 public class HookIn extends CommandBase{
+
+    CANPIDController hookPID;
 
     public HookIn() {
         super();
@@ -12,6 +16,8 @@ public class HookIn extends CommandBase{
 
     @Override
     public void initialize() {
+
+
 
     }
 

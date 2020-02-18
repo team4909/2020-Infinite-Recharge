@@ -23,6 +23,8 @@ import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+import frc.team4909.robot.subsystems.climber.commands.HookIn;
+import frc.team4909.robot.subsystems.climber.commands.HookOut;
 import frc.team4909.robot.subsystems.climber.commands.rachetHold;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
@@ -108,8 +110,9 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
 
 
-    driverGamepad.buttonHeld(BionicF310.Start, new rachetHold(-180));
-    
+    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180));
+    driverGamepad.buttonHeld(BionicF310.X, new HookIn());
+    driverGamepad.buttonHeld(BionicF310.B, new HookOut());
 
 
 
