@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    // shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.2)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -94,7 +94,6 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0.2));
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown());
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerUp(indexerSubsystem));
-    
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit());
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar());
     manipulatorGamepad.buttonHeld(FlightStick.Z, 0.3, new MoveTurret(shootersubsystem));
@@ -106,7 +105,7 @@ public class Robot extends TimedRobot {
 
 }
 
-  @Override   
+  @Override
   public void robotPeriodic() {
     //System.out.print("test");
     Scheduler.getInstance().run();

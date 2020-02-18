@@ -30,14 +30,14 @@ public class FollowTarget extends CommandBase {
     public void initialize() {
         Robot.vision.setLights(3);
 
-        isAligned = false; 
+        isAligned = false;
     }
 
     public double filterOffset(double off, double last){
         if (Math.abs(off-last) >= 6.0){
             off = (3*last + off)/4;
         }
-        return off; 
+        return off;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FollowTarget extends CommandBase {
             SmartDashboard.putBoolean("Target Seen?", true);
         }
 
-        Robot.vision.updateVisionDashboard();   
+        Robot.vision.updateVisionDashboard();
 
         Robot.turretSubsystem.setTurnSpeed(speedTurret);
         lastError = Robot.vision.getXOffset();
@@ -69,22 +69,16 @@ public class FollowTarget extends CommandBase {
             } else Robot.leds.setBlack();
 
             Robot.turretSubsystem.setTurnSpeed(0);
-
-            
-
-           
         }
 
-        
     }
-        
-       
 
-    
     @Override
-    public void end(boolean interupted){
+    public void end(boolean interrupted){
         System.out.println("Limelight End");
+
         Robot.turretSubsystem.setTurnSpeed(0);
         Robot.vision.setLights(1);
+
     }
 }
