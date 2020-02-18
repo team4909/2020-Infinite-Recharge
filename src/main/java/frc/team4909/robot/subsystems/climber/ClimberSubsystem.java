@@ -12,39 +12,59 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
-    CANSparkMax climberMotor;
-    CANEncoder climbEncoder;
-    CANPIDController climberPID;
-    PWM hook;
+    CANSparkMax climberMotor1;
+    CANSparkMax climberMotor2;
+    public CANSparkMax hookMotor;
+    CANEncoder climbEncoder1;
+    CANEncoder climbEncoder2;
+    CANPIDController climberPID1;
+    CANPIDController climberPID2;
+    PWM rachet;
 
     public ClimberSubsystem() {
-        climberMotor = new CANSparkMax(0, MotorType.kBrushless);
-        hook = new PWM(1);
 
-        climbEncoder = new CANEncoder(climberMotor);
-        climberPID = new CANPIDController(climberMotor);
+        climberMotor1 = new CANSparkMax(0, MotorType.kBrushless);
+        climberMotor2 = new CANSparkMax(1, MotorType.kBrushless);
+        rachet = new PWM(1);
+        hookMotor = new CANSparkMax(2, MotorType.kBrushless);
 
-        climberPID.setP(RobotConstants.climberkP);
-        climberPID.setI(RobotConstants.climberkI);
-        climberPID.setD(RobotConstants.climberkD);
-        climberPID.setFF(RobotConstants.climberkF);
+        climberMotor1.restoreFactoryDefaults();
+        climberMotor2.restoreFactoryDefaults();
 
-        climberMotor.restoreFactoryDefaults();
+        climbEncoder1 = new CANEncoder(climberMotor1);
+        climbEncoder2 = new CANEncoder(climberMotor2);
+        climberPID1 = new CANPIDController(climberMotor1);
+        climberPID2 = new CANPIDController(climberMotor2);
+
+        climberMotor2.follow(climberMotor1);
+
+
+        climberPID1.setP(RobotConstants.climberkP);
+        climberPID1.setI(RobotConstants.climberkI);
+        climberPID1.setD(RobotConstants.climberkD);
+        climberPID1.setFF(RobotConstants.climberkF);
+    
 
     }
 
-    public void setHookAngle(int speed){
-        hook.setRaw(speed);
+    public void setrachetAngle(int speed){
+        rachet.setRaw(speed);
     }
 
     public void setSpeed(double speed)
     {
-        climberMotor.set(speed);
+        climberMotor1.set(speed);
+    
+    }
+
+    public void setHSpeed(double hSpeed){
+
+        hookMotor.set(hSpeed);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("position", climbEncoder.getPosition());
+        SmartDashboard.putNumber("position", climbEncoder1.getPosition());
     }
     
 }

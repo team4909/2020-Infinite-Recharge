@@ -5,11 +5,11 @@ import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.generic.BionicButton;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class HookHold extends CommandBase {
+public class rachetHold extends CommandBase {
 
     int a;
 
-    public HookHold(int angle) {
+    public rachetHold(int angle) {
         super();
         addRequirements(Robot.climberSubsystem);
         a = angle;
@@ -17,12 +17,12 @@ public class HookHold extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.climberSubsystem.setHookAngle(a);
+        Robot.climberSubsystem.setrachetAngle(a);
     }
 
     @Override
     public void end(boolean interrupted){
-        Robot.climberSubsystem.setHookAngle(0);
-        System.out.println("HookHold inturrpted");
+        Robot.climberSubsystem.setrachetAngle(0);
+        System.out.println("rachetHold inturrpted");
     }
 }
