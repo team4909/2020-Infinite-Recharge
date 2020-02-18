@@ -17,12 +17,16 @@ public class SetShooterVelocity extends CommandBase {
 
     public void initialize(){
         Robot.shootersubsystem.setVelocity(velocity);
+        System.out.println("init shooter velocity");
     }
 
     @Override
     public void end(boolean interrupted){
-        Robot.shootersubsystem.setSpeed(0);
+        System.out.println("shooter end" + interrupted);
+        // Robot.shootersubsystem.setSpeed(0);
     }
+
+    
 
     // public boolean isFinished(){
     //     if((Robot.shootersubsystem.encoder.getVelocity()-velocity) < 100){

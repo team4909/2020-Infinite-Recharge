@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,71 +20,98 @@ public class ShooterSubsystem extends SubsystemBase {
 
     CANSparkMax shooter1;
     CANSparkMax shooter2;
-    public CANSparkMax turnMotor;
-    public WPI_TalonSRX hoodControl;
-    SpeedControllerGroup shooter;
     CANEncoder encoder;
     CANPIDController speedPID;
-    
+    double speed = 0;
+    public boolean isAtSpeed;
+
+    CANSparkMax turnMotor;
+
+    public double rawspeed, kP, kD, kI, kF;
+
+
+
     public ShooterSubsystem()
     {
+
         shooter1 = new CANSparkMax(5, MotorType.kBrushless);
         shooter2 = new CANSparkMax(6, MotorType.kBrushless);
-        shooter = new SpeedControllerGroup(shooter1, shooter2);
-
-        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
-        turnMotor.setIdleMode(IdleMode.kBrake);
-
-        hoodControl = new WPI_TalonSRX(9);
-        hoodControl.setNeutralMode(NeutralMode.Brake);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
 
         shooter1.follow(shooter2, true);
 
+        shooter1.setIdleMode(IdleMode.kCoast);
+        shooter2.setIdleMode(IdleMode.kCoast);
+
+        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
+        turnMotor.setIdleMode(IdleMode.kBrake);
+
+
         encoder = shooter2.getEncoder();
 
         speedPID = new CANPIDController(shooter2);
+        speedPID.setOutputRange(0.2, 1);
 
         speedPID.setP(RobotConstants.shooterkP);
-        speedPID.setI(RobotConstants.shooterkI);
-        speedPID.setD(RobotConstants.shooterkD);
+        speedPID.setI(0);
+        speedPID.setD(0);
+        // speedPID.setFF(0.09);
+        speedPID.setFF(0);
 
-        hoodControl.configFactoryDefault();
+        SmartDashboard.putNumber("kF", 0);
+        SmartDashboard.putNumber("kI", 0);
+        SmartDashboard.putNumber("kD", 0);
+        SmartDashboard.putNumber("kP", 0);
+        SmartDashboard.putNumber("% Speed", 0);
 
-        hoodControl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    }
 
-        hoodControl.config_kP(0, RobotConstants.hoodkP);
-        hoodControl.config_kI(0, RobotConstants.hoodkI);
-        hoodControl.config_kD(0, RobotConstants.hoodkD);
 
-        hoodControl.setSelectedSensorPosition(0);
-
-        speedPID.setReference(0, ControlType.kVelocity);
+    public void zeroTurret(){
+        turnMotor.getEncoder().setPosition(0);
     }
 
     @Override
     public void periodic(){
+
+        // kP = SmartDashboard.getNumber("kP", 0.005);
+        // kD = SmartDashboard.getNumber("kI", 0);
+        // speed = SmartDashboard.getNumber("% Speed", 0);
+        // kF = SmartDashboard.getNumber("kF", 0);
+        // speedPID.setP(kP);
+        // speedPID.setI(kI);
+        // speedPID.setD(kD);
+        // SmartDashboard.putNumber("Error", speedPID.get);
+        SmartDashboard.putNumber("Curr P", speedPID.getP());
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
+        SmartDashboard.putBoolean("At Speed", isAtSpeed);
+        if(Math.abs(speed-encoder.getVelocity())<100.00){
+            isAtSpeed = true;
+        }
+        else {
+            isAtSpeed = false;
+        }
+
+
+
+
     }
 
     public void setSpeed(double speed){
         shooter1.set(speed);
         shooter2.set(speed);
+        speed = 0;
     }
 
     public void setVelocity(double velocity){
+        // speedPID.setFF(velocity/5000);
         speedPID.setReference(velocity, ControlType.kVelocity);
+        speed = velocity;
     }
 
-    public void setTurnSpeed(double speed){
-        turnMotor.set(speed);
-    }
-
-    public void setHoodPosition(int pos){
-        hoodControl.set(ControlMode.Position, pos);
-    }
+    
 
     public double getRPM(){
         return encoder.getVelocity();

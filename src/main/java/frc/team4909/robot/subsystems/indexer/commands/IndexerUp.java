@@ -11,7 +11,7 @@ public class IndexerUp extends CommandBase{
         addRequirements(subsystem);
     }
 
-    public void initialize(){
+    public void execute(){
         Robot.indexerSubsystem.setSpeed(1);
     }
     @Override

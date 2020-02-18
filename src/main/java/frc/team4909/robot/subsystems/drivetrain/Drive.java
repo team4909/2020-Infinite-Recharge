@@ -19,7 +19,7 @@ public class Drive extends CommandBase{
     @Override
     public void execute(){
         Robot.drivetrainsubsystem.arcadeDrive(
-            -Robot.driverGamepad.getThresholdAxis(BionicF310.LY),
+            Robot.driverGamepad.getThresholdAxis(BionicF310.LY),
             Robot.driverGamepad.getThresholdAxis(BionicF310.RX)
         );
     }

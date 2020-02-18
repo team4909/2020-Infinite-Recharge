@@ -5,17 +5,11 @@ import frc.team4909.robot.Robot;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
  
 public class HoodDown extends CommandBase{
-    public HoodDown(ShooterSubsystem subsystem){
+    public HoodDown(){
         super();
-        addRequirements(subsystem);
     }
 
-    public void initialize(){
-        Robot.shootersubsystem.hoodControl.set(0.1);
-    }
-
-    @Override
-    public void end(boolean interupted){
-        Robot.shootersubsystem.hoodControl.set(0);
+    public void execute(){
+        Robot.hoodSubsystem.moveHood(-1);
     }
 }

@@ -8,6 +8,7 @@ import frc.team4909.robot.Robot;
 import frc.team4909.robot.Vision;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
+import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
 
 public class FollowTarget extends CommandBase {
 
@@ -18,22 +19,25 @@ public class FollowTarget extends CommandBase {
     private double speedShooter;
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
+    public boolean isAligned;
 
-    public FollowTarget(ShooterSubsystem subsystem, final Vision vsubsystem) {
+    public FollowTarget(TurretSubsystem subsystem, final Vision vsubsystem) {
         super();
         addRequirements(subsystem);
     }
-    
+
     @Override
     public void initialize() {
         Robot.vision.setLights(3);
+
+        isAligned = false;
     }
 
     public double filterOffset(double off, double last){
         if (Math.abs(off-last) >= 6.0){
             off = (3*last + off)/4;
         }
-        return off; 
+        return off;
     }
 
     @Override
@@ -41,17 +45,40 @@ public class FollowTarget extends CommandBase {
         offset = -Robot.vision.getXOffset();
         filterOffset(offset, lastError);
         speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
-        Robot.vision.updateVisionDashboard();   
-        //Robot.shootersubsystem.setHoodPosition(10000);
-        //System.out.println(Robot.shootersubsystem.hoodControl.getSelectedSensorPosition());
-        Robot.shootersubsystem.setTurnSpeed(speedTurret);
-        //System.out.println("Aiming" + speedTurret);
-        //System.out.println("" + kP + " " + twodec.format(speedTurret) + " " + twodec.format(offset));
+
+
+        if(Robot.vision.getXOffset() == 0 && Robot.vision.getYOffset() == 0){
+            //System.out.println("No target seen!");
+            SmartDashboard.putBoolean("Target Seen?", false);
+            speedTurret = 0;
+        } else {
+            SmartDashboard.putBoolean("Target Seen?", true);
+        }
+
+        Robot.vision.updateVisionDashboard();
+
+        Robot.turretSubsystem.setTurnSpeed(speedTurret);
         lastError = Robot.vision.getXOffset();
+
+        if (Math.abs(Robot.vision.getXOffset()) <= 5 ){
+
+            if (Robot.shootersubsystem.isAtSpeed){
+
+                Robot.leds.setGreen();
+
+            } else Robot.leds.setBlack();
+
+            Robot.turretSubsystem.setTurnSpeed(0);
+        }
+
     }
+
     @Override
-    public void end(boolean interupted){
-        Robot.shootersubsystem.turnMotor.set(0);
-        Robot.vision.setLights(0);
+    public void end(boolean interrupted){
+        System.out.println("Limelight End");
+
+        Robot.turretSubsystem.setTurnSpeed(0);
+        Robot.vision.setLights(1);
+
     }
 }

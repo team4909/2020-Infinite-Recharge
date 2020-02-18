@@ -89,7 +89,7 @@ public class Vision extends SubsystemBase {
    * @return The Y offset in radians.
    */
   public double getYOffset() {
-    return Math.toRadians(ty);
+    return ty;
   }
 
 //   public double getYOffsetWithMin() { 
@@ -143,10 +143,7 @@ public class Vision extends SubsystemBase {
    * @return The distance to the target using a formula.
    */
   public double calculateDistanceFromCameraHeight(double targetHeight, double cameraHeight, double cameraAngle) {
-    if (porthacth) {
-      // this.targetHeight = RobotMap.ROCKET_PORT_HEIGHT;
-    }
-    double methodDistance = (targetHeight - cameraHeight) / Math.tan(cameraAngle + getYOffset());
+    double methodDistance = (targetHeight - cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getYOffset()));
     return methodDistance;
   }
 
