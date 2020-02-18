@@ -12,11 +12,18 @@ public class RobotConstants{
     public static final double shooterkP = .5;
     public static final double shooterkI = 0;
     public static final double shooterkD = 0.5;
+    public static final double shooterkF = 0;
 
     public static final double turretSpeedMultiplier = 0.3;
 
     public static final double hoodkP = 24;
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
+
+    public static final double intakeP = 0;
+    public static final double intakeI = 0;
+    public static final double intakeD = 0;
+    public static final double intakeFF = 0;
+    public static final int deploySetpoint = 0;
     
 }
