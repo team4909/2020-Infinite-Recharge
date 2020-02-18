@@ -20,6 +20,7 @@ import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
+import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
   public static SorterSubsystem sorterSubsystem;
   public static HoodSubsystem hoodSubsystem;
   public static IntakeSubsystem intakeSubsystem;
+  public static CameraSubsystem cameraSubsystem;
   public static TurretSubsystem turretSubsystem;
   public static LEDs leds;
   public static Vision vision;
@@ -80,7 +82,9 @@ public class Robot extends TimedRobot {
     turretSubsystem = new TurretSubsystem();
 
     climberSubsystem = new ClimberSubsystem();
-    
+
+    cameraSubsystem = new CameraSubsystem();
+    cameraSubsystem.Stream();
 
     leds = new LEDs();
 
@@ -108,8 +112,6 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
 
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
-
-
     driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180));
     driverGamepad.buttonHeld(BionicF310.X, new HookIn());
     driverGamepad.buttonHeld(BionicF310.B, new HookOut());
