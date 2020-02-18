@@ -11,22 +11,40 @@ public class UltrasonicSensorSubsystem extends SubsystemBase {
     public UltrasonicSensorSubsystem() {
         // Ports: trig/ping, echo
         ultra = new Ultrasonic(0, 1);
+        enable();
+    }
+
+    public void enable() {
         ultra.setAutomaticMode(true);
     }
 
-    // Return distance from the sensor in inches
-    public int read()
-    {
+    public void disable() {
+        ultra.setAutomaticMode(false);
+    }
+
+    // Return distance from the sensor in a unit
+    /**
+     * @return The distance.
+     */
+    public int read() {
         ultra.setDistanceUnits(Unit.kInches);
-        double range  = ultra.getRangeInches();
+        double range = ultra.getRangeInches();
         if (range > 0 && range != 0) {
             return (int) range;
         } else {
-            //Distance is not okay
+            // Distance is not okay
             System.out.println("Distance is invalid");
             return 0;
         }
-
     }
 
+    public int readAverageDistance(int values) {
+        int[] dataSet = new int[values];
+        int distSum = 0;
+        for (int i = 0; i < values; i++) {
+            dataSet[i] = this.read();
+            distSum += dataSet[i];
+        }
+        return distSum / values;
+    } 
 }
