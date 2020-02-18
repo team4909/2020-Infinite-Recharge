@@ -20,6 +20,7 @@ import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
+import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static SorterSubsystem sorterSubsystem;
   public static HoodSubsystem hoodSubsystem;
   public static IntakeSubsystem intakeSubsystem;
+  public static CameraSubsystem cameraSubsystem;
   public static TurretSubsystem turretSubsystem;
   public static LEDs leds;
   public static Vision vision;
@@ -77,6 +79,8 @@ public class Robot extends TimedRobot {
     turretSubsystem = new TurretSubsystem();
 
     uSensorSubsystem = new UltrasonicSensorSubsystem();
+    cameraSubsystem = new CameraSubsystem();
+    cameraSubsystem.Stream();
 
     leds = new LEDs();
 
