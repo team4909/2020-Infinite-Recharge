@@ -61,7 +61,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
         // Since the robot doesn't move at speeds less than .3, this map function 
         // takes the full range of the joystick and converts it to the full range of the robot
         if (speed != 0) {
-            speedOutput = map(Math.abs(speed), 0, 1, .3, .75); 
+            speedOutput = map(Math.abs(speed), 0.0, 1, .3, .75); 
             speedOutput = Math.copySign(speedOutput, speed);
         }
 

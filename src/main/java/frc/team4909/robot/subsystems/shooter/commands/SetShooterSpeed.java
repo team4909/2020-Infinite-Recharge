@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 
 public class SetShooterSpeed extends CommandBase{
-    int speed;
+    double speed;
     
-    public SetShooterSpeed(int position){
+    public SetShooterSpeed(double s){
         super();
         addRequirements(Robot.shootersubsystem);
-        speed = position;
+        speed = s;
     }
 
     public void initialize(){

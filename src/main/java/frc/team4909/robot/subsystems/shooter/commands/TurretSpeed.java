@@ -12,11 +12,11 @@ public class TurretSpeed extends CommandBase{
     }
 
     public void initialize(){
-        Robot.shootersubsystem.setTurnSpeed(speed);
+        Robot.turretSubsystem.setTurnSpeed(speed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.shootersubsystem.setTurnSpeed(0);
+        Robot.turretSubsystem.setTurnSpeed(0);
     }
 }

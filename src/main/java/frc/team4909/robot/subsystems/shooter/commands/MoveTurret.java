@@ -9,6 +9,7 @@ import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.Vision;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class MoveTurret extends CommandBase {
@@ -22,18 +23,19 @@ public class MoveTurret extends CommandBase {
     
     @Override
     public void initialize() {
+        // turn off limelight lights
         Robot.vision.setLights(0);
     }
 
     @Override
     public void execute(){
         
-        Robot.shootersubsystem.setTurnSpeed(Robot.manipulatorGamepad.getThresholdAxis(BionicF310.RX));
+        Robot.turretSubsystem.setTurnSpeed(-Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Z));
 
         //check the direction correctness, like whether RS left actually moves the turret left.
     }
     @Override
     public void end(boolean interupted){
-        Robot.shootersubsystem.setTurnSpeed(0);
+        Robot.turretSubsystem.setTurnSpeed(0);
     }
 }

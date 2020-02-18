@@ -26,6 +26,8 @@ public class SetShooterVelocity extends CommandBase {
         Robot.shootersubsystem.setSpeed(0);
     }
 
+    
+
     // public boolean isFinished(){
     //     if((Robot.shootersubsystem.encoder.getVelocity()-velocity) < 100){
     //         return true;

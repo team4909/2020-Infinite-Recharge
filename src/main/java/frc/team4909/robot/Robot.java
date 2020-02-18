@@ -7,22 +7,28 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
+import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
+import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
+import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
 import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
+import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
@@ -34,14 +40,18 @@ public class Robot extends TimedRobot {
   public static SorterSubsystem sorterSubsystem;
   public static HoodSubsystem hoodSubsystem;
   public static IntakeSubsystem intakeSubsystem;
+  public static TurretSubsystem turretSubsystem;
   public static LEDs leds;
   public static Vision vision;
-  public static BionicF310 driverGamepad, manipulatorGamepad;
+  public static BionicF310 driverGamepad;
+  public static FlightStick manipulatorGamepad;
 
   public static ParallelCommandGroup shooterLimelightAssist;
 
   @Override
   public void robotInit() {
+
+
     
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
@@ -52,40 +62,48 @@ public class Robot extends TimedRobot {
     // shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
-    // indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
+    //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
 
     sorterSubsystem = new SorterSubsystem();
+    //sorterSubsystem.setDefaultCommand(new SorterOn(sorterSubsystem));
 
     hoodSubsystem = new HoodSubsystem();
-    hoodSubsystem.setDefaultCommand(new MoveHood());
+    //hoodSubsystem.setDefaultCommand(new MoveHood());
 
     intakeSubsystem = new IntakeSubsystem();
 
-    // leds = new LEDs();
+    turretSubsystem = new TurretSubsystem();
+
+    
+
+    leds = new LEDs();
 
     driverGamepad = new BionicF310(0, // Port
-        0, // Deadzone
+        0.05, // Deadzone
         0.6 // Gamepad sensitivity
     );
 
-    manipulatorGamepad = new BionicF310(1, // Port
-        0, // Deadzone
+    manipulatorGamepad = new FlightStick(1, // Port
+        0.05, // Deadzone
         0.0 // Gamepad sensitivity
     );
 
-    manipulatorGamepad.buttonHeld(BionicF310.B, new FollowTarget(shootersubsystem, vision));
-    manipulatorGamepad.buttonHeld(BionicF310.RT, 0.1, new IndexerAndSorterUp());
-    manipulatorGamepad.buttonHeld(BionicF310.RX, 0.2, new MoveTurret(shootersubsystem));
-    manipulatorGamepad.buttonPressed(BionicF310.Start, new SetShooterVelocity(shootersubsystem, 4000));
-    manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterSpeed(0));
-    manipulatorGamepad.buttonHeld(BionicF310.LT, 0.1, new SmartIndexerAndSorterUp());
-    manipulatorGamepad.buttonHeld(BionicF310.L, new IntakeIn());
-    manipulatorGamepad.buttonHeld(BionicF310.A, new IndexerAndSorterDown());
+
+    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false);
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(shootersubsystem, 3500), false);
+    manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0.2));
+    manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown());
+    manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerUp(indexerSubsystem));
     
-    manipulatorGamepad.buttonPressed(BionicF310.LB, new SetHoodInit());
-    manipulatorGamepad.buttonPressed(BionicF310.RB, new SetHoodFar());
+    manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit());
+    manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar());
+    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.3, new MoveTurret(shootersubsystem));
+
+    manipulatorGamepad.povActive(FlightStick.Top, new HoodUp());
+    manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
 
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
+
 }
 
   @Override   

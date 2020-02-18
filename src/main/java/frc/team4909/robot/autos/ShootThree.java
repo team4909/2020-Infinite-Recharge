@@ -11,9 +11,7 @@ import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 public class ShootThree extends SequentialCommandGroup{
     public ShootThree(){
         addCommands(
-            new FollowTarget(Robot.shootersubsystem, Robot.vision).withTimeout(1), 
-            new SetHoodInit(),
-            new ShootBalls(3500).withTimeout(8.25),
+            new ParallelCommandGroup(new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(1), new SetHoodInit(), new ShootBalls(3500).withTimeout(8.25)),
             new SetDriveSpeed(-0.9).withTimeout(2)
         );
     }
