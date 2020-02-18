@@ -28,37 +28,50 @@ public class ShooterSubsystem extends SubsystemBase {
     double speed;
     public boolean isAtSpeed;
     
+    public double rawspeed, kP, kD, kI, kF;
+
+
+
     public ShooterSubsystem()
     {
+
         shooter1 = new CANSparkMax(5, MotorType.kBrushless);
         shooter2 = new CANSparkMax(6, MotorType.kBrushless);
-        shooter = new SpeedControllerGroup(shooter1, shooter2);
-
-        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
-        turnMotor.setIdleMode(IdleMode.kBrake);
-
-        endPoint = new DigitalInput(2);
 
         shooter1.restoreFactoryDefaults();
         shooter2.restoreFactoryDefaults();
 
         shooter1.follow(shooter2, true);
 
+        shooter1.setIdleMode(IdleMode.kCoast);
+        shooter2.setIdleMode(IdleMode.kCoast);
+
+        turnMotor = new CANSparkMax(10, MotorType.kBrushless);
+        turnMotor.setIdleMode(IdleMode.kBrake);
+
+        endPoint = new DigitalInput(2);
+
         encoder = shooter2.getEncoder();
 
         speedPID = new CANPIDController(shooter2);
+        speedPID.setOutputRange(0.2, 1);
 
         speedPID.setP(RobotConstants.shooterkP);
-        speedPID.setI(RobotConstants.shooterkI);
-        speedPID.setD(RobotConstants.shooterkD);
-        speedPID.setFF(0.0001);
-        // speedPID.setIMaxAccum(10, 0);
+        speedPID.setI(0);
+        speedPID.setD(0);
+        // speedPID.setFF(0.09);
+        speedPID.setFF(0);
 
-        //speedPID.setReference(0, ControlType.kVelocity);
-    }
+    
 
-    public boolean turretAtZero(){
-        return endPoint.get();
+        SmartDashboard.putNumber("kF", 0);
+        SmartDashboard.putNumber("kI", 0);
+        SmartDashboard.putNumber("kD", 0);
+        SmartDashboard.putNumber("kP", 0);  
+        SmartDashboard.putNumber("% Speed", 0);
+        //speedPID.setIMaxAccum(500, 0);
+
+        // speedPID.setReference(1000, ControlType.kVelocity);
     }
 
     public void zeroTurret(){
@@ -67,6 +80,17 @@ public class ShooterSubsystem extends SubsystemBase {
 
     @Override
     public void periodic(){
+        
+        // kP = SmartDashboard.getNumber("kP", 0.005);
+        // kD = SmartDashboard.getNumber("kI", 0);
+        // speed = SmartDashboard.getNumber("% Speed", 0);
+        // kF = SmartDashboard.getNumber("kF", 0);
+        
+        // speedPID.setP(kP);
+        // speedPID.setI(kI);
+        // speedPID.setD(kD);
+        // SmartDashboard.putNumber("Error", speedPID.get);
+        SmartDashboard.putNumber("Curr P", speedPID.getP());
         SmartDashboard.putNumber("Speed", encoder.getVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
         if(Math.abs(speed-encoder.getVelocity())<100){
@@ -81,6 +105,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setVelocity(double velocity){
+        // speedPID.setFF(velocity/5000);
         speedPID.setReference(velocity, ControlType.kVelocity);
         speed = velocity;
     }

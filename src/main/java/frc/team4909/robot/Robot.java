@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    // shootersubsystem.setDefaultCommand(new FollowTarget(shootersubsystem, vision)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.2)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     // indexerSubsystem.setDefaultCommand(new IndexerOI(indexerSubsystem));
@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonHeld(BionicF310.RT, 0.1, new IndexerAndSorterUp());
     manipulatorGamepad.buttonHeld(BionicF310.RX, 0.2, new MoveTurret(shootersubsystem));
     manipulatorGamepad.buttonPressed(BionicF310.Start, new SetShooterVelocity(shootersubsystem, 4000));
-    manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterSpeed(0));
+    manipulatorGamepad.buttonPressed(BionicF310.Back, new SetShooterSpeed(0.8));
     manipulatorGamepad.buttonHeld(BionicF310.LT, 0.1, new SmartIndexerAndSorterUp());
     manipulatorGamepad.buttonHeld(BionicF310.L, new IntakeIn());
     manipulatorGamepad.buttonHeld(BionicF310.A, new IndexerAndSorterDown());

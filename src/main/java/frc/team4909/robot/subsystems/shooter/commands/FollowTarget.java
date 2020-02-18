@@ -60,6 +60,6 @@ public class FollowTarget extends CommandBase {
     public void end(boolean interupted){
         System.out.println("Limelight End");
         Robot.shootersubsystem.setTurnSpeed(0);
-        Robot.vision.setLights(1);
+        Robot.vision.setLights(3); //switch to 0
     }
 }

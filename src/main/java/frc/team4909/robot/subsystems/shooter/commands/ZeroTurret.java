@@ -21,9 +21,7 @@ public class ZeroTurret extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        if(Robot.shootersubsystem.turretAtZero()){
-            return true;
-        }
+    
         return false;
     }
 }

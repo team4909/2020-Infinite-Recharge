@@ -16,7 +16,7 @@ public class MoveHood extends CommandBase{
 
     @Override
     public void initialize() {
-        System.out.println("HoodControl Started");
+        
         // prevValue = Robot.hoodSubsystem.getPosition();
     }
 

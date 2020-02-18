@@ -23,7 +23,7 @@ public class SetShooterVelocity extends CommandBase {
     @Override
     public void end(boolean interrupted){
         System.out.println("shooter end" + interrupted);
-        Robot.shootersubsystem.setSpeed(0);
+        // Robot.shootersubsystem.setSpeed(0);
     }
 
     // public boolean isFinished(){
