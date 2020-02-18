@@ -19,7 +19,7 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.Climber.set(-0.2);
+        Robot.climberSubsystem.set(-0.2);
     }
 
     @Override

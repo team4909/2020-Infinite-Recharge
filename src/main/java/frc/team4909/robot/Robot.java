@@ -1,11 +1,17 @@
 package frc.team4909.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.operator.controllers.FlightStick;
+import frc.team4909.robot.subsystems.climber.Climber;
+import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
+import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+import frc.team4909.robot.subsystems.climber.commands.HookHold;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -29,8 +35,9 @@ public class Robot extends TimedRobot {
   public static LEDs leds;
   public static Vision vision;
   public static BionicF310 driverGamepad;
-
+  public static FlightStick flightstick;
   public static ParallelCommandGroup shooterLimelightAssist;
+  public static Climber climberSubsystem;
 
   @Override
   public void robotInit() {
@@ -56,6 +63,8 @@ public class Robot extends TimedRobot {
         0.1 // Gamepad sensitivity
     );
 
+    flightstick = new FlightStick(0);
+
     shootersubsystem.setVelocity(0);
 
     driverGamepad.buttonPressed(BionicF310.A, new FollowTarget(shootersubsystem, vision));
@@ -64,7 +73,10 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonHeld(BionicF310.Y, new IndexerAndSorterDown());
     driverGamepad.buttonHeld(BionicF310.LB, new HoodUp(shootersubsystem));
     driverGamepad.buttonHeld(BionicF310.RB, new HoodDown(shootersubsystem));
-    
+    flightstick.buttonHeld(0, new ClimberExtend(climberSubsystem));
+    flightstick.buttonHeld(1, new ClimberRetract(climberSubsystem));
+    flightstick.buttonHeld(2, new HookHold(climberSubsystem));
+
 }
 
   @Override   

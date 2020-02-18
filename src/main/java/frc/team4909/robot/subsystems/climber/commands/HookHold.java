@@ -7,23 +7,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class HookHold extends CommandBase {
 
+
     public HookHold(Climber subsystem) {
         // @TODO add in reqs
         addRequirements(subsystem);
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public void execute() {
-        Robot.climberSubsystem.setHookSpeed(10);
+        Robot.climberSubsystem.setHookSpeed(10.0);
     }
 
     @Override
     public void end(boolean interupted){
-        Robot.climberSubsystem.hookset.set(0);
+        Robot.climberSubsystem.setHookSpeed(0);
     }
 }
