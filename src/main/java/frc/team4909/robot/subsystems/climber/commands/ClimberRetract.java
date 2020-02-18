@@ -2,14 +2,14 @@ package frc.team4909.robot.subsystems.climber.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import frc.team4909.robot.Robot;
+import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team4909.robot.subsystems.climber.Climber;
 
 public class ClimberRetract extends CommandBase {
 
-    public ClimberRetract(Climber climberSubsystem) {
-        // @TODO add in reqs
-        addRequirements(climberSubsystem);
+    public ClimberRetract() {
+        super();
+        addRequirements(Robot.climberSubsystem);
     }
 
     @Override

@@ -1,18 +1,19 @@
 package frc.team4909.robot.subsystems.climber.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.team4909.robot.Robot;
-import frc.team4909.robot.subsystems.climber.Climber;
+import frc.team4909.robot.operator.controllers.BionicF310;
+import frc.team4909.robot.operator.generic.BionicButton;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class HookHold extends CommandBase {
 
-    double a;
+    int a;
 
-    public HookHold(double angle) {
+    public HookHold(int angle) {
+        super();
         addRequirements(Robot.climberSubsystem);
         a = angle;
-    }
+    }   
 
     @Override
     public void initialize() {
@@ -20,7 +21,8 @@ public class HookHold extends CommandBase {
     }
 
     @Override
-    public void end(boolean interupted){
+    public void end(boolean interrupted){
         Robot.climberSubsystem.setHookAngle(0);
+        System.out.println("HookHold inturrpted");
     }
 }

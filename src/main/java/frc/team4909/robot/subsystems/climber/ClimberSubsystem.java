@@ -1,24 +1,25 @@
 package frc.team4909.robot.subsystems.climber;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
-public class Climber extends SubsystemBase {
+
+public class ClimberSubsystem extends SubsystemBase {
     CANSparkMax climberMotor;
     CANEncoder climbEncoder;
     CANPIDController climberPID;
-    Servo hook;
+    PWM hook;
 
-    public Climber() {
+    public ClimberSubsystem() {
         climberMotor = new CANSparkMax(0, MotorType.kBrushless);
-        hook = new Servo(1);
+        hook = new PWM(1);
 
         climbEncoder = new CANEncoder(climberMotor);
         climberPID = new CANPIDController(climberMotor);
@@ -32,8 +33,8 @@ public class Climber extends SubsystemBase {
 
     }
 
-    public void setHookAngle(double angle){
-        hook.setAngle(angle);
+    public void setHookAngle(int speed){
+        hook.setRaw(speed);
     }
 
     public void setSpeed(double speed)

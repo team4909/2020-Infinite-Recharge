@@ -1,7 +1,6 @@
 package frc.team4909.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,6 +20,10 @@ import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
+import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
+import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
+import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+import frc.team4909.robot.subsystems.climber.commands.HookHold;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
@@ -46,9 +49,7 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static BionicF310 driverGamepad;
   public static FlightStick manipulatorGamepad;
-
-  public static ParallelCommandGroup shooterLimelightAssist;
-  public static Climber climberSubsystem;
+  public static ClimberSubsystem climberSubsystem;
 
   @Override
   public void robotInit() {
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
 
     turretSubsystem = new TurretSubsystem();
 
+    climberSubsystem = new ClimberSubsystem();
     
 
     leds = new LEDs();
@@ -104,6 +106,12 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
 
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
+
+
+    driverGamepad.buttonHeld(BionicF310.Start, new HookHold(-180));
+    
+
+
 
 }
 
