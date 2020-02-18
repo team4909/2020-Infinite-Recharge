@@ -22,11 +22,11 @@ public class ClimberExtend extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.climberSubsystem.set(0.2);
+        Robot.climberSubsystem.setSpeed(0.2);
     }
 
     @Override
     public void end(boolean interupted){
-        Robot.climberSubsystem.set(0);
+        Robot.climberSubsystem.setSpeed(0);
     }
 }

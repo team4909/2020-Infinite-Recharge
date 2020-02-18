@@ -2,49 +2,48 @@ package frc.team4909.robot.subsystems.climber;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team4909.robot.RobotConstants;
 public class Climber extends SubsystemBase {
-    WPI_VictorSPX climbermotor;
-    WPI_VictorSPX hookset;
-    CANEncoder climbcoder;
-    private double climberposition;
-    double climberP;
-    double climberI;
-    double climberD;
+    CANSparkMax climberMotor;
+    CANEncoder climbEncoder;
+    CANPIDController climberPID;
+    Servo hook;
+
     public Climber() {
-        climbermotor = new WPI_VictorSPX(0);
-        hookset = new WPI_VictorSPX(1);
+        climberMotor = new CANSparkMax(0, MotorType.kBrushless);
+        hook = new Servo(1);
 
-        climberposition=0;
-        climbermotor.configFactoryDefault();
-        hookset.configFactoryDefault();
-        climberP=0;
-        climberI=0;
-        climberD=0;
+        climbEncoder = new CANEncoder(climberMotor);
+        climberPID = new CANPIDController(climberMotor);
 
-        climbcoder.setPosition(0.0);
+        climberPID.setP(RobotConstants.climberkP);
+        climberPID.setI(RobotConstants.climberkI);
+        climberPID.setD(RobotConstants.climberkD);
+        climberPID.setFF(RobotConstants.climberkF);
+
+        climberMotor.restoreFactoryDefaults();
+
     }
 
-    public void setNewPosition()
-    {
-        climberposition = climbcoder.getPosition();
-    }
-
-    public void setHookSpeed(double speed){
-        hookset.set(speed);
+    public void setHookAngle(double angle){
+        hook.setAngle(angle);
     }
 
     public void setSpeed(double speed)
     {
-        climbermotor.set(speed);
+        climberMotor.set(speed);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("position", climbcoder.getPosition());
+        SmartDashboard.putNumber("position", climbEncoder.getPosition());
     }
     
 }
