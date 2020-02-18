@@ -1,6 +1,3 @@
-/**
- * @author Billerica bionics
- */
 package frc.team4909.robot.subsystems.ultrasonic;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
