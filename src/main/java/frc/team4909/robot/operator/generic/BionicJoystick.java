@@ -49,7 +49,7 @@ public class BionicJoystick extends Joystick {
     public void povActive(BionicPOV povAngle, CommandBase command) {
         BionicJoystickPOVButton newPov = new BionicJoystickPOVButton(this, povAngle.getNumber());
 
-        newPov.whenActive(command);
+        newPov.whileActiveContinuous(command);
     }
 
     /**
@@ -70,7 +70,7 @@ public class BionicJoystick extends Joystick {
     public void buttonPressed(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
-        newButton.whenActive(command);
+        newButton.whileActiveOnce(command);
     }
     
     /**
@@ -84,6 +84,16 @@ public class BionicJoystick extends Joystick {
     }
 
     /**
+     * @param button      Button to Create Handler For
+     * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
+     */
+    public void buttonHeld(BionicButton button, CommandBase command, boolean interruptible) {
+        JoystickButton newButton = new JoystickButton(this, button.getNumber());
+
+        newButton.whenHeld(command, interruptible);
+    }
+
+    /**
      * @param axis        Axis to Create Handler For
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
@@ -91,7 +101,7 @@ public class BionicJoystick extends Joystick {
     public void buttonHeld(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
-        newButton.whenActive(command);
+        newButton.whileActiveOnce(command);
     }
 
     /**
@@ -105,11 +115,22 @@ public class BionicJoystick extends Joystick {
     }
 
     /**
+     * @param button      Button to Create Handler For
+     * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
+     * @param interruptible If Command is Interruuptable
+     */
+    public void buttonToggled(BionicButton button, CommandBase command, boolean interruptible) {
+        JoystickButton newButton = new JoystickButton(this, button.getNumber());
+
+        newButton.toggleWhenPressed(command, interruptible);
+    }
+
+    /**
      * @param axis        Axis to Create Handler For
      * @param threshold   Minimum Threshold to Trigger Command
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
-    public void buttonToggled(BionicAxis axis, double threshold, InstantCommand command) {
+    public void buttonToggled(BionicAxis axis, double threshold, CommandBase command) {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
         newButton.toggleWhenActive(command);

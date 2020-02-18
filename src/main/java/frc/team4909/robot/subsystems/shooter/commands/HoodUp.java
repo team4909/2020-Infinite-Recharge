@@ -1,23 +1,15 @@
 package frc.team4909.robot.subsystems.shooter.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
  
 public class HoodUp extends CommandBase{
-    public HoodUp(ShooterSubsystem subsystem){
+    public HoodUp(){
         super();
-        addRequirements(subsystem);
     }
 
-    public void initialize(){
-        Robot.shootersubsystem.hoodControl.set(-0.2);
+    public void execute(){
+        Robot.hoodSubsystem.moveHood(1);
     }
-
-    @Override
-    public void end(boolean interupted){
-        Robot.shootersubsystem.hoodControl.set(0);
-    }
-
 }
