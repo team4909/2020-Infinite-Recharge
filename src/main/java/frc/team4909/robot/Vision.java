@@ -23,9 +23,9 @@ public class Vision extends SubsystemBase {
   private double ts;
   private double tl;
   //Camera Dep
-  private double targetHeight = 29;
-  private double cameraHeight = 5;
-  private double cameraAngle = 0;
+  public double targetHeight = 29;
+  public double cameraHeight = 5;
+  public double cameraAngle = 0;
   //Target Dependent
   private double angleToTarget;
   private double distanceToTarget;
