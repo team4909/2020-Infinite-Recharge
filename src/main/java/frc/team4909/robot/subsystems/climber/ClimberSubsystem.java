@@ -86,11 +86,16 @@ public class ClimberSubsystem extends SubsystemBase {
 
     }
 
-
+    public boolean TooMuchCurrent()
+    {
+        return climberMotor1.getOutputCurrent()>100;
+    }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("position", climbEncoder1.getPosition());
+        SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
+        SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
+        SmartDashboard.putBoolean("Too Much Current?", TooMuchCurrent());
     }
     
 }

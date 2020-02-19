@@ -36,6 +36,7 @@ import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
+import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
@@ -144,7 +145,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    CommandScheduler.getInstance().schedule(new ShootThree());
+    CommandScheduler.getInstance().schedule(new ZeroHoodInit(), new ShootThree());
   }
 
   @Override
