@@ -24,6 +24,7 @@ import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+import frc.team4909.robot.subsystems.climber.commands.ClimbUp;
 import frc.team4909.robot.subsystems.climber.commands.HookIn;
 import frc.team4909.robot.subsystems.climber.commands.HookOut;
 import frc.team4909.robot.subsystems.climber.commands.rachetHold;
