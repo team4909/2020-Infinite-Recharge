@@ -203,6 +203,22 @@ public class Vision extends SubsystemBase {
     }
   }
 
+
+    public double distanceToWall(){
+
+
+      distanceToTarget = Robot.vision.calculateDistanceFromCameraHeight(Robot.vision.targetHeight,
+         Robot.vision.cameraHeight, Robot.vision.cameraAngle);
+
+       // distanceToTarget = Math.sqrt( Math.pow(distance, 2) + Math.pow( 152.845, 2) - distance * 152.845 + Math.cos(51.73));
+      double distance = (189.335 + Math.sqrt(Math.pow(189.335,2))-(4*233616-Math.pow(distanceToTarget, 2)))/2;
+
+      return distance;
+
+    }
+
+
+
   /**
    * Updates the values of the Vision class.
    */
@@ -223,6 +239,8 @@ public class Vision extends SubsystemBase {
     SmartDashboard.putBoolean("Front Camera: ", this.usingFrontCam);
 
     SmartDashboard.putBoolean("Is Target Acquired?", this.targetAcquired());
+
+    SmartDashbord.putNumber("Distance to Wall", this.distanceToWall());
   }
 
 }
