@@ -15,27 +15,14 @@ public class ClimberExtend extends CommandBase {
         pos = setpoint;
     }
 
-
     @Override
     public void initialize() {
-
         Robot.climberSubsystem.setClimberPosition(pos);
-        
-    }
-
-   
-
-    @Override
-    public void execute() {
-    }
-
-    @Override
-    public void end(boolean interupted){
     }
 
     @Override
     public boolean isFinished() {
-        if(Math.abs(Robot.climberSubsystem.climbEncoder1.getPosition()-pos) <= 10){
+        if(Math.abs(Robot.climberSubsystem.getClimbPos()-pos) <= 10){
             return true;
         }
         return false;

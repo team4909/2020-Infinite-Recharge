@@ -17,12 +17,11 @@ public class rachetHold extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.climberSubsystem.setrachetAngle(a);
+        Robot.climberSubsystem.setRatchetSpeed(a);
     }
 
     @Override
     public void end(boolean interrupted){
-        Robot.climberSubsystem.setrachetAngle(0);
-        System.out.println("rachetHold interrupted");
+        Robot.climberSubsystem.setRatchetSpeed(0);
     }
 }

@@ -13,11 +13,6 @@ public class ClimberRetract extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public void execute() {
         Robot.climberSubsystem.setSpeed(-0.2);
     }

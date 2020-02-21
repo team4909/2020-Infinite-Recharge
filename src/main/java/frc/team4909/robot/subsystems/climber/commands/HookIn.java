@@ -15,19 +15,12 @@ public class HookIn extends CommandBase{
     }
 
     @Override
-    public void initialize() {
-
-
-
-    }
-
-    @Override
     public void execute() {
-        Robot.climberSubsystem.hookMotor.set(-0.2);
+        Robot.climberSubsystem.setHookSpeed(-0.2);
     }
 
     @Override
     public void end(boolean interupted){
-        Robot.climberSubsystem.hookMotor.set(0);
+        Robot.climberSubsystem.setHookSpeed(0);
     }
 }

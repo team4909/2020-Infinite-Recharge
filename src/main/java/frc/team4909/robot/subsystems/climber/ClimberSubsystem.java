@@ -5,32 +5,23 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
-    public CANSparkMax climberMotor1;
-    CANSparkMax climberMotor2;
-    public CANSparkMax hookMotor;
-    public CANEncoder climbEncoder1;
-    CANEncoder climbEncoder2;
-    CANEncoder hookEncoder;
-    public CANPIDController climberPID1;
-    CANPIDController climberPID2;
-    CANPIDController hookPID;
-
+    CANSparkMax climberMotor1, climberMotor2, hookMotor;
+    CANEncoder climbEncoder1, climbEncoder2, hookEncoder;
+    CANPIDController climberPID, hookPID;
     PWM rachet;
 
     public ClimberSubsystem() {
 
-        climberMotor1 = new CANSparkMax(0, MotorType.kBrushless);
-        climberMotor2 = new CANSparkMax(1, MotorType.kBrushless);
+        climberMotor1 = new CANSparkMax(14, MotorType.kBrushless);
+        climberMotor2 = new CANSparkMax(15, MotorType.kBrushless);
         rachet = new PWM(1);
-        hookMotor = new CANSparkMax(2, MotorType.kBrushless);
+        hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
         climberMotor2.restoreFactoryDefaults();
@@ -39,27 +30,24 @@ public class ClimberSubsystem extends SubsystemBase {
         climbEncoder2 = new CANEncoder(climberMotor2);
         hookEncoder = new CANEncoder(hookMotor);
 
-        climberPID1 = new CANPIDController(climberMotor1);
-        climberPID2 = new CANPIDController(climberMotor2);
+        climberPID = new CANPIDController(climberMotor1);
         hookPID = new CANPIDController(hookMotor);
 
         climberMotor2.follow(climberMotor1);
 
 
-        climberPID1.setP(RobotConstants.climberkP);
-        climberPID1.setI(RobotConstants.climberkI);
-        climberPID1.setD(RobotConstants.climberkD);
-        climberPID1.setFF(RobotConstants.climberkF);
+        climberPID.setP(RobotConstants.climberkP);
+        climberPID.setI(RobotConstants.climberkI);
+        climberPID.setD(RobotConstants.climberkD);
+        climberPID.setFF(RobotConstants.climberkF);
 
         hookPID.setP(RobotConstants.hookkP);
         hookPID.setP(RobotConstants.hookkI);
         hookPID.setP(RobotConstants.hookkD);
         hookPID.setP(RobotConstants.hookkF);
-    
-
     }
 
-    public void setrachetAngle(int speed){
+    public void setRatchetSpeed(int speed){
         rachet.setRaw(speed);
     }
 
@@ -69,33 +57,28 @@ public class ClimberSubsystem extends SubsystemBase {
     
     }
 
-    public void setHSpeed(double hSpeed){
-
-        hookMotor.set(hSpeed);
+    public void setHookSpeed(double speed){
+        hookMotor.set(speed);
     }
 
     public void setHookPosition(double Hpos){
-
         hookPID.setReference(Hpos, ControlType.kPosition);
 
     }
 
     public void setClimberPosition(double pos){
-
-        climberPID1.setReference(pos, ControlType.kPosition);
+        climberPID.setReference(pos, ControlType.kPosition);
 
     }
 
-    public boolean TooMuchCurrent()
-    {
-        return climberMotor1.getOutputCurrent()>100;
+    public double getClimbPos(){
+        return climbEncoder1.getPosition();
     }
 
     @Override
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
         SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
-        SmartDashboard.putBoolean("Too Much Current?", TooMuchCurrent());
     }
     
 }
