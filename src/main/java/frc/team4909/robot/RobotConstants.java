@@ -20,6 +20,16 @@ public class RobotConstants{
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
 
+    public static final double climberkP = 0;
+    public static final double climberkI = 0;
+    public static final double climberkD = 0;
+    public static final double climberkF = 0;
+
+    public static final double hookkP = 0;
+    public static final double hookkI = 0;
+    public static final double hookkD = 0;
+    public static final double hookkF = 0;
+
     public static final double intakekP = 0.5;
     public static final double intakekI = 0;
     public static final double intakekD = 0;

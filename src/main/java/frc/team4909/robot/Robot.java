@@ -23,6 +23,13 @@ import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
+import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
+import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
+import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+import frc.team4909.robot.subsystems.climber.commands.ClimbUp;
+import frc.team4909.robot.subsystems.climber.commands.HookIn;
+import frc.team4909.robot.subsystems.climber.commands.HookOut;
+import frc.team4909.robot.subsystems.climber.commands.rachetHold;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
@@ -32,6 +39,7 @@ import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
+import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
@@ -49,8 +57,7 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static BionicF310 driverGamepad;
   public static FlightStick manipulatorGamepad;
-
-  public static ParallelCommandGroup shooterLimelightAssist;
+  public static ClimberSubsystem climberSubsystem;
 
   @Override
   public void robotInit() {
@@ -77,6 +84,8 @@ public class Robot extends TimedRobot {
     intakeSubsystem = new IntakeSubsystem();
 
     turretSubsystem = new TurretSubsystem();
+
+    climberSubsystem = new ClimberSubsystem();
 
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
@@ -108,6 +117,13 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
 
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
+    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180));
+    driverGamepad.buttonHeld(BionicF310.X, new HookIn());
+    driverGamepad.buttonHeld(BionicF310.B, new HookOut());
+    driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500));
+    driverGamepad.buttonHeld(BionicF310.RB, new ClimberRetract());
+    driverGamepad.buttonPressed(BionicF310.R, new ClimbUp());
+
 
 }
 
@@ -136,7 +152,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    CommandScheduler.getInstance().schedule(new ShootThree());
+    CommandScheduler.getInstance().schedule(new ZeroHoodInit(), new ShootThree());
   }
 
   @Override
