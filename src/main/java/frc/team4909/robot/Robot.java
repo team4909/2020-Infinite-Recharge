@@ -166,6 +166,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    // Ready Auto Commands
     CommandScheduler.getInstance().schedule(new ZeroHoodInit(), new ShootThree());
   }
 
@@ -176,14 +177,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    // Ready Telop Commands.
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
-    // CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
   }
 
   @Override
   public void teleopPeriodic() {
+    // Insert Additional Values into Smart Dashboard
     SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
   }
