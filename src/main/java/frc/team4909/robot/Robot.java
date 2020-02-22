@@ -45,6 +45,7 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 
 public class Robot extends TimedRobot {
+  // Subsystems
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static ShooterSubsystem shootersubsystem;
   public static IndexerSubsystem indexerSubsystem;
@@ -62,8 +63,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-
-    
+    // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
@@ -92,6 +92,7 @@ public class Robot extends TimedRobot {
 
     leds = new LEDs();
 
+    // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
         0.05, // Deadzone
         0.6 // Gamepad sensitivity
@@ -142,10 +143,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    //System.out.print("test");
+    // Start Scheduling processes
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
-     
+    
+    // Put values on SmartDashboard
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
