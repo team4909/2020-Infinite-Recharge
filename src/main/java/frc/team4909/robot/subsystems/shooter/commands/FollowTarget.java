@@ -23,7 +23,7 @@ public class FollowTarget extends CommandBase {
 
     public FollowTarget(TurretSubsystem subsystem, final Vision vsubsystem) {
         super();
-        addRequirements(subsystem);
+        addRequirements(subsystem, vsubsystem);
     }
 
     @Override

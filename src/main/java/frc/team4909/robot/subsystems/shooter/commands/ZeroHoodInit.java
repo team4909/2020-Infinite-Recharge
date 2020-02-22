@@ -5,7 +5,7 @@ import frc.team4909.robot.Robot;
 
 public class ZeroHoodInit extends CommandBase{
     
-    double hoodZeroCurrent = 30;
+    double hoodZeroCurrent = -20;
     boolean atZero = false;
 
     public ZeroHoodInit(){

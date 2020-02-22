@@ -163,6 +163,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    CommandScheduler.getInstance().schedule(new ZeroHoodInit());
     // CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);

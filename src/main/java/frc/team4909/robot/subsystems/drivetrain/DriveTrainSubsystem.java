@@ -40,14 +40,14 @@ public class DriveTrainSubsystem extends SubsystemBase{
         bionicDrive = new DifferentialDrive(m_left, m_right);
     }
 
-    /**
+/**
  * map a number from one range to another
  * @param  {num} value   the value to be mapped
  * @param  {num} old_min the minimum of value
  * @param  {num} old_max the maximum of value
  * @param  {num} new_min the new minimum value
  * @param  {num} new_max the new maximum value
- * @return {num}         the value remaped on the range [new_min new_max]
+ * @return The value remaped on the range [new_min new_max]
  */
 public double map(double value, double old_min, double old_max, double new_min, double new_max) {
 	return (value - old_min) / (old_max - old_min) * (new_max - new_min) + new_min;
@@ -70,7 +70,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
 
         if(inverted){
             speedOutput = speedOutput*-1;
-            turnOutput = turnOutput*-1;
+            turnOutput = turnOutput*1;
         }
 
 
