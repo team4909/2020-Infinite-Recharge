@@ -103,27 +103,27 @@ public class Robot extends TimedRobot {
     );
 
     // FlightStick Controls
-    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //
+    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 2)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Moves turret
-    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //depoy intake, sorter, indexer
+    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Move the Turret (Joystick: Twist Stick [Axis Z])
+    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
 
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp()); //Position the Hood Up (Joystick: D-Pad UP)
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown()); //Position the Hood Up (Joystick: D-Pad DOWN)
 
     // Gamepad Controls
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
-    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180)); //
-    driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: X)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: B)
+    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180)); //Set the Ratchet Speed Up (Gamepad: Start Button)
+    driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
+    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp());
+    driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp()); //Start the Climb Up Group (Gamepad: Left Trigger)
 
 
 }
