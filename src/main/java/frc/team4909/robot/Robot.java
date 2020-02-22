@@ -17,7 +17,9 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
-import frc.team4909.robot.subsystems.intake.IntakeIn;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDeployAndOn;
+import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -68,7 +70,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.2)); //(new FollowTarget(shootersubsystem, vision));
+    // shootersubsystem.setDefaultCommand(new SetShooterSpeed(1)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -96,19 +98,20 @@ public class Robot extends TimedRobot {
     );
 
     manipulatorGamepad = new FlightStick(1, // Port
-        0.05, // Deadzone
+        0.7, // Deadzone
         0.0 // Gamepad sensitivity
     );
 
 
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false);
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(shootersubsystem, 3500), false);
-    manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0.2));
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false);
+    manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0));
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown());
-    manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerUp(indexerSubsystem));
+    manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp());
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit());
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar());
-    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.3, new MoveTurret(shootersubsystem));
+    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem));
+    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp());
 
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp());
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
@@ -123,6 +126,7 @@ public class Robot extends TimedRobot {
 
 
 }
+
 
   @Override
   public void robotPeriodic() {

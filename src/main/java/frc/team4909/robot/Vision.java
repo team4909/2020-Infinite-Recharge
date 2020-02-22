@@ -92,14 +92,6 @@ public class Vision extends SubsystemBase {
     return ty;
   }
 
-//   public double getYOffsetWithMin() { 
-//     if (Math.toRadians(ty) < -RobotMap.CAMERA_ANGLE){
-//       return -RobotMap.CAMERA_ANGLE;
-//     }
-//     else {
-//       return Math.toRadians(ty);
-//     }
-//   }
 
   /**
    * Gets the target area.
@@ -147,19 +139,6 @@ public class Vision extends SubsystemBase {
     return methodDistance;
   }
 
- // public double calculatevelocity(double distance)
- // {
-  //  distance=this.calculateDistanceArea();
-  //  yspeed=distance/Robot.
- // }
-
-//   public double calculateDistanceFromCameraHeightWithMin(double targetHeight, double cameraHeight, double cameraAngle) {
-//     if (porthacth) {
-//       // this.targetHeight = RobotMap.ROCKET_PORT_HEIGHT;
-//     }
-//     double methodDistance = (targetHeight - cameraHeight) / Math.tan(cameraAngle + getYOffsetWithMin());
-//     return methodDistance;
-//   }
 
   /**
    * Gets the distance to the target based of off its area using a slope-intercept formula.

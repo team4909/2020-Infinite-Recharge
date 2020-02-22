@@ -8,7 +8,7 @@ import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 
 public class SmartIndexerUp extends CommandBase{
 
-    private final double delaySec = .15;
+    private final double delaySec = 0.3;
     private double time = 0;
     private boolean isRunning = false;
     

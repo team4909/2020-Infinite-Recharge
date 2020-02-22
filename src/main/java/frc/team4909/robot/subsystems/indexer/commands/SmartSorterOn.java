@@ -1,0 +1,27 @@
+package frc.team4909.robot.subsystems.indexer.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.team4909.robot.Robot;
+import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
+
+public class SmartSorterOn extends CommandBase{
+    public SmartSorterOn(SorterSubsystem subsystem){
+        super();
+        addRequirements(subsystem);
+    }
+
+    @Override
+    public void initialize(){
+        if(!(Robot.indexerSubsystem.hasBallUpper() && Robot.indexerSubsystem.hasBallLower())){
+
+            Robot.sorterSubsystem.sorterOn(-0.5);
+        }
+    }
+
+
+    @Override
+    public void end(boolean interupted){
+        Robot.sorterSubsystem.sorterOn(0);
+    }
+}

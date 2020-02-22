@@ -24,7 +24,6 @@ public class MoveTurret extends CommandBase {
     @Override
     public void initialize() {
         // turn off limelight lights
-        Robot.vision.setLights(0);
     }
 
     @Override

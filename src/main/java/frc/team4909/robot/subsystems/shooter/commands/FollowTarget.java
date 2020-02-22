@@ -61,14 +61,20 @@ public class FollowTarget extends CommandBase {
         lastError = Robot.vision.getXOffset();
 
         if (Math.abs(Robot.vision.getXOffset()) <= 5 ){
+            isAligned = true;
 
             if (Robot.shootersubsystem.isAtSpeed){
 
                 Robot.leds.setGreen();
 
-            } else Robot.leds.setBlack();
+            } else{
+                Robot.leds.setBlack();
+            }
+            
 
             Robot.turretSubsystem.setTurnSpeed(0);
+        } else{
+            isAligned = false;
         }
 
     }
@@ -80,5 +86,10 @@ public class FollowTarget extends CommandBase {
         Robot.turretSubsystem.setTurnSpeed(0);
         Robot.vision.setLights(1);
 
+    }
+
+    @Override
+    public boolean isFinished() {
+        return isAligned;
     }
 }
