@@ -25,8 +25,8 @@ public class ShooterSubsystem extends SubsystemBase {
     public ShooterSubsystem()
     {
 
-        shooter1 = new WPI_TalonFX(5);
-        shooter2 = new WPI_TalonFX(6);
+        shooter1 = new WPI_TalonFX(6);
+        shooter2 = new WPI_TalonFX(5);
 
         shooter1.configFactoryDefault();
         shooter2.configFactoryDefault();
