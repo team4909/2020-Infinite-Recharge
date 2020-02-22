@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
 
 
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false);
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false);
+    manipulatorGamepad.buttonPressed(FlightStick.Five, new SetShooterSpeed(0.75)); //Once this becomes shootballs, make the command toggled, uninterruptible...
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0));
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown());
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp());
@@ -116,13 +116,13 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp());
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown());
 
-    driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
-    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180));
-    driverGamepad.buttonHeld(BionicF310.X, new HookIn());
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut());
-    driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500));
-    driverGamepad.buttonHeld(BionicF310.RB, new ClimberRetract());
-    driverGamepad.buttonPressed(BionicF310.R, new ClimbUp());
+    // driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive());
+    // driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180));
+    // driverGamepad.buttonHeld(BionicF310.X, new HookIn());
+    // driverGamepad.buttonHeld(BionicF310.B, new HookOut());
+    // driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend(-0.3));
+    // driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract());
+    // driverGamepad.buttonPressed(BionicF310.RT, 0.2, new ClimbUp());
 
 
 }
@@ -162,6 +162,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    CommandScheduler.getInstance().schedule(new ZeroHoodInit());
     // CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);

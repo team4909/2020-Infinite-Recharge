@@ -1,5 +1,7 @@
 package frc.team4909.robot.subsystems.climber;
 
+import java.util.concurrent.atomic.DoubleAdder;
+
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -30,16 +32,16 @@ public class ClimberSubsystem extends SubsystemBase {
         climbEncoder2 = new CANEncoder(climberMotor2);
         hookEncoder = new CANEncoder(hookMotor);
 
-        climberPID = new CANPIDController(climberMotor1);
+        // climberPID = new CANPIDController(climberMotor1);
         hookPID = new CANPIDController(hookMotor);
 
         climberMotor2.follow(climberMotor1);
 
 
-        climberPID.setP(RobotConstants.climberkP);
-        climberPID.setI(RobotConstants.climberkI);
-        climberPID.setD(RobotConstants.climberkD);
-        climberPID.setFF(RobotConstants.climberkF);
+        // climberPID.setP(RobotConstants.climberkP);
+        // climberPID.setI(RobotConstants.climberkI);
+        // climberPID.setD(RobotConstants.climberkD);
+        // climberPID.setFF(RobotConstants.climberkF);
 
         hookPID.setP(RobotConstants.hookkP);
         hookPID.setP(RobotConstants.hookkI);
@@ -67,8 +69,13 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setClimberPosition(double pos){
-        climberPID.setReference(pos, ControlType.kPosition);
+        // climberPID.setReference(pos, ControlType.kPosition);
 
+    }
+
+    public void setClimberSpeed(double speed){
+        climberMotor1.set(speed);
+        climberMotor2.set(speed);
     }
 
     public double getClimbPos(){

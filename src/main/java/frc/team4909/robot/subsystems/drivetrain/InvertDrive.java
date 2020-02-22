@@ -7,12 +7,12 @@ public class InvertDrive extends InstantCommand{
     
 
     public InvertDrive(){
-        //addRequirements(Robot.drivetrainsubsystem);
+        addRequirements(Robot.drivetrainsubsystem);
     }
 
     @Override
     public void initialize(){
-        //Robot.drivetrainsubsystem.invertDriveDirection();
+        Robot.drivetrainsubsystem.invertDriveDirection();
         Robot.cameraSubsystem.toggleCamera();
     }
 }

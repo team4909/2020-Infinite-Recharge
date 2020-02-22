@@ -99,8 +99,8 @@ public double map(double value, double old_min, double old_max, double new_min, 
     }
 
     public void zeroHood(){
-        hoodPos = 0;
         hoodControl.setSelectedSensorPosition(0);
+        hoodPos = 0;
     }
 
 }

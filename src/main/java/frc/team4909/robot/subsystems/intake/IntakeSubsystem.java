@@ -43,6 +43,10 @@ public class IntakeSubsystem extends SubsystemBase{
         deployPID.setReference(pos, ControlType.kPosition);
     }
 
+    public void zeroDeploy(){
+        deployEncoder.setPosition(0);
+    }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Pos", deployEncoder.getPosition());

@@ -17,14 +17,20 @@ public class ClimberExtend extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.climberSubsystem.setClimberPosition(pos);
+        Robot.climberSubsystem.setClimberSpeed(pos);
     }
 
     @Override
-    public boolean isFinished() {
-        if(Math.abs(Robot.climberSubsystem.getClimbPos()-pos) <= 10){
-            return true;
-        }
-        return false;
+    public void end(boolean interrupted) {
+        Robot.climberSubsystem.setClimberSpeed(0);
     }
+
+    // @Override
+    // public boolean isFinished() {
+    //     return true;
+    //     // if(Math.abs(Robot.climberSubsystem.getClimbPos()-pos) <= 10){
+    //     //     return true;
+    //     // }
+    //     // return false;
+    // }
 }
