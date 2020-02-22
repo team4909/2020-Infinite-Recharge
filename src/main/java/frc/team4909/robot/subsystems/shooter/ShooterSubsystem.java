@@ -13,7 +13,7 @@ import frc.team4909.robot.RobotConstants;
 public class ShooterSubsystem extends SubsystemBase {
 
     WPI_TalonFX shooter1, shooter2;
-    double speed = 0;
+    double speed = -500000;
     public boolean isAtSpeed;
 
     CANSparkMax turnMotor;

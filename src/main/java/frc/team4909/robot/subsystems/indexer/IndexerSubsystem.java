@@ -18,10 +18,8 @@ public class IndexerSubsystem extends SubsystemBase{
     
     public IndexerSubsystem(){
         lowerMotor = new CANSparkMax(7, MotorType.kBrushless);
-        upperMotor = new CANSparkMax(8, MotorType.kBrushless);
 
         lowerMotor.setIdleMode(IdleMode.kBrake);
-        upperMotor.setIdleMode(IdleMode.kBrake);
 
         upperPhotoelectric = new DigitalInput(0);
         lowerPhotoelectric = new DigitalInput(1);
@@ -38,7 +36,6 @@ public class IndexerSubsystem extends SubsystemBase{
 
     public void 
     setSpeed(double speed){
-        upperMotor.set(speed);
         lowerMotor.set(speed);
     }
 
