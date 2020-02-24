@@ -11,9 +11,9 @@ public class ShootByDistance extends CommandBase {
      * Values obtained through 6 tested points: 
      * (Distance to Goal, Hood Angle Reqired to Make The Inner Port).
      */
-    private double a = RobotConstants.hoodCofA;
-    private double b = RobotConstants.hoodCofB;
-    private double c = RobotConstants.hoodCofC;
+    private double a = RobotConstants.hoodCoefA;
+    private double b = RobotConstants.hoodCoefB;
+    private double c = RobotConstants.hoodCoefC;
 
     public ShootByDistance() {
         super();
