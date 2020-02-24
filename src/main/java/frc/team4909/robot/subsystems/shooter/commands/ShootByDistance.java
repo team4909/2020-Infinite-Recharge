@@ -10,17 +10,21 @@ public class ShootByDistance extends CommandBase {
     private double b = RobotConstants.hoodCofB;
     private double c = RobotConstants.hoodCofC;
 
-    public ShootByDistance(double distance) {
+    public ShootByDistance() {
         super();
         addRequirements(Robot.hoodSubsystem);
-        calculateAngle(distance);
     }
 
-    private double calculateAngle(double distance) {
+    @Override
+    public void initialize() {
+        Robot.hoodSubsystem.setHoodAngle(calculateAngle(Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle))); 
+    }
+
+    private int calculateAngle(double distance) {
         double y;
         double firstMono = a * Math.pow(distance, 2);
         double secondMono = b * distance;
         y = firstMono + secondMono + c;
-        return y;
+        return (int) y;
     }
 }

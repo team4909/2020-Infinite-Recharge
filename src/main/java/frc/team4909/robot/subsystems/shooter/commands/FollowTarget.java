@@ -21,6 +21,11 @@ public class FollowTarget extends CommandBase {
     DecimalFormat twodec = new DecimalFormat("#.00");
     public boolean isAligned;
 
+    /**
+     * 
+     * @param subsystem The subsystem for the Turret
+     * @param vsubsystem The subsystem for the vision
+     */
     public FollowTarget(TurretSubsystem subsystem, final Vision vsubsystem) {
         super();
         addRequirements(subsystem);
@@ -51,8 +56,9 @@ public class FollowTarget extends CommandBase {
             //System.out.println("No target seen!");
             SmartDashboard.putBoolean("Target Seen?", false);
             speedTurret = 0;
-        } else {
+        } else {  
             SmartDashboard.putBoolean("Target Seen?", true);
+
         }
 
         Robot.vision.updateVisionDashboard();
@@ -70,7 +76,7 @@ public class FollowTarget extends CommandBase {
 
             Robot.turretSubsystem.setTurnSpeed(0);
         }
-
+        
     }
 
     @Override

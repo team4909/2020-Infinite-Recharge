@@ -9,6 +9,7 @@ import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
+import frc.team4909.robot.subsystems.shooter.commands.ShootByDistance;
 
 public class ShootThree extends SequentialCommandGroup{
     public ShootThree(){
@@ -18,6 +19,7 @@ public class ShootThree extends SequentialCommandGroup{
                 new SetHoodInit(),
                 new SetShooterSpeed(0.9),
                 new IndexerAndSorterUp().withTimeout(2),
+                //new ShootByDistance(),
                 //new ShootBalls(3500).withTimeout(8.25)),
             new SetDriveSpeed(-0.9).withTimeout(2)
         )
