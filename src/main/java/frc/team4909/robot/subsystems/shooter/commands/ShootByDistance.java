@@ -17,7 +17,8 @@ public class ShootByDistance extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.hoodSubsystem.setHoodAngle(calculateAngle(Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle))); 
+        Robot.hoodSubsystem.setHoodAngle(calculateAngle(Robot.vision.calculateDistanceFromCameraHeight(
+                RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle)));
     }
 
     private int calculateAngle(double distance) {
