@@ -19,7 +19,7 @@ public class RobotConstants{
     public static final double hoodkP = 24;
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
-    // Solve for cofs by graphing test values
+    // TODO Test values.
     public static final double hoodCofA = 0;
     public static final double hoodCofB = 0;
     public static final double hoodCofC = 0;
