@@ -4,30 +4,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.Vision;
-import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class ShootByDistance extends CommandBase {
-    private double accelInS2 = 386.22;
-    private double currDist;
-    private double timeEstimate;
-    private double xComponent;
-    private double yComponent;
-    private double releaseRPM;
 
-    public ShootByDistance(ShooterSubsystem subsystem, Vision limelight) {
+    private double a = RobotConstants.hoodCofA;
+    private double b = RobotConstants.hoodCofB;
+    private double c = RobotConstants.hoodCofC;
+
+    public ShootByDistance(double distance, Vision limelight) {
         super();
-        addRequirements(subsystem);
+        addRequirements(Robot.hoodSubsystem);
+        calculateAngle(distance);
     }
 
-    @Override
-    public void execute(){
-        currDist = Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle);
-        System.out.println(currDist);
-        timeEstimate = currDist/100;//estimate
-        xComponent = currDist/timeEstimate;    //inches per second
-        yComponent = (currDist-0.5*accelInS2*Math.pow(timeEstimate, 2.0))/timeEstimate;   
-        releaseRPM = Math.sqrt(Math.pow(xComponent, 2.0)+Math.pow(yComponent, 2));
-
-        Robot.shootersubsystem.setVelocity(releaseRPM);  
-    } 
+    private double calculateAngle(double distance) {
+        double y;
+        double firstMono = a * Math.pow(distance, 2);
+        double secondMono = b * distance;
+        y = firstMono + secondMono + c;
+        return y;
+    }
 }
