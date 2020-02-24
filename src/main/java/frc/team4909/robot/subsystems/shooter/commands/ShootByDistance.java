@@ -22,10 +22,10 @@ public class ShootByDistance extends CommandBase {
     }
 
     private int calculateAngle(double distance) {
-        double y;
+        double outputAngle;
         double firstMono = a * Math.pow(distance, 2);
         double secondMono = b * distance;
         y = firstMono + secondMono + c;
-        return (int) y;
+        return (int) outputAngle;
     }
 }
