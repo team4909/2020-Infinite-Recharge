@@ -22,7 +22,7 @@ public class ShootByDistance extends CommandBase {
     @Override
     public void execute(){
         currDist = Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle);
-        System.out.println(currDist);
+        // System.out.println(currDist);
         timeEstimate = currDist/100;//estimate
         xComponent = currDist/timeEstimate;    //inches per second
         yComponent = (currDist-0.5*accelInS2*Math.pow(timeEstimate, 2.0))/timeEstimate;   

@@ -18,7 +18,6 @@ import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
-import frc.team4909.robot.subsystems.intake.commands.IntakeDeployAndOn;
 import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
@@ -63,7 +62,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
 
-    
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
@@ -98,19 +96,19 @@ public class Robot extends TimedRobot {
     );
 
     manipulatorGamepad = new FlightStick(1, // Port
-        0.7, // Deadzone
+        0.35, // Deadzone
         0.0 // Gamepad sensitivity
     );
 
     // FlightStick Controls
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonPressed(FlightStick.Five, new SetShooterSpeed(0.90)); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 2)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Moves turret
+    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.35, new MoveTurret(shootersubsystem)); //Moves turret
     manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //depoy intake, sorter, indexer
 
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp()); //Position the Hood Up (Joystick: D-Pad UP)
@@ -124,9 +122,10 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
     driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp());
-
+    vision.setLights(3);
 
 }
+
 
 
   @Override
@@ -163,10 +162,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
     // CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
+    intakeSubsystem.zeroDeploy();
   }
 
   @Override

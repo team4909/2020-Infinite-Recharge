@@ -34,6 +34,6 @@ public class RobotConstants{
     public static final double intakekI = 0;
     public static final double intakekD = 0;
     public static final double intakekF = 0;
-    public static final int deploySetpoint = 170;
+    public static final double deploySetpoint = 35.5;
     
 }

@@ -79,7 +79,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
     }
 
     public void moveHood(double pos){
-        System.out.println(pos);
+        // System.out.println(pos);
         if (getAngle() > 72) {
             if (pos > 0) {
                 // do nothing
