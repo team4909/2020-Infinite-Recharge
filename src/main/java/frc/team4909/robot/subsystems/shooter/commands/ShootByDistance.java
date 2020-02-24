@@ -11,7 +11,7 @@ public class ShootByDistance extends CommandBase {
     private double b = RobotConstants.hoodCofB;
     private double c = RobotConstants.hoodCofC;
 
-    public ShootByDistance(double distance, Vision limelight) {
+    public ShootByDistance(double distance) {
         super();
         addRequirements(Robot.hoodSubsystem);
         calculateAngle(distance);
