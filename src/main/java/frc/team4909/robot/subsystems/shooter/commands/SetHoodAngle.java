@@ -36,9 +36,4 @@ public class SetHoodAngle extends CommandBase{
         double position = interpola*Math.pow(distance, 2)+interpolb*Math.pow(distance, 1)+interpolc;
         Robot.hoodSubsystem.setHoodPosition((int)(position));
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        Robot.turretSubsystem.setTurnSpeed(0);
-    }
 }
