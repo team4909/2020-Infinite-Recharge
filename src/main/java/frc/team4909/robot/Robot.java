@@ -44,6 +44,7 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 
 public class Robot extends TimedRobot {
+  // Subsystems
   public static DriveTrainSubsystem drivetrainsubsystem;
   public static ShooterSubsystem shootersubsystem;
   public static IndexerSubsystem indexerSubsystem;
@@ -61,7 +62,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-
+    // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
@@ -90,6 +91,7 @@ public class Robot extends TimedRobot {
 
     leds = new LEDs();
 
+    // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
         0.05, // Deadzone
         0.6 // Gamepad sensitivity
@@ -101,39 +103,51 @@ public class Robot extends TimedRobot {
     );
 
     // FlightStick Controls
-    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //
-    manipulatorGamepad.buttonPressed(FlightStick.Five, new SetShooterSpeed(0.90)); //Set Shooter Speed 75% (Joystick: Button 5)
-    manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 2)
-    manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
+      //-- Handle Buttons
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
-    manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
+    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //Toggle Limelight Aim (Joystick: Button 2)
+    manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.35, new MoveTurret(shootersubsystem)); //Moves turret
-    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //depoy intake, sorter, indexer
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
 
+      //-- Base Buttons
+    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
+    manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
+
+      //-- Axis
+    manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Move the Turret (Joystick: Twist Stick [Axis Z])
+
+      //-- D-Pad
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp()); //Position the Hood Up (Joystick: D-Pad UP)
     manipulatorGamepad.povActive(FlightStick.Bottom, new HoodDown()); //Position the Hood Up (Joystick: D-Pad DOWN)
 
     // Gamepad Controls
-    driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
-    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180)); //
-    driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: X)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: B)
-    driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
-    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp());
-    vision.setLights(3);
+      //-- Middle Buttons
+    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180)); //Set the Ratchet Speed Up (Gamepad: Start Button)
 
+      //-- Face Buttons
+    driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
+    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
+    
+      //-- Bumpers
+    driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
+    driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
+
+      //-- Triggers
+    driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp()); //Start the Climb Up Group (Gamepad: Left Trigger)
+    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
 }
 
 
 
   @Override
   public void robotPeriodic() {
-    //System.out.print("test");
+    // Start Scheduling processes
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
-     
+    
+    // Put values on SmartDashboard
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
@@ -152,6 +166,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    // Ready Auto Commands
     CommandScheduler.getInstance().schedule(new ZeroHoodInit(), new ShootThree());
   }
 
@@ -162,9 +177,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    
+    // Ready Telop Commands.
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
-    // CommandScheduler.getInstance().schedule(new ZeroTurret());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
@@ -172,6 +186,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    // Insert Additional Values into Smart Dashboard
     SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
   }
