@@ -31,6 +31,7 @@ import frc.team4909.robot.subsystems.climber.commands.HookOut;
 import frc.team4909.robot.subsystems.climber.commands.rachetHold;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.*;
+import frc.team4909.robot.subsystems.shooter.commands.FollowAndAim;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
 import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
 import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot {
     // FlightStick Controls
       //-- Handle Buttons
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
-    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowTarget(turretSubsystem, vision), false); //Toggle Limelight Aim (Joystick: Button 2)
+    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false); //Set Shooter Speed 75% (Joystick: Button 5)
