@@ -63,8 +63,8 @@ public class ShooterSubsystem extends SubsystemBase {
             isAtSpeed = false;
         }
 
-
-
+        SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
+        SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());
 
     }
 

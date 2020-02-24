@@ -16,6 +16,7 @@ public class IntakeSubsystem extends SubsystemBase{
     CANPIDController deployPID;
     CANEncoder deployEncoder;
     public boolean intakeDeployed = false;
+    double holdingPos;
     
     public IntakeSubsystem(){
         intakeMotor = new CANSparkMax(12, MotorType.kBrushless);
@@ -29,7 +30,7 @@ public class IntakeSubsystem extends SubsystemBase{
         deployPID.setI(RobotConstants.intakekI);
         deployPID.setD(RobotConstants.intakekD);
         deployPID.setFF(RobotConstants.intakekF);
-        deployPID.setOutputRange(-0.75, 0.75);
+        deployPID.setOutputRange(-0.5, 0.5);
 
         deployEncoder = new CANEncoder(deployMotor);
         deployEncoder.setPosition(0);
@@ -39,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase{
         intakeMotor.set(speed);
     }
 
-    public void deployIntake(int pos){
+    public void deployIntake(double pos){
         deployPID.setReference(pos, ControlType.kPosition);
     }
 
@@ -50,5 +51,7 @@ public class IntakeSubsystem extends SubsystemBase{
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Pos", deployEncoder.getPosition());
+        SmartDashboard.putNumber("Intake Current", deployMotor.getOutputCurrent());
+        //deployPID.setReference(holdingPos, ControlType.kPosition);
     }
 }

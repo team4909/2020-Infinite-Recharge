@@ -12,8 +12,8 @@ import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
 
 public class FollowTarget extends CommandBase {
 
-    private final double kP = 0.022;
-    private final double kD = 0.0005;
+    private final double kP = 0.08;
+    private final double kD = 0.0008;
     private double lastError = Robot.vision.getXOffset();
     private double speedTurret;
     private double speedShooter;
@@ -23,7 +23,7 @@ public class FollowTarget extends CommandBase {
 
     public FollowTarget(TurretSubsystem subsystem, final Vision vsubsystem) {
         super();
-        addRequirements(subsystem, vsubsystem);
+        addRequirements(subsystem);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class FollowTarget extends CommandBase {
         speedTurret = (offset * kP + Math.abs(offset - lastError) * kD);
 
 
-        if(Robot.vision.getXOffset() == 0 && Robot.vision.getYOffset() == 0){
+        if(!Robot.vision.targetAcquired()){
             //System.out.println("No target seen!");
             SmartDashboard.putBoolean("Target Seen?", false);
             speedTurret = 0;
@@ -60,21 +60,15 @@ public class FollowTarget extends CommandBase {
         Robot.turretSubsystem.setTurnSpeed(speedTurret);
         lastError = Robot.vision.getXOffset();
 
-        if (Math.abs(Robot.vision.getXOffset()) <= 5 ){
-            isAligned = true;
+        if (Math.abs(Robot.vision.getXOffset()) <= 5){
 
             if (Robot.shootersubsystem.isAtSpeed){
 
                 Robot.leds.setGreen();
 
-            } else{
-                Robot.leds.setBlack();
-            }
-            
+            } else Robot.leds.setBlack();
 
             Robot.turretSubsystem.setTurnSpeed(0);
-        } else{
-            isAligned = false;
         }
 
     }
@@ -86,10 +80,5 @@ public class FollowTarget extends CommandBase {
         Robot.turretSubsystem.setTurnSpeed(0);
         Robot.vision.setLights(1);
 
-    }
-
-    @Override
-    public boolean isFinished() {
-        return isAligned;
     }
 }

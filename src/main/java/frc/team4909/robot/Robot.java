@@ -18,7 +18,6 @@ import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
 import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
-import frc.team4909.robot.subsystems.intake.commands.IntakeDeployAndOn;
 import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
@@ -99,7 +98,7 @@ public class Robot extends TimedRobot {
     );
 
     manipulatorGamepad = new FlightStick(1, // Port
-        0.7, // Deadzone
+        0.35, // Deadzone
         0.0 // Gamepad sensitivity
     );
 
@@ -139,6 +138,7 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp()); //Start the Climb Up Group (Gamepad: Left Trigger)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
 }
+
 
 
   @Override
@@ -181,6 +181,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
+    intakeSubsystem.zeroDeploy();
   }
 
   @Override
