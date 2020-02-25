@@ -180,6 +180,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     // Ready Telop Commands.
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
+    drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();

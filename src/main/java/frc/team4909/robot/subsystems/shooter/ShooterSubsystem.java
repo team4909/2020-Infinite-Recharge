@@ -31,7 +31,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1.configFactoryDefault();
         shooter2.configFactoryDefault();
 
-        shooter1.follow(shooter2);
+        // shooter1.follow(shooter2);
         shooter1.setInverted(true);
 
         shooter1.setNeutralMode(NeutralMode.Coast);
