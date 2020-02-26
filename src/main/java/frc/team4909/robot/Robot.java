@@ -96,9 +96,7 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Do Nothing", null);
     autoChooser.addOption("Shoot 3 ONLY", new ShootThree());
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
-
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
-
 
     // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
@@ -111,6 +109,7 @@ public class Robot extends TimedRobot {
         0.0 // Gamepad sensitivity
     );
 
+// Robot Controls
     // FlightStick Controls
       //-- Handle Buttons
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
@@ -157,7 +156,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
     
-    // Put values on SmartDashboard
+    // Put values on SmartDashboards
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
