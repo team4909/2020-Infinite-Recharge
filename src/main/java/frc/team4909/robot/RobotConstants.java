@@ -14,6 +14,10 @@ public class RobotConstants{
     public static final double shooterkD = 0.5;
     public static final double shooterkF = 0;
 
+	public static final double hoodCoefA = 0;
+	public static final double hoodCoefB = 0;
+	public static final double hoodCoefC = 0;
+
     public static final double turretSpeedMultiplier = 0.3;
 
     public static final double hoodkP = 24;
@@ -39,4 +43,5 @@ public class RobotConstants{
     public static final double drivekP = 0.09;
     public static final double drivekI = 0.0;
     public static final double drivekD = 0.0;
+
 }
