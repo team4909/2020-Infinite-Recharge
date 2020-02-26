@@ -19,7 +19,6 @@ public class FollowTarget extends CommandBase {
     private double speedShooter;
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
-    public boolean isAligned;
 
     /**
      * 
@@ -35,7 +34,7 @@ public class FollowTarget extends CommandBase {
     public void initialize() {
         Robot.vision.setLights(3);
         Robot.vision.setPipeline(0);
-        isAligned = false;
+        Robot.shootersubsystem.isAligned = false;
     }
 
     public double filterOffset(double off, double last){
@@ -67,14 +66,7 @@ public class FollowTarget extends CommandBase {
         lastError = Robot.vision.getXOffset();
 
         if (Math.abs(Robot.vision.getXOffset()) <= 5){
-
-            if (Robot.shootersubsystem.isAtSpeed){
-
-                Robot.leds.setGreen();
-
-            } else Robot.leds.setBlack();
-
-            Robot.turretSubsystem.setTurnSpeed(0);
+            Robot.shootersubsystem.isAligned = true;
         }
         
     }

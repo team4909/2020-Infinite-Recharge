@@ -2,6 +2,7 @@ package frc.team4909.robot.subsystems.leds;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /*
 The LEDs are controlled by the REV Blinkin LED Driver.
@@ -10,10 +11,11 @@ and uses a PWM signal to follow preset patterns.
 Patterns can be found here: http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
 */
 
-public class LEDs{
+public class LEDs extends SubsystemBase{
     public Spark LEDController;
 
-    public LEDs() {
+    public LEDs() { 
+        super();
         LEDController = new Spark(0);
     }
 
@@ -29,6 +31,10 @@ public class LEDs{
         LEDController.set(0.85);
     }
 
+    public void setYellow() {
+        LEDController.set(0.69);
+    }
+
     public void setBlack(){
         LEDController.set(0.99);
     }
@@ -40,7 +46,6 @@ public class LEDs{
     public void setBlueBlink(){
         LEDController.set(-0.09);
     }
-
 
     
     public void setAllianceColor(){

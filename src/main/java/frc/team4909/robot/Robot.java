@@ -26,7 +26,9 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
+import frc.team4909.robot.subsystems.leds.LEDSetter;
 import frc.team4909.robot.subsystems.leds.LEDs;
+import frc.team4909.robot.subsystems.leds.SetGreen;
 import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
@@ -87,6 +89,7 @@ public class Robot extends TimedRobot {
     cameraSubsystem.Stream();
 
     leds = new LEDs();
+    leds.setDefaultCommand(new LEDSetter());
 
     autoChooser = new SendableChooser<>();
 
@@ -120,6 +123,7 @@ public class Robot extends TimedRobot {
       //-- Base Buttons
     manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
+    //manipulatorGamepad.buttonPressed(FlightStick.TopRight, new SetGreen()); //Set LEDs to Green When ready to Buddy Climb.
 
       //-- Axis
     manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Move the Turret (Joystick: Twist Stick [Axis Z])

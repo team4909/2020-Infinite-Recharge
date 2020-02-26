@@ -14,16 +14,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
     WPI_TalonFX shooter1, shooter2;
     double speed = -500000;
-    public boolean isAtSpeed;
+    public boolean isAtSpeed = false;
+    public boolean isAligned = false;
 
     CANSparkMax turnMotor;
 
     public double rawspeed, kP, kD, kI, kF;
 
-
-
-    public ShooterSubsystem()
-    {
+    public ShooterSubsystem() {
 
         shooter1 = new WPI_TalonFX(6);
         shooter2 = new WPI_TalonFX(5);
@@ -47,19 +45,17 @@ public class ShooterSubsystem extends SubsystemBase {
 
     }
 
-
-    public void zeroTurret(){
+    public void zeroTurret() {
         turnMotor.getEncoder().setPosition(0);
     }
 
     @Override
-    public void periodic(){
+    public void periodic() {
         SmartDashboard.putNumber("Speed", shooter2.getSelectedSensorVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
-        if(Math.abs(speed-getRPM())<100.00){
+        if (Math.abs(speed - getRPM()) < 100.00) {
             isAtSpeed = true;
-        }
-        else {
+        } else {
             isAtSpeed = false;
         }
 
@@ -68,21 +64,19 @@ public class ShooterSubsystem extends SubsystemBase {
 
     }
 
-    public void setSpeed(double speed){
+    public void setSpeed(double speed) {
         shooter1.set(speed);
         shooter2.set(speed);
         speed = 0;
     }
 
-    public void setVelocity(double velocity){
+    public void setVelocity(double velocity) {
         // speedPID.setFF(velocity/5000);
         shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }
 
-    
-
-    public double getRPM(){
+    public double getRPM() {
         return shooter2.getSelectedSensorVelocity();
     }
 
