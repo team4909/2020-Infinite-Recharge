@@ -35,6 +35,7 @@ public class Vision extends SubsystemBase {
   private double frontLight;
   private double backLight;
   private String camName;
+  private double pipeline = 0;
 
   /**
    * Gets the X offset in degrees.
@@ -57,6 +58,7 @@ public class Vision extends SubsystemBase {
   @Override
   public void periodic() {
     frontCamFeed.getEntry("ledMode").setNumber(ledState);
+    frontCamFeed.getEntry("pipeline").setNumber(pipeline);
   }
 
   /**
@@ -73,6 +75,10 @@ public class Vision extends SubsystemBase {
 
   public void setLights(double ledState){
     this.ledState = ledState;
+  }
+
+  public void setPipeline(double pipeline){
+    this.pipeline = pipeline;
   }
   /**
    * Gets the X offset in degrees.

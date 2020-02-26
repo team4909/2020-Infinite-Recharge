@@ -2,9 +2,12 @@ package frc.team4909.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team4909.robot.autos.ShootThree;
+import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -51,6 +54,7 @@ public class Robot extends TimedRobot {
   public static BionicF310 driverGamepad;
   public static FlightStick manipulatorGamepad;
   public static ClimberSubsystem climberSubsystem;
+  public static SendableChooser autoChooser;
 
   @Override
   public void robotInit() {
@@ -83,6 +87,15 @@ public class Robot extends TimedRobot {
     cameraSubsystem.Stream();
 
     leds = new LEDs();
+
+    autoChooser = new SendableChooser<>();
+
+    autoChooser.setDefaultOption("Do Nothing", null);
+    autoChooser.addOption("Shoot 3 ONLY", new ShootThree());
+    autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
+
+    SmartDashboard.putData("Autonomous Mode: ", autoChooser);
+
 
     // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
@@ -160,7 +173,12 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // Ready Auto Commands
-    CommandScheduler.getInstance().schedule(new ZeroHoodInit(), new ShootThree());
+    CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
+    climberSubsystem.resetClimbEncoder();
+    drivetrainsubsystem.zeroGyro();
+    hoodSubsystem.zeroHood();
+    shootersubsystem.setSpeed(0);
+    intakeSubsystem.zeroDeploy();
   }
 
   @Override

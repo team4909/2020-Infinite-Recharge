@@ -34,7 +34,7 @@ public class FollowTarget extends CommandBase {
     @Override
     public void initialize() {
         Robot.vision.setLights(3);
-
+        Robot.vision.setPipeline(0);
         isAligned = false;
     }
 
@@ -85,6 +85,6 @@ public class FollowTarget extends CommandBase {
 
         Robot.turretSubsystem.setTurnSpeed(0);
         Robot.vision.setLights(1);
-
+        Robot.vision.setPipeline(1);
     }
 }
