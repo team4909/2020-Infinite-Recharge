@@ -9,9 +9,9 @@ public class SetShooterVelocity extends CommandBase {
 
     double velocity;
 
-    public SetShooterVelocity(ShooterSubsystem subsystem, double v) {
+    public SetShooterVelocity(double v) {
         super();
-        addRequirements(subsystem);
+        addRequirements(Robot.shootersubsystem);
         velocity = v;
     }
 

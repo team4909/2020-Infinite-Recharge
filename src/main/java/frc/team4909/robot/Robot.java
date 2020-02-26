@@ -38,6 +38,7 @@ import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
+import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class Robot extends TimedRobot {
@@ -115,7 +116,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterSpeed(0.75), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(4500), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons
