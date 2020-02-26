@@ -6,6 +6,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +18,7 @@ public class ClimberSubsystem extends SubsystemBase {
     CANEncoder climbEncoder1, climbEncoder2, hookEncoder;
     CANPIDController climberPID, hookPID;
     PWM rachet;
+    double climbHoldPos = 0;
 
     public ClimberSubsystem() {
 
@@ -28,15 +30,16 @@ public class ClimberSubsystem extends SubsystemBase {
         climberMotor1.restoreFactoryDefaults();
         climberMotor2.restoreFactoryDefaults();
 
+        climberMotor1.setIdleMode(IdleMode.kBrake);
+        climberMotor2.setIdleMode(IdleMode.kBrake);
+
+        climberMotor2.follow(climberMotor1);
+
         climbEncoder1 = new CANEncoder(climberMotor1);
-        climbEncoder2 = new CANEncoder(climberMotor2);
         hookEncoder = new CANEncoder(hookMotor);
 
         // climberPID = new CANPIDController(climberMotor1);
         hookPID = new CANPIDController(hookMotor);
-
-        climberMotor2.follow(climberMotor1);
-
 
         // climberPID.setP(RobotConstants.climberkP);
         // climberPID.setI(RobotConstants.climberkI);
@@ -47,16 +50,12 @@ public class ClimberSubsystem extends SubsystemBase {
         hookPID.setP(RobotConstants.hookkI);
         hookPID.setP(RobotConstants.hookkD);
         hookPID.setP(RobotConstants.hookkF);
+
+        // climbEncoder1.setPosition(0);
     }
 
     public void setRatchetSpeed(int speed){
         rachet.setRaw(speed);
-    }
-
-    public void setSpeed(double speed)
-    {
-        climberMotor1.set(speed);
-    
     }
 
     public void setHookSpeed(double speed){
@@ -74,18 +73,25 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setClimberSpeed(double speed){
+        // climbHoldPos += speed*1;
         climberMotor1.set(speed);
-        climberMotor2.set(speed);
+        System.out.println("Elevator Moving" + speed);
     }
 
     public double getClimbPos(){
         return climbEncoder1.getPosition();
     }
 
+    public void resetClimbEncoder(){
+        climbEncoder1.setPosition(0);
+        climbHoldPos=0;
+    }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
         SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
+        // setClimberPosition(climbHoldPos);
     }
     
 }

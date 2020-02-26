@@ -1,8 +1,5 @@
 package frc.team4909.robot.operator.controllers;
 
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.operator.generic.BionicAxis;
 import frc.team4909.robot.operator.generic.BionicButton;
 import frc.team4909.robot.operator.generic.BionicJoystick;

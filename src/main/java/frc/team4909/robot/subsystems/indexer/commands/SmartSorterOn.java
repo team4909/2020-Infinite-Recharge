@@ -13,8 +13,8 @@ public class SmartSorterOn extends CommandBase{
 
     @Override
     public void initialize(){
-        if(!(Robot.indexerSubsystem.hasBallUpper() && Robot.indexerSubsystem.hasBallLower())){
-            Robot.sorterSubsystem.sorterOn(-0.5);
+        if(!(Robot.indexerSubsystem.hasBallUpper() || Robot.indexerSubsystem.hasBallLower())){
+            Robot.sorterSubsystem.sorterOn(-0.25);
         }
         else{
             Robot.sorterSubsystem.sorterOn(0);

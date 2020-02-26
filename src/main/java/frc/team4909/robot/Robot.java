@@ -4,45 +4,37 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
-import frc.team4909.robot.subsystems.drivetrain.Drive;
-import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
-import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
-import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
-import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
-import frc.team4909.robot.subsystems.indexer.commands.IndexerUp;
-import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
-import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
-import frc.team4909.robot.subsystems.indexer.commands.SorterOn;
-import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
-import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
-import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
-import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
-import frc.team4909.robot.subsystems.climber.commands.ClimbUp;
 import frc.team4909.robot.subsystems.climber.commands.HookIn;
 import frc.team4909.robot.subsystems.climber.commands.HookOut;
 import frc.team4909.robot.subsystems.climber.commands.rachetHold;
+import frc.team4909.robot.subsystems.drivetrain.Drive;
+import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
+import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
+import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
+import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
+import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
+import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.leds.LEDs;
-import frc.team4909.robot.subsystems.shooter.*;
+import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
+import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
+import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
 import frc.team4909.robot.subsystems.shooter.commands.FollowAndAim;
-import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
 import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
 import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
-import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
-import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
-import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
-import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
-import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
+import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
+import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class Robot extends TimedRobot {
   // Subsystems
@@ -132,11 +124,11 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     
       //-- Bumpers
-    driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
+    // driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
 
       //-- Triggers
-    driverGamepad.buttonPressed(BionicF310.LT, 0.2, new ClimbUp()); //Start the Climb Up Group (Gamepad: Left Trigger)
+    driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
 }
 
@@ -180,6 +172,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     // Ready Telop Commands.
     CommandScheduler.getInstance().schedule(new ZeroHoodInit());
+    climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);

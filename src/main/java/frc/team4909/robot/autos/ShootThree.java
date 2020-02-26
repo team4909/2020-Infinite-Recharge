@@ -8,8 +8,6 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.shooter.commands.FollowTarget;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
-import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
-import frc.team4909.robot.subsystems.shooter.commands.ShootByDistance;
 
 public class ShootThree extends SequentialCommandGroup{
     public ShootThree(){

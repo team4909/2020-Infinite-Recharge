@@ -9,11 +9,6 @@ public class IntakeIn extends CommandBase{
     }
 
     @Override
-    public void initialize() {
-        Robot.intakeSubsystem.setSpeed(1);
-    }
-
-    @Override
     public void execute() {
 
         Robot.intakeSubsystem.setSpeed(1);

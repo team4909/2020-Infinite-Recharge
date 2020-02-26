@@ -20,7 +20,7 @@ public class RobotConstants{
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
 
-    public static final double climberkP = 0;
+    public static final double climberkP = 3;
     public static final double climberkI = 0;
     public static final double climberkD = 0;
     public static final double climberkF = 0;
@@ -34,7 +34,7 @@ public class RobotConstants{
     public static final double intakekI = 0;
     public static final double intakekD = 0;
     public static final double intakekF = 0;
-    public static final double deploySetpoint = 35.5;
+    public static final double deploySetpoint = 33.4;
 
     public static final double drivekP = 0.09;
     public static final double drivekI = 0.0;

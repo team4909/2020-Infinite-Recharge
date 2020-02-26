@@ -9,7 +9,10 @@ public class SorterOut extends CommandBase{
     public SorterOut(SorterSubsystem subsystem){
         super();
         addRequirements(subsystem);
+
     }
+
+    
 
     @Override
     public void initialize(){
@@ -20,5 +23,6 @@ public class SorterOut extends CommandBase{
     @Override
     public void end(boolean interupted){
         Robot.sorterSubsystem.sorterOn(0);
+
     }
 }

@@ -13,7 +13,7 @@ public class IndexerOut extends CommandBase{
     }
 
     public void initialize(){
-        Robot.indexerSubsystem.setSpeed(-1);
+        Robot.indexerSubsystem.setSpeed(1);
     }
     @Override
     public void end(boolean interupted){
