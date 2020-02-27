@@ -9,12 +9,13 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
-    CANSparkMax climberMotor1, climberMotor2, hookMotor;
+   public  CANSparkMax climberMotor1, climberMotor2, hookMotor;
     CANEncoder climbEncoder1, climbEncoder2, hookEncoder;
     CANPIDController climberPID, hookPID;
     PWM rachet;
@@ -24,7 +25,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
         climberMotor1 = new CANSparkMax(14, MotorType.kBrushless);
         climberMotor2 = new CANSparkMax(15, MotorType.kBrushless);
-        rachet = new PWM(1);
+        rachet = new Servo(1);
         hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
@@ -54,8 +55,8 @@ public class ClimberSubsystem extends SubsystemBase {
         // climbEncoder1.setPosition(0);
     }
 
-    public void setRatchetSpeed(int speed){
-        rachet.setRaw(speed);
+    public void setRatchetSpeed(double angle){
+        rachet.setPosition(angle);
     }
 
     public void setHookSpeed(double speed){

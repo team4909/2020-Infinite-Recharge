@@ -16,7 +16,6 @@ import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
 import frc.team4909.robot.subsystems.climber.commands.HookIn;
 import frc.team4909.robot.subsystems.climber.commands.HookOut;
-import frc.team4909.robot.subsystems.climber.commands.rachetHold;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
@@ -133,7 +132,7 @@ public class Robot extends TimedRobot {
 
     // Gamepad Controls
       //-- Middle Buttons
-    driverGamepad.buttonPressed(BionicF310.Start, new rachetHold(-180)); //Set the Ratchet Speed Up (Gamepad: Start Button)
+    
 
       //-- Face Buttons
     driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
@@ -182,6 +181,7 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
+    climberSubsystem.setRatchetSpeed(0);
   }
 
   @Override
@@ -198,6 +198,7 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
+    climberSubsystem.setRatchetSpeed(0);
   }
 
   @Override
