@@ -55,7 +55,7 @@ public class ClimberSubsystem extends SubsystemBase {
         // climbEncoder1.setPosition(0);
     }
 
-    public void setRatchetSpeed(double angle){
+    public void setRatchetAngle(double angle){
         rachet.setPosition(angle);
     }
 
@@ -92,6 +92,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
         SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
+        SmartDashboard.putNumber("Ratchet Pos", rachet.getPosition());
         // setClimberPosition(climbHoldPos);
     }
     

@@ -181,7 +181,7 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetSpeed(0);
+    // climberSubsystem.setRatchetAngle(0);
   }
 
   @Override
@@ -198,7 +198,7 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetSpeed(0);
+    // climberSubsystem.setRatchetAngle(0);
   }
 
   @Override
