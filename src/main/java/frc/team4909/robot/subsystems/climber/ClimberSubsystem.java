@@ -1,24 +1,22 @@
 package frc.team4909.robot.subsystems.climber;
 
-import java.util.concurrent.atomic.DoubleAdder;
-
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
+import frc.team4909.robot.util.Util;
 
 public class ClimberSubsystem extends SubsystemBase {
    public  CANSparkMax climberMotor1, climberMotor2, hookMotor;
     CANEncoder climbEncoder1, climbEncoder2, hookEncoder;
     CANPIDController climberPID, hookPID;
-    PWM rachet;
+    Servo rachet;
     double climbHoldPos = 0;
 
     public ClimberSubsystem() {
@@ -56,7 +54,8 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setRatchetAngle(double angle){
-        rachet.setPosition(angle);
+        double a = Util.map(angle, -128, 128, 0, 1);
+        rachet.setPosition(a);
     }
 
     public void setHookSpeed(double speed){
