@@ -54,8 +54,7 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setRatchetAngle(double angle){
-        double a = Util.map(angle, -128, 128, 0, 1);
-        rachet.setPosition(a);
+        rachet.setAngle(angle);
     }
 
     public void setHookSpeed(double speed){

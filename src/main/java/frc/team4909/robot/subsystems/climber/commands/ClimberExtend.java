@@ -17,7 +17,8 @@ public class ClimberExtend extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.leds.setRed();
+        //Robot.leds.setRed();
+        Robot.cameraSubsystem.climb = true;
         Robot.climberSubsystem.setRatchetAngle(1);
         Robot.climberSubsystem.setClimberSpeed(-0.25);
     }

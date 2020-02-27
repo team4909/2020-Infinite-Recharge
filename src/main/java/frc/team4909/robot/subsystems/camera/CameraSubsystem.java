@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CameraSubsystem {
 
     boolean toggle = true;
-boolean climb = true; // set to F
+    public boolean climb = false; // set to F
     MjpegServer camera;
     UsbCamera camera0;
     UsbCamera camera1;
@@ -44,10 +44,10 @@ boolean climb = true; // set to F
         } else if (toggle) {
             camera.setSource(camera0);
             SmartDashboard.putNumber("source", 0);
-        } else {
-            camera.setSource(camera1);
-            SmartDashboard.putNumber("source", 1);
-        }
+        } //else {
+        //     camera.setSource(camera1);
+        //     SmartDashboard.putNumber("source", 1);
+        // }
     }
 
     public void Stream() {

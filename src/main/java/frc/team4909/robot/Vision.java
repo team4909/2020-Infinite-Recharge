@@ -12,7 +12,7 @@ public class Vision extends SubsystemBase {
   private final double lightFlash= 2.0;
   private final double lightOff = 1.0;
   private final double blink = 2.0;
-  private NetworkTable frontCamFeed;
+  private final NetworkTable frontCamFeed;
   private NetworkTable rearCamFeed;
   private NetworkTable activeCamFeed;
 
@@ -23,13 +23,13 @@ public class Vision extends SubsystemBase {
   private double ts;
   private double tl;
   //Camera Dep
-  private double targetHeight = 29;
-  private double cameraHeight = 5;
+  private final double targetHeight = 29;
+  private final double cameraHeight = 5;
   private double cameraAngle = 0;
   //Target Dependent
   private double angleToTarget;
   private double distanceToTarget;
-  private boolean porthacth = false;
+  private final boolean porthacth = false;
   private boolean usingFrontCam = false;
 
   private double frontLight;
@@ -73,11 +73,11 @@ public class Vision extends SubsystemBase {
     tl = activeCamFeed.getEntry("tl").getDouble(0.0);
   }
 
-  public void setLights(double ledState){
+  public void setLights(final double ledState){
     this.ledState = ledState;
   }
 
-  public void setPipeline(double pipeline){
+  public void setPipeline(final double pipeline){
     this.pipeline = pipeline;
   }
   /**
@@ -148,8 +148,8 @@ public class Vision extends SubsystemBase {
    *
    * @return The distance to the target using a formula.
    */
-  public double calculateDistanceFromCameraHeight(double targetHeight, double cameraHeight, double cameraAngle) {
-    double methodDistance = (targetHeight - cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getYOffset()));
+  public double calculateDistanceFromCameraHeight(final double targetHeight, final double cameraHeight, final double cameraAngle) {
+    final double methodDistance = (targetHeight - cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getYOffset()));
     return methodDistance;
   }
 

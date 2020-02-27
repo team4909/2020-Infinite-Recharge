@@ -58,10 +58,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
 
 
-    public void arcadeDrive(double speed, double turn) {
+    public void arcadeDrive(final double speed, final double turn) {
 
         double speedOutput = speed;
-        double turnOutput = turn * 0.7;
+        final double turnOutput = turn * 0.7;
 
         // Since the robot doesn't move at speeds less than .3, this map function 
         // takes the full range of the joystick and converts it to the full range of the robot
@@ -88,9 +88,9 @@ public class DriveTrainSubsystem extends SubsystemBase{
         }
     }
 
-    public void tankDrive(double leftSpeed, double rightSpeed){
-        double leftOutput = leftSpeed;
-        double rightOutput = rightSpeed;
+    public void tankDrive(final double leftSpeed, final double rightSpeed){
+        final double leftOutput = leftSpeed;
+        final double rightOutput = rightSpeed;
 
         bionicDrive.tankDrive(leftOutput, rightOutput);
     }

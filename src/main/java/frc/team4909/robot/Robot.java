@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    // shootersubsystem.setDefaultCommand(new SetShooterSpeed(1)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.3)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -175,7 +175,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // Ready Auto Commands
-    CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
+    CommandScheduler.getInstance().schedule(new ShootThree());
+    //CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
     climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
