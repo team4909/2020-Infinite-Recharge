@@ -1,5 +1,7 @@
 package frc.team4909.robot.subsystems.shooter;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -9,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
+import frc.team4909.robot.util.Util;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -30,7 +33,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2.configFactoryDefault();
 
         // shooter1.follow(shooter2);
-        shooter1.setInverted(true);
+        // shooter1.setInverted(true);
 
         shooter1.setNeutralMode(NeutralMode.Coast);
         shooter2.setNeutralMode(NeutralMode.Coast);
@@ -59,19 +62,20 @@ public class ShooterSubsystem extends SubsystemBase {
             isAtSpeed = false;
         }
 
-        SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
+        // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
         SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());
 
     }
 
     public void setSpeed(double speed) {
-        shooter1.set(speed);
+        // shooter1.set(speed);
         shooter2.set(speed);
         speed = 0;
     }
 
     public void setVelocity(double velocity) {
         // speedPID.setFF(velocity/5000);
+        // double v = Util
         shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }

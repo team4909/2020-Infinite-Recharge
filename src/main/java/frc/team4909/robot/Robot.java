@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     cameraSubsystem.Stream();
 
     leds = new LEDs();
-    leds.setDefaultCommand(new LEDSetter());
+    // leds.setDefaultCommand(new LEDSetter());
 
     autoChooser = new SendableChooser<>();
 
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new SetShooterSpeed(0)); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodFar()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(4500), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodInit()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons

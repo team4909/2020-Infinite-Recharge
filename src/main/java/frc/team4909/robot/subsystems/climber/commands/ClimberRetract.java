@@ -15,7 +15,7 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.climberSubsystem.setClimberSpeed(Robot.driverGamepad.getThresholdAxis(BionicF310.RT));
+        Robot.climberSubsystem.setClimberSpeed(0.25);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ClimberExtend extends CommandBase {
     @Override
     public void initialize() {
         Robot.leds.setRed();
-        Robot.climberSubsystem.setClimberSpeed(-Robot.driverGamepad.getThresholdAxis(BionicF310.LT));
+        Robot.climberSubsystem.setClimberSpeed(-1);
 
     }
 
