@@ -15,9 +15,13 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void initialize() {
-        Robot.climberSubsystem.setClimberSpeed(1);
-        Robot.leds.setRainbow();
-
+        if(Robot.climberSubsystem.getClimbCurrent() < 25){
+            Robot.leds.setRainbow();
+            Robot.climberSubsystem.setClimberSpeed(0.25);
+        }else{
+            Robot.leds.setDefault();
+            Robot.climberSubsystem.setClimberSpeed(1);
+        }
     }
 
     @Override

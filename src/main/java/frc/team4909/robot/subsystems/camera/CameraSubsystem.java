@@ -19,7 +19,7 @@ public class CameraSubsystem {
     public boolean climb = false; // set to F
     MjpegServer camera;
     UsbCamera camera0;
-    UsbCamera camera1;
+    // UsbCamera camera1;
     UsbCamera climbCamera;
     CvSink inSink;
     Mat imgWithLine;
@@ -40,7 +40,7 @@ public class CameraSubsystem {
 
         if (climb) {
             camera.setSource(climbCamera);
-            SmartDashboard.putNumber("source", 2);
+            SmartDashboard.putNumber("source", 1);
         } else if (toggle) {
             camera.setSource(camera0);
             SmartDashboard.putNumber("source", 0);
@@ -55,14 +55,14 @@ public class CameraSubsystem {
 
             camera = CameraServer.getInstance().addSwitchedCamera("Camera Feed");
             camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+            // camera1 = CameraServer.getInstance().startAutomaticCapture(1);
             climbCamera = CameraServer.getInstance().startAutomaticCapture(2);
             // add view of lielight for jeff...
             camera0.setFPS(10);
-            camera1.setFPS(10);
+            // camera1.setFPS(10);
             climbCamera.setFPS(20);
             camera0.setResolution(240, 180);
-            camera1.setResolution(240, 180);
+            // camera1.setResolution(240, 180);
             climbCamera.setResolution(240, 180);
 
 

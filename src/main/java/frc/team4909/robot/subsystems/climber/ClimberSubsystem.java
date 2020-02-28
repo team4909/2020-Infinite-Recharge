@@ -26,7 +26,7 @@ public class ClimberSubsystem extends SubsystemBase {
         climberMotor1 = new CANSparkMax(14, MotorType.kBrushless);
         climberMotor2 = new CANSparkMax(15, MotorType.kBrushless);
         rachet = new PWM(1);
-        hookMotor = new CANSparkMax(16, MotorType.kBrushless);
+        // hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
         climberMotor2.restoreFactoryDefaults();
@@ -37,20 +37,20 @@ public class ClimberSubsystem extends SubsystemBase {
         climberMotor2.follow(climberMotor1);
 
         climbEncoder1 = new CANEncoder(climberMotor1);
-        hookEncoder = new CANEncoder(hookMotor);
+        // hookEncoder = new CANEncoder(hookMotor);
 
         // climberPID = new CANPIDController(climberMotor1);
-        hookPID = new CANPIDController(hookMotor);
+        // hookPID = new CANPIDController(hookMotor);
 
         // climberPID.setP(RobotConstants.climberkP);
         // climberPID.setI(RobotConstants.climberkI);
         // climberPID.setD(RobotConstants.climberkD);
         // climberPID.setFF(RobotConstants.climberkF);
 
-        hookPID.setP(RobotConstants.hookkP);
-        hookPID.setP(RobotConstants.hookkI);
-        hookPID.setP(RobotConstants.hookkD);
-        hookPID.setP(RobotConstants.hookkF);
+        // hookPID.setP(RobotConstants.hookkP);
+        // hookPID.setP(RobotConstants.hookkI);
+        // hookPID.setP(RobotConstants.hookkD);
+        // hookPID.setP(RobotConstants.hookkF);
 
         // climbEncoder1.setPosition(0);
 
@@ -96,11 +96,16 @@ public class ClimberSubsystem extends SubsystemBase {
         climbHoldPos=0;
     }
 
+    public double getClimbCurrent(){
+        return climberMotor1.getOutputCurrent();
+    }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
-        SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
+        // SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
         SmartDashboard.putNumber("Curr Ratchet Pos", rachet.getPosition());
+        SmartDashboard.putNumber("Climb Current", getClimbCurrent());
         // setClimberPosition(climbHoldPos);
         // setRatchetAngle(SmartDashboard.getNumber("RatchetPos", 0));
     }

@@ -51,6 +51,9 @@ public class LEDs extends SubsystemBase{
         LEDController.set(-0.99);
     }
 
+    public void setDefault(){
+        LEDController.set(0);
+    }
     
     public void setAllianceColor(){
         switch (DriverStation.getInstance().getAlliance()) {
