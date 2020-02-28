@@ -7,8 +7,8 @@ public class FollowAndAim extends ParallelCommandGroup {
     public FollowAndAim() {
         addCommands(
             new ParallelCommandGroup(
-                new FollowTarget(Robot.turretSubsystem, Robot.vision),
-                new ShootByDistance()
+                new FollowTarget(Robot.turretSubsystem, Robot.vision)
+                //new ShootByDistance()
             )
         );
     }
