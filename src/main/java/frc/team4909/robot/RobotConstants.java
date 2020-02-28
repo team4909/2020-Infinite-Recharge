@@ -24,10 +24,11 @@ public class RobotConstants{
     public static final double hoodkI = 0;
     public static final double hoodkD = 0;
 
-    public static final double climberkP = 3;
+    public static final double climberkP = 1;
     public static final double climberkI = 0;
     public static final double climberkD = 0;
     public static final double climberkF = 0;
+    public static final double climberTop = 0;
 
     public static final double hookkP = 0;
     public static final double hookkI = 0;

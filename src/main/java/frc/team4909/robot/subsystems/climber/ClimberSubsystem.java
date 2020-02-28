@@ -39,20 +39,21 @@ public class ClimberSubsystem extends SubsystemBase {
         climbEncoder1 = new CANEncoder(climberMotor1);
         // hookEncoder = new CANEncoder(hookMotor);
 
-        // climberPID = new CANPIDController(climberMotor1);
+        climberPID = new CANPIDController(climberMotor1);
         // hookPID = new CANPIDController(hookMotor);
 
-        // climberPID.setP(RobotConstants.climberkP);
-        // climberPID.setI(RobotConstants.climberkI);
-        // climberPID.setD(RobotConstants.climberkD);
-        // climberPID.setFF(RobotConstants.climberkF);
+        climberPID.setP(RobotConstants.climberkP);
+        climberPID.setI(RobotConstants.climberkI);
+        climberPID.setD(RobotConstants.climberkD);
+        climberPID.setFF(RobotConstants.climberkF);
+        climberPID.setOutputRange(-0.25, 0.25);
 
         // hookPID.setP(RobotConstants.hookkP);
         // hookPID.setP(RobotConstants.hookkI);
         // hookPID.setP(RobotConstants.hookkD);
         // hookPID.setP(RobotConstants.hookkF);
 
-        // climbEncoder1.setPosition(0);
+        climbEncoder1.setPosition(0);
 
         SmartDashboard.putNumber("Ratchet Pos", 0);
 
@@ -77,12 +78,15 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setClimberPosition(double pos){
-        // climberPID.setReference(pos, ControlType.kPosition);
+        climberPID.setReference(pos, ControlType.kPosition);
 
     }
 
     public void setClimberSpeed(double speed){
         // climbHoldPos += speed*1;
+        if(speed<0){
+            
+        }
         climberMotor1.set(speed);
         System.out.println("Elevator Moving" + speed);
     }
@@ -107,7 +111,7 @@ public class ClimberSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Curr Ratchet Pos", rachet.getPosition());
         SmartDashboard.putNumber("Climb Current", getClimbCurrent());
         // setClimberPosition(climbHoldPos);
-        // setRatchetAngle(SmartDashboard.getNumber("RatchetPos", 0));
+        setRatchetAngle(0.1);
     }
 
     

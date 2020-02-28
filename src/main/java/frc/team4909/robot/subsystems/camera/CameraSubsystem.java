@@ -41,7 +41,7 @@ public class CameraSubsystem {
         if (climb) {
             camera.setSource(climbCamera);
             SmartDashboard.putNumber("source", 1);
-        } else if (toggle) {
+        } else /*if (toggle)*/ {
             camera.setSource(camera0);
             SmartDashboard.putNumber("source", 0);
         } //else {
@@ -56,7 +56,7 @@ public class CameraSubsystem {
             camera = CameraServer.getInstance().addSwitchedCamera("Camera Feed");
             camera0 = CameraServer.getInstance().startAutomaticCapture(0);
             // camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            climbCamera = CameraServer.getInstance().startAutomaticCapture(2);
+            climbCamera = CameraServer.getInstance().startAutomaticCapture(1);
             // add view of lielight for jeff...
             camera0.setFPS(10);
             // camera1.setFPS(10);

@@ -16,12 +16,12 @@ public class ShootThree extends SequentialCommandGroup{
         Robot.shootersubsystem.setSpeed(0.3);
         addCommands(
             new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(1),
-            new SetHoodFar(),
+            new SetHoodInit(),
             // new SetShooterSpeed(0.9),
             ///new IndexerAndSorterUp().withTimeout(2),
             //new ShootByDistance(),
             new ShootBalls(12000).withTimeout(8.25),
-            new SetDriveSpeed(-0.9).withTimeout(1.5)
+            new SetDriveSpeed(-0.9).withTimeout(0.5)
         );
     }
 }

@@ -22,10 +22,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
     //CANSparkMax frontRight, frontLeft, backRight, backLeft;
     SpeedControllerGroup m_right, m_left;
     DifferentialDrive bionicDrive;
-    boolean inverted = false;
+    boolean inverted, preciseMode = false;
     AHRS navX;
     double angle = 0;
     PIDController pid;
+    double speedMultiplier, turnMultiplier;
 
     public DriveTrainSubsystem() {
         frontRight = new WPI_TalonFX(1);
@@ -66,12 +67,12 @@ public class DriveTrainSubsystem extends SubsystemBase{
         // Since the robot doesn't move at speeds less than .3, this map function 
         // takes the full range of the joystick and converts it to the full range of the robot
         if (speed != 0) {
-            speedOutput = Util.map(Math.abs(speed), 0.0, 1, .3, .75); 
+            speedOutput = Util.map(Math.abs(speed), 0.0, 1, .3, speedMultiplier); 
             speedOutput = Math.copySign(speedOutput, speed);
             }
 
         if (turn != 0){
-            turnOutput = Util.map(Math.abs(turn), 0.0, 1, .3, .75); 
+            turnOutput = Util.map(Math.abs(turn), 0.05, 1, .3, turnMultiplier); 
             turnOutput = Math.copySign(turnOutput, turn);
         }
 
@@ -101,6 +102,9 @@ public class DriveTrainSubsystem extends SubsystemBase{
         bionicDrive.tankDrive(leftOutput, rightOutput);
     }
 
+    public void togglePreciseMode() {
+        preciseMode = !preciseMode;
+    }
     
     public void invertDriveDirection(){
         inverted = !inverted;
@@ -117,6 +121,13 @@ public class DriveTrainSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("Robot Angle", navX.getAngle());   
         SmartDashboard.putNumber("Target Angle", angle);
        
+        if(preciseMode){
+            speedMultiplier = 0.5;
+            turnMultiplier = 0.5;
+        }else{
+            speedMultiplier = 0.75;
+            turnMultiplier = 0.75;
+        }
     } 
     
 

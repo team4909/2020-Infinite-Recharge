@@ -14,15 +14,17 @@ public class ClimberRetract extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        if(Robot.climberSubsystem.getClimbCurrent() < 25){
-            Robot.leds.setRainbow();
-            Robot.climberSubsystem.setRatchetAngle(1);
-            Robot.climberSubsystem.setClimberSpeed(0.25);
-        }else{
-            Robot.leds.setDefault();
-            Robot.climberSubsystem.setClimberSpeed(1);
-        }
+    public void execute() {
+        // if(Robot.climberSubsystem.getClimbCurrent() < 25){
+        //     Robot.leds.setRainbow();
+        //     Robot.climberSubsystem.setRatchetAngle(-0.55);
+        //     Robot.climberSubsystem.setClimberSpeed(-0.25);
+        // }else{
+        //     Robot.leds.setDefault();
+            
+        // }
+        Robot.climberSubsystem.setClimberSpeed(1);
+        Robot.climberSubsystem.setRatchetAngle(0.1);
     }
 
     @Override
