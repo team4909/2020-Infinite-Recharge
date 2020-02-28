@@ -44,6 +44,7 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
+import frc.team4909.robot.subsystems.shooter.commands.SwapShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class Robot extends TimedRobot {
@@ -73,7 +74,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    // shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.3)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterSpeed(0.5)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -120,9 +121,9 @@ public class Robot extends TimedRobot {
       //-- Handle Buttons
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
-    manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.3), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
+    manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.5), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000)); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(17000)); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons
@@ -132,6 +133,7 @@ public class Robot extends TimedRobot {
 
       //-- Axis
     manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Move the Turret (Joystick: Twist Stick [Axis Z])
+    manipulatorGamepad.buttonPressed(FlightStick.Slider, 0.1,new SwapShooterSpeed());
 
       //-- D-Pad
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp()); //Position the Hood Up (Joystick: D-Pad UP)

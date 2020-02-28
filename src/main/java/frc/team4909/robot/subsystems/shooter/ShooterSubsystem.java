@@ -19,6 +19,8 @@ public class ShooterSubsystem extends SubsystemBase {
     double speed = -500000;
     public boolean isAtSpeed = false;
     public boolean isAligned = false;
+    public boolean isReving = false;
+    public double shooterSetSpeed = 17000;
 
     CANSparkMax turnMotor;
 
@@ -56,7 +58,8 @@ public class ShooterSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Speed", shooter2.getSelectedSensorVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
-        if (Math.abs(speed - getRPM()) < 750.00) {
+        SmartDashboard.putNumber("Current Speed Setpoint", shooterSetSpeed);
+        if (Math.abs(speed - getRPM()) < 1000.00) {
             isAtSpeed = true;
         } else {
             isAtSpeed = false;
@@ -64,6 +67,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
         SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());
+        SmartDashboard.putBoolean("Shooter Reving", isReving);
 
     }
 

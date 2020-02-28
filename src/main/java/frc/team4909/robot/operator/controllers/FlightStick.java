@@ -29,7 +29,8 @@ public class FlightStick extends BionicJoystick {
     public static BionicButton Eleven = new BionicButton(11);
     public static BionicButton Twelve = new BionicButton(12);
 	
-	public static BionicAxis Z = new BionicAxis(2);
+    public static BionicAxis Z = new BionicAxis(2);
+    public static BionicAxis Slider = new BionicAxis(3);
 
     public FlightStick(int port, double deadzone, double sensitivity) {
 		super(port, deadzone, sensitivity);
