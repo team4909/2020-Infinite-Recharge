@@ -12,7 +12,7 @@ public class ShootBalls extends ParallelCommandGroup{
     public ShootBalls(int speed){
         super();
         addCommands(new SetShooterVelocity(speed),
-            new IndexerAndSorterUp() //,
+            new MoveIndexerAtSpeed() //,
             //new IntakeIn()
         );
     }

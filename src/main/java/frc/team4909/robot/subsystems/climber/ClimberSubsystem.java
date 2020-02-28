@@ -6,6 +6,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,14 +18,14 @@ public class ClimberSubsystem extends SubsystemBase {
    public  CANSparkMax climberMotor1, climberMotor2, hookMotor;
     CANEncoder climbEncoder1, climbEncoder2, hookEncoder;
     CANPIDController climberPID, hookPID;
-    Servo rachet;
+    PWM rachet;
     double climbHoldPos = 0;
 
     public ClimberSubsystem() {
 
         climberMotor1 = new CANSparkMax(14, MotorType.kBrushless);
         climberMotor2 = new CANSparkMax(15, MotorType.kBrushless);
-        rachet = new Servo(1);
+        rachet = new PWM(1);
         hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
@@ -51,10 +53,18 @@ public class ClimberSubsystem extends SubsystemBase {
         hookPID.setP(RobotConstants.hookkF);
 
         // climbEncoder1.setPosition(0);
+
+        SmartDashboard.putNumber("Ratchet Pos", 0);
+
     }
 
     public void setRatchetAngle(double angle){
-        rachet.setAngle(angle);
+        double a = Util.map(angle, -90, 90, -1, 1);
+        rachet.setSpeed(a);
+    }
+
+    public void setRatchetSpeed(double speed){
+        rachet.setSpeed(speed);
     }
 
     public void setHookSpeed(double speed){
@@ -90,8 +100,11 @@ public class ClimberSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
         SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
-        SmartDashboard.putNumber("Ratchet Pos", rachet.getPosition());
+        SmartDashboard.putNumber("Curr Ratchet Pos", rachet.getPosition());
         // setClimberPosition(climbHoldPos);
+        // setRatchetAngle(SmartDashboard.getNumber("RatchetPos", 0));
     }
+
+    
     
 }

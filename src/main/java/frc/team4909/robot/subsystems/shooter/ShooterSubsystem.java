@@ -56,7 +56,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Speed", shooter2.getSelectedSensorVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
-        if (Math.abs(speed - getRPM()) < 100.00) {
+        if (Math.abs(speed - getRPM()) < 750.00) {
             isAtSpeed = true;
         } else {
             isAtSpeed = false;

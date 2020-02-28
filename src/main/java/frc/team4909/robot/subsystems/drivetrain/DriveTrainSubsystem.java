@@ -61,7 +61,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
     public void arcadeDrive(final double speed, final double turn) {
 
         double speedOutput = speed;
-        final double turnOutput = turn * 0.7;
+        double turnOutput = turn;
 
         // Since the robot doesn't move at speeds less than .3, this map function 
         // takes the full range of the joystick and converts it to the full range of the robot
@@ -69,6 +69,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
             speedOutput = Util.map(Math.abs(speed), 0.0, 1, .3, .75); 
             speedOutput = Math.copySign(speedOutput, speed);
             }
+
+        if (turn != 0){
+            turnOutput = Util.map(Math.abs(turn), 0.0, 1, .3, .75); 
+            turnOutput = Math.copySign(turnOutput, turn);
+        }
 
         // angle += turn;
 
@@ -78,14 +83,15 @@ public class DriveTrainSubsystem extends SubsystemBase{
         if(inverted){
             speedOutput = speedOutput*-1;
         }
-        if(Math.abs(turnOutput) != 0){
-            bionicDrive.arcadeDrive(speedOutput, turnOutput);
-            angle = navX.getAngle();
-        }else{
-            if(speedOutput != 0){
-                bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.75, 0.75));    
-            }else{bionicDrive.arcadeDrive(0, 0);}
-        }
+        // if(Math.abs(turnOutput) != 0){
+        //     bionicDrive.arcadeDrive(speedOutput, turnOutput);
+        //     angle = navX.getAngle();
+        // }else{
+        //     if(speedOutput != 0){
+        //         bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
+        //     }else{bionicDrive.arcadeDrive(0, 0);}
+        // }
+        bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){
