@@ -15,6 +15,7 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void initialize() {
+        Robot.climberSubsystem.setRatchetAngle(1);
         Robot.climberSubsystem.setClimberSpeed(1);
         Robot.leds.setRainbow();
 
@@ -22,7 +23,6 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void end(boolean interupted){
-        // Robot.climberSubsystem.setRatchetAngle(-5);
         Robot.climberSubsystem.setClimberSpeed(0);
     }
 }
