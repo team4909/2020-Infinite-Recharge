@@ -19,7 +19,7 @@ public class ClimberExtend extends CommandBase {
     public void initialize() {
         //Robot.leds.setRed();
         Robot.cameraSubsystem.climb = true;
-        // Robot.climberSubsystem.setRatchetAngle(5);
+        Robot.climberSubsystem.setRatchetAngle(-0.2);
         Robot.climberSubsystem.setClimberSpeed(-0.5);
     }
 

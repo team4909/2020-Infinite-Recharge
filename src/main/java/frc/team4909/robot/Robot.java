@@ -16,7 +16,7 @@ import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
 import frc.team4909.robot.subsystems.climber.commands.HookIn;
 import frc.team4909.robot.subsystems.climber.commands.HookOut;
-import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
+// import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
       //-- Triggers
     driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(90));
+    // driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(90));
 
     vision.setPipeline(1);
 }
@@ -186,7 +186,6 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetAngle(0);
   }
 
   @Override
@@ -203,7 +202,6 @@ public class Robot extends TimedRobot {
     // hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
-    //  climberSubsystem.setRatchetAngle(0);
   }
 
   @Override
