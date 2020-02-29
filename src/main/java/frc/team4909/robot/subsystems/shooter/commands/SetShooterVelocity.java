@@ -25,7 +25,7 @@ public class SetShooterVelocity extends CommandBase {
     public void end(boolean interrupted){
         Robot.shootersubsystem.isReving = false;
         System.out.println("shooter end" + interrupted);
-        Robot.shootersubsystem.setSpeed(0.5);
+        Robot.shootersubsystem.setVelocity(11000);
     }
 
     

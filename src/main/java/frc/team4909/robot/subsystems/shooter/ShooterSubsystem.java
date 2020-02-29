@@ -50,6 +50,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2.config_kD(0, RobotConstants.shooterkD);
         shooter2.config_kF(0, RobotConstants.shooterkF);
 
+        shooter2.configPeakOutputReverse(0);
     }
 
     public void zeroTurret() {
@@ -67,11 +68,11 @@ public class ShooterSubsystem extends SubsystemBase {
             isAtSpeed = false;
         }
 
-        if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) < -0.8){
-            Robot.shootersubsystem.shooterSetSpeed = 22000;
-        }else if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) > 0.8){
-            Robot.shootersubsystem.shooterSetSpeed = 17000;
-        }
+        // if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) < -0.8){
+        //     Robot.shootersubsystem.shooterSetSpeed = 22000;
+        // }else if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) > 0.8){
+        //     Robot.shootersubsystem.shooterSetSpeed = 17000;
+        // }
 
         // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
         SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());

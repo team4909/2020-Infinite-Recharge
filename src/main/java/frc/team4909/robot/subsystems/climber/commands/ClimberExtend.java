@@ -28,9 +28,9 @@ public class ClimberExtend extends CommandBase {
         //Robot.leds.setRed();
         // Robot.climberSubsystem.setClimberSpeed(0.4);
         Robot.cameraSubsystem.climb = true;
-        Robot.climberSubsystem.setRatchetAngle(0.4);
+        // Robot.climberSubsystem.setRatchetAngle(0.4);
         if(Timer.getFPGATimestamp() - time > delaySec){
-            Robot.climberSubsystem.setClimberSpeed(-0.3);
+            Robot.climberSubsystem.setClimberSpeed(-1/*-0.3*/);
         }
         // Robot.climberSubsystem.setClimberPosition(RobotConstants.climberTop);
     }
