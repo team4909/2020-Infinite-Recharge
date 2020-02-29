@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class ClimberExtend extends CommandBase {
 
     double pos, time;
-    double delaySec = 0.1;
+    double delaySec = 0.025;
 
     public ClimberExtend(){
         super();
@@ -26,18 +26,18 @@ public class ClimberExtend extends CommandBase {
     @Override
     public void execute() {
         //Robot.leds.setRed();
-        // Robot.climberSubsystem.setClimberSpeed(0.4);
+        Robot.climberSubsystem.setClimberSpeed(0.4);
         Robot.cameraSubsystem.climb = true;
-        // Robot.climberSubsystem.setRatchetAngle(0.4);
+        Robot.climberSubsystem.setRatchetAngle(0.4);
         if(Timer.getFPGATimestamp() - time > delaySec){
-            Robot.climberSubsystem.setClimberSpeed(-1/*-0.3*/);
+           Robot.climberSubsystem.setClimberSpeed(-1/*-0.3*/);
         }
         // Robot.climberSubsystem.setClimberPosition(RobotConstants.climberTop);
     }
 
     @Override
     public void end(boolean interrupted) {
-        // Robot.climberSubsystem.setRatchetAngle(0.1);
+        Robot.climberSubsystem.setRatchetAngle(0.1);
         Robot.climberSubsystem.setClimberSpeed(0);
     }
 }

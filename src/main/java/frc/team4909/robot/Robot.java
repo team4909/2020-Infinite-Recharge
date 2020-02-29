@@ -166,6 +166,8 @@ public class Robot extends TimedRobot {
     // Start Scheduling processes
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
+
+    // Robot.leds.setBlack();
     
     // Put values on SmartDashboards
     SmartDashboard.putNumber("X Offset", vision.getXOffset());
@@ -194,6 +196,7 @@ public class Robot extends TimedRobot {
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
+    leds.setDefault();
   }
 
   @Override
