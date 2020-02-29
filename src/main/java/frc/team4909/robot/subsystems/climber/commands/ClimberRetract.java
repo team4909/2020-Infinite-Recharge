@@ -29,6 +29,7 @@ public class ClimberRetract extends CommandBase {
 
     @Override
     public void end(boolean interupted){
+        Robot.leds.setRainbow();
         Robot.climberSubsystem.setClimberSpeed(0);
     }
 }

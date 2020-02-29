@@ -44,7 +44,6 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
-import frc.team4909.robot.subsystems.shooter.commands.SwapShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class Robot extends TimedRobot {
@@ -100,8 +99,8 @@ public class Robot extends TimedRobot {
 
     autoChooser = new SendableChooser<>();
 
-    autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.addOption("Shoot 3 ONLY", new ShootThree());
+    // autoChooser.setDefaultOption("Do Nothing", null);
+    autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
@@ -129,11 +128,11 @@ public class Robot extends TimedRobot {
       //-- Base Buttons
     manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
+    manipulatorGamepad.buttonPressed(FlightStick.Seven, new ZeroHoodInit());
     //manipulatorGamepad.buttonPressed(FlightStick.TopRight, new SetGreen()); //Set LEDs to Green When ready to Buddy Climb.
 
       //-- Axis
     manipulatorGamepad.buttonHeld(FlightStick.Z, 0.4, new MoveTurret(shootersubsystem)); //Move the Turret (Joystick: Twist Stick [Axis Z])
-    manipulatorGamepad.buttonPressed(FlightStick.Slider, 0.1,new SwapShooterSpeed());
 
       //-- D-Pad
     manipulatorGamepad.povActive(FlightStick.Top, new HoodUp()); //Position the Hood Up (Joystick: D-Pad UP)
@@ -188,8 +187,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // Ready Auto Commands
-    CommandScheduler.getInstance().schedule(new ShootThree());
-    //CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
+    // CommandScheduler.getInstance().schedule(new ShootThree());
+    CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
     climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();

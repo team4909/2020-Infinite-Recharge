@@ -10,7 +10,9 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
+import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.util.Util;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -63,6 +65,12 @@ public class ShooterSubsystem extends SubsystemBase {
             isAtSpeed = true;
         } else {
             isAtSpeed = false;
+        }
+
+        if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) < -0.8){
+            Robot.shootersubsystem.shooterSetSpeed = 22000;
+        }else if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) > 0.8){
+            Robot.shootersubsystem.shooterSetSpeed = 17000;
         }
 
         // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
