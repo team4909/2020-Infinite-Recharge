@@ -26,7 +26,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
     AHRS navX;
     double angle = 0;
     PIDController pid;
-    double speedMultiplier, turnMultiplier;
+    double speedMultiplier, turnMultiplier, lastAngle;
 
     public DriveTrainSubsystem() {
         frontRight = new WPI_TalonFX(1);
@@ -37,6 +37,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
         frontLeft = new WPI_TalonFX(3);
         backLeft = new WPI_TalonFX(4);
+
+        frontRight.configClosedloopRamp(0.1);
+        frontLeft.configClosedloopRamp(0.1);
+        backRight.configClosedloopRamp(0.1);
+        backLeft.configClosedloopRamp(0.1);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
         frontRight.setNeutralMode(NeutralMode.Coast);
@@ -84,15 +89,14 @@ public class DriveTrainSubsystem extends SubsystemBase{
         if(inverted){
             speedOutput = speedOutput*-1;
         }
-        // if(Math.abs(turnOutput) != 0){
-        //     bionicDrive.arcadeDrive(speedOutput, turnOutput);
-        //     angle = navX.getAngle();
-        // }else{
-        //     if(speedOutput != 0){
-        //         bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
-        //     }else{bionicDrive.arcadeDrive(0, 0);}
-        // }
-        bionicDrive.arcadeDrive(speedOutput, turnOutput);
+        if(Math.abs(turnOutput) != 0){
+            bionicDrive.arcadeDrive(speedOutput, turnOutput);
+        }else{
+            if(speedOutput != 0){
+                bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
+            }else{bionicDrive.arcadeDrive(0, 0);}
+        }
+        // bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){
@@ -120,7 +124,14 @@ public class DriveTrainSubsystem extends SubsystemBase{
         bionicDrive.feedWatchdog();
         SmartDashboard.putNumber("Robot Angle", navX.getAngle());   
         SmartDashboard.putNumber("Target Angle", angle);
+        SmartDashboard.putNumber("Is Turning?", navX.getRawAccelZ());
        
+        if(Math.abs(navX.getAngle()-lastAngle)>1){                        
+            angle = navX.getAngle();
+        }
+
+        lastAngle = navX.getAngle();
+
         if(preciseMode){
             speedMultiplier = 0.5;
             turnMultiplier = 0.5;
