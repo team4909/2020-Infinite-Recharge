@@ -87,14 +87,13 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setVelocity(double velocity) {
-        // speedPID.setFF(velocity/5000);
-        // double v = Util
-        shooter2.set(ControlMode.Velocity, velocity);
+        double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
+        shooter2.set(ControlMode.Velocity, v);
         speed = velocity;
     }
 
     public double getRPM() {
-        return shooter2.getSelectedSensorVelocity();
+        return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
     }
 
 }

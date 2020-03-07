@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(11000)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(3225)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
