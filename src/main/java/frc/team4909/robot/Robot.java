@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(3225)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(11000)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -221,6 +221,7 @@ public class Robot extends TimedRobot {
     // Insert Additional Values into Smart Dashboard
     SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
+    // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
   }
 
   @Override

@@ -19,7 +19,7 @@ public class ShootThree extends SequentialCommandGroup{
             // new SetShooterSpeed(0.9),
             ///new IndexerAndSorterUp().withTimeout(2),
             //new ShootByDistance(),
-            new ShootBalls(12000).withTimeout(8.25),
+            new ShootBalls(3225).withTimeout(8.25),
             new SetDriveSpeed(-0.9).withTimeout(0.5)
         );
     }
