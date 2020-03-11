@@ -5,6 +5,7 @@ import java.util.Map;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -23,7 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
     public boolean isAligned = false;
     public boolean isReving = false;
     public double shooterSetSpeed = 17000;
-
+    Orchestra orchestra = new Orchestra();
+    
     CANSparkMax turnMotor;
 
     public double rawspeed, kP, kD, kI, kF;
@@ -51,11 +53,15 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2.config_kF(0, RobotConstants.shooterkF);
 
         shooter2.configPeakOutputReverse(0);
+
+        orchestra.addInstrument(shooter1);
+
     }
 
     public void zeroTurret() {
         turnMotor.getEncoder().setPosition(0);
     }
+
 
     @Override
     public void periodic() {
@@ -94,7 +100,8 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double getRPM() {
-        return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
+        // return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
+        return shooter2.getSelectedSensorVelocity();
     }
 
 }

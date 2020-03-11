@@ -16,9 +16,8 @@ public class MoveTurret extends CommandBase {
 
 
 
-    public MoveTurret(ShooterSubsystem subsystem) {
+    public MoveTurret() {
         super();
-        addRequirements(subsystem);
     }
     
     @Override

@@ -104,6 +104,17 @@ public class BionicJoystick extends Joystick {
     }
 
     /**
+     * @param axis        Axis to Create Handler For
+     * @param threshold   Minimum Threshold to Trigger Command
+     * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
+     */
+    public void buttonHeld(BionicAxis axis, double threshold, CommandBase command, boolean interruptible) {
+        BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
+
+        newButton.whileActiveOnce(command, interruptible);
+    }
+
+    /**
      * @param button      Button to Create Handler For
      * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
      */
