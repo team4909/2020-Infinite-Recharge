@@ -9,7 +9,7 @@ public class RobotConstants {
     public static final double limelightPowerPortDiff = powerPortHeight - limelightHeight;
 
     //Shooter Constants
-    public static final double shooterkP = 0.001;
+    public static final double shooterkP = 0.00139;
     public static final double shooterkI = 0;
     public static final double shooterkD = 0;
     public static final double shooterkF = 0.05815;

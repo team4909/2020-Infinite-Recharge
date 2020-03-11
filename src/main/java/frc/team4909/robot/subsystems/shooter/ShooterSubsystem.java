@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.Robot;
@@ -25,6 +27,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public double shooterSetSpeed = 17000;
 
     CANSparkMax turnMotor;
+    SimpleMotorFeedforward feedforward;
 
     public double rawspeed, kP, kD, kI, kF;
 
@@ -35,6 +38,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
         shooter1.configFactoryDefault();
         shooter2.configFactoryDefault();
+
+        feedforward = new SimpleMotorFeedforward(0.139, 0.114, 0.0368); //determined by the characterization tool
 
         shooter1.follow(shooter2);
         shooter1.setInverted(true);
@@ -48,7 +53,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter2.config_kP(0, RobotConstants.shooterkP);
         shooter2.config_kI(0, RobotConstants.shooterkI);
         shooter2.config_kD(0, RobotConstants.shooterkD);
-        shooter2.config_kF(0, RobotConstants.shooterkF);
+        shooter2.config_kF(0, feedforward.calculate(12000)); //this is the velocity
 
         shooter2.configPeakOutputReverse(0);
     }
@@ -89,6 +94,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setVelocity(double velocity) {
         double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
+        shooter2.config_kF(0, feedforward.calculate(12000)); //this is the velocity
         shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }
