@@ -11,5 +11,10 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
-  }
+  },
+  "liveshare.allowGuestTaskControl": true,
+  "liveshare.allowGuestDebugControl": true,
+  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true
+
 }

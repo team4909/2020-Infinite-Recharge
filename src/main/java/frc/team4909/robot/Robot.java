@@ -13,6 +13,7 @@ import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
+import frc.team4909.robot.subsystems.camera.PixyCam;
 import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
 import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
   public static FlightStick manipulatorGamepad;
   public static ClimberSubsystem climberSubsystem;
   public static SendableChooser autoChooser;
+  public static PixyCam pixyCam;
 
   @Override
   public void robotInit() {
