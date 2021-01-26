@@ -11,32 +11,30 @@ import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 public class GalacticSearch extends SequentialCommandGroup { //Sequential: One after another, Parallel: Everything happens at once
     public GalacticSearch(){
 
-        private boolean detected = Robot.pixyCam.getDetected();
-        private boolean left = PixyCam.left; 
-        private boolean right = PixyCam.right;
-        private AHRS navx = new AHRS(SPI.Port.kMPX);
-        private int ballCount = 0;
+        boolean detected = Robot.pixyCam.getDetected();
+        int ballCount; 
+        final int CENTERX_PIXY = 0;
+        // In the form of Path, Color "AR" "AB" "BR" "BB"
+        String selectedPath;
         
         //TODO: Can implement gyro instead of timeout
 
         addCommands(
             new SequentialCommandGroup(
-                //Deploying the Intake, because we want it to be running always
-                new IntakeDeploy();
+                new IntakeDeploy(); //Deploying the Intake, because we want it to be running always
                 //First Step when Robot is at C1
-                if(detected == true){//we can see something at either B3 & C3
-                    if(left == true){
-                        //Following B Red path
-                        new SetDriveSpeed(0.5).withTimeout(0.75); //TODO: Test these numbers
-                        new IndexerAndSorterUp(); //We could also use SmartIndexerand SorterUp
-                        
-                       
-                    } else if(right == true){
-                        //Following A Red path
-                    }
+                if(detected == true){//Check if we can see something
+                    if (Robot.pixyCam.getDeviationX() < CENTERX_PIXY){ //Checks if there is a blob on the left
+                       selectedPath = "BR";
+                        //TODO Finish Path w/ PathWeaver* or Gyro + Pixy
+                    } 
+                    else if(Robot.pixyCam.getDeviationX() > CENTERX_PIXY ){ //Checks if there is a blob on the right
+                        selectedPath = "AR";
+                        //TODO Finish Path w/ PathWeaver* or Gyro + Pixy
+                    }  
                 }
                 else if(detected == false){//We cannot see anything
-
+                    //TODO write code to drive to middle of D5 & E5
                 }
         );
     }

@@ -46,6 +46,7 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
+import com.kauailabs.navx.frc.*;
 
 public class Robot extends TimedRobot {
   // Subsystems
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
   public static ClimberSubsystem climberSubsystem;
   public static SendableChooser autoChooser;
   public static PixyCam pixyCam;
+  public static AHRS navX;
 
   @Override
   public void robotInit() {
@@ -96,8 +98,11 @@ public class Robot extends TimedRobot {
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
 
+    pixyCam = new PixyCam();
+
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
+    navX = new AHRS(SPI.Port.kMPX);
 
     autoChooser = new SendableChooser<>();
 
@@ -105,6 +110,8 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
+
+    pixyCam.sortTest();
 
     // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
