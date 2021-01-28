@@ -1,5 +1,6 @@
 package frc.team4909.robot;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -8,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.team4909.robot.autos.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
@@ -102,16 +104,17 @@ public class Robot extends TimedRobot {
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
-    navX = new AHRS(SPI.Port.kMPX);
+    navX = new AHRS(SPI.Port.kMXP);
 
     autoChooser = new SendableChooser<>();
 
     // autoChooser.setDefaultOption("Do Nothing", null);
     autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
+    autoChooser.addOption("Distance Pid Test", new DriveForward(2));
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
-    pixyCam.sortTest();
+    // pixyCam.sortTest();
 
     // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port

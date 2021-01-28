@@ -19,10 +19,8 @@ public class GalacticSearch extends SequentialCommandGroup { //Sequential: One a
         
         //TODO: Can implement gyro instead of timeout
 
-        addCommands(
-            new SequentialCommandGroup(
-                new IntakeDeploy(); //Deploying the Intake, because we want it to be running always
-                //First Step when Robot is at C1
+        //Logic for determining path
+        //First Step when Robot is at C1
                 if(detected == true){//Check if we can see something
                     if (Robot.pixyCam.getDeviationX() < CENTERX_PIXY){ //Checks if there is a blob on the left
                        selectedPath = "BR";
@@ -36,6 +34,10 @@ public class GalacticSearch extends SequentialCommandGroup { //Sequential: One a
                 else if(detected == false){//We cannot see anything
                     //TODO write code to drive to middle of D5 & E5
                 }
-        );
+
+        addCommands(
+                new IntakeDeploy() //Deploying the Intake, because we want it to be running always
+            );
+
     }
 } 
