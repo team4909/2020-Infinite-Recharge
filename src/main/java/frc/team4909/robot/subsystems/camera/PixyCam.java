@@ -54,7 +54,7 @@ public class PixyCam extends SubsystemBase{
                 blocks.sort((Block b1, Block b2) -> b1.getHeight() - b2.getHeight());
                 break;
             case "area":
-                blocks.sort((Block b1, Block b2) -> (b1.getHeight()*b1.getWidth()) - (b2.getHeight()*b2.getWidth());
+                blocks.sort((Block b1, Block b2) -> (b1.getHeight()*b1.getWidth()) - (b2.getHeight()*b2.getWidth()));
                 break;
             default:
                 break;
