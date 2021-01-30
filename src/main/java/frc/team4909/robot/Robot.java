@@ -1,5 +1,6 @@
 package frc.team4909.robot;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -102,7 +103,7 @@ public class Robot extends TimedRobot {
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
-    navX = new AHRS(SPI.Port.kMPX);
+    navX = new AHRS(SPI.Port.kMXP);
 
     autoChooser = new SendableChooser<>();
 
@@ -111,7 +112,7 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
-    pixyCam.sortTest();
+    // pixyCam.sortTest();
 
     // Initialize Controllers
     driverGamepad = new BionicF310(0, // Port
