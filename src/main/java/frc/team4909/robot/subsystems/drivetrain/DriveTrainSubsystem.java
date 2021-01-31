@@ -18,7 +18,7 @@ import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.util.Util;
 
 public class DriveTrainSubsystem extends SubsystemBase{
-    WPI_TalonFX frontRight, frontLeft, backRight, backLeft;
+    public WPI_TalonFX frontRight, frontLeft, backRight, backLeft;
     //CANSparkMax frontRight, frontLeft, backRight, backLeft;
     SpeedControllerGroup m_right, m_left;
     DifferentialDrive bionicDrive;
