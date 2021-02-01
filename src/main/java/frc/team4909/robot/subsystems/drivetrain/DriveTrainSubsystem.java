@@ -38,10 +38,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
         frontLeft = new WPI_TalonFX(3);
         backLeft = new WPI_TalonFX(4);
 
-        frontRight.configClosedloopRamp(0.1);
-        frontLeft.configClosedloopRamp(0.1);
-        backRight.configClosedloopRamp(0.1);
-        backLeft.configClosedloopRamp(0.1);
+        frontRight.configClosedloopRamp(2);
+        frontLeft.configClosedloopRamp(2);
+        backRight.configClosedloopRamp(2);
+        backLeft.configClosedloopRamp(2);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
         frontRight.setNeutralMode(NeutralMode.Coast);
