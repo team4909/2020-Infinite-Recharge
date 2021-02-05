@@ -14,7 +14,8 @@
   },
   "liveshare.allowGuestTaskControl": true,
   "liveshare.allowGuestDebugControl": true,
-  "extensions.ignoreRecommendations": true
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "extensions.ignoreRecommendations": true,
+  "liveshare.languages.allowGuestCommandControl": true
 
 }

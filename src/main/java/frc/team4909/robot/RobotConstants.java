@@ -47,6 +47,11 @@ public class RobotConstants {
     public static final double drivekP = 0.09;
     public static final double drivekI = 0.0;
     public static final double drivekD = 0.0;
+    
+    public static final double distancekP = 0.025;
+    public static final double distancekI = 0.0;
+    public static final double distancekD = 0.0;
+
 
     //Distance Constants
     public static final double distancekP = 0.025;
