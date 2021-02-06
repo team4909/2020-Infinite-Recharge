@@ -87,6 +87,12 @@ public class DriveTrainSubsystem extends SubsystemBase{
         if(inverted){
             speedOutput = speedOutput*-1;
         }
+
+        //Drive Ramping Up
+        speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
+
+
+
         if(Math.abs(turnOutput) != 0){
             bionicDrive.arcadeDrive(speedOutput, turnOutput);
         }else{
