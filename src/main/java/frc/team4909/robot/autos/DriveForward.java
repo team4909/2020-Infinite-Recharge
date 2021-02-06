@@ -30,6 +30,6 @@ public class DriveForward extends CommandBase{
         //This sets the current position of the robot
         currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
         //This takes the pid calculate method and gives it as speed to the arcade drive
-        // Robot.drivetrainsubsystem.arcadeDrive(MathUtil.clamp(distancePID.calculate(currentPos), 50, 400), 0); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+        Robot.drivetrainsubsystem.arcadeDrive(MathUtil.clamp(distancePID.calculate(currentPos), 50, 400), 0); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
     }
 }
