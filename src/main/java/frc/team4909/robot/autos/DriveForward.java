@@ -16,7 +16,8 @@ public class DriveForward extends CommandBase{
     int STARTING_POS = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition();
     int currentPos;
 
-    public DriveForward(int feet){
+    public void DriveForwardInches(int inches){
+        int feet = inches * 12;
         //Converts the feet to move argument into ticks for a setpoint
         int feetInTicks = (feet * 2880) + STARTING_POS;
         //Creates new PID controller; See RobotConstants for values

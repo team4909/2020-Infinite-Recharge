@@ -14,8 +14,7 @@ public class turnRobot extends CommandBase{
     public double GAIN = 0.3; //TODO check value | Gain is the speed at which the robot will spin
     public double SPEED = 0.5; //TODO check value
 
-    public turnRobot(double degrees){
-        super();
+    public void turnRobotDegrees(double degrees){
         targetState = degrees + Robot.navX.getAngle(); //Gets the abosolute position | TODO Find what get angle really means / gives back
         System.out.println(Robot.navX.getAngle());
         error = targetState - Robot.navX.getAngle(); //Gets the absolute error
