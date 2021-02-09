@@ -70,10 +70,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
         // Since the robot doesn't move at speeds less than .3, this map function 
         // takes the full range of the joystick and converts it to the full range of the robot
-        if (speed != 0) {
-            speedOutput = Util.map(Math.abs(speed), 0.0, 1, .3, speedMultiplier); 
-            speedOutput = Math.copySign(speedOutput, speed);
-            }
+        
+        // if (speed != 0) {
+        //     speedOutput = Util.map(Math.abs(speed), 0.0, 1, .3, speedMultiplier); 
+        //     speedOutput = Math.copySign(speedOutput, speed);
+        //     }
 
         if (turn != 0){
             turnOutput = Util.map(Math.abs(turn), 0.05, 1, .3, turnMultiplier); 
@@ -89,16 +90,14 @@ public class DriveTrainSubsystem extends SubsystemBase{
             speedOutput = speedOutput*-1;
         }
 
-        //Drive Ramping Up
+        //Drive Ramping
         speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
-
-
 
         if(Math.abs(turnOutput) != 0){
             bionicDrive.arcadeDrive(speedOutput, turnOutput);
         }else{
             if(speedOutput != 0){
-                bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
+                bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5)); //Drive Straight PID   
             }else{bionicDrive.arcadeDrive(0, 0);}
         }
         // bionicDrive.arcadeDrive(speedOutput, turnOutput);

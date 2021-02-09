@@ -6,7 +6,7 @@ public class DriveTrainRamp {
     
         /*  
         *   Values we'll need
-        *   lastValue
+        *   lastOutput
         *   joystickOutput
         *   acceleration threshold (could be its own function with related constants, or could be a constant)
         */
@@ -14,17 +14,17 @@ public class DriveTrainRamp {
     //Class Variables :
    //The maximum rate of change of the "speedoutput" in the drivetrain arcade drive.  
     private static double accelThreshold = 0.1; //TODO test value
-    private static double lastValue = 0; 
+    private static double lastOutput = 0; 
 
     public static double getRampedOutput(double speedOutput){
 
         //If the speed is trying to acellerate too fast
-        if(Math.abs(speedOutput - lastValue) > accelThreshold){
+        if(Math.abs(speedOutput - lastOutput) > accelThreshold){
             //Sets speedOutPut equal to its last value plus the limit 
-            speedOutput = lastValue + Math.copySign(accelThreshold, speedOutput); //CopySign handles accel and deccel
+            speedOutput = lastOutput + Math.copySign(accelThreshold, (speedOutput - lastOutput)); //CopySign handles accel and deccel
         }
 
-        lastValue = speedOutput;
+        lastOutput = speedOutput;
         return speedOutput;
 
     } 

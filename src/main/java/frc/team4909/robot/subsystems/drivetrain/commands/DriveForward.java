@@ -1,4 +1,4 @@
-package frc.team4909.robot.autos;
+package frc.team4909.robot.subsystems.drivetrain.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -14,12 +14,20 @@ public class DriveForward extends CommandBase{
     PIDController distancePID;
     //Sets the position for the robot when it starts; This is set because we can ensure that we will be at 0 ticks everytime we start the robot
     int STARTING_POS = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition();
-    int currentPos;
+    double currentPos;
+    double feet;
 
-    public void DriveForwardInches(int inches){
-        int feet = inches * 12;
+    public DriveForward(double inches){
+        super();
+        addRequirements(Robot.drivetrainsubsystem);
+        this.feet = inches * 12;
+    }
+
+
+    @Override
+    public void initialize() {
         //Converts the feet to move argument into ticks for a setpoint
-        int feetInTicks = (feet * 2880) + STARTING_POS;
+        double feetInTicks = (feet * 2880) + STARTING_POS;
         //Creates new PID controller; See RobotConstants for values
         distancePID = new PIDController(RobotConstants.distancekP, RobotConstants.distancekI, RobotConstants.distancekD);
         //Sets the setpoint for the PID
@@ -31,6 +39,16 @@ public class DriveForward extends CommandBase{
         //This sets the current position of the robot
         currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
         //This takes the pid calculate method and gives it as speed to the arcade drive
-        Robot.drivetrainsubsystem.arcadeDrive(MathUtil.clamp(distancePID.calculate(currentPos), 50, 400), 0); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+        Robot.drivetrainsubsystem.arcadeDrive(MathUtil.clamp(distancePID.calculate(currentPos), 0.3, 1), 0); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+    }
+
+    @Override
+    public boolean isFinished() {
+        return Math.abs(currentPos - distancePID.getSetpoint()) < 2000;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        Robot.drivetrainsubsystem.arcadeDrive(0, 0);
     }
 }

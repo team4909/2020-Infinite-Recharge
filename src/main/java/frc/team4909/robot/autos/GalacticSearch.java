@@ -1,9 +1,6 @@
 package frc.team4909.robot.autos;
 
-import java.util.function.BiConsumer;
 import java.util.function.BooleanSupplier;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.Robot;
@@ -13,8 +10,6 @@ import frc.team4909.robot.autos.galacticsearch.B_Blue;
 import frc.team4909.robot.autos.galacticsearch.B_Red;
 import frc.team4909.robot.autos.galacticsearch.BlueStart;
 import frc.team4909.robot.subsystems.camera.PixyCam;
-import frc.team4909.robot.subsystems.drivetrain.commands.turnRobot;
-import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
 
 public class GalacticSearch extends SequentialCommandGroup{
 
@@ -28,23 +23,24 @@ public class GalacticSearch extends SequentialCommandGroup{
 
     public GalacticSearch(){
         
-        addCommands(new ConditionalCommand( //Can we see a ball?
-            new ConditionalCommand( // Yes, A or B?
-                new A_Red(), // Is in the middle
-                new B_Red(), // Is on the left
-                new RedChoice()), 
-            new SequentialCommandGroup( //No
-                new BlueStart(), // Goes to D5 
-                new ConditionalCommand( // A or B?
-                    new A_Blue(), // A Blue, is on the right
-                    new B_Blue(), // B Blue, is on the left
-                    new BlueChoice())), //Can also do this: BooleanSupplier sup = () -> true;
-            new FirstChoice())
+        addCommands(
+            new ConditionalCommand( //Can we see a ball?
+                new ConditionalCommand( // Yes, A or B?
+                    new A_Red(), // Is in the middle
+                    new B_Red(), // Is on the left
+                    new RedChoice()), 
+                new SequentialCommandGroup( //No
+                    new BlueStart(), // Goes to D5 
+                    new ConditionalCommand( // A or B?
+                        new A_Blue(), // A Blue, is on the right
+                        new B_Blue(), // B Blue, is on the left
+                        new BlueChoice())), //Can also do this: BooleanSupplier sup = () -> true;
+                new FirstChoice())
         );
 
     {
-                
-        //DriveForward driveForward = new DriveForward();
+
+    //DriveForward driveForward = new DriveForward();
 
     //                 //First Step when Robot is at C1
     //                 if(detected){//Check if we can see something
@@ -114,16 +110,19 @@ public class GalacticSearch extends SequentialCommandGroup{
     }
     }
 
+    //TODO figure which value of deviation helps us determine left or right
+
     private class FirstChoice implements BooleanSupplier{
+
         @Override
         public boolean getAsBoolean() {
-            if(Robot.pixyCam.getDeviationX() < 0.5 && Robot.pixyCam.getDeviationX() > -0.5){ //In the Middle
+            if(Robot.pixyCam.getDeviationX() < 0.5 && Robot.pixyCam.getDeviationX() > -0.5){ //In the middle
                 return true;
             } else if(Robot.pixyCam.getDeviationX() <= -0.5){ //On the left
                 return true;
-            } else if(Robot.pixyCam.getDeviationX() <= -0.5){
+            } else if(Robot.pixyCam.getDeviationX() >= 0.5){ //On the right
                 return false;
-            } else { //Not seen or On the right
+            } else { //Not seen 
                 System.out.println("Not seen @ First Choice");
                 return false;
             } 
@@ -134,7 +133,6 @@ public class GalacticSearch extends SequentialCommandGroup{
 
         @Override
         public boolean getAsBoolean() {
-
             if(Robot.pixyCam.getDeviationX() < 0.5 && Robot.pixyCam.getDeviationX() > -0.5){ //In the Middle
                 return true;
             } else if(Robot.pixyCam.getDeviationX() <= -0.5){ //On the left
