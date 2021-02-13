@@ -52,5 +52,6 @@ public class RobotConstants {
     public static final double distancekI = 0.0;
     public static final double distancekD = 0.0;
 
-
+    //Pixy Constants
+    public static final int PIXY_REFRESH_DIVISOR = 4;
 }
