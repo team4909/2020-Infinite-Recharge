@@ -33,20 +33,26 @@ public class DriveTrainSubsystem extends SubsystemBase{
         backRight = new WPI_TalonFX(2);
         // frontRight = new CANSparkMax(1, MotorType.kBrushless);
         // backRight = new CANSparkMax(2, MotorType.kBrushless);
-        m_right = new SpeedControllerGroup(frontRight, backRight);
-
+        
         frontLeft = new WPI_TalonFX(3);
         backLeft = new WPI_TalonFX(4);
 
-        frontRight.configClosedloopRamp(2);
-        frontLeft.configClosedloopRamp(2);
-        backRight.configClosedloopRamp(2);
-        backLeft.configClosedloopRamp(2);
+        frontLeft.configFactoryDefault();
+        backLeft.configFactoryDefault();
+        frontRight.configFactoryDefault();
+        backRight.configFactoryDefault();
 
-        frontLeft.setNeutralMode(NeutralMode.Coast);
-        frontRight.setNeutralMode(NeutralMode.Coast);
-        backLeft.setNeutralMode(NeutralMode.Coast);
-        backRight.setNeutralMode(NeutralMode.Coast);
+        m_right = new SpeedControllerGroup(frontRight, backRight);
+
+        // frontRight.configClosedloopRamp(2);
+        // frontLeft.configClosedloopRamp(2);
+        // backRight.configClosedloopRamp(2);
+        // backLeft.configClosedloopRamp(2);
+
+        frontLeft.setNeutralMode(NeutralMode.Brake);
+        frontRight.setNeutralMode(NeutralMode.Brake);
+        backLeft.setNeutralMode(NeutralMode.Brake);
+        backRight.setNeutralMode(NeutralMode.Brake);
         // frontLeft = new CANSparkMax(3, MotorType.kBrushless);
         // backLeft = new CANSparkMax(4, MotorType.kBrushless);
         m_left = new SpeedControllerGroup(frontLeft, backLeft);
@@ -92,7 +98,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
         speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
 
 
-
+/*
         if(Math.abs(turnOutput) != 0){
             bionicDrive.arcadeDrive(speedOutput, turnOutput);
         }else{
@@ -100,7 +106,8 @@ public class DriveTrainSubsystem extends SubsystemBase{
                 bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
             }else{bionicDrive.arcadeDrive(0, 0);}
         }
-        // bionicDrive.arcadeDrive(speedOutput, turnOutput);
+*/
+        bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){

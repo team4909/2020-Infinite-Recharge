@@ -54,9 +54,9 @@ public class RobotConstants {
 
 
     //Distance Constants
-    public static final double distancekP = 0.025;
-    public static final double distancekI = 0.0;
-    public static final double distancekD = 0.00;
+    // public static final double distancekP = 0.025;
+    // public static final double distancekI = 0.0;
+    // public static final double distancekD = 0.00;
 
 
 }

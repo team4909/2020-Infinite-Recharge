@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
 
-    pixyCam = new PixyCam();
+    //pixyCam = new PixyCam();
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
