@@ -1,8 +1,6 @@
 package frc.team4909.robot.subsystems.camera;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
@@ -14,18 +12,26 @@ public class PixyCam extends SubsystemBase{
     private Pixy2 pixy;
     //Don't remove/rename the variables under
     private Block biggestBlock;
-    private static final int FRAME_WIDTH = 200; //TODO get values
+    private int numloops = 0;
+    private static final int FRAME_WIDTH = 300; //TODO get values
     private static final int FRAME_HEIGHT = 200;
     
-    public void initialize() {
-        pixy = Pixy2.createInstance(new SPILink());
-        pixy.init();
-        // Enable both LEDS
-        pixy.setLamp((byte) 1, (byte) 1);
-    }
+
+    // public void initialize() {
+    //     System.out.println("This is inside the Pixy initialize() method");
+    //     pixy = Pixy2.createInstance(new SPILink());
+    //     pixy.init();
+    //     // Enable both LEDS
+    //     pixy.setLamp((byte) 1, (byte) 1);
+    // }
 
     public PixyCam() {
-        
+        super();
+        System.out.println("Constructing Pixy");
+        pixy = Pixy2.createInstance(new SPILink());
+        System.out.println(pixy.init());
+        // Enable both LEDS
+        System.out.println(pixy.setLamp((byte) 1, (byte) 1));
     }
 
     /**
@@ -36,7 +42,7 @@ public class PixyCam extends SubsystemBase{
     public Block getBiggestBlock(String criteria) { //
 
         // Checks if blocks are on the screen
-        int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 2);
+        int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10); 
         if (blockCount <= 0) {
             return null;
         }
@@ -59,7 +65,6 @@ public class PixyCam extends SubsystemBase{
             default:
                 break;
         }
-        blocks.sort((Block b1, Block b2) -> b1.getWidth() - b2.getWidth());
         
         //The first block in the list contains the biggest value after the sort.
         return blocks.get(0);
@@ -68,14 +73,18 @@ public class PixyCam extends SubsystemBase{
 
     @Override
     public void periodic(){
-        biggestBlock = this.getBiggestBlock("width"); //TODO for now.
+        if(++numloops == RobotConstants.PIXY_REFRESH_DIVISOR){
+            biggestBlock = this.getBiggestBlock("width"); //TODO for now.
+            numloops = 0;
+        }
+        //System.out.println("Biggest block: " + biggestBlock);
     }
 
     /**
      * @return Returns deviation from center. Can be used for determining the x-position of a block.
      */
     public int getDeviationX() {
-        int deviationFromCenter = biggestBlock.getX();   //TODO figure out where the zero for the x-axis is.
+        int deviationFromCenter = - FRAME_WIDTH/2 + biggestBlock.getX();   //TODO figure out where the zero for the x-axis is.
         return deviationFromCenter;
     }
 
