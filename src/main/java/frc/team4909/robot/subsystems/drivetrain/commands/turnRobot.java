@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.*;
 import frc.team4909.robot.subsystems.drivetrain.*;
 import frc.team4909.robot.*;
 
-public class turnRobot extends CommandBase{
+public class TurnRobot extends CommandBase{
     //error is how much we have to turn
     //gain is the speed to turn at based on error
     public double error;
@@ -14,7 +14,7 @@ public class turnRobot extends CommandBase{
     public double GAIN = 0.3; //TODO check value | Gain is the speed at which the robot will spin
     public double SPEED = 0.5; //TODO check value
 
-    public turnRobot(double degrees){
+    public TurnRobot(double degrees){
         super();
         targetState = degrees + Robot.navX.getAngle(); //Gets the abosolute position | TODO Find what get angle really means / gives back
         System.out.println(Robot.navX.getAngle());
