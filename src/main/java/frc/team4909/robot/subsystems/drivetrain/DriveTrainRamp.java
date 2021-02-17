@@ -13,11 +13,13 @@ public class DriveTrainRamp {
 
     //Class Variables :
    //The maximum rate of change of the "speedoutput" in the drivetrain arcade drive.  
-    private static double accelThreshold = 0.01; //TODO test value
+    private static double accelThreshold = 0.03; //TODO test value
     private static double lastValue = 0; 
 
     public static double getRampedOutput(double speedOutput){
 
+        //TODO Functionize the below line.
+        accelThreshold = 0.03 - Math.abs(lastValue) * 0.015;
         //If the speed is trying to acellerate too fast
         if(Math.abs(speedOutput - lastValue) > accelThreshold){
             //Sets speedOutPut equal to its last value plus the limit 

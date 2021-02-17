@@ -98,15 +98,15 @@ public class DriveTrainSubsystem extends SubsystemBase{
         speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
 
 
-/*
+
         if(Math.abs(turnOutput) != 0){
-            bionicDrive.arcadeDrive(speedOutput, turnOutput);
+            bionicDrive.arcadeDrive(speedOutput, turnOutput * 0.5);
         }else{
             if(speedOutput != 0){
                 bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
             }else{bionicDrive.arcadeDrive(0, 0);}
         }
-*/
+
         bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
@@ -147,7 +147,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
             speedMultiplier = 0.5;
             turnMultiplier = 0.5;
         }else{
-            speedMultiplier = 0.75;
+            speedMultiplier = 1;
             turnMultiplier = 0.75;
         }
     } 
