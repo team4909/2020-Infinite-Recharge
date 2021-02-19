@@ -27,6 +27,7 @@ import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
+import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
   public static SendableChooser autoChooser;
   public static PixyCam pixyCam;
   public static AHRS navX;
+  private int numloops = 0;
 
   @Override
   public void robotInit() {
@@ -99,7 +101,7 @@ public class Robot extends TimedRobot {
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
 
-    //pixyCam = new PixyCam();
+    pixyCam = new PixyCam();
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
@@ -201,13 +203,15 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // Ready Auto Commands
     // CommandScheduler.getInstance().schedule(new ShootThree());
-    CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
+    //CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
 //    climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
+
+    CommandScheduler.getInstance().schedule(new TurnRobot(90));
   }
 
   @Override
@@ -233,6 +237,16 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
+    if(++numloops != RobotConstants.PIXY_REFRESH_DIVISOR) return;
+
+    if (pixyCam.getDetected()){
+      System.out.println("Detected: " + pixyCam.getDetected());
+      System.out.println("Deviation X: " + pixyCam.getDeviationX());
+      System.out.println("Width: " + pixyCam.getBlockWidth());
+    } else {
+      System.out.println("Detected: " + pixyCam.getDetected());
+    }
+    numloops = 0;
   }
 
   @Override

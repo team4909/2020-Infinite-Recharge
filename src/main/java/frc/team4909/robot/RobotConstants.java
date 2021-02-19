@@ -52,11 +52,18 @@ public class RobotConstants {
     public static final double distancekI = 0.0;
     public static final double distancekD = 0.0;
 
+    public static final double TURN_KP = 0.025;
+    public static final double TURN_KI = 0.0;
+    public static final double TURN_KD = 0.0;
+
+    
+
 
     //Distance Constants
     // public static final double distancekP = 0.025;
     // public static final double distancekI = 0.0;
     // public static final double distancekD = 0.00;
 
-
+    //Pixy Refresh Constant
+    public static final int PIXY_REFRESH_DIVISOR = 10;
 }
