@@ -1,23 +1,23 @@
-package frc.team4909.robot.subsystems.climber.commands;
+// package frc.team4909.robot.subsystems.climber.commands;
 
-import com.revrobotics.CANPIDController;
+// import com.revrobotics.CANPIDController;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team4909.robot.Robot;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import frc.team4909.robot.Robot;
 
-public class ClimberSetSpeed extends CommandBase{
+// public class ClimberSetSpeed extends CommandBase{
 
-    double s;
+//     double s;
 
-    public ClimberSetSpeed(double speed) {
-        super();
-        addRequirements(Robot.climberSubsystem);
-        s = speed;
-    }
+//     public ClimberSetSpeed(double speed) {
+//         super();
+//         addRequirements(Robot.climberSubsystem);
+//         s = speed;
+//     }
 
-    @Override
-    public void initialize() {
-        Robot.climberSubsystem.setClimberSpeed(s);
-    }
-}
+//     @Override
+//     public void initialize() {
+//         Robot.climberSubsystem.setClimberSpeed(s);
+//     }
+// }
 
