@@ -99,7 +99,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
 
 
-        if(Math.abs(turnOutput) != 0){
+        if(Math.abs(turnOutput) != 0 && speedOutput != 0){
             bionicDrive.arcadeDrive(speedOutput, turnOutput * 0.5);
         }else{
             if(speedOutput != 0){
@@ -107,7 +107,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
             }else{bionicDrive.arcadeDrive(0, 0);}
         }
 
-        bionicDrive.arcadeDrive(speedOutput, turnOutput);
+        //bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){
