@@ -16,6 +16,7 @@ public class TurnRobot extends CommandBase{
 
     public TurnRobot(double degrees){
         super();
+        addRequirements(Robot.drivetrainsubsystem);
         System.out.println("TURN ROBOT IS CONSTUCTED");
         turnRobot = new PIDController(RobotConstants.TURN_KP, RobotConstants.TURN_KI, RobotConstants.TURN_KD);
         //TODO change the format of final constants to CAPS_AND_UNDERSCORES.
@@ -33,8 +34,12 @@ public class TurnRobot extends CommandBase{
 
     @Override
     public void execute() {
-        //turnRobot.calculate(Robot.navX.getAngle());
-        Robot.drivetrainsubsystem.arcadeDrive(SPEED, turnRobot.calculate(Robot.navX.getAngle()));
+        //error = targetState - Robot.navX.getAngle();
+        //System.out.println("Error:" + error);
+        //double output = error * GAIN;
+        double output = turnRobot.calculate(Robot.navX.getAngle());
+        //Robot.drivetrainsubsystem.tankDrive(output, -output);
+        Robot.drivetrainsubsystem.tankDrive(output, -output); //TODO where does the negative go???
         if(++numLoops == 10){
             System.out.println("Current Angle: " + Robot.navX.getAngle());
             System.out.println("Target Angle: " + targetState);
@@ -45,7 +50,7 @@ public class TurnRobot extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        if(turnRobot.getPositionError() < 3){ 
+        if(turnRobot.getPositionError() < 1){ 
             System.out.println("Error is less than 3 units");
             return true;
         }

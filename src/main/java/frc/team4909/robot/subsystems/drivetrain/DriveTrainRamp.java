@@ -29,5 +29,21 @@ public class DriveTrainRamp {
         lastValue = speedOutput;
         return speedOutput;
 
-    } 
+    }
+    
+    public static double getAccelerationRampedOutput(double speedOutput){
+        //TODO Functionize the below line.
+        accelThreshold = 0.02;
+        //If the speed is trying to acellerate too fast
+        if((speedOutput - lastValue) > accelThreshold){
+            //Sets speedOutPut equal to its last value plus the limit 
+            speedOutput = lastValue + Math.copySign(accelThreshold, speedOutput - lastValue); //CopySign handles accel and deccel
+        }
+
+        lastValue = speedOutput;
+        return speedOutput;
+
+    }
+    
+    
 }

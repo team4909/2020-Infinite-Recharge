@@ -21,7 +21,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
     public WPI_TalonFX frontRight, frontLeft, backRight, backLeft;
     //CANSparkMax frontRight, frontLeft, backRight, backLeft;
     SpeedControllerGroup m_right, m_left;
-    DifferentialDrive bionicDrive;
+    public DifferentialDrive bionicDrive;
     boolean inverted, preciseMode = false;
     AHRS navX;
     double angle = 0;
@@ -29,11 +29,11 @@ public class DriveTrainSubsystem extends SubsystemBase{
     double speedMultiplier, turnMultiplier, lastAngle;
 
     public DriveTrainSubsystem() {
+
+        //RIGHT SIDE NOT INVERTED: 
+
         frontRight = new WPI_TalonFX(1);
         backRight = new WPI_TalonFX(2);
-        // frontRight = new CANSparkMax(1, MotorType.kBrushless);
-        // backRight = new CANSparkMax(2, MotorType.kBrushless);
-        
         frontLeft = new WPI_TalonFX(3);
         backLeft = new WPI_TalonFX(4);
 
@@ -53,8 +53,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
         frontRight.setNeutralMode(NeutralMode.Brake);
         backLeft.setNeutralMode(NeutralMode.Brake);
         backRight.setNeutralMode(NeutralMode.Brake);
-        // frontLeft = new CANSparkMax(3, MotorType.kBrushless);
-        // backLeft = new CANSparkMax(4, MotorType.kBrushless);
+
         m_left = new SpeedControllerGroup(frontLeft, backLeft);
 
         pid = new PIDController(RobotConstants.drivekP, RobotConstants.drivekI, RobotConstants.drivekD);
@@ -62,13 +61,13 @@ public class DriveTrainSubsystem extends SubsystemBase{
         navX = new AHRS(SerialPort.Port.kMXP);
         navX.reset();
 
-
         bionicDrive = new DifferentialDrive(m_left, m_right);
+        //bionicDrive.setRightSideInverted(true);
 
     }
 
 
-    public void arcadeDrive(final double speed, final double turn) {
+    public void arcadeDrive(final double speed, final double turn, final boolean decelerationRamped) {
 
         double speedOutput = speed;
         double turnOutput = turn;
@@ -95,7 +94,8 @@ public class DriveTrainSubsystem extends SubsystemBase{
         }
 
         //Drive Ramping Up
-        speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
+        if (decelerationRamped) speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
+        else speedOutput = DriveTrainRamp.getAccelerationRampedOutput(speedOutput);
 
 
 
@@ -104,10 +104,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
         }else{
             if(speedOutput != 0){
                 bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
-            }else{bionicDrive.arcadeDrive(0, 0);}
+            }else{
+                bionicDrive.arcadeDrive(speedOutput, turnOutput);
+            }
         }
-
-        //bionicDrive.arcadeDrive(speedOutput, turnOutput);
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){
@@ -150,6 +150,8 @@ public class DriveTrainSubsystem extends SubsystemBase{
             speedMultiplier = 1;
             turnMultiplier = 0.75;
         }
+
+        //System.out.println(frontRight.getSelectedSensorPosition());
     } 
     
 

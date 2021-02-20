@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
@@ -75,7 +77,6 @@ public class Robot extends TimedRobot {
 
     // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
-    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
     vision = new Vision();
 
@@ -211,7 +212,7 @@ public class Robot extends TimedRobot {
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
 
-    CommandScheduler.getInstance().schedule(new TurnRobot(90));
+    CommandScheduler.getInstance().schedule(new DriveForward(144));
   }
 
   @Override
@@ -229,6 +230,8 @@ public class Robot extends TimedRobot {
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
 //    climberSubsystem.setRatchetSpeed(-0.5);
+    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+
   }
 
   @Override
