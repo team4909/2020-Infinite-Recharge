@@ -48,10 +48,16 @@ public class RobotConstants {
     public static final double drivekI = 0.0;
     public static final double drivekD = 0.0;
     
-    public static final double distancekP = 0.025;
+    public static final double distancekP = 0.002;
     public static final double distancekI = 0.0;
     public static final double distancekD = 0.0;
 
-    //Pixy Constants
-    public static final int PIXY_REFRESH_DIVISOR = 4;
+    public static final double TURN_KP = 0.025;
+    public static final double TURN_KI = 0.0;
+    public static final double TURN_KD = 0.0;
+
+    public static final double TICKS_PER_INCH = 8 * 2048 / (6 * Math.PI);
+    
+    //Pixy Refresh Constant
+    public static final int PIXY_REFRESH_DIVISOR = 10;
 }

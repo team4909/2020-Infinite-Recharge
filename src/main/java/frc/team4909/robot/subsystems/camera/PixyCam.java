@@ -44,12 +44,11 @@ public class PixyCam extends SubsystemBase{
 
         // Checks if blocks are on the screen
         int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10); 
-        if (blockCount <= 0) {
+        if (!(blockCount >= 1)) {
             return null;
         }
 
         // Get all blocks
-        pixy.getCCC().getBlocks();
         ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
         
         // Sort based on the selected criteria
@@ -126,4 +125,4 @@ public class PixyCam extends SubsystemBase{
         return blockHeight;
     }
 
-}
+} 

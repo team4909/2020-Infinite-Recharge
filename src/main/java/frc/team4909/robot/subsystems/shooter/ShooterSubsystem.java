@@ -23,7 +23,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public boolean isAtSpeed = false;
     public boolean isAligned = false;
     public boolean isReving = false;
-    public double shooterSetSpeed = 17000;
+    public double shooterSetSpeed = 0;
     Orchestra orchestra = new Orchestra();
     
     CANSparkMax turnMotor;

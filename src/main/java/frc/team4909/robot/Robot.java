@@ -9,24 +9,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.camera.PixyCam;
-import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
-import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
-import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
-import frc.team4909.robot.subsystems.climber.commands.ClimberSetSpeed;
-import frc.team4909.robot.subsystems.climber.commands.HookIn;
-import frc.team4909.robot.subsystems.climber.commands.HookOut;
-import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
+//import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
+//import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
+//import frc.team4909.robot.subsystems.climber.commands.ClimberRetract;
+//import frc.team4909.robot.subsystems.climber.commands.ClimberSetSpeed;
+//import frc.team4909.robot.subsystems.climber.commands.HookIn;
+//import frc.team4909.robot.subsystems.climber.commands.HookOut;
+//import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
 // import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
 import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
+import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -63,17 +66,17 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static BionicF310 driverGamepad;
   public static FlightStick manipulatorGamepad;
-  public static ClimberSubsystem climberSubsystem;
+  //public static ClimberSubsystem climberSubsystem;
   public static SendableChooser autoChooser;
   public static PixyCam pixyCam;
   public static AHRS navX;
+  private int numloops = 0;
 
   @Override
   public void robotInit() {
 
     // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
-    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
 
     vision = new Vision();
 
@@ -93,8 +96,8 @@ public class Robot extends TimedRobot {
 
     turretSubsystem = new TurretSubsystem();
 
-    climberSubsystem = new ClimberSubsystem();
-    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
+//    climberSubsystem = new ClimberSubsystem();
+//    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
@@ -134,7 +137,8 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
-
+    manipulatorGamepad.buttonPressed(FlightStick.Eight, new SetShooterVelocity(0)); //Set Shooter Speed 75% (Joystick: Button 5)
+    
       //-- Base Buttons
     manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
@@ -154,16 +158,16 @@ public class Robot extends TimedRobot {
 
       //-- Face Buttons
     // driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
+//    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     
       //-- Bumpers
     // driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
 
       //-- Triggers
-    driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
-    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
+//    driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
+//    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
+//    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
 
     vision.setPipeline(1);
@@ -200,13 +204,15 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // Ready Auto Commands
     // CommandScheduler.getInstance().schedule(new ShootThree());
-    CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
-    climberSubsystem.resetClimbEncoder();
+    //CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
+//    climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
+
+    CommandScheduler.getInstance().schedule(new DriveForward(144));
   }
 
   @Override
@@ -223,7 +229,9 @@ public class Robot extends TimedRobot {
     // hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetSpeed(-0.5);
+//    climberSubsystem.setRatchetSpeed(-0.5);
+    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+
   }
 
   @Override
@@ -232,6 +240,16 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
     SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
+    if(++numloops != RobotConstants.PIXY_REFRESH_DIVISOR) return;
+
+    if (pixyCam.getDetected()){
+      System.out.println("Detected: " + pixyCam.getDetected());
+      System.out.println("Deviation X: " + pixyCam.getDeviationX());
+      System.out.println("Width: " + pixyCam.getBlockWidth());
+    } else {
+      System.out.println("Detected: " + pixyCam.getDetected());
+    }
+    numloops = 0;
   }
 
   @Override

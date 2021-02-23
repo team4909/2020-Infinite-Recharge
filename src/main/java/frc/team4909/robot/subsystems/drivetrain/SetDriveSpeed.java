@@ -14,12 +14,12 @@ public class SetDriveSpeed extends CommandBase{
 
     @Override
     public void execute() {
-        Robot.drivetrainsubsystem.arcadeDrive(speed, 0);
+        Robot.drivetrainsubsystem.arcadeDrive(speed, 0, false);
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.drivetrainsubsystem.arcadeDrive(0, 0);
+        Robot.drivetrainsubsystem.arcadeDrive(0, 0, false);
     }
 
 }

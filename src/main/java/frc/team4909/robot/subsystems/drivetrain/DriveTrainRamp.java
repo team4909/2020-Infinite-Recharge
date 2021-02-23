@@ -13,19 +13,37 @@ public class DriveTrainRamp {
 
     //Class Variables :
    //The maximum rate of change of the "speedoutput" in the drivetrain arcade drive.  
-    private static double accelThreshold = 0.1; //TODO test value
-    private static double lastOutput = 0; 
+    private static double accelThreshold = 0.03; //TODO test value
+    private static double lastValue = 0; 
 
     public static double getRampedOutput(double speedOutput){
 
+        //TODO Functionize the below line.
+        accelThreshold = 0.03 - Math.abs(lastValue) * 0.015;
         //If the speed is trying to acellerate too fast
-        if(Math.abs(speedOutput - lastOutput) > accelThreshold){
+        if(Math.abs(speedOutput - lastValue) > accelThreshold){
             //Sets speedOutPut equal to its last value plus the limit 
-            speedOutput = lastOutput + Math.copySign(accelThreshold, (speedOutput - lastOutput)); //CopySign handles accel and deccel
+            speedOutput = lastValue + Math.copySign(accelThreshold, speedOutput - lastValue); //CopySign handles accel and deccel
         }
 
-        lastOutput = speedOutput;
+        lastValue = speedOutput;
         return speedOutput;
 
-    } 
+    }
+    
+    public static double getAccelerationRampedOutput(double speedOutput){
+        //TODO Functionize the below line.
+        accelThreshold = 0.02;
+        //If the speed is trying to acellerate too fast
+        if((speedOutput - lastValue) > accelThreshold){
+            //Sets speedOutPut equal to its last value plus the limit 
+            speedOutput = lastValue + Math.copySign(accelThreshold, speedOutput - lastValue); //CopySign handles accel and deccel
+        }
+
+        lastValue = speedOutput;
+        return speedOutput;
+
+    }
+    
+    
 }

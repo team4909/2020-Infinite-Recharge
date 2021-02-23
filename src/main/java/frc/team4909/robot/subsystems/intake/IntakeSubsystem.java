@@ -38,9 +38,9 @@ public class IntakeSubsystem extends SubsystemBase{
         deployPID.setD(RobotConstants.intakekD);
         deployPID.setFF(RobotConstants.intakekF);
         deployPID.setOutputRange(-0.5, 0.5);
-
         deployEncoder = new CANEncoder(deployMotor);
         deployEncoder.setPosition(0);
+        deployIntake(0);
     }
 
     public void setSpeed(double speed){
