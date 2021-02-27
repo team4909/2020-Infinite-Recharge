@@ -20,7 +20,7 @@ public class A_Red extends SequentialCommandGroup {
         super();
         addCommands(//negatived angles for testing
             new DriveForward(60),
-            new TurnRobot(26.6), //right is positive, i believe
+            new TurnRobot(26.6), //right is positive, I believe
             new DriveForward(67.1),
             new TurnRobot(-108.4),
             new DriveForward(94.9),

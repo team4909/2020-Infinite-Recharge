@@ -88,18 +88,21 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
         // angle += turn;
 
-        SmartDashboard.putNumber("SpeedOutput", speedOutput);
-        SmartDashboard.putNumber("TurnOutoput", turnOutput);
+        
 
         if(inverted){
             speedOutput = speedOutput*-1;
         }
 
         //Drive Ramping Up
-        if (decelerationRamped) speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
-        else speedOutput = DriveTrainRamp.getAccelerationRampedOutput(speedOutput);
+        if (decelerationRamped){ 
+            speedOutput = DriveTrainRamp.getRampedOutput(speedOutput);
+        } else{
+            speedOutput = DriveTrainRamp.getAccelerationRampedOutput(speedOutput);
+        }
 
-
+        SmartDashboard.putNumber("SpeedOutput", speedOutput);
+        SmartDashboard.putNumber("TurnOutoput", turnOutput);
 
         if(Math.abs(turnOutput) != 0 && speedOutput != 0){
             bionicDrive.arcadeDrive(speedOutput, turnOutput);
@@ -134,6 +137,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
     public double getAngle(){
         return navX.getAngle();
+    }
+
+    public void resetAngle(){
+        angle = navX.getAngle();
     }
 
     @Override

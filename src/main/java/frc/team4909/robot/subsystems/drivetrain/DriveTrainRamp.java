@@ -35,7 +35,7 @@ public class DriveTrainRamp {
         //TODO Functionize the below line.
         accelThreshold = 0.02;
         //If the speed is trying to acellerate too fast
-        if((speedOutput - lastValue) > accelThreshold){
+        if((speedOutput - lastValue) < -accelThreshold){
             //Sets speedOutPut equal to its last value plus the limit 
             speedOutput = lastValue + Math.copySign(accelThreshold, speedOutput - lastValue); //CopySign handles accel and deccel
         }

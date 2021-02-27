@@ -13,7 +13,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
+import frc.team4909.robot.autos.galacticsearch.A_Blue;
 import frc.team4909.robot.autos.galacticsearch.A_Red;
+import frc.team4909.robot.autos.galacticsearch.B_Blue;
+import frc.team4909.robot.autos.galacticsearch.B_Red;
+import frc.team4909.robot.autos.galacticsearch.BlueStart;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 //import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -83,7 +87,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(10000)); //(new FollowTarget(shootersubsystem, vision));
+    //shootersubsystem.setDefaultCommand(new SetShooterVelocity(5000)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -139,6 +143,8 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
     manipulatorGamepad.buttonPressed(FlightStick.Eight, new SetShooterVelocity(0)); //Set Shooter Speed 75% (Joystick: Button 5)
+    //manipulatorGamepad.buttonPressed(FlightStick.Eight, new eroDeploy()); // (Joystick: Button 10)
+    
     
       //-- Base Buttons
     manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
@@ -212,14 +218,21 @@ public class Robot extends TimedRobot {
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
-
-    //CommandScheduler.getInstance().schedule(new TurnRobot(-26.6));
-    CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new IndexerAndSorterUp(), new A_Red()));
+    
+    // CommandScheduler.getInstance().schedule(
+    //   new ParallelCommandGroup(
+    //     new SequentialCommandGroup(
+    //       new BlueStart(),
+    //       new B_Blue()
+    //     )
+    //   )
+    // );
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
   }
 
   @Override
   public void autonomousPeriodic() {
-
+    new IntakeDeploy(); 
   }
 
   @Override

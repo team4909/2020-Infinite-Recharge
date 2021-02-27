@@ -52,12 +52,12 @@ public class RobotConstants {
     public static final double distancekI = 0.0;
     public static final double distancekD = 0.0;
 
-    public static final double TURN_KP = 0.035;
+    public static final double TURN_KP = 0.02;
     public static final double TURN_KI = 0.0;
-    public static final double TURN_KD = 0.0;
+    public static final double TURN_KD = 0.004;
 
     public static final double TICKS_PER_INCH = 8 * 2048 / (6 * Math.PI);
-    public static final double TOLERANCE_INCHES = 3 * TICKS_PER_INCH;
+    public static final double TOLERANCE_INCHES = 0.5 * TICKS_PER_INCH;
     public static final double TOLERANCE_DEGREES = 3;
     
     //Pixy Refresh Constant

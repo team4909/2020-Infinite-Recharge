@@ -4,29 +4,30 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 
-
 public class B_Blue extends SequentialCommandGroup {
 
     /*
-        1. Turn 14
-        2. Move 30"
-        3. Turn 45
-        4. Move 84.8"
-        5. Turn -90
-        6. Move 84.8"
-        7. Move 30"
-    */
-    
+     * 1. Turn 14 2. Move 30" 3. Turn 45 4. Move 84.8" 5. Turn -90 6. Move 84.8" 7.
+     * Move 30"
+     */
+
     public B_Blue() {
-        
+
         super();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            System.out.println("Interupted");
+        }
         addCommands(
-            new TurnRobot(14),
+            new TurnRobot(-14),
             new DriveForward(30),
-            new TurnRobot(45),
+            new TurnRobot(-45),
             new DriveForward(84.8),
-            new TurnRobot(-90),
+            new TurnRobot(90),
             new DriveForward(84.8),
+            new TurnRobot(-45),
             new DriveForward(30)
         );
     }

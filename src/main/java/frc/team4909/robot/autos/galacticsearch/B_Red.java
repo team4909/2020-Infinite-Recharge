@@ -20,13 +20,13 @@ public class B_Red extends SequentialCommandGroup {
     public B_Red() {
         super();
         addCommands(
-            new TurnRobot(26.6),
+            new TurnRobot(-26.6),
             new DriveForward(61),
-            new TurnRobot(-71.6),
+            new TurnRobot(71.6),
             new DriveForward(84.8),
-            new TurnRobot(90),
+            new TurnRobot(-90),
             new DriveForward(84.8),
-            new TurnRobot(-45),
+            new TurnRobot(45),
             new DriveForward(130)
         );
     }

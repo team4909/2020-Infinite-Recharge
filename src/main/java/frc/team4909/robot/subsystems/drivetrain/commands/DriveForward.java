@@ -44,7 +44,7 @@ public class DriveForward extends CommandBase{
         currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
         //This takes the pid calculate method and gives it as speed to the arcade drive
         //IMPORTANT: THE NEGATIVE IS NEEDED BECAUSE ON THE JOYSTICK, UP IS NEGATIVE. THE NEGATIVE EMULATES THE STICK'S DIRECTIONS. 
-        Robot.drivetrainsubsystem.arcadeDrive( - MathUtil.clamp(distancePID.calculate(currentPos), -0.6, 0.6), 0, false); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+        Robot.drivetrainsubsystem.arcadeDrive(-MathUtil.clamp(distancePID.calculate(currentPos), -0.6, 0.6), 0, false); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
         if(++numLoops == 10){
             // System.out.println("Current Position: " + currentPos);
             // System.out.println("Target Position: " + targetPos);
@@ -58,7 +58,7 @@ public class DriveForward extends CommandBase{
     public boolean isFinished() {
 
         if (Math.abs(currentPos - targetPos) < RobotConstants.TOLERANCE_INCHES){
-            System.out.println("Error is less than 3 inches");
+            System.out.println("Error command in Drive Forward has been called");
             return true;
         }
         return false;
@@ -68,7 +68,11 @@ public class DriveForward extends CommandBase{
     @Override
     public void end(boolean interrupted) {
         System.out.println("No more moving translationally.");
-        Robot.drivetrainsubsystem.arcadeDrive(0, 0, false);
+        // Robot.drivetrainsubsystem.arcadeDrive(0, 0, false);
+        // NOTE: we are using tank drive because arcade drive ramping IS VERY BAD, we will use tank drive instead.
+        // @TODO fix arcade drive ramping.
+        Robot.drivetrainsubsystem.tankDrive(0, 0);
         DriveTrainRamp.zeroLastValue();
+        System.out.println("End command in DriveForward has ended");
     }
 }

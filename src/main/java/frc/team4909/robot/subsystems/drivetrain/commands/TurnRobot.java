@@ -39,7 +39,7 @@ public class TurnRobot extends CommandBase{
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         double output = turnPID.calculate(currentPosition);
         //NEGATIVE IS FOR SOME REASON???> SEE DRIVEFORWARD.JAVA
-        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.35, 1);
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.2, 1);
         Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???; 
         if(++numLoops == 10){
             System.out.println("Current Angle: " + currentPosition);
@@ -64,6 +64,7 @@ public class TurnRobot extends CommandBase{
     public void end(boolean interrupted){
         System.out.println("No more turning");
         Robot.drivetrainsubsystem.arcadeDrive(0, 0, false);
+        Robot.drivetrainsubsystem.resetAngle();
     }
     
 }
