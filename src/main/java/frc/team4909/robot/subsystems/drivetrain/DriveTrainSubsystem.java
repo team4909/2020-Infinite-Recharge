@@ -102,7 +102,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
 
 
         if(Math.abs(turnOutput) != 0 && speedOutput != 0){
-            bionicDrive.arcadeDrive(speedOutput, turnOutput * 0.5);
+            bionicDrive.arcadeDrive(speedOutput, turnOutput);
         }else{
             if(speedOutput != 0){
                 bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    

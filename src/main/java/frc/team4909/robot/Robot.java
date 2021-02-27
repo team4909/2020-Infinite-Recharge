@@ -214,7 +214,7 @@ public class Robot extends TimedRobot {
     leds.setDefault();
 
     //CommandScheduler.getInstance().schedule(new TurnRobot(-26.6));
-    CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new IntakeDeploy(), new A_Red()));
+    CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new IndexerAndSorterUp(), new A_Red()));
   }
 
   @Override

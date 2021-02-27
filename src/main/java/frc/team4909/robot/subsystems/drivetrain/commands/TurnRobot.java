@@ -2,6 +2,7 @@ package frc.team4909.robot.subsystems.drivetrain.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 
@@ -38,7 +39,8 @@ public class TurnRobot extends CommandBase{
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         double output = turnPID.calculate(currentPosition);
         //NEGATIVE IS FOR SOME REASON???> SEE DRIVEFORWARD.JAVA
-        Robot.drivetrainsubsystem.arcadeDrive(SPEED, output, true); //TODO where does the negative go???;
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.35, 1);
+        Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???; 
         if(++numLoops == 10){
             System.out.println("Current Angle: " + currentPosition);
             System.out.println("Target Angle: " + targetPosition);
