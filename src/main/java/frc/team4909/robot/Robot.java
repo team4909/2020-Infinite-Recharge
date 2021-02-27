@@ -13,9 +13,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
+import frc.team4909.robot.autos.galacticsearch.A_Red;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
-import frc.team4909.robot.subsystems.camera.CameraSubsystem;
+//import frc.team4909.robot.subsystems.camera.CameraSubsystem;
 import frc.team4909.robot.subsystems.camera.PixyCam;
 //import frc.team4909.robot.subsystems.climber.ClimberSubsystem;
 //import frc.team4909.robot.subsystems.climber.commands.ClimberExtend;
@@ -36,6 +37,7 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
 import frc.team4909.robot.subsystems.leds.LEDSetter;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
@@ -60,7 +62,7 @@ public class Robot extends TimedRobot {
   public static SorterSubsystem sorterSubsystem;
   public static HoodSubsystem hoodSubsystem;
   public static IntakeSubsystem intakeSubsystem;
-  public static CameraSubsystem cameraSubsystem;
+  //public static CameraSubsystem cameraSubsystem;
   public static TurretSubsystem turretSubsystem;
   public static LEDs leds;
   public static Vision vision;
@@ -99,14 +101,13 @@ public class Robot extends TimedRobot {
 //    climberSubsystem = new ClimberSubsystem();
 //    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
-    cameraSubsystem = new CameraSubsystem();
-    cameraSubsystem.Stream();
+    //cameraSubsystem = new CameraSubsystem();
+    //cameraSubsystem.Stream();
 
     pixyCam = new PixyCam();
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
-    navX = new AHRS(SPI.Port.kMXP);
 
     autoChooser = new SendableChooser<>();
 
@@ -212,7 +213,8 @@ public class Robot extends TimedRobot {
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
 
-    CommandScheduler.getInstance().schedule(new DriveForward(144));
+    //CommandScheduler.getInstance().schedule(new TurnRobot(-26.6));
+    CommandScheduler.getInstance().schedule(new ParallelCommandGroup(new IntakeDeploy(), new A_Red()));
   }
 
   @Override

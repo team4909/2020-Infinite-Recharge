@@ -2,6 +2,7 @@ package frc.team4909.robot.autos;
 
 import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.autos.galacticsearch.A_Blue;
@@ -10,6 +11,7 @@ import frc.team4909.robot.autos.galacticsearch.B_Blue;
 import frc.team4909.robot.autos.galacticsearch.B_Red;
 import frc.team4909.robot.autos.galacticsearch.BlueStart;
 import frc.team4909.robot.subsystems.camera.PixyCam;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
 
 public class GalacticSearch extends SequentialCommandGroup{
 
@@ -24,18 +26,22 @@ public class GalacticSearch extends SequentialCommandGroup{
     public GalacticSearch(){
         
         addCommands(
-            new ConditionalCommand( //Can we see a ball?
-                new ConditionalCommand( // Yes, A or B?
-                    new A_Red(), // Is in the middle
-                    new B_Red(), // Is on the left
-                    new RedChoice()), 
-                new SequentialCommandGroup( //No
-                    new BlueStart(), // Goes to D5 
-                    new ConditionalCommand( // A or B?
-                        new A_Blue(), // A Blue, is on the right
-                        new B_Blue(), // B Blue, is on the left
-                        new BlueChoice())), //Can also do this: BooleanSupplier sup = () -> true;
-                new FirstChoice())
+            new ParallelCommandGroup(
+                new ConditionalCommand( //Can we see a ball?
+                    new ConditionalCommand( // Yes, A or B?
+                        new A_Red(), // Is in the middle
+                        new B_Red(), // Is on the left
+                        new RedChoice()), 
+                    new SequentialCommandGroup( //No
+                        new BlueStart(), // Goes to D5 
+                        new ConditionalCommand( // A or B?
+                            new A_Blue(), // A Blue, is on the right
+                            new B_Blue(), // B Blue, is on the left
+                            new BlueChoice())), //Can also do this: BooleanSupplier sup = () -> true;
+                    new FirstChoice()),
+                new IntakeDeploy() //TODO make sure this works.
+
+            )
         );
 
     {

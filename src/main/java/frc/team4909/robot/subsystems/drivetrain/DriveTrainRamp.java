@@ -44,6 +44,10 @@ public class DriveTrainRamp {
         return speedOutput;
 
     }
-    
+
+
+    public static void zeroLastValue() {
+        lastValue = 0;
+    }
     
 }

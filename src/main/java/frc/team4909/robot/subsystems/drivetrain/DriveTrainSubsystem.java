@@ -60,7 +60,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
         pid = new PIDController(RobotConstants.drivekP, RobotConstants.drivekI, RobotConstants.drivekD);
 
         navX = new AHRS(SerialPort.Port.kMXP);
-        navX.reset();
+        zeroGyro();
 
         bionicDrive = new DifferentialDrive(m_left, m_right);
         //bionicDrive.setRightSideInverted(true);
@@ -130,6 +130,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
     public void zeroGyro(){
         angle = 0;
         navX.reset();
+    }
+
+    public double getAngle(){
+        return navX.getAngle();
     }
 
     @Override
