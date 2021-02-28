@@ -64,11 +64,40 @@ public class DriveTrainRamp {
         return targetSpeed;
     }
 
+    public static double getAccelerationRampedOutput(double targetSpeed, double lastSetSpeed){
+        //TODO Functionize the below line.
+        accelThreshold = 4;
+        //Checks if the speed is trying to increase, and by too much. Misses the case where the speed isn't changing, but the direction is.
+        if (targetSpeed * lastSetSpeed < 0 && Math.abs(targetSpeed - lastSetSpeed) > accelThreshold) {
+            targetSpeed = 0; //CopySign handles accel
+        } else if( Math.abs(targetSpeed) > Math.abs(lastSetSpeed) && Math.abs(targetSpeed - lastSetSpeed) > accelThreshold) {
+            //Sets the new speed equal to its last value plus the limit. 
+            targetSpeed = lastSetSpeed + Math.copySign(accelThreshold, targetSpeed - lastSetSpeed);
+        }
+
+        lastSetSpeed = targetSpeed;
+
+        return targetSpeed;
+    }
+
     public static void zeroLastValue() {
         lastSetSpeed = 0;
     }
     
-
+    public static void main (String[] args){
+        double[] test_vals = new double[]{-10, -8, -5, 0, 5, 8, 10};
+        System.out.println("              lastSetSpeed:    -10      -8      -5       0       5       8      10" );
+        System.out.println("    ");
+        for (double i : test_vals){
+            System.out.print("targetSpeed:   ");
+            System.out.format("%+8.2f", i);
+            System.out.print(" | ");
+            for(double j : test_vals){
+                System.out.format("%+8.2f", getAccelerationRampedOutput(i, j));
+            }
+            System.out.println();
+        }
+    }
     
 
 }
