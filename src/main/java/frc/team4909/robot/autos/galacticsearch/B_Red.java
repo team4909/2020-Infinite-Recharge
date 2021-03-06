@@ -1,5 +1,6 @@
 package frc.team4909.robot.autos.galacticsearch;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
@@ -20,12 +21,12 @@ public class B_Red extends SequentialCommandGroup {
     public B_Red() {
         super();
         addCommands(
-            new TurnRobot(-26.6),
-            new DriveForward(61),
-            new TurnRobot(71.6),
-            new DriveForward(84.8),
+            new TurnRobot(-23.35),
+            new DriveForward(75.7),
+            new TurnRobot(68.35),
+            new DriveForward(84.9),
             new TurnRobot(-90),
-            new DriveForward(84.8),
+            new DriveForward(84.9),
             new TurnRobot(45),
             new DriveForward(130)
         );

@@ -1,5 +1,6 @@
 package frc.team4909.robot.autos.galacticsearch;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
@@ -12,16 +13,10 @@ public class B_Blue extends SequentialCommandGroup {
      */
 
     public B_Blue() {
-
         super();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            System.out.println("Interupted");
-        }
+
         addCommands(
-            new TurnRobot(-14),
+            new TurnRobot(-13.04),
             new DriveForward(30),
             new TurnRobot(-45),
             new DriveForward(84.8),

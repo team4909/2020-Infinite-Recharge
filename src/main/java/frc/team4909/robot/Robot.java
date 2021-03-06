@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
+import frc.team4909.robot.autos.GalacticSearch;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
 import frc.team4909.robot.autos.galacticsearch.A_Blue;
@@ -116,8 +117,8 @@ public class Robot extends TimedRobot {
     autoChooser = new SendableChooser<>();
 
     // autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
-    autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
+    //autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
+    //autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
     // pixyCam.sortTest();
@@ -216,7 +217,7 @@ public class Robot extends TimedRobot {
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
-    intakeSubsystem.zeroDeploy();
+    //intakeSubsystem.zeroDeploy();
     leds.setDefault();
     
     // CommandScheduler.getInstance().schedule(
@@ -227,12 +228,12 @@ public class Robot extends TimedRobot {
     //     )
     //   )
     // );
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
+    CommandScheduler.getInstance().schedule(new GalacticSearch());
   }
 
   @Override
   public void autonomousPeriodic() {
-    new IntakeDeploy(); 
+    //new IntakeDeploy(); 
   }
 
   @Override
@@ -243,10 +244,8 @@ public class Robot extends TimedRobot {
     // drivetrainsubsystem.zeroGyro();
     // hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
-    // intakeSubsystem.zeroDeploy();
 //    climberSubsystem.setRatchetSpeed(-0.5);
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
-
   }
 
   @Override
@@ -257,12 +256,15 @@ public class Robot extends TimedRobot {
     // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
     if(++numloops != RobotConstants.PIXY_REFRESH_DIVISOR) return;
 
+    SmartDashboard.putBoolean("Detected", pixyCam.getDetected());
     if (pixyCam.getDetected()){
-      System.out.println("Detected: " + pixyCam.getDetected());
-      System.out.println("Deviation X: " + pixyCam.getDeviationX());
-      System.out.println("Width: " + pixyCam.getBlockWidth());
+      //System.out.println("Detected: " + pixyCam.getDetected());
+      SmartDashboard.putNumber("Deviation X", pixyCam.getDeviationX());
+      //System.out.println("Deviation X: " + pixyCam.getDeviationX());
+      //System.out.println("Width: " + pixyCam.getBlockWidth());
     } else {
-      System.out.println("Detected: " + pixyCam.getDetected());
+
+      //System.out.println("Detected: " + pixyCam.getDetected());
     }
     numloops = 0;
   }

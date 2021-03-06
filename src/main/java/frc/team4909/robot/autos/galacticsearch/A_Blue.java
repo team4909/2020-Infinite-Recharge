@@ -1,5 +1,6 @@
 package frc.team4909.robot.autos.galacticsearch;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
@@ -16,10 +17,10 @@ public class A_Blue extends SequentialCommandGroup{
         7. Move 65"
     */
 
-    public A_Blue(){
+    public A_Blue(){    
         super();
         addCommands(
-            new TurnRobot(31.0),
+            new TurnRobot(31.96),
             new DriveForward(42.4),
             new TurnRobot(-116.6),
             new DriveForward(94.9),

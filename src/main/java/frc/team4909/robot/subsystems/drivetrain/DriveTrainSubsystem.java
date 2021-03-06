@@ -150,7 +150,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("Target Angle", angle);
         SmartDashboard.putNumber("Is Turning?", navX.getRawAccelZ());
        
-        if(Math.abs(navX.getAngle()-lastAngle)>1){                        
+        if(Math.abs(navX.getAngle()-lastAngle)>0.5){                        
             angle = navX.getAngle();
         }
 

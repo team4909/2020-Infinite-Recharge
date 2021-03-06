@@ -1,5 +1,6 @@
 package frc.team4909.robot.autos.galacticsearch;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
@@ -19,7 +20,7 @@ public class A_Red extends SequentialCommandGroup {
     public A_Red(){
         super();
         addCommands(//negatived angles for testing
-            new DriveForward(60),
+            new DriveForward(69.5),
             new TurnRobot(26.6), //right is positive, I believe
             new DriveForward(67.1),
             new TurnRobot(-108.4),
