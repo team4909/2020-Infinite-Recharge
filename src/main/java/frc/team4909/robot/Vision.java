@@ -11,9 +11,7 @@ public class Vision extends SubsystemBase {
   private final double lightOn = 3.0;
   private final double lightFlash= 2.0;
   private final double lightOff = 1.0;
-  private final double blink = 2.0;
   private final NetworkTable frontCamFeed;
-  private NetworkTable rearCamFeed;
   private NetworkTable activeCamFeed;
 
   private double tv;
@@ -27,14 +25,10 @@ public class Vision extends SubsystemBase {
   private final double cameraHeight = 5;
   private double cameraAngle = 0;
   //Target Dependent
-  private double angleToTarget;
-  private double distanceToTarget;
-  private final boolean porthacth = false;
   private boolean usingFrontCam = false;
 
   private double frontLight;
   private double backLight;
-  private String camName;
   private double pipeline = 0;
 
   /**

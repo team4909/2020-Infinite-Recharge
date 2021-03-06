@@ -12,8 +12,6 @@ import frc.team4909.robot.RobotConstants;
 public class TurretSubsystem extends SubsystemBase{
 
     public DigitalInput endPoint;
-    private double speedTurret;
-    private double lastSpeedTurret;
     private double lastSpeed;
 
     CANSparkMax turnMotor;

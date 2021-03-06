@@ -1,6 +1,5 @@
 package frc.team4909.robot.subsystems.shooter;
 
-import java.util.Map;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -11,10 +10,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
-import frc.team4909.robot.operator.controllers.FlightStick;
-import frc.team4909.robot.util.Util;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -94,7 +90,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setVelocity(double velocity) {
-        double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
+        // double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
         shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }

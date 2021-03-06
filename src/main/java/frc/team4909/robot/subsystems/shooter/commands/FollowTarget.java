@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.Vision;
-import frc.team4909.robot.operator.controllers.BionicF310;
-import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
 
 public class FollowTarget extends CommandBase {
@@ -16,7 +14,6 @@ public class FollowTarget extends CommandBase {
     private final double kD = 0.0008;
     private double lastError = Robot.vision.getXOffset();
     private double speedTurret;
-    private double speedShooter;
     private double offset;
     DecimalFormat twodec = new DecimalFormat("#.00");
 

@@ -15,7 +15,6 @@ public class PixyCam extends SubsystemBase{
     private Block biggestBlock;
     private int numloops = 0;
     private static final int FRAME_WIDTH = 300; //TODO get values
-    private static final int FRAME_HEIGHT = 200;
     
 
     // public void initialize() {

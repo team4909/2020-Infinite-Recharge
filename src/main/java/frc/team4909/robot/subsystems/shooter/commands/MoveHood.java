@@ -6,7 +6,6 @@ import frc.team4909.robot.operator.controllers.BionicF310;
 
 public class MoveHood extends CommandBase{
 
-    private int prevValue;
 
     public MoveHood(){
         super();

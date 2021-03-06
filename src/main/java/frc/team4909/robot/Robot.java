@@ -1,23 +1,20 @@
 package frc.team4909.robot;
 
-import edu.wpi.first.wpilibj.SPI;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
-import frc.team4909.robot.autos.galacticsearch.A_Blue;
-import frc.team4909.robot.autos.galacticsearch.A_Red;
-import frc.team4909.robot.autos.galacticsearch.B_Blue;
-import frc.team4909.robot.autos.galacticsearch.B_Red;
-import frc.team4909.robot.autos.galacticsearch.BlueStart;
+// import frc.team4909.robot.autos.galacticsearch.A_Blue;
+// import frc.team4909.robot.autos.galacticsearch.A_Red;
+// import frc.team4909.robot.autos.galacticsearch.B_Blue;
+// import frc.team4909.robot.autos.galacticsearch.B_Red;
+// import frc.team4909.robot.autos.galacticsearch.BlueStart;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 //import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -34,7 +31,6 @@ import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
-import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -42,7 +38,6 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
-import frc.team4909.robot.subsystems.leds.LEDSetter;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
 import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
@@ -56,7 +51,6 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
-import com.kauailabs.navx.frc.*;
 
 public class Robot extends TimedRobot {
   // Subsystems
@@ -119,6 +113,13 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
     autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
+
+    //Zeros the encoder on robot startup
+    drivetrainsubsystem.frontLeft.setSelectedSensorPosition(0);
+    drivetrainsubsystem.frontRight.setSelectedSensorPosition(0);
+    drivetrainsubsystem.backLeft.setSelectedSensorPosition(0);
+    drivetrainsubsystem.backRight.setSelectedSensorPosition(0);
+
 
     // pixyCam.sortTest();
 
@@ -227,7 +228,7 @@ public class Robot extends TimedRobot {
     //     )
     //   )
     // );
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
+    // CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
   }
 
   @Override

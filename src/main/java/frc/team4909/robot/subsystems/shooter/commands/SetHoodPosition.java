@@ -1,6 +1,5 @@
 package frc.team4909.robot.subsystems.shooter.commands;
 
-import javax.swing.text.Position;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;

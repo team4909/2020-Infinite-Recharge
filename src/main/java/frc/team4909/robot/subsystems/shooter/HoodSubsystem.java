@@ -6,9 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
-import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class HoodSubsystem extends SubsystemBase{
 
