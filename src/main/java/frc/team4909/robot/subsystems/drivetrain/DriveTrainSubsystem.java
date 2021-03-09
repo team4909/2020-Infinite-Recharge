@@ -143,6 +143,14 @@ public class DriveTrainSubsystem extends SubsystemBase{
         angle = navX.getAngle();
     }
 
+    public void getDisplacementX(){
+        navX.getDisplacementX();
+    }
+
+    public void getDisplacementY(){
+        navX.getDisplacementY();
+    }
+
     @Override
     public void periodic(){
         bionicDrive.feedWatchdog();

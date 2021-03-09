@@ -76,7 +76,6 @@ public class Robot extends TimedRobot {
   //public static ClimberSubsystem climberSubsystem;
   public static SendableChooser autoChooser;
   public static PixyCam pixyCam;
-  public static AHRS navX;
   private int numloops = 0;
 
   @Override
@@ -179,6 +178,10 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
 
     vision.setPipeline(1);
+
+    //Testing the DriveForward Command:
+    
+    SmartDashboard.putData("Drive Forward", new DriveForward());
 }
 
 
@@ -228,6 +231,7 @@ public class Robot extends TimedRobot {
     //     )
     //   )
     // );
+    
     CommandScheduler.getInstance().schedule(new GalacticSearch());
   }
 
