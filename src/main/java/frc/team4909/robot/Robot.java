@@ -182,6 +182,7 @@ public class Robot extends TimedRobot {
     //Testing the DriveForward Command:
     
     SmartDashboard.putData("Drive Forward", new DriveForward());
+    System.out.println("Button is created");
 }
 
 
@@ -192,6 +193,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     CommandScheduler.getInstance().run();
 
+
     // Robot.leds.setBlack();
     
     // Put values on SmartDashboards
@@ -199,6 +201,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
     SmartDashboard.putBoolean("Lower Has Ball", indexerSubsystem.hasBallLower());
+    SmartDashboard.putNumber("Current Encoder", Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition());
   }
 
   @Override

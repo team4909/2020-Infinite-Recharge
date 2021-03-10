@@ -56,7 +56,11 @@ public class RobotConstants {
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.004;
 
-    public static final double TICKS_PER_INCH = 8 * 2048 / (6 * Math.PI);
+    //THIS IS ALL IMPERICAL: we rotated the wheel 360(degrees) and subtracted the starting encoder position... 
+    //...from the ending encoder position to get 20,472. - all for TICKS_PER_INCH
+    //The 13.2 in the commented out "calculation" is the actual gear ratio from cad.
+    //6.125 is the wheel diameter including the tread
+    public static final double TICKS_PER_INCH = 20_472 / (6.125 * Math.PI); //13.2 * 2048 / (6.125 * Math.PI);
     public static final double TOLERANCE_INCHES = 0.2 * TICKS_PER_INCH; //0.5 prev
     public static final double TOLERANCE_DEGREES = 1;
     

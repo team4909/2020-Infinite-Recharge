@@ -15,7 +15,6 @@ public class DriveForward extends CommandBase{
     PIDController distancePID;
     double inches;
     //Sets the position for the robot when it starts; This is set because we can ensure that we will be at 0 ticks everytime we start the robot
-    int startingPos;
     double currentPos;
     double targetPos;
     boolean retrieveDistance = true;
@@ -32,6 +31,7 @@ public class DriveForward extends CommandBase{
         super();
         SmartDashboard.putNumber("DriveForward Distance", 0);
         SmartDashboard.putString("Position Determining Method", "default");
+        SmartDashboard.putNumber("Multiplier", 1.0);
         addRequirements(Robot.drivetrainsubsystem);
         //Creates new PID controller; See RobotConstants for values
         distancePID = new PIDController(RobotConstants.distancekP, RobotConstants.distancekI, RobotConstants.distancekD);
@@ -69,15 +69,20 @@ public class DriveForward extends CommandBase{
 
     @Override
     public void initialize() {
-        startingPos = getSensorPosition(SmartDashboard.getString("Position Determining Method", "default"));
+        //currentPos = getSensorPosition(SmartDashboard.getString("Position Determining Method", "default"));
+        currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
+
         if (this.retrieveDistance) {
             this.inches = SmartDashboard.getNumber("DriveForward Distance", 0);
         } 
         
-        targetPos = startingPos + RobotConstants.TICKS_PER_INCH * inches;
-        
+        System.out.println("inches = " + inches);
+        targetPos = currentPos + RobotConstants.TICKS_PER_INCH * inches;
+        targetPos *= SmartDashboard.getNumber("Multiplier", 1.0);
+        System.out.println("Current Pos:" + currentPos);
+        System.out.println("Target Pos:" + targetPos);
         distancePID.setSetpoint(targetPos);
-        System.out.println("Begin DriveForward with error " + (targetPos - startingPos));
+        System.out.println("Begin DriveForward with error " + (targetPos - currentPos));
         //TODO Test Value and figure out units
     }
 
