@@ -270,7 +270,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
-    vision.setLights(3);
+    vision.setLights(3); //Sets light to version 3
   }
 
   @Override
