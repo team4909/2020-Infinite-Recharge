@@ -22,8 +22,8 @@ public class B_Red extends SequentialCommandGroup {
         super();
         addCommands(
             new TurnRobot(-23.35),
-            new DriveForward(75.7),
-            new TurnRobot(68.35),
+            new DriveForward(61),
+            new TurnRobot(71.6),
             new DriveForward(84.9),
             new TurnRobot(-90),
             new DriveForward(84.9),

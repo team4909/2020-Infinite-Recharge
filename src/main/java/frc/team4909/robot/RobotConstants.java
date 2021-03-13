@@ -50,9 +50,9 @@ public class RobotConstants {
     
     public static final double distancekP = 0.002;
     public static final double distancekI = 0.0;
-    public static final double distancekD = 0.0001;
+    public static final double distancekD = 0.0002;
 
-    public static final double TURN_KP = 0.02;
+    public static final double TURN_KP = 0.045;
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.006;
 

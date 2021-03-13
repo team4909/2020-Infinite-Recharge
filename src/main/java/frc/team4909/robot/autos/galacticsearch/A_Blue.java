@@ -20,10 +20,10 @@ public class A_Blue extends SequentialCommandGroup{
     public A_Blue(){    
         super();
         addCommands(
-            new TurnRobot(31.96),
+            new TurnRobot(31.),
             new DriveForward(42.4),
-            new TurnRobot(-116.6),
-            new DriveForward(94.9),
+            new TurnRobot(-107.6),
+            new DriveForward(100),
             new TurnRobot(98.1),
             new DriveForward(67.1),
             new TurnRobot(-30),

@@ -223,7 +223,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Has Driveforward Ended?", false);
     SmartDashboard.putBoolean("Has TurnRobot Ended?", false);
     drivetrainsubsystem.zeroGyro();
-    hoodSubsystem.zeroHood();
+    // hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
@@ -237,8 +237,8 @@ public class Robot extends TimedRobot {
     //   )
     // );
     
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new B_Blue()));
-    //CommandScheduler.getInstance().schedule(new TurnRobot(90));
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
+    //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnRobot(360)));
   }
 
   @Override

@@ -17,14 +17,14 @@ public class B_Blue extends SequentialCommandGroup {
         super();
 
         addCommands(
-            new TurnRobot(-13.04),
+            new TurnRobot(-14),
             new DriveForward(30),
-            new TurnRobot(-45),
-            new DriveForward(70),
-            new TurnRobot(90),
+            new TurnRobot(-42),
             new DriveForward(84.8),
-            new TurnRobot(-45),
-            new DriveForward(30)
+            new TurnRobot(85),
+            new DriveForward(84.8),
+            new TurnRobot(-40),
+            new DriveForward(84.8)
         );
     }
     
