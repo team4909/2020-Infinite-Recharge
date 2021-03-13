@@ -220,10 +220,12 @@ public class Robot extends TimedRobot {
     // CommandScheduler.getInstance().schedule(new ShootThree());
     //CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
 //    climberSubsystem.resetClimbEncoder();
+    SmartDashboard.putBoolean("Has Driveforward Ended?", false);
+    SmartDashboard.putBoolean("Has TurnRobot Ended?", false);
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
-    //intakeSubsystem.zeroDeploy();
+    intakeSubsystem.zeroDeploy();
     leds.setDefault();
     
     // CommandScheduler.getInstance().schedule(
@@ -235,7 +237,8 @@ public class Robot extends TimedRobot {
     //   )
     // );
     
-    CommandScheduler.getInstance().schedule(new GalacticSearch());
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new B_Blue()));
+    //CommandScheduler.getInstance().schedule(new TurnRobot(90));
   }
 
   @Override

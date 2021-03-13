@@ -83,6 +83,7 @@ public class DriveForward extends CommandBase{
         System.out.println("Target Pos:" + targetPos);
         distancePID.setSetpoint(targetPos);
         System.out.println("Begin DriveForward with error " + (targetPos - currentPos));
+        SmartDashboard.putBoolean("Has Driveforward Ended?", false);
         //TODO Test Value and figure out units
     }
 
@@ -136,6 +137,7 @@ public class DriveForward extends CommandBase{
         // @TODO fix arcade drive ramping.
         Robot.drivetrainsubsystem.tankDrive(0, 0);
         DriveTrainRamp.zeroLastValue();
+        SmartDashboard.putBoolean("Has Driveforward Ended?", true);
         System.out.println("End command in DriveForward has ended");
     }
 }

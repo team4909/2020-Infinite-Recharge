@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 
+
 public class B_Blue extends SequentialCommandGroup {
 
     /*
@@ -19,7 +20,7 @@ public class B_Blue extends SequentialCommandGroup {
             new TurnRobot(-13.04),
             new DriveForward(30),
             new TurnRobot(-45),
-            new DriveForward(84.8),
+            new DriveForward(70),
             new TurnRobot(90),
             new DriveForward(84.8),
             new TurnRobot(-45),

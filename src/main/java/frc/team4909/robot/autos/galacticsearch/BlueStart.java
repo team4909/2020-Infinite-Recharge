@@ -17,7 +17,7 @@ public class BlueStart extends SequentialCommandGroup{
         
         addCommands(
             new TurnRobot(13.04),
-            new DriveForward(123.7)
+            new DriveForward(108.2)
         );
     }
 }
