@@ -54,7 +54,7 @@ public class RobotConstants {
 
     public static final double TURN_KP = 0.02;
     public static final double TURN_KI = 0.0;
-    public static final double TURN_KD = 0.004;
+    public static final double TURN_KD = 0.006;
 
     //THIS IS ALL IMPERICAL: we rotated the wheel 360(degrees) and subtracted the starting encoder position... 
     //...from the ending encoder position to get 20,472. - all for TICKS_PER_INCH

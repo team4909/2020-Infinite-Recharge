@@ -40,7 +40,7 @@ public class TurnRobot extends CommandBase{
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         double output = turnPID.calculate(currentPosition);
         //NEGATIVE IS FOR SOME REASON???> SEE DRIVEFORWARD.JAVA
-        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.5, 0.8);
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.5, 0.9);
         //double clampedOutput = MathUtil.clamp(output, -1, 1);
         Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???; 
         //Robot.drivetrainsubsystem.arcadeDrive(SPEED, clampedOutput, true);
@@ -49,6 +49,8 @@ public class TurnRobot extends CommandBase{
             System.out.println("Target Angle: " + targetPosition);
             System.out.println("Turn PID Output: " + output + "\n");
             System.out.println("             -               ");
+            SmartDashboard.putNumber("Turn PID Error", targetPosition - currentPosition);
+            SmartDashboard.putNumber("Clamped Turn Output", clampedOutput);
             numLoops = 0;
         }
     }

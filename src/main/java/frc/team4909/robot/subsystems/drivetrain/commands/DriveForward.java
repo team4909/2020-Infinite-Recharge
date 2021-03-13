@@ -93,14 +93,17 @@ public class DriveForward extends CommandBase{
         currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
         //This takes the pid calculate method and gives it as speed to the arcade drive
         //IMPORTANT: THE NEGATIVE IS NEEDED BECAUSE ON THE JOYSTICK, UP IS NEGATIVE. THE NEGATIVE EMULATES THE STICK'S DIRECTIONS. 
-        double output = -1 * MathUtil.clamp(
-            distancePID.calculate(currentPos), 
-            -0.4, 
-            0.4);
-        Robot.drivetrainsubsystem.arcadeDrive(
-            output, 
-            0, 
-            false); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+        double output = -distancePID.calculate(currentPos); 
+        //     -0.4, 
+        //     0.4);
+        //Robot.drivetrainsubsystem.arcadeDrive(
+        //     output, 
+        //     0, 
+        //     false); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
+
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.4);
+
+        Robot.drivetrainsubsystem.arcadeDrive( output < 0 ? -clampedOutput : clampedOutput, 0, true); //TODO where does the negative go???;
         if(++numLoops == 1){
             // System.out.println("Current Position: " + currentPos);
             // System.out.println("Target Position: " + targetPos);
