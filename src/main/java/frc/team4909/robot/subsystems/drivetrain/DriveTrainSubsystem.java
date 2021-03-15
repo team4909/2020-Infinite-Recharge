@@ -110,7 +110,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
             if(speedOutput != 0){
                 bionicDrive.arcadeDrive(speedOutput, MathUtil.clamp(pid.calculate(navX.getAngle(), angle),-0.5, 0.5));    
             }else{
-                bionicDrive.arcadeDrive(speedOutput, turnOutput);
+                bionicDrive.arcadeDrive(0, turnOutput);
             }
         }
     }
@@ -140,7 +140,7 @@ public class DriveTrainSubsystem extends SubsystemBase{
     }
 
     public void resetAngle(){
-        angle = navX.getAngle();
+        lastAngle = angle = navX.getAngle();
     }
 
     public void getDisplacementX(){
@@ -154,11 +154,13 @@ public class DriveTrainSubsystem extends SubsystemBase{
     @Override
     public void periodic(){
         bionicDrive.feedWatchdog();
-        SmartDashboard.putNumber("Robot Angle", navX.getAngle());   
-        SmartDashboard.putNumber("Target Angle", angle);
-        SmartDashboard.putNumber("Is Turning?", navX.getRawAccelZ());
+
+        //Useful for Debugging
+        //SmartDashboard.putNumber("Robot Angle", navX.getAngle());   
+        //SmartDashboard.putNumber("Target Angle", angle);
+        //SmartDashboard.putNumber("Is Turning?", navX.getRawAccelZ());
        
-        if(Math.abs(navX.getAngle()-lastAngle)>0.5){                        
+        if(Math.abs(navX.getAngle()-lastAngle) > 0.5){                        
             angle = navX.getAngle();
         }
 
