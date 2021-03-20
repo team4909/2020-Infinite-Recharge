@@ -21,13 +21,13 @@ public class CounterClockwiseSquare extends SequentialCommandGroup {
 
         addCommands(
             new DriveForward(distance),
-            new TurnRobot(turnAngle),
-            new DriveForward(distance),
-            new TurnRobot(turnAngle),
-            new DriveForward(distance),
-            new TurnRobot(turnAngle),
-            new DriveForward(distance),
             new TurnRobot(turnAngle)
+            // new DriveForward(distance),
+            // new TurnRobot(turnAngle),
+            // new DriveForward(distance),
+            // new TurnRobot(turnAngle),
+            // new DriveForward(distance),
+            // new TurnRobot(turnAngle)
         );
     }
     

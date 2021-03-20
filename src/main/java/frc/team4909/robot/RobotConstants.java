@@ -41,7 +41,7 @@ public class RobotConstants {
     public static final double intakekI = 0;
     public static final double intakekD = 0;
     public static final double intakekF = 0;
-    public static final double deploySetpoint = 33.4;
+    public static final double deploySetpoint = 28;//33.4 for any non GalacticSeach purposes
 
     // Drive Constantsft
     public static final double drivekP = 0.09;
@@ -62,7 +62,7 @@ public class RobotConstants {
     //6.125 is the wheel diameter including the tread
     public static final double TICKS_PER_INCH = 20_472 / (6.125 * Math.PI); //13.2 * 2048 / (6.125 * Math.PI);
     public static final double TOLERANCE_INCHES = 0.2 * TICKS_PER_INCH; //0.5 prev
-    public static final double TOLERANCE_DEGREES = 1;
+    public static final double TOLERANCE_DEGREES = 0.25;
     
     //Pixy Refresh Constant
     public static final int PIXY_REFRESH_DIVISOR = 10;

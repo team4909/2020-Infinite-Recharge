@@ -19,11 +19,11 @@ public class B_Blue extends SequentialCommandGroup {
         addCommands(
             new TurnRobot(-14),
             new DriveForward(30),
-            new TurnRobot(-42),
+            new TurnRobot(-45),
             new DriveForward(84.8),
-            new TurnRobot(85),
+            new TurnRobot(90),
             new DriveForward(84.8),
-            new TurnRobot(-40),
+            new TurnRobot(-45),
             new DriveForward(84.8)
         );
     }

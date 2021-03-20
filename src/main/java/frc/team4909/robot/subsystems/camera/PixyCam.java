@@ -1,6 +1,8 @@
 package frc.team4909.robot.subsystems.camera;
 
 import java.util.ArrayList;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team4909.robot.RobotConstants;
 import io.github.pseudoresonance.pixy2api.Pixy2;
@@ -16,7 +18,9 @@ public class PixyCam extends SubsystemBase{
     private int numloops = 0;
     private static final int FRAME_WIDTH = 300; //TODO get values
     private static final int FRAME_HEIGHT = 200;
-    
+    public int blockCount;
+    public ArrayList<Block> blocks;
+
 
     // public void initialize() {
     //     System.out.println("This is inside the Pixy initialize() method");
@@ -43,13 +47,13 @@ public class PixyCam extends SubsystemBase{
     public Block getBiggestBlock(String criteria) { //
 
         // Checks if blocks are on the screen
-        int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10); 
+        blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10); 
         if (!(blockCount >= 1)) {
             return null;
         }
 
         // Get all blocks
-        ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
+        blocks = pixy.getCCC().getBlockCache();
         
         // Sort based on the selected criteria
         switch (criteria) {
@@ -65,18 +69,29 @@ public class PixyCam extends SubsystemBase{
             default:
                 break;
         }
+
+      
+
         
-        //The first block in the list contains the biggest value after the sort.
-        return blocks.get(0);
+        //The first block in the list contains the smallest width, ie 
+        //THIS ARRAY LIST SORTS FROM SMALLEST TO LARGEST
+        return blocks.get(blocks.size() - 1);
     }
 
 
     @Override
     public void periodic(){
-        if(++numloops == RobotConstants.PIXY_REFRESH_DIVISOR){
-            biggestBlock = this.getBiggestBlock("width"); //TODO for now.
-            numloops = 0;
+        biggestBlock = this.getBiggestBlock("width"); //TODO for now
+        SmartDashboard.putBoolean("Found Block?", biggestBlock != null);
+        if(biggestBlock != null) {
+            SmartDashboard.putNumber("deviationXnew", getDeviationX());
         }
+        for(int i = 0; i < blockCount; i++){
+
+            SmartDashboard.putNumber("blocks" + i, blocks.get(i).getWidth());
+
+        }
+
         //System.out.println("Biggest block: " + biggestBlock);
     }
 

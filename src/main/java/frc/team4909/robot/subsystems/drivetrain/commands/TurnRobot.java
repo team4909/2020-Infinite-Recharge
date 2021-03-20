@@ -28,6 +28,7 @@ public class TurnRobot extends CommandBase{
     public void initialize() {
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         targetPosition = degrees + currentPosition; //Gets the absolute position | TODO Find what get angle really means / gives back
+        SmartDashboard.putNumber("TurnRobot Start Angle", currentPosition);
         SmartDashboard.putNumber("TurnRobot Current Angle", currentPosition);
         SmartDashboard.putNumber("TurnRobot Target Angle", targetPosition);
         turnPID.setSetpoint(targetPosition);
@@ -41,7 +42,7 @@ public class TurnRobot extends CommandBase{
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         double output = turnPID.calculate(currentPosition);
         //NEGATIVE IS FOR SOME REASON???> SEE DRIVEFORWARD.JAVA
-        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.5, 0.9);
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.31); //0.5, 0.9
         //double clampedOutput = MathUtil.clamp(output, -1, 1);
         Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???; 
         //Option: Tank Drive to avoid unknown ramping-related issues.

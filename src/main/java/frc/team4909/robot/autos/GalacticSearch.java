@@ -13,6 +13,8 @@ import frc.team4909.robot.autos.galacticsearch.B_Blue;
 import frc.team4909.robot.autos.galacticsearch.B_Red;
 import frc.team4909.robot.autos.galacticsearch.BlueStart;
 import frc.team4909.robot.subsystems.camera.PixyCam;
+import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
+import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
 
 public class GalacticSearch extends SequentialCommandGroup{
@@ -40,8 +42,10 @@ public class GalacticSearch extends SequentialCommandGroup{
                             new A_Blue(), // A Blue, is on the right
                             new B_Blue(), // B Blue, is on the left
                             new BlueChoice())), //Can also do this: BooleanSupplier sup = () -> true;
-                    new FirstChoice())
-                //new IntakeDeploy() //TODO make sure this works.
+                    new FirstChoice()),
+                //new IntakeDeploy(), //TODO make sure this works.
+                new SmartIndexerAndSorterUp()
+                //new IndexerAndSorterUp()
 
             )
         );
@@ -124,7 +128,7 @@ public class GalacticSearch extends SequentialCommandGroup{
 
         @Override
         public boolean getAsBoolean() {
-            if(Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= 30) { //In the middle or left
+            if(Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= 10) { //In the middle or left
                 SmartDashboard.putString("path", "RED");
                 return true;
             } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() > 30) { //To the right 
@@ -142,7 +146,7 @@ public class GalacticSearch extends SequentialCommandGroup{
 
         @Override
         public boolean getAsBoolean() {
-            if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() < 30 && Robot.pixyCam.getDeviationX() > -70){ //In the Middle
+            if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() < 30 && Robot.pixyCam.getDeviationX() > -30){ //In the Middle
                 SmartDashboard.putString("path", "A_Red");
                 return true;
             } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= -70){ //On the left

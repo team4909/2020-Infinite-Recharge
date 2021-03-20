@@ -17,7 +17,8 @@ public class SmartSorterOn extends CommandBase{
             Robot.sorterSubsystem.sorterOn(-0.25);
         }
         else{
-            Robot.sorterSubsystem.sorterOn(0);
+            Robot.sorterSubsystem.sorterOn(-0.05); //For GS, so that a pileup of balls is not reqried to run the sorter
+            //FOR ALL NON GS REASONS IT SHOULD BE 0 ^
         }
     }
 

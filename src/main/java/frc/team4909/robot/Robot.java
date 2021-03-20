@@ -19,6 +19,9 @@ import frc.team4909.robot.autos.galacticsearch.A_Red;
 import frc.team4909.robot.autos.galacticsearch.B_Blue;
 import frc.team4909.robot.autos.galacticsearch.B_Red;
 import frc.team4909.robot.autos.galacticsearch.BlueStart;
+import frc.team4909.robot.autos.geometricpaths.ClockwiseLine;
+import frc.team4909.robot.autos.geometricpaths.ClockwiseSquare;
+import frc.team4909.robot.autos.geometricpaths.CounterClockwiseSquare;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 //import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -237,8 +240,10 @@ public class Robot extends TimedRobot {
     //   )
     // );
     
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
-    //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnRobot(360)));
+    //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
+    //CommandScheduler.getInstance().schedule(new BlueStart());
+    // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
+    CommandScheduler.getInstance().schedule(new GalacticSearch());
   }
 
   @Override
