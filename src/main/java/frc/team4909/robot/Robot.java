@@ -61,6 +61,8 @@ import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
+import frc.team4909.robot.util.Wait;
+
 import com.kauailabs.navx.frc.*;
 
 public class Robot extends TimedRobot {
@@ -244,7 +246,7 @@ public class Robot extends TimedRobot {
     //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
     //CommandScheduler.getInstance().schedule(new BlueStart());
     // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new GalacticSearch()));
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
   }
 
   @Override

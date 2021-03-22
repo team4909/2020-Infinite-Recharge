@@ -8,7 +8,7 @@ import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 
 public class SmartIndexerUp extends CommandBase{
 
-    private final double delaySec = 0.5;
+    private final double delaySec = 0.2;
     private double time = 0;
     private boolean isRunning = false;
     
@@ -23,7 +23,7 @@ public class SmartIndexerUp extends CommandBase{
         {
             if(Robot.indexerSubsystem.hasBallLower())
             {
-                Robot.indexerSubsystem.setSpeed(-0.6);
+                Robot.indexerSubsystem.setSpeed(-0.4);
                 isRunning = true;
                 time = Timer.getFPGATimestamp();
             }

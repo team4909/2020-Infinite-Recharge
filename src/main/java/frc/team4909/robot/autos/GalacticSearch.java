@@ -128,14 +128,15 @@ public class GalacticSearch extends SequentialCommandGroup{
 
         @Override
         public boolean getAsBoolean() {
-            if(Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= 10) { //In the middle or left
+            if(Robot.pixyCam.getDetected() &&  Robot.pixyCam.getDeviationX() <= 68 ) { //In the middle or left
                 SmartDashboard.putString("path", "RED");
                 return true;
-            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() > 30) { //To the right 
+            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() > 68 ) { //To the right 
                 SmartDashboard.putString("path", "BLUE");
                 return false;
             } else { //Not seen
                 System.out.println("Not seen @ First Choice");
+                System.out.println(Robot.pixyCam.getDetected());
                 SmartDashboard.putString("path", "BLUE (NOTHING SEEN)");
                 return false;
             }
@@ -149,7 +150,7 @@ public class GalacticSearch extends SequentialCommandGroup{
             if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() < 30 && Robot.pixyCam.getDeviationX() > -30){ //In the Middle
                 SmartDashboard.putString("path", "A_Red");
                 return true;
-            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= -70){ //On the left
+            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= -30){ //On the left
                 SmartDashboard.putString("path", "B_Red");
                 return false;
             } else {
