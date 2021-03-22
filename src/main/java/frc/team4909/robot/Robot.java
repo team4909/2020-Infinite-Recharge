@@ -46,6 +46,7 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
 import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDown;
 import frc.team4909.robot.subsystems.leds.LEDSetter;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
@@ -243,7 +244,7 @@ public class Robot extends TimedRobot {
     //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
     //CommandScheduler.getInstance().schedule(new BlueStart());
     // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
-    CommandScheduler.getInstance().schedule(new GalacticSearch());
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new GalacticSearch()));
   }
 
   @Override

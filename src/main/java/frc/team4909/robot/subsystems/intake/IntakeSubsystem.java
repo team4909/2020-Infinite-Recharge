@@ -17,7 +17,7 @@ public class IntakeSubsystem extends SubsystemBase{
     CANSparkMax deployMotor;
     WPI_TalonSRX intakeMotor;
     CANPIDController deployPID;
-    CANEncoder deployEncoder;
+    public CANEncoder deployEncoder;
     public boolean intakeDeployed = false;
     double holdingPos;
     
