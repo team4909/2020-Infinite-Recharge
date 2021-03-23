@@ -81,14 +81,14 @@ public class PixyCam extends SubsystemBase{
 
     @Override
     public void periodic(){
-        biggestBlock = this.getBiggestBlock("width"); //TODO for now
+        biggestBlock = this.getBiggestBlock("height"); //TODO for now
         SmartDashboard.putBoolean("Found Block?", biggestBlock != null);
         if(biggestBlock != null) {
             SmartDashboard.putNumber("deviationXnew", getDeviationX());
         }
         for(int i = 0; i < blockCount; i++){
 
-            SmartDashboard.putNumber("blocks" + i, blocks.get(i).getWidth());
+            SmartDashboard.putNumber("blocks" + i, blocks.get(i).getHeight());
 
         }
 
@@ -139,5 +139,13 @@ public class PixyCam extends SubsystemBase{
         int blockHeight = biggestBlock.getHeight();
         return blockHeight;
     }
+
+    public int filterDeviation(int currentDev) {
+        
+
+        return currentDev;
+        
+    }
+
 
 } 
