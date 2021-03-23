@@ -147,10 +147,10 @@ public class GalacticSearch extends SequentialCommandGroup{
 
         @Override
         public boolean getAsBoolean() {
-            if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() < 30 && Robot.pixyCam.getDeviationX() > -30){ //In the Middle
+            if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() < 30 && Robot.pixyCam.getDeviationX() > -40){ //In the Middle
                 SmartDashboard.putString("path", "A_Red");
                 return true;
-            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= -30){ //On the left
+            } else if (Robot.pixyCam.getDetected() && Robot.pixyCam.getDeviationX() <= -40){ //On the left
                 SmartDashboard.putString("path", "B_Red");
                 return false;
             } else {

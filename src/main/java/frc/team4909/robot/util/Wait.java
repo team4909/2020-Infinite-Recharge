@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+//Tells the robot to wait a specified number of SECONDS used in GS to wait between two Sequential Command Commands
+
 public class Wait extends CommandBase{
 
     double targetTime;
