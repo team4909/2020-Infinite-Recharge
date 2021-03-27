@@ -31,8 +31,8 @@ public class MotionMagicForward extends CommandBase{
         LSD = Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition();
         RSD = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition();
 
-        leftTicksToMove = LSD + (RobotConstants.TICKS_PER_INCH * inches);
-        rightTicksToMove = RSD + (RobotConstants.TICKS_PER_INCH * inches);
+        // leftTicksToMove = LSD + (RobotConstants.TICKS_PER_INCH * inches);
+        // rightTicksToMove = RSD + (RobotConstants.TICKS_PER_INCH * inches);
         
         leftTicksToMove = 80000 + LSD;
         rightTicksToMove = 80000 + RSD;
@@ -47,9 +47,9 @@ public class MotionMagicForward extends CommandBase{
 
 
         Robot.drivetrainsubsystem.frontLeft.set(TalonFXControlMode.MotionMagic, leftTicksToMove);
-        Robot.drivetrainsubsystem.frontRight.set(TalonFXControlMode.MotionMagic, leftTicksToMove);
+        Robot.drivetrainsubsystem.frontRight.set(TalonFXControlMode.MotionMagic, rightTicksToMove);
 
-        Robot.drivetrainsubsystem.backLeft.set(TalonFXControlMode.MotionMagic, rightTicksToMove);
+        Robot.drivetrainsubsystem.backLeft.set(TalonFXControlMode.MotionMagic, leftTicksToMove);
         Robot.drivetrainsubsystem.backRight.set(TalonFXControlMode.MotionMagic, rightTicksToMove);
     } 
 
