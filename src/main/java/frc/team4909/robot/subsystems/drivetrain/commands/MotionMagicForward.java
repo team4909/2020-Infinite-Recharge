@@ -23,8 +23,11 @@ public class MotionMagicForward extends CommandBase{
 
     @Override
     public void initialize() {
-        leftTicksToMove = Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition() + RobotConstants.TICKS_PER_INCH * inches;
-        rightTicksToMove = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition() + RobotConstants.TICKS_PER_INCH * inches;
+        leftTicksToMove = Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition() + (RobotConstants.TICKS_PER_INCH * inches);
+        rightTicksToMove = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition() + (RobotConstants.TICKS_PER_INCH * inches);
+        
+        SmartDashboard.putNumber("Left Ticks to Move", leftTicksToMove);
+        SmartDashboard.putNumber("Right Ticks to Move", rightTicksToMove);
     } 
 
     @Override
@@ -42,7 +45,8 @@ public class MotionMagicForward extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        if(Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition() <= RobotConstants.TOLERANCE_TICKS && Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition() <= RobotConstants.TOLERANCE_TICKS){
+        if(Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition() >= RobotConstants.TOLERANCE_TICKS && 
+           Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition() >= RobotConstants.TOLERANCE_TICKS){
             return true;
         } else {
             return false;
@@ -53,5 +57,11 @@ public class MotionMagicForward extends CommandBase{
     public void end(boolean interrupted) {
         SmartDashboard.putBoolean("End Method in MotionMagicForward called", true);
         Robot.drivetrainsubsystem.arcadeDrive(0, 0, true);
+        
+        Robot.drivetrainsubsystem.frontLeft.set(TalonFXControlMode.MotionMagic, 0);
+        Robot.drivetrainsubsystem.frontRight.set(TalonFXControlMode.MotionMagic, 0);
+        Robot.drivetrainsubsystem.backLeft.set(TalonFXControlMode.MotionMagic, 0);
+        Robot.drivetrainsubsystem.backRight.set(TalonFXControlMode.MotionMagic, 0);
+
     }
 }
