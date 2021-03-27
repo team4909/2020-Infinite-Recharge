@@ -3,6 +3,7 @@ package frc.team4909.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,6 +32,7 @@ import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
+import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagicForward;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -229,6 +231,7 @@ public class Robot extends TimedRobot {
     //   )
     // );
     // CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
+    CommandScheduler.getInstance().schedule(new MotionMagicForward(30.0));
   }
 
   @Override

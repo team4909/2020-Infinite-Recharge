@@ -56,7 +56,8 @@ public class RobotConstants {
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.004;
 
-    public static final double TICKS_PER_INCH = 8 * 2048 / (6 * Math.PI);
+    public static final double TICKS_PER_INCH = 20_472 / (6.125 * Math.PI);
+    //8 * 2048 / (6 * Math.PI);
     public static final double TOLERANCE_INCHES = 0.5 * TICKS_PER_INCH;
     public static final double TOLERANCE_DEGREES = 3;
     
@@ -68,12 +69,12 @@ public class RobotConstants {
     public static final int PID_SLOT_IDX = 0;
     public static final int TIMEOUT = 30;
 
-    public static final int MOTION_CRUISE_VELOCITY = 15000;
-    public static final int MOTION_ACCELERATION = 6000;
+    public static final int MOTION_CRUISE_VELOCITY = 20000;
+    public static final int MOTION_ACCELERATION = 10000;
 
     //TODO test values
     public static final double MAGIC_KF = 0.2;
-    public static final double MAGIC_KP = 0.02;
+    public static final double MAGIC_KP = 0.2;
     public static final double MAGIC_KI = 0.0;
     public static final double MAGIC_KD = 0.0;
 
