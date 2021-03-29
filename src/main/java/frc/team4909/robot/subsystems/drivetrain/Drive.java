@@ -13,17 +13,11 @@ public class Drive extends CommandBase{
 
     @Override
     public void initialize(){
-        
-        Robot.drivetrainsubsystem.frontLeft.configFactoryDefault();
-        Robot.drivetrainsubsystem.frontRight.configFactoryDefault();
-        Robot.drivetrainsubsystem.backLeft.configFactoryDefault();
-        Robot.drivetrainsubsystem.backRight.configFactoryDefault();
 
     }
 
     @Override
     public void execute(){
-
         //System.out.println("Front Right Encoder Position: " + Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition());
         Robot.drivetrainsubsystem.arcadeDrive(
             Robot.driverGamepad.getThresholdAxis(BionicF310.LY),

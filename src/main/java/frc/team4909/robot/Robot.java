@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
-import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagic;
 import frc.team4909.robot.subsystems.drivetrain.commands.TrapDrive;
 import frc.team4909.robot.autos.GalacticSearch;
 import frc.team4909.robot.autos.ShootThree;
@@ -65,8 +64,6 @@ import frc.team4909.robot.subsystems.shooter.commands.SetShooterVelocity;
 import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 import frc.team4909.robot.util.Wait;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.kauailabs.navx.frc.*;
 
 public class Robot extends TimedRobot {
@@ -97,7 +94,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    //subsystem.setDefaultCommand(new SetShooterVelocity(5000)); //(new FollowTarget(shootersubsystem, vision));
+    //shootersubsystem.setDefaultCommand(new SetShooterVelocity(5000)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -251,7 +248,7 @@ public class Robot extends TimedRobot {
     //CommandScheduler.getInstance().schedule(new BlueStart());
     // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
     // CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
-    CommandScheduler.getInstance().schedule(new MotionMagic(30.0));
+    CommandScheduler.getInstance().schedule(new TrapDrive(30.0));
 
   }
 
@@ -270,8 +267,6 @@ public class Robot extends TimedRobot {
     // shootersubsystem.setSpeed(0);
 //    climberSubsystem.setRatchetSpeed(-0.5);
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
-
-    
   }
 
   @Override
@@ -293,9 +288,6 @@ public class Robot extends TimedRobot {
       //System.out.println("Detected: " + pixyCam.getDetected());
     }
     numloops = 0;
- 
-
-    
   }
 
   @Override

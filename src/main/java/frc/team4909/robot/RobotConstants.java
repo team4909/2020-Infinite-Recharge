@@ -73,20 +73,6 @@ public class RobotConstants {
     //Pixy Refresh Constant
     public static final int PIXY_REFRESH_DIVISOR = 10;
 
-    //MOtion Magic
-    public static final int PID_LOOP_IDX = 0;
-    public static final int PID_SLOT_IDX = 0;
-    public static final int TIMEOUT = 3;
 
-    public static final int MOTION_CRUISE_VELOCITY = 8000; //prev 15000
-    public static final int MOTION_ACCELERATION = 4000; //prev 6000
-
-    //TODO test values
-    public static final double MAGIC_KF = 20;
-    public static final double MAGIC_KP = 20;
-    public static final double MAGIC_KI = 0.0;
-    public static final double MAGIC_KD = 0.002;
-
-    public static final int TOLERANCE_TICKS = 150; 
     
 }
