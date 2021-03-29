@@ -2,6 +2,8 @@ package frc.team4909.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -54,6 +56,64 @@ public class DriveTrainSubsystem extends SubsystemBase{
         frontRight.setNeutralMode(NeutralMode.Brake);
         backLeft.setNeutralMode(NeutralMode.Brake);
         backRight.setNeutralMode(NeutralMode.Brake);
+
+        frontLeft.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, RobotConstants.PID_LOOP_IDX, RobotConstants.TIMEOUT);
+        frontRight.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, RobotConstants.PID_LOOP_IDX, RobotConstants.TIMEOUT);
+        backLeft.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, RobotConstants.PID_LOOP_IDX, RobotConstants.TIMEOUT);
+        backRight.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, RobotConstants.PID_LOOP_IDX, RobotConstants.TIMEOUT);
+
+        frontLeft.configNeutralDeadband(0.001);
+        frontRight.configNeutralDeadband(0.001);
+        backLeft.configNeutralDeadband(0.001);
+        backRight.configNeutralDeadband(0.001);
+
+        frontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, RobotConstants.TIMEOUT);
+        frontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, RobotConstants.TIMEOUT);
+
+        frontRight.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, RobotConstants.TIMEOUT);
+        frontRight.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, RobotConstants.TIMEOUT);
+
+        backLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, RobotConstants.TIMEOUT);
+        backLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, RobotConstants.TIMEOUT);
+
+        backRight.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, RobotConstants.TIMEOUT);
+        backRight.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, RobotConstants.TIMEOUT);
+
+        frontLeft.selectProfileSlot(RobotConstants.PID_SLOT_IDX, RobotConstants.PID_LOOP_IDX);
+        frontLeft.config_kP(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KP);
+        frontLeft.config_kI(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KI);
+        frontLeft.config_kD(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KD);
+        frontLeft.config_kF(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KF);
+
+        frontRight.selectProfileSlot(RobotConstants.PID_SLOT_IDX, RobotConstants.PID_LOOP_IDX);
+        frontRight.config_kP(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KP);
+        frontRight.config_kI(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KI);
+        frontRight.config_kD(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KD);
+        frontRight.config_kF(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KF);
+        
+        backLeft.selectProfileSlot(RobotConstants.PID_SLOT_IDX, RobotConstants.PID_LOOP_IDX);
+        backLeft.config_kP(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KP);
+        backLeft.config_kI(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KI);
+        backLeft.config_kD(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KD);
+        backLeft.config_kF(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KF);
+        
+        backRight.selectProfileSlot(RobotConstants.PID_SLOT_IDX, RobotConstants.PID_LOOP_IDX);
+        backRight.config_kP(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KP);
+        backRight.config_kI(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KI);
+        backRight.config_kD(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KD);
+        backRight.config_kF(RobotConstants.PID_SLOT_IDX, RobotConstants.MAGIC_KF);
+
+        frontLeft.configMotionCruiseVelocity(RobotConstants.MOTION_CRUISE_VELOCITY);
+        frontLeft.configMotionAcceleration(RobotConstants.MOTION_ACCELERATION);
+
+        frontRight.configMotionCruiseVelocity(RobotConstants.MOTION_CRUISE_VELOCITY);
+        frontRight.configMotionAcceleration(RobotConstants.MOTION_ACCELERATION);
+
+        backLeft.configMotionCruiseVelocity(RobotConstants.MOTION_CRUISE_VELOCITY);
+        backLeft.configMotionAcceleration(RobotConstants.MOTION_ACCELERATION);
+
+        backRight.configMotionCruiseVelocity(RobotConstants.MOTION_CRUISE_VELOCITY);
+        backRight.configMotionAcceleration(RobotConstants.MOTION_ACCELERATION);
 
         m_left = new SpeedControllerGroup(frontLeft, backLeft);
 
