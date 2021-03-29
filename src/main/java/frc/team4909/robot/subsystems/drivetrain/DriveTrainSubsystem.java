@@ -116,25 +116,10 @@ public class DriveTrainSubsystem extends SubsystemBase{
     }
 
     public void tankDrive(final double leftSpeed, final double rightSpeed){
-        double leftOutput = leftSpeed;
-        double rightOutput = rightSpeed;
+        final double leftOutput = leftSpeed;
+        final double rightOutput = rightSpeed;
 
-        if(leftOutput != 0){
-            leftOutput = MathUtil.clamp(Math.abs(leftOutput), 0.3, RobotConstants.MAX_VELOCITY);
-            if(leftOutput < 0){
-                leftOutput *= -1;
-            }
-        }
-
-        if(rightOutput != 0){
-            rightOutput = MathUtil.clamp(Math.abs(rightOutput), 0.3, RobotConstants.MAX_VELOCITY);
-            if(rightOutput < 0){
-                rightOutput *= -1;
-            }
-
-        } 
-
-        bionicDrive.tankDrive( -leftOutput, -rightOutput);
+        bionicDrive.tankDrive(leftOutput, rightOutput);
     }
 
     public void togglePreciseMode() {

@@ -101,7 +101,7 @@ public class DriveForward extends CommandBase{
         //     0, 
         //     false); //TODO we might have to set the speed or voltage of the motors to the pid not arcaed drive
 
-        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.8);
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.4);
 
         Robot.drivetrainsubsystem.arcadeDrive( output < 0 ? -clampedOutput : clampedOutput, 0, true); //TODO where does the negative go???;
         if(++numLoops == 1){

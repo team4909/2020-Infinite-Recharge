@@ -43,24 +43,18 @@ public class RobotConstants {
     public static final double intakekF = 0;
     public static final double deploySetpoint = 28;//33.4 for any non GalacticSeach purposes
 
-    // Drive Constants
+    // Drive Constantsft
     public static final double drivekP = 0.09;
     public static final double drivekI = 0.0;
     public static final double drivekD = 0.0;
     
-    public static final double distancekP = 0.004;
+    public static final double distancekP = 0.002;
     public static final double distancekI = 0.0;
     public static final double distancekD = 0.0002;
 
     public static final double TURN_KP = 0.045;
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.006;
-
-    //Trapezoidal motion Constants
-    public static final double RAMP_UP_TIME = 3; //I AM SECONDS
-    public static final double RAMP_DOWN_TIME = 4; //IS ALSO SECONDS
-    public static final double MAX_VELOCITY = 0.6;
-
 
     //THIS IS ALL IMPERICAL: we rotated the wheel 360(degrees) and subtracted the starting encoder position... 
     //...from the ending encoder position to get 20,472. - all for TICKS_PER_INCH
@@ -72,7 +66,4 @@ public class RobotConstants {
     
     //Pixy Refresh Constant
     public static final int PIXY_REFRESH_DIVISOR = 10;
-
-
-    
 }

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
-import frc.team4909.robot.subsystems.drivetrain.commands.TrapDrive;
 import frc.team4909.robot.autos.GalacticSearch;
 import frc.team4909.robot.autos.ShootThree;
 import frc.team4909.robot.autos.ShootThreePickUpThree;
@@ -247,9 +246,7 @@ public class Robot extends TimedRobot {
     //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
     //CommandScheduler.getInstance().schedule(new BlueStart());
     // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
-    // CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
-    CommandScheduler.getInstance().schedule(new TrapDrive(30.0));
-
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
   }
 
   @Override
