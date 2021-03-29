@@ -245,10 +245,11 @@ public class Robot extends TimedRobot {
     // );
     
     //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new BlueStart(), new A_Blue()));
-    //CommandScheduler.getInstance().schedule(new BlueStart());
+    //CommandScheduler.getInstance().schedule(new A_Red());
     // CommandSchedular.getInstance().schedule(new CounterClockwiseSquare());
-    // CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
-    CommandScheduler.getInstance().schedule(new MotionMagicForward(-30));
+    //THIS IS OUR GALACTIC SEARCH AUTO!!!!
+     CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new IntakeDown(), new Wait(2), new GalacticSearch()));
+    //CommandScheduler.getInstance().schedule(new MotionMagicForward(90));
   }
 
   @Override

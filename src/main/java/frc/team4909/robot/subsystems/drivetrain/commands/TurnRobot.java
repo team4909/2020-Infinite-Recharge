@@ -1,5 +1,8 @@
 package frc.team4909.robot.subsystems.drivetrain.commands;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -26,6 +29,11 @@ public class TurnRobot extends CommandBase{
     
     @Override
     public void initialize() {
+        Robot.drivetrainsubsystem.frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        Robot.drivetrainsubsystem.backLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        Robot.drivetrainsubsystem.frontRight.setInverted(TalonFXInvertType.CounterClockwise);
+        Robot.drivetrainsubsystem.backRight.setInverted(TalonFXInvertType.CounterClockwise);
+
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         targetPosition = degrees + currentPosition; //Gets the absolute position | TODO Find what get angle really means / gives back
         SmartDashboard.putNumber("TurnRobot Start Angle", currentPosition);
@@ -44,7 +52,7 @@ public class TurnRobot extends CommandBase{
         //NEGATIVE IS FOR SOME REASON???> SEE DRIVEFORWARD.JAVA
         double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.31); //0.5, 0.9
         //double clampedOutput = MathUtil.clamp(output, -1, 1);
-        Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???; 
+        Robot.drivetrainsubsystem.arcadeDrive(SPEED, output < 0 ? -clampedOutput : clampedOutput, true); //TODO where does the negative go???;
         //Option: Tank Drive to avoid unknown ramping-related issues.
         //Robot.drivetrainsubsystem.arcadeDrive(SPEED, clampedOutput, true);
         if(++numLoops == 1){
@@ -69,6 +77,12 @@ public class TurnRobot extends CommandBase{
     @Override
     public void end(boolean interrupted){
         System.out.println("No more turning");
+
+        Robot.drivetrainsubsystem.frontLeft.set(TalonFXControlMode.PercentOutput, 0);
+        Robot.drivetrainsubsystem.backLeft.set(TalonFXControlMode.PercentOutput, 0);
+        Robot.drivetrainsubsystem.frontRight.set(TalonFXControlMode.PercentOutput, 0);
+        Robot.drivetrainsubsystem.backRight.set(TalonFXControlMode.PercentOutput, 0);
+        
         Robot.drivetrainsubsystem.tankDrive(0, 0);
         Robot.drivetrainsubsystem.resetAngle();
         SmartDashboard.putBoolean("Has TurnRobot Ended?", true);

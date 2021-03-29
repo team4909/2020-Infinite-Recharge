@@ -3,6 +3,7 @@ package frc.team4909.robot.autos.galacticsearch;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
+import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagicForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 
 public class BlueStart extends SequentialCommandGroup{
@@ -17,7 +18,7 @@ public class BlueStart extends SequentialCommandGroup{
         
         addCommands(
             new TurnRobot(14),
-            new DriveForward(108.2)
+            new MotionMagicForward(108.2)
         );
     }
 }

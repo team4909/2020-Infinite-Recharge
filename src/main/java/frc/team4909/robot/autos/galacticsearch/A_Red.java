@@ -3,6 +3,7 @@ package frc.team4909.robot.autos.galacticsearch;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
+import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagicForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 
 public class A_Red extends SequentialCommandGroup {
@@ -20,13 +21,13 @@ public class A_Red extends SequentialCommandGroup {
     public A_Red(){
         super();
         addCommands(//negatived angles for testing
-            new DriveForward(60),
+            new MotionMagicForward(60),
             new TurnRobot(26.6), //right is positive, I believe
-            new DriveForward(67.1),
+            new MotionMagicForward(67.1),
             new TurnRobot(-108.4),
-            new DriveForward(94.9),
-            new TurnRobot(81.8),
-            new DriveForward(155)    
+            new MotionMagicForward(94.9),
+            new TurnRobot(80),
+            new MotionMagicForward(120)    
         );
     }
 

@@ -80,5 +80,5 @@ public class RobotConstants {
     public static final double MAGIC_KI = 0.0;
     public static final double MAGIC_KD = 0.0;
 
-    public static final int TOLERANCE_TICKS = 150;
+    public static final double TOLERANCE_TICKS = TICKS_PER_INCH;
 }

@@ -3,6 +3,7 @@ package frc.team4909.robot.autos.galacticsearch;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
+import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagicForward;
 import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 
@@ -22,13 +23,13 @@ public class A_Blue extends SequentialCommandGroup{
         super();
         addCommands(
             new TurnRobot(31.0),
-            new DriveForward(42.4),
+            new MotionMagicForward(42.4),
             new TurnRobot(-116.6),
-            new DriveForward(94.9),
+            new MotionMagicForward(94.9),
             new TurnRobot(98.1),
-            new DriveForward(67.1),
+            new MotionMagicForward(67.1),
             new TurnRobot(-30),
-            new DriveForward(132.5) 
+            new MotionMagicForward(100) 
         );
     }    
 }    
