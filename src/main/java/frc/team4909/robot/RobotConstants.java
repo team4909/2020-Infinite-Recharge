@@ -73,7 +73,7 @@ public class RobotConstants {
     public static final int MOTION_ACCELERATION = 10000;
 
     //TODO test values
-    public static final double MAGIC_KF = 0.2;
+    public static final double MAGIC_KF = 0.0;
     public static final double MAGIC_KP = 0.2;
     public static final double MAGIC_KI = 0.0;
     public static final double MAGIC_KD = 0.0;

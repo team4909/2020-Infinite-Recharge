@@ -28,14 +28,15 @@ public class MotionMagicForward extends CommandBase{
     @Override
     public void initialize() {
        
-        LSD = Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition();
-        RSD = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition();
 
-        // leftTicksToMove = LSD + (RobotConstants.TICKS_PER_INCH * inches);
-        // rightTicksToMove = RSD + (RobotConstants.TICKS_PER_INCH * inches);
+        Robot.drivetrainsubsystem.frontLeft.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.backLeft.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.frontRight.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.backRight.setSelectedSensorPosition(0);
+
         
-        leftTicksToMove = 80000 + LSD;
-        rightTicksToMove = 80000 + RSD;
+        leftTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
+        rightTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
         
         SmartDashboard.putNumber("Left Ticks to Move", leftTicksToMove);
         SmartDashboard.putNumber("Right Ticks to Move", rightTicksToMove);
