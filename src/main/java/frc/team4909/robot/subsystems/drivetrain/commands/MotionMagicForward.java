@@ -19,10 +19,22 @@ public class MotionMagicForward extends CommandBase{
     public double LSD;
     public double RSD;
 
+    public boolean isFinished;
+
 
     public MotionMagicForward(double in){
         super();
         this.inches = in;
+
+        leftTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
+        rightTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
+    }
+
+    public MotionMagicForward(double lTicks, double rTicks){
+
+        //recives ticks from MM turn
+        leftTicksToMove = lTicks;
+        rightTicksToMove = rTicks;
     }
 
     @Override
@@ -35,8 +47,7 @@ public class MotionMagicForward extends CommandBase{
         Robot.drivetrainsubsystem.frontRight.setSelectedSensorPosition(0);
         Robot.drivetrainsubsystem.backRight.setSelectedSensorPosition(0);
         
-        leftTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
-        rightTicksToMove = inches * RobotConstants.TICKS_PER_INCH;
+     
         
         SmartDashboard.putNumber("Left Ticks to Move", leftTicksToMove);
         SmartDashboard.putNumber("Right Ticks to Move", rightTicksToMove);
@@ -67,10 +78,13 @@ public class MotionMagicForward extends CommandBase{
     @Override
     public boolean isFinished() {
         if(Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition() >= leftTicksToMove - RobotConstants.TOLERANCE_TICKS){
+            isFinished = true;
             return true;
+        
         } else {
             return false;
         }
+
 
     }   
 

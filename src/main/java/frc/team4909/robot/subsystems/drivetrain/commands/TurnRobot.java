@@ -34,6 +34,13 @@ public class TurnRobot extends CommandBase{
         Robot.drivetrainsubsystem.frontRight.setInverted(TalonFXInvertType.CounterClockwise);
         Robot.drivetrainsubsystem.backRight.setInverted(TalonFXInvertType.CounterClockwise);
 
+        
+        Robot.drivetrainsubsystem.frontLeft.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.backLeft.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.frontRight.setSelectedSensorPosition(0);
+        Robot.drivetrainsubsystem.backRight.setSelectedSensorPosition(0);
+        
+
         currentPosition = Robot.drivetrainsubsystem.getAngle();
         targetPosition = degrees + currentPosition; //Gets the absolute position | TODO Find what get angle really means / gives back
         SmartDashboard.putNumber("TurnRobot Start Angle", currentPosition);
@@ -62,6 +69,9 @@ public class TurnRobot extends CommandBase{
             SmartDashboard.putNumber("Clamped Turn Output", clampedOutput);
             numLoops = 0;
         }
+
+        SmartDashboard.putNumber("LEFT TURN TICKS", Robot.drivetrainsubsystem.frontLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("RIGHT TURN TICKS", Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition());
     }
 
     @Override

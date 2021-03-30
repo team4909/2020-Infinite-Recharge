@@ -61,6 +61,8 @@ public class RobotConstants {
     //The 13.2 in the commented out "calculation" is the actual gear ratio from cad.
     //6.125 is the wheel diameter including the tread
     public static final double TICKS_PER_INCH = 20_472 / (6.125 * Math.PI); //13.2 * 2048 / (6.125 * Math.PI);
+    public static final double L_TICKS_PER_DEGREES = 0; //used for MM turning  228.330 231.0
+    public static final double R_TICKS_PER_DEGREES = 0; // 241.830 242.7
     public static final double TOLERANCE_INCHES = 0.2 * TICKS_PER_INCH; //0.5 prev
     public static final double TOLERANCE_DEGREES = 0.25;
     
@@ -81,4 +83,5 @@ public class RobotConstants {
     public static final double MAGIC_KD = 0.0;
 
     public static final double TOLERANCE_TICKS = TICKS_PER_INCH;
+    
 }
