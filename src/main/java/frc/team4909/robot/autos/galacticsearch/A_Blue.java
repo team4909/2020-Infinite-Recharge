@@ -29,7 +29,7 @@ public class A_Blue extends SequentialCommandGroup{
             new TurnRobot(98.1),
             new MotionMagicForward(67.1),
             new TurnRobot(-30),
-            new MotionMagicForward(100) 
+            new MotionMagicForward(60) 
         );
     }    
 }    

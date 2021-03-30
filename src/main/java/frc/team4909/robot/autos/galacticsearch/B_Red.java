@@ -29,7 +29,7 @@ public class B_Red extends SequentialCommandGroup {
             new TurnRobot(-95),
             new MotionMagicForward(84.8),
             new TurnRobot(40),
-            new MotionMagicForward(130)
+            new MotionMagicForward(120)
             
         );
     }

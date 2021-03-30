@@ -24,10 +24,10 @@ public class A_Red extends SequentialCommandGroup {
             new MotionMagicForward(60),
             new TurnRobot(26.6), //right is positive, I believe
             new MotionMagicForward(67.1),
-            new TurnRobot(-108.4),
+            new TurnRobot(-98.2),
             new MotionMagicForward(94.9),
-            new TurnRobot(80),
-            new MotionMagicForward(120)    
+            new TurnRobot(71.6),
+            new MotionMagicForward(151)    
         );
     }
 
