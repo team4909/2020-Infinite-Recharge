@@ -229,7 +229,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Has Driveforward Ended?", false);
     SmartDashboard.putBoolean("Has TurnRobot Ended?", false);
     drivetrainsubsystem.zeroGyro();
-    // hoodSubsystem.zeroHood();
+    hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
     intakeSubsystem.zeroDeploy();
     leds.setDefault();
@@ -260,7 +260,7 @@ public class Robot extends TimedRobot {
     // CommandScheduler.getInstance().schedule(new ZeroHoodInit());
     // climberSubsystem.resetClimbEncoder();
     // drivetrainsubsystem.zeroGyro();
-    // hoodSubsystem.zeroHood();
+    hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
 //    climberSubsystem.setRatchetSpeed(-0.5);
     drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
