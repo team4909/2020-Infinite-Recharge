@@ -140,6 +140,7 @@ public class Vision extends SubsystemBase {
    * @return 1 or 0
    */
   public double isTargetVisibleDouble() {
+    SmartDashboard.putNumber("Is Visible", tv);
     return tv;
   }
 

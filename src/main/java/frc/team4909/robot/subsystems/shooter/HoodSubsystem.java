@@ -60,7 +60,9 @@ public double map(double value, double old_min, double old_max, double new_min, 
         SmartDashboard.putNumber("Hood Setpoint", hoodPos);
         SmartDashboard.putNumber("Hood Current", getHoodCurrent());
         if (!zeroing){
-            hoodControl.set(ControlMode.Position, hoodPos);
+            if(hoodPos >= 0 && hoodPos <= 214){
+                hoodControl.set(ControlMode.Position, hoodPos);
+            }
         }
     }
     

@@ -1,6 +1,8 @@
 package frc.team4909.robot.subsystems.shooter.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 
@@ -21,9 +23,12 @@ public class ShootByDistance extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        Robot.hoodSubsystem.setHoodAngle(calculateAngle((int)Robot.vision.calculateDistanceFromCameraHeight(
-                RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle)));
+    public void execute() {
+        int targetAngle = MathUtil.clamp(calculateAngle((int)Robot.vision.calculateDistanceFromCameraHeight(
+            RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle)), 23, 74);
+        SmartDashboard.putNumber("Calculated dist", targetAngle);
+        Robot.hoodSubsystem.setHoodAngle(targetAngle
+        );
     }
 
     /**

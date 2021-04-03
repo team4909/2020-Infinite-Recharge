@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(11000)); //(new FollowTarget(shootersubsystem, vision));
+    // shootersubsystem.setDefaultCommand(new SetShooterVelocity(11000)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -88,8 +88,8 @@ public class Robot extends TimedRobot {
 
     turretSubsystem = new TurretSubsystem();
 
-    climberSubsystem = new ClimberSubsystem();
-    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
+    //climberSubsystem = new ClimberSubsystem();
+    //climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
@@ -144,16 +144,16 @@ public class Robot extends TimedRobot {
 
       //-- Face Buttons
     // driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
+    //driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     
       //-- Bumpers
     // driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
     driverGamepad.buttonPressed(BionicF310.RB, new InvertDrive()); //Invert Drive Direction (Gamepad: Right Bumper)
 
       //-- Triggers
-    driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
-    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
+    //driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
+    //driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
+    //driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
 
     vision.setPipeline(1);
@@ -191,7 +191,7 @@ public class Robot extends TimedRobot {
     // Ready Auto Commands
     // CommandScheduler.getInstance().schedule(new ShootThree());
     CommandScheduler.getInstance().schedule((CommandBase)autoChooser.getSelected(), new ZeroHoodInit());
-    climberSubsystem.resetClimbEncoder();
+    //climberSubsystem.resetClimbEncoder();
     drivetrainsubsystem.zeroGyro();
     hoodSubsystem.zeroHood();
     shootersubsystem.setSpeed(0);
@@ -213,7 +213,7 @@ public class Robot extends TimedRobot {
     // hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetSpeed(-0.5);
+    //climberSubsystem.setRatchetSpeed(-0.5);
   }
 
   @Override
