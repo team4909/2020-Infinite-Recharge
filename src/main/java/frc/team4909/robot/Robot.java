@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team4909.robot.subsystems.drivetrain.commands.DriveForward;
+import frc.team4909.robot.subsystems.drivetrain.commands.DriveLimelight;
 import frc.team4909.robot.subsystems.drivetrain.commands.MotionMagicForward;
 import frc.team4909.robot.autos.GalacticSearch;
 import frc.team4909.robot.autos.ShootThree;
@@ -182,7 +183,15 @@ public class Robot extends TimedRobot {
 //    driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
 //    driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
 //    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
-    driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
+    // driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
+
+    //ONLY FOR AT HOME CHALLANGES:
+    driverGamepad.buttonPressed(BionicF310.X, new DriveLimelight(60)); //Green Zone
+    driverGamepad.buttonPressed(BionicF310.Y, new DriveLimelight(120)); //Yellow Zone
+    driverGamepad.buttonPressed(BionicF310.B, new DriveLimelight(180)); //Blue Zone
+    driverGamepad.buttonPressed(BionicF310.A, new DriveLimelight(240)); //Red Zone
+    driverGamepad.buttonPressed(BionicF310.LB, new DriveLimelight(300)); //Re-Intro Zone
+    
 
     vision.setPipeline(1);
 

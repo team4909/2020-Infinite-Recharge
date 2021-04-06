@@ -19,7 +19,7 @@ public class MotionMagicForward extends CommandBase{
     public double LSD;
     public double RSD;
 
-    public boolean isFinished;
+    public static boolean isFinished;
 
 
     public MotionMagicForward(double in){
@@ -41,6 +41,7 @@ public class MotionMagicForward extends CommandBase{
     public void initialize() {
        
         SmartDashboard.putBoolean("End Method in MotionMagicForward called", false);
+        isFinished = false;
 
         Robot.drivetrainsubsystem.frontLeft.setSelectedSensorPosition(0);
         Robot.drivetrainsubsystem.backLeft.setSelectedSensorPosition(0);
