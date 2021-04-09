@@ -1,120 +1,107 @@
 package frc.team4909.robot.subsystems.shooter;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
+import frc.team4909.robot.operator.controllers.FlightStick;
+import frc.team4909.robot.util.Util;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    CANSparkMax shooter1;
-    CANSparkMax shooter2;
-    CANEncoder encoder;
-    CANPIDController speedPID;
-    double speed = 0;
-    public boolean isAtSpeed;
-
+    WPI_TalonFX shooter1, shooter2;
+    double speed = -500000;
+    public boolean isAtSpeed = false;
+    public boolean isAligned = false;
+    public boolean isReving = false;
+    public double shooterSetSpeed = 17000;
+    Orchestra orchestra = new Orchestra();
+    
     CANSparkMax turnMotor;
 
     public double rawspeed, kP, kD, kI, kF;
 
+    public ShooterSubsystem() {
 
+        shooter1 = new WPI_TalonFX(6);
+        shooter2 = new WPI_TalonFX(5);
 
-    public ShooterSubsystem()
-    {
+        shooter1.configFactoryDefault();
+        shooter2.configFactoryDefault();
 
-        shooter1 = new CANSparkMax(5, MotorType.kBrushless);
-        shooter2 = new CANSparkMax(6, MotorType.kBrushless);
+        shooter1.follow(shooter2);
+        shooter1.setInverted(true);
 
-        shooter1.restoreFactoryDefaults();
-        shooter2.restoreFactoryDefaults();
-
-        shooter1.follow(shooter2, true);
-
-        shooter1.setIdleMode(IdleMode.kCoast);
-        shooter2.setIdleMode(IdleMode.kCoast);
+        shooter1.setNeutralMode(NeutralMode.Coast);
+        shooter2.setNeutralMode(NeutralMode.Coast);
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kBrake);
 
+        shooter2.config_kP(0, RobotConstants.shooterkP);
+        shooter2.config_kI(0, RobotConstants.shooterkI);
+        shooter2.config_kD(0, RobotConstants.shooterkD);
+        shooter2.config_kF(0, RobotConstants.shooterkF);
 
-        encoder = shooter2.getEncoder();
+        shooter2.configPeakOutputReverse(0);
 
-        speedPID = new CANPIDController(shooter2);
-        speedPID.setOutputRange(0.2, 1);
-
-        speedPID.setP(RobotConstants.shooterkP);
-        speedPID.setI(0);
-        speedPID.setD(0);
-        // speedPID.setFF(0.09);
-        speedPID.setFF(0);
-
-        SmartDashboard.putNumber("kF", 0);
-        SmartDashboard.putNumber("kI", 0);
-        SmartDashboard.putNumber("kD", 0);
-        SmartDashboard.putNumber("kP", 0);
-        SmartDashboard.putNumber("% Speed", 0);
+        orchestra.addInstrument(shooter1);
 
     }
 
-
-    public void zeroTurret(){
+    public void zeroTurret() {
         turnMotor.getEncoder().setPosition(0);
     }
 
-    @Override
-    public void periodic(){
 
-        // kP = SmartDashboard.getNumber("kP", 0.005);
-        // kD = SmartDashboard.getNumber("kI", 0);
-        // speed = SmartDashboard.getNumber("% Speed", 0);
-        // kF = SmartDashboard.getNumber("kF", 0);
-        // speedPID.setP(kP);
-        // speedPID.setI(kI);
-        // speedPID.setD(kD);
-        // SmartDashboard.putNumber("Error", speedPID.get);
-        SmartDashboard.putNumber("Curr P", speedPID.getP());
-        SmartDashboard.putNumber("Speed", encoder.getVelocity());
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Speed", shooter2.getSelectedSensorVelocity());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
-        if(Math.abs(speed-encoder.getVelocity())<100.00){
+        SmartDashboard.putNumber("Current Speed Setpoint", speed);
+        SmartDashboard.putNumber("Shooter Speed Output", shooter2.get());
+        if (Math.abs(speed - getRPM()) < 250.00) {
             isAtSpeed = true;
-        }
-        else {
+        } else {
             isAtSpeed = false;
         }
 
+        // if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) < -0.8){
+        //     Robot.shootersubsystem.shooterSetSpeed = 22000;
+        // }else if(Robot.manipulatorGamepad.getThresholdAxis(FlightStick.Slider) > 0.8){
+        //     Robot.shootersubsystem.shooterSetSpeed = 17000;
+        // }
 
-
+        // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
+        SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());
+        SmartDashboard.putBoolean("Shooter Reving", isReving);
 
     }
 
-    public void setSpeed(double speed){
-        shooter1.set(speed);
+    public void setSpeed(double speed) {
+        // shooter1.set(speed);
         shooter2.set(speed);
         speed = 0;
     }
 
-    public void setVelocity(double velocity){
-        // speedPID.setFF(velocity/5000);
-        speedPID.setReference(velocity, ControlType.kVelocity);
+    public void setVelocity(double velocity) {
+        double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
+        shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }
 
-    
-
-    public double getRPM(){
-        return encoder.getVelocity();
+    public double getRPM() {
+        // return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
+        return shooter2.getSelectedSensorVelocity();
     }
 
 }

@@ -13,6 +13,6 @@ public class SetShooterSpeed extends CommandBase{
     }
 
     public void initialize(){
-        Robot.shootersubsystem.setSpeed(speed);;
+        Robot.shootersubsystem.setSpeed(speed);
     }
 }

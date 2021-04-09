@@ -16,15 +16,13 @@ public class MoveTurret extends CommandBase {
 
 
 
-    public MoveTurret(ShooterSubsystem subsystem) {
+    public MoveTurret() {
         super();
-        addRequirements(subsystem);
     }
     
     @Override
     public void initialize() {
         // turn off limelight lights
-        Robot.vision.setLights(0);
     }
 
     @Override
@@ -35,7 +33,7 @@ public class MoveTurret extends CommandBase {
         //check the direction correctness, like whether RS left actually moves the turret left.
     }
     @Override
-    public void end(boolean interupted){
+    public void end(boolean interrupted){
         Robot.turretSubsystem.setTurnSpeed(0);
     }
 }

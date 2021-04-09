@@ -5,24 +5,25 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 
-public class SorterOut extends CommandBase{
-    public SorterOut(SorterSubsystem subsystem){
+public class SmartSorterOn extends CommandBase{
+    public SmartSorterOn(SorterSubsystem subsystem){
         super();
         addRequirements(subsystem);
-
     }
-
-    
 
     @Override
     public void initialize(){
-        Robot.sorterSubsystem.sorterOn(0.5);
+        if(!(Robot.indexerSubsystem.hasBallUpper() || Robot.indexerSubsystem.hasBallLower())){
+            Robot.sorterSubsystem.sorterOn(-0.25);
+        }
+        else{
+            Robot.sorterSubsystem.sorterOn(0);
+        }
     }
 
 
     @Override
     public void end(boolean interupted){
         Robot.sorterSubsystem.sorterOn(0);
-
     }
 }

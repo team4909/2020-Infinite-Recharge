@@ -1,9 +1,8 @@
 package frc.team4909.robot.operator.generic;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -102,6 +101,17 @@ public class BionicJoystick extends Joystick {
         BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
 
         newButton.whileActiveOnce(command);
+    }
+
+    /**
+     * @param axis        Axis to Create Handler For
+     * @param threshold   Minimum Threshold to Trigger Command
+     * @param commandable Returns a Commandable that can be used by the operator and autonomous CommandGroups
+     */
+    public void buttonHeld(BionicAxis axis, double threshold, CommandBase command, boolean interruptible) {
+        BionicJoystickAxisButton newButton = new BionicJoystickAxisButton(this, axis.getNumber(), threshold);
+
+        newButton.whileActiveOnce(command, interruptible);
     }
 
     /**

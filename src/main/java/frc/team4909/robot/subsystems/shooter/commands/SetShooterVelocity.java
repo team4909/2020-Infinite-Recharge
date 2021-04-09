@@ -9,21 +9,23 @@ public class SetShooterVelocity extends CommandBase {
 
     double velocity;
 
-    public SetShooterVelocity(ShooterSubsystem subsystem, double v) {
+    public SetShooterVelocity(double v) {
         super();
-        addRequirements(subsystem);
+        addRequirements(Robot.shootersubsystem);
         velocity = v;
     }
 
     public void initialize(){
+        Robot.shootersubsystem.isReving = true;
         Robot.shootersubsystem.setVelocity(velocity);
         System.out.println("init shooter velocity");
     }
 
     @Override
     public void end(boolean interrupted){
+        Robot.shootersubsystem.isReving = false;
         System.out.println("shooter end" + interrupted);
-        // Robot.shootersubsystem.setSpeed(0);
+        Robot.shootersubsystem.setVelocity(3225);
     }
 
     

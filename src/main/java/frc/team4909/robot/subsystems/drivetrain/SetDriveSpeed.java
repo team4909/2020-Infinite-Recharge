@@ -13,7 +13,7 @@ public class SetDriveSpeed extends CommandBase{
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         Robot.drivetrainsubsystem.arcadeDrive(speed, 0);
     }
 

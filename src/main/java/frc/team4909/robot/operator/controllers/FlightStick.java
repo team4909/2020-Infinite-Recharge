@@ -1,8 +1,5 @@
 package frc.team4909.robot.operator.controllers;
 
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.operator.generic.BionicAxis;
 import frc.team4909.robot.operator.generic.BionicButton;
 import frc.team4909.robot.operator.generic.BionicJoystick;
@@ -32,7 +29,8 @@ public class FlightStick extends BionicJoystick {
     public static BionicButton Eleven = new BionicButton(11);
     public static BionicButton Twelve = new BionicButton(12);
 	
-	public static BionicAxis Z = new BionicAxis(2);
+    public static BionicAxis Z = new BionicAxis(2);
+    public static BionicAxis Slider = new BionicAxis(3);
 
     public FlightStick(int port, double deadzone, double sensitivity) {
 		super(port, deadzone, sensitivity);

@@ -4,16 +4,17 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
+import frc.team4909.robot.subsystems.shooter.commands.ZeroHoodInit;
 
 public class HoodSubsystem extends SubsystemBase{
 
-    WPI_TalonSRX hoodControl;
+    public WPI_TalonSRX hoodControl;
     int hoodPos;
-
+    public boolean zeroing = false;
 
     public HoodSubsystem(){        
         hoodControl = new WPI_TalonSRX(9);
@@ -57,7 +58,10 @@ public double map(double value, double old_min, double old_max, double new_min, 
     public void periodic() {
         SmartDashboard.putNumber("Hood Position", getAngle()  );
         SmartDashboard.putNumber("Hood Setpoint", hoodPos);
-        hoodControl.set(ControlMode.Position, hoodPos);
+        SmartDashboard.putNumber("Hood Current", getHoodCurrent());
+        if (!zeroing){
+            hoodControl.set(ControlMode.Position, hoodPos);
+        }
     }
     
     public void setHoodPosition(int pos){
@@ -68,9 +72,16 @@ public double map(double value, double old_min, double old_max, double new_min, 
         hoodPos = (int)map(angle, 23, 74, 0, 214);
     }
 
+    public void setSpeed(double speed){
+        hoodControl.set(speed);
+    }
+
+    public double getHoodCurrent(){
+        return hoodControl.getStatorCurrent();
+    }
 
     public void moveHood(double pos){
-        System.out.println(pos);
+        // System.out.println(pos);
         if (getAngle() > 72) {
             if (pos > 0) {
                 // do nothing
@@ -90,8 +101,8 @@ public double map(double value, double old_min, double old_max, double new_min, 
     }
 
     public void zeroHood(){
-        hoodPos = 0;
         hoodControl.setSelectedSensorPosition(0);
+        hoodPos = 0;
     }
 
 }
