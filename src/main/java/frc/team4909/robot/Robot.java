@@ -39,6 +39,8 @@ import frc.team4909.robot.subsystems.shooter.TurretSubsystem;
 import frc.team4909.robot.subsystems.shooter.commands.FollowAndAim;
 import frc.team4909.robot.subsystems.shooter.commands.HoodDown;
 import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
+import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
+import frc.team4909.robot.subsystems.ultrasonic.UltrasonicSensorSubsystem;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
@@ -60,6 +62,8 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static BionicF310 driverGamepad;
   public static FlightStick manipulatorGamepad;
+  public static UltrasonicSensorSubsystem uSensorSubsystem;
+  public static ParallelCommandGroup shooterLimelightAssist;
   public static ClimberSubsystem climberSubsystem;
   public static SendableChooser autoChooser;
 
@@ -87,6 +91,8 @@ public class Robot extends TimedRobot {
     intakeSubsystem = new IntakeSubsystem();
 
     turretSubsystem = new TurretSubsystem();
+
+    uSensorSubsystem = new UltrasonicSensorSubsystem();
 
     climberSubsystem = new ClimberSubsystem();
     climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
