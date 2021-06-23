@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
     cameraSubsystem.Stream();
 
     leds = new LEDs();
-    // leds.setDefaultCommand(new LEDSetter());
+    leds.setDefaultCommand(new LEDSetter());
 
     autoChooser = new SendableChooser<>();
 
