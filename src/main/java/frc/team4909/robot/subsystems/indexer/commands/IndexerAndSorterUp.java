@@ -11,6 +11,6 @@ public class IndexerAndSorterUp extends ParallelCommandGroup {
         System.out.println("sorter indexer up");
         addCommands(new SorterOn(Robot.sorterSubsystem),
         new IndexerUp(Robot.indexerSubsystem));
-        //new IntakeDeploy());
+        new IntakeDeploy();
     }
 }

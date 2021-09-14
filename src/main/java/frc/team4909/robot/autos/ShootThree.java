@@ -14,13 +14,13 @@ import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 public class ShootThree extends SequentialCommandGroup{
     public ShootThree(){
         addCommands(
-            new ParallelCommandGroup(new FollowTarget(Robot.turretSubsystem, Robot.vision), new SetShooterSpeed(0.5)).withTimeout(1),
+            new ParallelCommandGroup(
             new SetHoodInit(),
             // new SetShooterSpeed(0.9),
             ///new IndexerAndSorterUp().withTimeout(2),
             //new ShootByDistance(),
             new ShootBalls(3225).withTimeout(8.25),
             new SetDriveSpeed(-0.9).withTimeout(0.5)
-        );
+        ));
     }
 }

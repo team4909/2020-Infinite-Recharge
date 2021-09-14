@@ -36,6 +36,7 @@ import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterUp;
 import frc.team4909.robot.subsystems.indexer.commands.SmartIndexerAndSorterUp;
 import frc.team4909.robot.subsystems.intake.IntakeSubsystem;
+import frc.team4909.robot.subsystems.intake.commands.IntakeDeploy;
 import frc.team4909.robot.subsystems.leds.LEDSetter;
 import frc.team4909.robot.subsystems.leds.LEDs;
 import frc.team4909.robot.subsystems.shooter.HoodSubsystem;
@@ -78,10 +79,10 @@ public class Robot extends TimedRobot {
     // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
 
-    vision = new Vision();
+    //vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(4000)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(0)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -131,8 +132,8 @@ public class Robot extends TimedRobot {
 // Robot Controls
     // FlightStick Controls
       //-- Handle Buttons
-    manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
-    manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
+    manipulatorGamepad.buttonHeld(FlightStick.One, new IntakeDeploy()); //Sorter and Indexer (Joystick: Button 1)
+    //manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.5), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
@@ -170,7 +171,7 @@ public class Robot extends TimedRobot {
 //    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
 
-    vision.setPipeline(1);
+    //vision.setPipeline(1);
 }
 
 
@@ -184,8 +185,8 @@ public class Robot extends TimedRobot {
     // Robot.leds.setBlack();
     
     // Put values on SmartDashboards
-    SmartDashboard.putNumber("X Offset", vision.getXOffset());
-    SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
+    //SmartDashboard.putNumber("X Offset", vision.getXOffset());
+    //SmartDashboard.putNumber("Shooter Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
     SmartDashboard.putBoolean("Upper Has Ball", indexerSubsystem.hasBallUpper());
     SmartDashboard.putBoolean("Lower Has Ball", indexerSubsystem.hasBallLower());
   }
@@ -237,9 +238,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // Insert Additional Values into Smart Dashboard
-    SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
-    SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
-    // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
+    // SmartDashboard.putNumber("X  - Offset", vision.getXOffset());
+    // SmartDashboard.putNumber("Shooter  - Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
+    // // shooterSubsystem.setVelocity(SmartDashboard.getNumber("Shooter Speed", 0));
     if(++numloops != RobotConstants.PIXY_REFRESH_DIVISOR) return;
 
     if (pixyCam.getDetected()){

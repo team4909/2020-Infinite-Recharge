@@ -12,8 +12,8 @@ import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 public class ShootThreePickUpThree extends SequentialCommandGroup{
     public ShootThreePickUpThree(){
         addCommands(
-(
-                new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(1)),
+
+                //new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(1)),
                 new SetHoodInit(),
                 // new SetShooterSpeed(0.9),
                 // new IndexerAndSorterUp().withTimeout(2),
