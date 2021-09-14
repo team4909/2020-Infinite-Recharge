@@ -8,8 +8,9 @@ import frc.team4909.robot.subsystems.intake.commands.IntakeIn;
 public class IndexerAndSorterUp extends ParallelCommandGroup {
     public IndexerAndSorterUp() {
         super();
+        System.out.println("sorter indexer up");
         addCommands(new SorterOn(Robot.sorterSubsystem),
-        new IndexerUp(Robot.indexerSubsystem),
-        new IntakeDeploy());
+        new IndexerUp(Robot.indexerSubsystem));
+        //new IntakeDeploy());
     }
 }

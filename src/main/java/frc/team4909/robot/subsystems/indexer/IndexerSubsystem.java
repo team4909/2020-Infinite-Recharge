@@ -34,9 +34,9 @@ public class IndexerSubsystem extends SubsystemBase{
         return !lowerPhotoelectric.get();
     }
 
-    public void 
-    setSpeed(double speed){
+    public void setSpeed(double speed){
         lowerMotor.set(speed);
+        //upperMotor.set(speed);
     }
 
     public void setSmartSpeed(double speed){

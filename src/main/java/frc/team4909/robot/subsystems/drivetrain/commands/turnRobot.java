@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
 
-public class TurnRobot extends CommandBase{
+public class turnRobot extends CommandBase{
     //error is how much we have to turn
     //gain is the speed to turn at based on error
     public double error;
@@ -14,7 +14,7 @@ public class TurnRobot extends CommandBase{
     public final double SPEED = 0; //TODO check value
     public int numLoops = 0;
 
-    public TurnRobot(double degrees){
+    public turnRobot(double degrees){
         super();
         addRequirements(Robot.drivetrainsubsystem);
         System.out.println("TURN ROBOT IS CONSTUCTED");

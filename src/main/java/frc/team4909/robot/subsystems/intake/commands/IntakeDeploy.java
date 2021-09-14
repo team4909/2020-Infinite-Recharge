@@ -12,7 +12,7 @@ public class IntakeDeploy extends CommandBase{
     @Override
     public void initialize() {
         Robot.intakeSubsystem.intakeDeployed = true;
-        Robot.intakeSubsystem.setSpeed(.9);
+        Robot.intakeSubsystem.setSpeed(.2);
         Robot.intakeSubsystem.deployIntake(RobotConstants.deploySetpoint);
     }
 

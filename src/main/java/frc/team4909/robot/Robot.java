@@ -29,7 +29,7 @@ import frc.team4909.robot.subsystems.drivetrain.Drive;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
-import frc.team4909.robot.subsystems.drivetrain.commands.TurnRobot;
+import frc.team4909.robot.subsystems.drivetrain.commands.turnRobot;
 import frc.team4909.robot.subsystems.indexer.IndexerSubsystem;
 import frc.team4909.robot.subsystems.indexer.SorterSubsystem;
 import frc.team4909.robot.subsystems.indexer.commands.IndexerAndSorterDown;
@@ -81,7 +81,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(10000)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(4000)); //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -118,12 +118,12 @@ public class Robot extends TimedRobot {
     // pixyCam.sortTest();
 
     // Initialize Controllers
-    driverGamepad = new BionicF310(0, // Port
+    driverGamepad = new BionicF310(1, // Port
         0.05, // Deadzone
         0.6 // Gamepad sensitivity
     );
 
-    manipulatorGamepad = new FlightStick(1, // Port
+    manipulatorGamepad = new FlightStick(0, // Port
         0.35, // Deadzone
         0.0 // Gamepad sensitivity
     );
