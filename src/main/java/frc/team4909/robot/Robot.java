@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
 // Robot Controls
     // FlightStick Controls
       //-- Handle Buttons
-    manipulatorGamepad.buttonHeld(FlightStick.One, new IntakeDeploy()); //Sorter and Indexer (Joystick: Button 1)
+    manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
     //manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.5), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
     manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)

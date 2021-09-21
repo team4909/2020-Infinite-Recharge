@@ -9,8 +9,10 @@ public class IndexerAndSorterUp extends ParallelCommandGroup {
     public IndexerAndSorterUp() {
         super();
         System.out.println("sorter indexer up");
-        addCommands(new SorterOn(Robot.sorterSubsystem),
-        new IndexerUp(Robot.indexerSubsystem));
-        new IntakeDeploy();
+        addCommands(
+        new SorterOn(Robot.sorterSubsystem),
+        new IndexerUp(Robot.indexerSubsystem),
+        new IntakeDeploy()
+        );
     }
 }
