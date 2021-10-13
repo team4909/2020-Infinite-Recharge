@@ -23,18 +23,18 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public ClimberSubsystem() {
 
-        climberMotor1 = new CANSparkMax(14, MotorType.kBrushless);
-        climberMotor2 = new CANSparkMax(15, MotorType.kBrushless);
+        climberMotor1 = new CANSparkMax(15, MotorType.kBrushless);
+        // climberMotor2 = new CANSparkMax(165, MotorType.kBrushless);
         rachet = new PWM(1);
         // hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
-        climberMotor2.restoreFactoryDefaults();
+        // climberMotor2.restoreFactoryDefaults();
 
         climberMotor1.setIdleMode(IdleMode.kBrake);
-        climberMotor2.setIdleMode(IdleMode.kBrake);
+        // climberMotor2.setIdleMode(IdleMode.kBrake);
 
-        climberMotor2.follow(climberMotor1);
+        // climberMotor2.follow(climberMotor1);
 
         climbEncoder1 = new CANEncoder(climberMotor1);
         // hookEncoder = new CANEncoder(hookMotor);

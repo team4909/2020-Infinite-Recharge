@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons
-    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Depoy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
+    manipulatorGamepad.buttonToggled(FlightStick.Eleven, new SmartIndexerAndSorterUp()); //Deploy the Intake, the Sorter, and the Indexer (Joystick: Button 11)
     manipulatorGamepad.buttonHeld(FlightStick.Twelve, new IndexerAndSorterDown()); //Dump Balls (Joystick: Button 12)
     manipulatorGamepad.buttonPressed(FlightStick.Seven, new ZeroHoodInit());
     //manipulatorGamepad.buttonPressed(FlightStick.TopRight, new SetGreen()); //Set LEDs to Green When ready to Buddy Climb.

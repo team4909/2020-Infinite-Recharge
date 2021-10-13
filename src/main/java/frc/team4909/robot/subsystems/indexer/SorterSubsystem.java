@@ -11,7 +11,7 @@ public class SorterSubsystem extends SubsystemBase{
     CANSparkMax sorterMotor;
 
     public SorterSubsystem(){
-        sorterMotor = new CANSparkMax(11, MotorType.kBrushless);
+        sorterMotor = new CANSparkMax(14, MotorType.kBrushless);
         sorterMotor.setIdleMode(IdleMode.kBrake);
     }
     public void sorterOn(double speed){
