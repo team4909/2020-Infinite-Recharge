@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
 
     turretSubsystem = new TurretSubsystem();
 
-    uSensorSubsystem = new UltrasonicSensorSubsystem();
+    // uSensorSubsystem = new UltrasonicSensorSubsystem();
 
     climberSubsystem = new ClimberSubsystem();
     climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));

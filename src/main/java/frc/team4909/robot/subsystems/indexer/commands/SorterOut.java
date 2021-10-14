@@ -16,7 +16,7 @@ public class SorterOut extends CommandBase{
 
     @Override
     public void initialize(){
-        Robot.sorterSubsystem.sorterOn(0.5);
+        Robot.sorterSubsystem.sorterOn(-0.5);
     }
 
 

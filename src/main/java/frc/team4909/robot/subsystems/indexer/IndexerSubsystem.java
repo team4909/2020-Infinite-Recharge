@@ -69,4 +69,8 @@ public class IndexerSubsystem extends SubsystemBase{
         ballTimer = 0;
         }
     }
+
+    public boolean getLowerPhotoelectric(){
+        return lowerPhotoelectric.get();
+    }
 }
