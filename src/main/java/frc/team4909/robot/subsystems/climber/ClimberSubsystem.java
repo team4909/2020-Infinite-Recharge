@@ -24,17 +24,17 @@ public class ClimberSubsystem extends SubsystemBase {
     public ClimberSubsystem() {
 
         climberMotor1 = new CANSparkMax(15, MotorType.kBrushless);
-        // climberMotor2 = new CANSparkMax(16, MotorType.kBrushless);
+        climberMotor2 = new CANSparkMax(16, MotorType.kBrushless);
         rachet = new PWM(1);
         // hookMotor = new CANSparkMax(16, MotorType.kBrushless);
 
         climberMotor1.restoreFactoryDefaults();
-        // climberMotor2.restoreFactoryDefaults();
+        climberMotor2.restoreFactoryDefaults();
 
         climberMotor1.setIdleMode(IdleMode.kBrake);
-        // climberMotor2.setIdleMode(IdleMode.kBrake);
+        climberMotor2.setIdleMode(IdleMode.kBrake);
 
-        // climberMotor2.follow(climberMotor1);
+        climberMotor2.follow(climberMotor1);
 
         climbEncoder1 = new CANEncoder(climberMotor1);
         // hookEncoder = new CANEncoder(hookMotor);
@@ -56,12 +56,13 @@ public class ClimberSubsystem extends SubsystemBase {
         climbEncoder1.setPosition(0);
 
         SmartDashboard.putNumber("Ratchet Pos", 0);
+        SmartDashboard.putBoolean("ClimberOn", true);
 
     }
 
     public void setRatchetAngle(double angle){
-        // double a = Util.map(angle, -90, 90, -1, 1);
-        rachet.setSpeed(angle);
+        double a = Util.map(angle, 0, 180, -1, 1); //Turns into speed
+        rachet.setSpeed(a);
     }
 
     public void setRatchetSpeed(double speed){
@@ -83,12 +84,17 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void setClimberSpeed(double speed){
+        if(SmartDashboard.getBoolean("ClimberOn", false) == true) {
+            
         // climbHoldPos += speed*1;
         if(speed<0){
             
         }
         climberMotor1.set(speed);
         System.out.println("Elevator Moving" + speed);
+    } else {
+        System.out.println("climber off");
+    }
     }
 
     public double getClimbPos(){
@@ -104,14 +110,17 @@ public class ClimberSubsystem extends SubsystemBase {
         return climberMotor1.getOutputCurrent();
     }
 
+    
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("climber position", climbEncoder1.getPosition());
         // SmartDashboard.putNumber("Hook position", hookEncoder.getPosition());
         SmartDashboard.putNumber("Curr Ratchet Pos", rachet.getPosition());
         SmartDashboard.putNumber("Climb Current", getClimbCurrent());
+
         // setClimberPosition(climbHoldPos);
-        setRatchetAngle(0.1);
+        // setRatchetAngle(0.1);
     }
 
     

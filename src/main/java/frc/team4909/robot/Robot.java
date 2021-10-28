@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(10000)); //(new FollowTarget(shootersubsystem, vision));
+    shootersubsystem.setDefaultCommand(new SetShooterVelocity(0)); //10000 //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -159,8 +159,9 @@ public class Robot extends TimedRobot {
       //-- Triggers
     driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
-    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(0.3));
+    driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(180));
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
+  
 
     vision.setPipeline(1);
 }
@@ -219,7 +220,7 @@ public class Robot extends TimedRobot {
     // hoodSubsystem.zeroHood();
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
-    climberSubsystem.setRatchetSpeed(-0.5);
+    // climberSubsystem.setRatchetSpeed(-0.5);
   }
 
   @Override
