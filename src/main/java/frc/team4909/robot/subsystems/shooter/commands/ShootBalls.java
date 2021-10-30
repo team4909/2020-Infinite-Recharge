@@ -11,8 +11,8 @@ public class ShootBalls extends ParallelCommandGroup{
 
     public ShootBalls(int speed){
         super();
-        addCommands(new SetShooterVelocity(speed),
-            new MoveIndexerAtSpeed() //,
+        addCommands(new SetShooterVelocity(speed)
+            // new MoveIndexerAtSpeed() //,
             //new IntakeIn()
         );
     }
