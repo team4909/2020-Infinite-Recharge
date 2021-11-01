@@ -20,10 +20,10 @@ public class ShootThree extends SequentialCommandGroup{
             // new SetHoodInit(),
             // new SetShooterSpeed(0.9),
 
-            new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(2), 
-            new ShootByDistance().withTimeout(1),
+            new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(0.5), 
+            new ShootByDistance().withTimeout(0.5),
             new ShootBalls(10000).withTimeout(3),
-            new ParallelCommandGroup(new ShootBalls(10_000).withTimeout(2), new IndexerAndSorterUp()).withTimeout(8.25),
+            new ParallelCommandGroup(new ShootBalls(10_000), new IndexerAndSorterUp()).withTimeout(6),
             // new ShootBalls(10_000).withTimeout(8.25),
             // new IndexerAndSorterUp().withTimeout(2),
             ///new ShootByDistance(),

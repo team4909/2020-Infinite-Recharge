@@ -150,7 +150,7 @@ public class Robot extends TimedRobot {
 
       //-- Face Buttons
     // driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
+    // driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     
       //-- Bumpers
     // driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)

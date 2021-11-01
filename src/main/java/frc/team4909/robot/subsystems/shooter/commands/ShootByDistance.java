@@ -37,6 +37,7 @@ public class ShootByDistance extends CommandBase {
         double firstMono = a * Math.pow(distance, 2);
         double secondMono = b * distance;
         outputAngle = firstMono + secondMono + c;
+        
         return (int) outputAngle;
     }
 }
