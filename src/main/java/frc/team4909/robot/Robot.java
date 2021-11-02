@@ -107,8 +107,8 @@ public class Robot extends TimedRobot {
     autoChooser = new SendableChooser<>();
 
     // autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThree());
-    autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
+    autoChooser.setDefaultOption("Shoot 3 ONLY", new ShootThreePickUpThree());
+    //autoChooser.addOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
     // Initialize Controllers
