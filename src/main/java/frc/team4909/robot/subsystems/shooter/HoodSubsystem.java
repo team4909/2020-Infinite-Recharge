@@ -60,11 +60,12 @@ public double map(double value, double old_min, double old_max, double new_min, 
         SmartDashboard.putNumber("Hood Setpoint", hoodPos);
         SmartDashboard.putNumber("Hood Current", getHoodCurrent());
         if (!zeroing){
-            if(getAngle() < 72 && getAngle() > 23){
+            // System.out.println(getAngle());
+            // if(getAngle() < 72.5 && getAngle() >= 23){
                 hoodControl.set(ControlMode.Position, hoodPos);
-            } else {
-                hoodControl.set(ControlMode.Position, 1);
-            }
+            // } else {
+                // setHoodAngle(23);
+            // }
 
         }
         
@@ -75,7 +76,10 @@ public double map(double value, double old_min, double old_max, double new_min, 
     }
 
     public void setHoodAngle(int angle){
-        hoodPos = (int)map(angle, 23, 74, 0, 214);
+        if(angle < 23){
+            angle = 23;
+        }
+        hoodPos = (int) map(angle, 23, 74, 0, 214);
     }
 
     public void setSpeed(double speed){
@@ -88,7 +92,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
 
     public void moveHood(double pos){
         // System.out.println(pos);
-        if (getAngle() > 72) {
+        if (getAngle() > 72.5) {
             if (pos > 0) {
                 // do nothing
             } else {
