@@ -1,14 +1,11 @@
 package frc.team4909.robot.subsystems.drivetrain;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,7 +15,7 @@ import frc.team4909.robot.RobotConstants;
 import frc.team4909.robot.util.Util;
 
 public class DriveTrainSubsystem extends SubsystemBase{
-    WPI_TalonFX frontRight, frontLeft, backRight, backLeft;
+    public WPI_TalonFX frontRight, frontLeft, backRight, backLeft;
     //CANSparkMax frontRight, frontLeft, backRight, backLeft;
     SpeedControllerGroup m_right, m_left;
     DifferentialDrive bionicDrive;
