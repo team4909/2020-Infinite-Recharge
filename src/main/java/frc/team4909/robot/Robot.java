@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
     // uSensorSubsystem = new UltrasonicSensorSubsystem();
 
     climberSubsystem = new ClimberSubsystem();
-    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
+    // climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
@@ -221,6 +221,7 @@ public class Robot extends TimedRobot {
     // shootersubsystem.setSpeed(0);
     // intakeSubsystem.zeroDeploy();
     // climberSubsystem.setRatchetSpeed(-0.5);
+    // climberSubsystem.setRatchetAngl
   }
 
   @Override

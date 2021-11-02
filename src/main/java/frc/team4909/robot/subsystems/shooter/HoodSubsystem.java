@@ -60,7 +60,11 @@ public double map(double value, double old_min, double old_max, double new_min, 
         SmartDashboard.putNumber("Hood Setpoint", hoodPos);
         SmartDashboard.putNumber("Hood Current", getHoodCurrent());
         if (!zeroing){
-            hoodControl.set(ControlMode.Position, hoodPos);
+            if(getAngle() < 72 && getAngle() > 23){
+                hoodControl.set(ControlMode.Position, hoodPos);
+            } else {
+                hoodControl.set(ControlMode.Position, 0);
+            }
         }
     }
     
