@@ -24,7 +24,7 @@ public class ClimberRetract extends CommandBase {
             
         // }
         Robot.climberSubsystem.setClimberSpeed(1);
-        Robot.climberSubsystem.setRatchetAngle(0.1);
+        // Robot.climberSubsystem.setRatchetAngle(0.1);
     }
 
     @Override

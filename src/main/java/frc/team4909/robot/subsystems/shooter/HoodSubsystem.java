@@ -66,6 +66,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
                 hoodControl.set(ControlMode.Position, 0);
             }
         }
+        
     }
     
     public void setHoodPosition(int pos){

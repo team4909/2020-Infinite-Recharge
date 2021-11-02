@@ -150,7 +150,7 @@ public class Robot extends TimedRobot {
 
       //-- Face Buttons
     // driverGamepad.buttonHeld(BionicF310.X, new HookIn()); //Set the Hook Inwards (Gamepad: 'X' Button)
-    driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
+    // driverGamepad.buttonHeld(BionicF310.B, new HookOut()); //Set the Hook Outwards (Gamepad: 'B' Button)
     
       //-- Bumpers
     // driverGamepad.buttonHeld(BionicF310.LB, new ClimberExtend(500)); //Extend the Climber 500 (Gamepad: Light Bumper)
@@ -160,6 +160,8 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonHeld(BionicF310.LT, 0.2, new ClimberExtend()); //Start the Climb Up Group (Gamepad: Left Trigger)
     driverGamepad.buttonHeld(BionicF310.RT, 0.2, new ClimberRetract()); //Retract the Climber (Gamepad: Right Trigger)
     driverGamepad.buttonHeld(BionicF310.A, new MoveRatchet(180));
+    driverGamepad.buttonHeld(BionicF310.B, new MoveRatchet(0));
+
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
   
 
