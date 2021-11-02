@@ -1,5 +1,6 @@
 package frc.team4909.robot.subsystems.shooter.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
@@ -14,6 +15,8 @@ public class ShootByDistance extends CommandBase {
     private double a = RobotConstants.hoodCoefA;
     private double b = RobotConstants.hoodCoefB;
     private double c = RobotConstants.hoodCoefC;
+    private int count = 0;
+
 
     public ShootByDistance() {
         super();
@@ -24,6 +27,16 @@ public class ShootByDistance extends CommandBase {
     public void initialize() {
         Robot.hoodSubsystem.setHoodAngle(calculateAngle((int)Robot.vision.calculateDistanceFromCameraHeight(
                 RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle)));
+    }
+
+    @Override
+    public void execute() {
+        // count++;
+        // if(count == 2){
+            Robot.hoodSubsystem.setHoodAngle(calculateAngle((int)Robot.vision.calculateDistanceFromCameraHeight(
+                RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle)));
+        //     count = 0;
+        // }
     }
 
     /**
@@ -37,7 +50,6 @@ public class ShootByDistance extends CommandBase {
         double firstMono = a * Math.pow(distance, 2);
         double secondMono = b * distance;
         outputAngle = firstMono + secondMono + c;
-        
         return (int) outputAngle;
     }
 }

@@ -42,6 +42,7 @@ import frc.team4909.robot.subsystems.shooter.commands.HoodUp;
 import frc.team4909.robot.subsystems.shooter.commands.MoveHood;
 import frc.team4909.robot.subsystems.ultrasonic.UltrasonicSensorSubsystem;
 import frc.team4909.robot.subsystems.shooter.commands.MoveTurret;
+import frc.team4909.robot.subsystems.shooter.commands.SetHoodClose;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodFar;
 import frc.team4909.robot.subsystems.shooter.commands.SetHoodInit;
 import frc.team4909.robot.subsystems.shooter.commands.SetShooterSpeed;
@@ -97,8 +98,8 @@ public class Robot extends TimedRobot {
     climberSubsystem = new ClimberSubsystem();
     // climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
-    cameraSubsystem = new CameraSubsystem();
-    cameraSubsystem.Stream();
+    // cameraSubsystem = new CameraSubsystem();
+    // cameraSubsystem.Stream();
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
@@ -127,7 +128,8 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonHeld(FlightStick.One, new IndexerAndSorterUp()); //Sorter and Indexer (Joystick: Button 1)
     manipulatorGamepad.buttonHeld(FlightStick.Two, new FollowAndAim(), false); //Toggle Limelight Aim (Joystick: Button 2)
     manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.5), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
-    manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
+    //manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
+    manipulatorGamepad.buttonToggled(FlightStick.Four, new SetHoodClose());
     manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
 
@@ -163,7 +165,8 @@ public class Robot extends TimedRobot {
     driverGamepad.buttonHeld(BionicF310.B, new MoveRatchet(0));
 
     driverGamepad.buttonPressed(BionicF310.X, new TogglePreciseMode());
-  
+
+    
 
     vision.setPipeline(1);
 }
