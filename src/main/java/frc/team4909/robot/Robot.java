@@ -98,8 +98,8 @@ public class Robot extends TimedRobot {
     climberSubsystem = new ClimberSubsystem();
     // climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
-    // cameraSubsystem = new CameraSubsystem();
-    // cameraSubsystem.Stream();
+    cameraSubsystem = new CameraSubsystem();
+    cameraSubsystem.Stream();
 
     leds = new LEDs();
     // leds.setDefaultCommand(new LEDSetter());
