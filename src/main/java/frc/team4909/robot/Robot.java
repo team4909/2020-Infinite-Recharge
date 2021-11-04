@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     // uSensorSubsystem = new UltrasonicSensorSubsystem();
 
     climberSubsystem = new ClimberSubsystem();
-    // climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
+    climberSubsystem.setDefaultCommand(new ClimberSetSpeed(0.025));
 
     cameraSubsystem = new CameraSubsystem();
     cameraSubsystem.Stream();
@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
     );
 
     manipulatorGamepad = new FlightStick(1, // Port
-        0.35, // Deadzone
+        0.05, // Deadzone
         0.0 // Gamepad sensitivity
     );
 
