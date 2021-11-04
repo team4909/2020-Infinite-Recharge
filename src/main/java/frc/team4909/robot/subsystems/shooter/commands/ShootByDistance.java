@@ -12,11 +12,11 @@ public class ShootByDistance extends CommandBase {
      * Values obtained through 6 tested points: 
      * (Distance to Goal, Hood Angle Reqired to Make The Inner Port).
      */
-    private double a = RobotConstants.hoodCoefA;
-    private double b = RobotConstants.hoodCoefB;
-    private double c = RobotConstants.hoodCoefC;
-    private double d = RobotConstants.hoodCoefD;
-    private int count = 0;
+    // private double a = RobotConstants.hoodCoefA;
+    // private double b = RobotConstants.hoodCoefB;
+    // private double c = RobotConstants.hoodCoefC;
+    // private double d = RobotConstants.hoodCoefD;
+    // private int count = 0;
 
 
     public ShootByDistance() {
@@ -41,6 +41,7 @@ public class ShootByDistance extends CommandBase {
     }
 
     /**
+     * OLD Angle calculations
      * Calculate the angle the hood needs to be to score.
      * @param distance The distance from the Limelight to the Goal.
      * @return The angle of the quadratic
@@ -56,15 +57,16 @@ public class ShootByDistance extends CommandBase {
 
     
     /**
+     * NEW Angle calculations
      * Calculate the angle the hood needs to be to score.
      * @param distance The distance from the Limelight to the Goal.
      * @return The angle of the quadratic
      */
     private int calculateAngle(int distance) {
         // Use previously tested coefficients to calculate angle
-        return (int) (Math.pow(RobotConstants.hoodCoefA, 4) + 
-                    Math.pow(RobotConstants.hoodCoefB, 3) + 
-                    Math.pow(RobotConstants.hoodCoefC, 2) + 
+        return (int) (Math.pow(RobotConstants.hoodCoefA, 4) * distance + 
+                    Math.pow(RobotConstants.hoodCoefB, 3) * distance + 
+                    Math.pow(RobotConstants.hoodCoefC, 2) * distance + 
                     RobotConstants.hoodCoefD * distance);
     }
 
