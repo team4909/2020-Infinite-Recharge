@@ -17,11 +17,10 @@ import frc.team4909.robot.subsystems.shooter.commands.ShootBalls;
 public class ShootThreePickUpThree extends SequentialCommandGroup{
     public ShootThreePickUpThree(){
         addCommands(
-                //new ShootThree(),
-                //new ParallelDeadlineGroup(),
-                new IntakeDeploy(),
-                new DriveForward(200)
-                //new ShootThree()
+                new ShootThree(),
+                new ParallelDeadlineGroup(new DriveForward(170), new SmartIndexerAndSorterUp()),
+                new DriveForward(-100),
+                new ShootThree()
         
         );
     }

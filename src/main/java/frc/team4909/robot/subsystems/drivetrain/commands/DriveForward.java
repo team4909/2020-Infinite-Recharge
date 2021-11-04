@@ -80,7 +80,7 @@ public class DriveForward extends CommandBase{
         targetPos *= SmartDashboard.getNumber("Multiplier", 1.0);
         System.out.println("Current Pos:" + currentPos);
         System.out.println("Target Pos:" + targetPos);
-        distancePID.setSetpoint(targetPos);
+        distancePID.setSetpoint(Math.abs(targetPos));
         System.out.println("Begin DriveForward with error " + (targetPos - currentPos));
         SmartDashboard.putBoolean("Has Driveforward Ended?", false);
         //TODO Test Value and figure out units
@@ -92,11 +92,22 @@ public class DriveForward extends CommandBase{
         currentPos = Robot.drivetrainsubsystem.frontRight.getSelectedSensorPosition(); //TODO test wether STARTING_POS needs to be added to this value
         //This takes the pid calculate method and gives it as speed to the arcade drive
         //IMPORTANT: THE NEGATIVE IS NEEDED BECAUSE ON THE JOYSTICK, UP IS NEGATIVE. THE NEGATIVE EMULATES THE STICK'S DIRECTIONS. 
-        double output = -distancePID.calculate(currentPos); 
+        double output;
+        if (inches < 0) {
+             output = distancePID.calculate(currentPos); 
+        } else {
+            output = -distancePID.calculate(currentPos); 
+        }
 
-        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.3, 0.4);
 
-        Robot.drivetrainsubsystem.arcadeDrive( output < 0 ? -clampedOutput : clampedOutput, 0); //TODO where does the negative go???;
+        double clampedOutput = MathUtil.clamp(Math.abs(output), 0.2, 0.7);
+
+        if (inches < 0) {
+            Robot.drivetrainsubsystem.arcadeDrive(-(output < 0 ? -clampedOutput : clampedOutput), 0); //TODO where does the negative go???;
+        } else {
+            Robot.drivetrainsubsystem.arcadeDrive(output < 0 ? -clampedOutput : clampedOutput, 0); //TODO where does the negative go???;
+        }
+        
         if(++numLoops == 1){
             // System.out.println("Current Position: " + currentPos);
             // System.out.println("Target Position: " + targetPos);
@@ -113,10 +124,19 @@ public class DriveForward extends CommandBase{
     @Override
     public boolean isFinished() {
 
-        if ((currentPos - targetPos) > 0){
-            System.out.println("isFinished has returned true");
-            return true;
+        if (inches < 0) {
+
+            if ((currentPos - targetPos) < 0){
+                System.out.println("isFinished has returned true (-)");
+                return true;
+            }
+        } else {
+            if ((currentPos - targetPos) > 0){
+                System.out.println("isFinished has returned true (+)");
+                return true;
+            }
         }
+
         return false;
 
     }
