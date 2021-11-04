@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.ShootThree;
-import frc.team4909.robot.autos.ShootThreePickUpThree;
+import frc.team4909.robot.autos.AutoShootThreePickUpThree;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -21,7 +21,7 @@ import frc.team4909.robot.subsystems.climber.commands.HookIn;
 import frc.team4909.robot.subsystems.climber.commands.HookOut;
 import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
 // import frc.team4909.robot.subsystems.climber.commands.MoveRatchet;
-import frc.team4909.robot.subsystems.drivetrain.Drive;
+import frc.team4909.robot.subsystems.drivetrain.DriveWithJoystick;
 import frc.team4909.robot.subsystems.drivetrain.DriveTrainSubsystem;
 import frc.team4909.robot.subsystems.drivetrain.InvertDrive;
 import frc.team4909.robot.subsystems.drivetrain.TogglePreciseMode;
@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
 
     // Instantiate the Subsystems
     drivetrainsubsystem = new DriveTrainSubsystem();
-    drivetrainsubsystem.setDefaultCommand(new Drive(drivetrainsubsystem));
+    drivetrainsubsystem.setDefaultCommand(new DriveWithJoystick(drivetrainsubsystem));
 
     vision = new Vision();
 
@@ -106,7 +106,7 @@ public class Robot extends TimedRobot {
 
     autoChooser = new SendableChooser<>();
     // autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.setDefaultOption("Shoot 3 Pickup 3", new ShootThreePickUpThree());
+    autoChooser.setDefaultOption("Shoot 3 Pickup 3", new AutoShootThreePickUpThree());
     autoChooser.addOption("Shoot 3", new ShootThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
