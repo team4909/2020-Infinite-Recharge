@@ -14,9 +14,14 @@ public class RobotConstants {
     public static final double shooterkD = 0;
     public static final double shooterkF = 0.05815;
 
-    public static final double hoodCoefA = -0.0015916;
-    public static final double hoodCoefB = 0.5017;
-    public static final double hoodCoefC = 27.1368;
+    // public static final double hoodCoefA = -0.0015916;
+    // public static final double hoodCoefB = 0.5017;
+    // public static final double hoodCoefC = 27.1368;
+
+    public static final double hoodCoefA = -1.4058e-8;
+    public static final double hoodCoefB = 1.282e-5;
+    public static final double hoodCoefC = -5.06999e-3;
+    public static final double hoodCoefD = 0.95704;
 
     public static final double turretSpeedMultiplier = 0.3;
 
