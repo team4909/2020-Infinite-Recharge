@@ -25,7 +25,7 @@ public class AutoShootThreePickUpThree extends SequentialCommandGroup{
                     new ShootBalls(10000)    
                 ),
                 //new SmartIndexerAndSorterUp().withTimeout(1);
-                new ParallelDeadlineGroup(new Drive(-135), new IndexerAndSorterUp(), new IntakeDeploy(), new ShootBalls(10000)),
+                new ParallelDeadlineGroup(new Drive(-135), new SmartIndexerAndSorterUp(), new ShootBalls(10000)),
                 new ParallelDeadlineGroup(new Drive(21), new ShootBalls(10000)),
                 new ParallelCommandGroup(new FollowTarget(Robot.turretSubsystem, Robot.vision), new SetHoodFar(), new ShootBalls(10000)).withTimeout(0.7), //horizontal alignment
                 //new ShootBalls(10000).withTimeout(2), // spin up the flywheel
