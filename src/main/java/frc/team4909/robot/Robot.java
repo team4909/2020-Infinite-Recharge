@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.AutoShootThreePickUpThree;
 import frc.team4909.robot.autos.ShootThree;
+import frc.team4909.robot.autos.SixBallAuto;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -106,8 +107,9 @@ public class Robot extends TimedRobot {
 
     autoChooser = new SendableChooser<>();
     // autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.setDefaultOption("Shoot 3 Pickup 3", new AutoShootThreePickUpThree());
+    autoChooser.setDefaultOption("6 Ball Auto", new SixBallAuto());
     autoChooser.addOption("Shoot 3", new ShootThree());
+    autoChooser.addOption("Shoot 3 Pickup 3 NO SHOOT", new AutoShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
     // Initialize Controllers

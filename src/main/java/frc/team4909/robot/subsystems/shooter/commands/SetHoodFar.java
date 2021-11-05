@@ -12,7 +12,7 @@ public class SetHoodFar extends CommandBase{
 
     @Override
     public void initialize() {
-        Robot.hoodSubsystem.setHoodAngle(70);
+        Robot.hoodSubsystem.setHoodAngle(60);
     }
     @Override
     public boolean isFinished() {

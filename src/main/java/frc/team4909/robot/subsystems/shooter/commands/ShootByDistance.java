@@ -47,14 +47,14 @@ public class ShootByDistance extends CommandBase {
      * @param distance The distance from the Limelight to the Goal.
      * @return The angle of the quadratic
      */
-    // private int calculateAngle(int distance) {
-    //     // Use previously tested coefficients to calculate angle
-    //     double outputAngle;
-    //     double firstMono = a * Math.pow(distance, 2);
-    //     double secondMono = b * distance;
-    //     outputAngle = firstMono + secondMono + c;
-    //     return (int) outputAngle;
-    // }
+    private int calculateAngle(int distance) {
+        // Use previously tested coefficients to calculate angle
+        double outputAngle;
+        double firstMono = a * Math.pow(distance, 2);
+        double secondMono = b * distance;
+        outputAngle = firstMono + secondMono + c;
+        return (int) outputAngle;
+    }
 
     
     /**
@@ -63,17 +63,18 @@ public class ShootByDistance extends CommandBase {
      * @param distance The distance from the Limelight to the Goal.
      * @return The angle of the quadratic
      */
-    private int calculateAngle(double distance) {
-        SmartDashboard.putNumber("LimeLight Distance", distance);
-        // Use previously tested coefficients to calculate angle
-        int angle = (int) (Math.pow(distance, 4) * RobotConstants.hoodCoef4A +
-                            Math.pow(distance, 3) * RobotConstants.hoodCoef4B + 
-                            Math.pow(distance, 2) * RobotConstants.hoodCoef4C + 
-                            distance * RobotConstants.hoodCoef4D);
-        angle+=3;
-        SmartDashboard.putNumber("LimeLight Calculated Angle", angle);
-        return angle;
-    }
+    // private int calculateAngle(double distance) {
+    //     SmartDashboard.putNumber("LimeLight Distance", distance);
+    //     // Use previously tested coefficients to calculate angle
+    //     int angle = (int) (Math.pow(distance, 4) * RobotConstants.hoodCoef4A +
+    //                         Math.pow(distance, 3) * RobotConstants.hoodCoef4B + 
+    //                         Math.pow(distance, 2) * RobotConstants.hoodCoef4C + 
+    //                         distance * RobotConstants.hoodCoef4D);
+    //     angle+=3;
+    //     SmartDashboard.putNumber("LimeLight Calculated Angle", angle);
+    //     return angle;
+    // }
+
 
     
 }

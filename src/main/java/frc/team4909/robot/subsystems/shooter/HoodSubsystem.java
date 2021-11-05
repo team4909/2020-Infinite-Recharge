@@ -59,6 +59,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
         SmartDashboard.putNumber("Hood Position", getAngle()  );
         SmartDashboard.putNumber("Hood Setpoint", hoodPos);
         SmartDashboard.putNumber("Hood Current", getHoodCurrent());
+        SmartDashboard.putNumber("Distance", Robot.vision.calculateDistanceFromCameraHeight(RobotConstants.powerPortHeight, RobotConstants.limelightHeight, RobotConstants.limelightAngle));
         if (!zeroing){
             // System.out.println(getAngle());
             // if(getAngle() < 72.5 && getAngle() >= 23){
@@ -79,6 +80,7 @@ public double map(double value, double old_min, double old_max, double new_min, 
         if(angle < 23){
             angle = 23;
         }
+        SmartDashboard.putNumber("Hood Requested Angle", angle);
         hoodPos = (int) map(angle, 23, 74, 0, 214);
     }
 
@@ -98,7 +100,8 @@ public double map(double value, double old_min, double old_max, double new_min, 
             } else {
                 hoodPos += pos;
             }
-        } else if (getAngle() < 23.5) {
+        } else if (getAngle() < 23.5)
+         {
             if (pos < 0) {
                 // do nothing
             } else {
