@@ -15,6 +15,7 @@ public class SetShooterVelocity extends CommandBase {
         velocity = v;
     }
 
+    @Override
     public void initialize(){
         Robot.shootersubsystem.isReving = true;
         Robot.shootersubsystem.setVelocity(velocity);

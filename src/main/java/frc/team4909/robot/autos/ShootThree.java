@@ -12,10 +12,13 @@ import frc.team4909.robot.subsystems.shooter.commands.ShootByDistance;
 public class ShootThree extends SequentialCommandGroup{
     public ShootThree(){
         addCommands(
-            new FollowTarget(Robot.turretSubsystem, Robot.vision).withTimeout(0.7), //horizontal alignment
-            new ShootByDistance().withTimeout(0.5), // hood alignment
+            new ParallelCommandGroup(
+                new FollowTarget(Robot.turretSubsystem, Robot.vision),
+                new ShootByDistance()).withTimeout(1),
             new ShootBalls(10000).withTimeout(2), // spin up the flywheel
-            new ParallelCommandGroup(new ShootBalls(10_000), new IndexerAndSorterUp()).withTimeout(3) // keep flywheel going, run indexer seconds
+            new ParallelCommandGroup(
+                new ShootBalls(10_000), 
+                new IndexerAndSorterUp()).withTimeout(3) // keep flywheel going, run indexer seconds
         );
     }
 }

@@ -94,7 +94,6 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setVelocity(double velocity) {
-        double v = Util.map(velocity, 0.0, 6380.0, 0.0, 21777.06);
         shooter2.set(ControlMode.Velocity, velocity);
         speed = velocity;
     }
