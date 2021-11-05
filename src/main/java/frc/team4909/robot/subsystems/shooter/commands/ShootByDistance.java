@@ -1,6 +1,7 @@
 package frc.team4909.robot.subsystems.shooter.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team4909.robot.Robot;
 import frc.team4909.robot.RobotConstants;
@@ -12,9 +13,9 @@ public class ShootByDistance extends CommandBase {
      * Values obtained through 6 tested points: 
      * (Distance to Goal, Hood Angle Reqired to Make The Inner Port).
      */
-    // private double a = RobotConstants.hoodCoefA;
-    // private double b = RobotConstants.hoodCoefB;
-    // private double c = RobotConstants.hoodCoefC;
+    private double a = RobotConstants.hoodCoefA;
+    private double b = RobotConstants.hoodCoefB;
+    private double c = RobotConstants.hoodCoefC;
     // private double d = RobotConstants.hoodCoefD;
     // private int count = 0;
 
@@ -62,12 +63,16 @@ public class ShootByDistance extends CommandBase {
      * @param distance The distance from the Limelight to the Goal.
      * @return The angle of the quadratic
      */
-    private int calculateAngle(int distance) {
+    private int calculateAngle(double distance) {
+        SmartDashboard.putNumber("LimeLight Distance", distance);
         // Use previously tested coefficients to calculate angle
-        return (int) (Math.pow(RobotConstants.hoodCoefA, 4) * distance + 
-                    Math.pow(RobotConstants.hoodCoefB, 3) * distance + 
-                    Math.pow(RobotConstants.hoodCoefC, 2) * distance + 
-                    RobotConstants.hoodCoefD * distance);
+        int angle = (int) (Math.pow(distance, 4) * RobotConstants.hoodCoef4A +
+                            Math.pow(distance, 3) * RobotConstants.hoodCoef4B + 
+                            Math.pow(distance, 2) * RobotConstants.hoodCoef4C + 
+                            distance * RobotConstants.hoodCoef4D);
+        angle+=3;
+        SmartDashboard.putNumber("LimeLight Calculated Angle", angle);
+        return angle;
     }
 
     

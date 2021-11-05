@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterSpeed(0.5), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
     //manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
     manipulatorGamepad.buttonToggled(FlightStick.Four, new SetHoodClose());
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(21000), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(10000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons

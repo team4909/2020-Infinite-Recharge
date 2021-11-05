@@ -15,15 +15,19 @@ public class RobotConstants {
     public static final double shooterkF = 0.05815;
 
     // OLD Quadratic hood values
-    // public static final double hoodCoefA = -0.0015916;
-    // public static final double hoodCoefB = 0.5017;
-    // public static final double hoodCoefC = 27.1368;
+    public static final double hoodCoefA = 0.00222701;
+    public static final double hoodCoefB = -0.909441;
+    public static final double hoodCoefC = 133.32;
 
     // NEW Quartic hood values
-    public static final double hoodCoefA = -1.4058e-8;
-    public static final double hoodCoefB = 1.282e-5;
-    public static final double hoodCoefC = -5.06999e-3;
-    public static final double hoodCoefD = 0.95704;
+    // public static final double hoodCoef4A = -1.4058e-8;
+    // public static final double hoodCoef4B = 1.282e-5;
+    // public static final double hoodCoef4C = -5.06999e-3;
+    // public static final double hoodCoef4D = 0.95704;
+    public static final double hoodCoef4A = -6.5612e-9;
+    public static final double hoodCoef4B = 0.00001292;
+    public static final double hoodCoef4C = -0.00570245;
+    public static final double hoodCoef4D = 0.962744;
 
     public static final double turretSpeedMultiplier = 0.3;
 

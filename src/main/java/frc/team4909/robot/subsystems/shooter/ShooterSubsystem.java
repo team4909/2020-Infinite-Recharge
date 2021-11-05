@@ -65,7 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Speed", shooter2.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Speed", getRPM());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
         SmartDashboard.putNumber("Current Speed Setpoint", speed);
         SmartDashboard.putNumber("Shooter Speed Output", shooter2.get());
@@ -99,9 +99,10 @@ public class ShooterSubsystem extends SubsystemBase {
         speed = velocity;
     }
 
+    //NOT RPM DUKMMY
     public double getRPM() {
         // return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
-        return shooter2.getSelectedSensorVelocity();
+        return 600*(shooter2.getSelectedSensorVelocity() / 2048);
     }
 
 }
