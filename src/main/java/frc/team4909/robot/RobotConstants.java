@@ -15,9 +15,9 @@ public class RobotConstants {
     public static final double shooterkF = 0.05; //setpoint * kf = motorOutput 
 
     // OLD Quadratic hood values
-    public static final double hoodCoefA = -0.0015916;
-    public static final double hoodCoefB = 0.5017;
-    public static final double hoodCoefC = 27.1368;
+    public static final double hoodCoefA = -0.000673493;
+    public static final double hoodCoefB = 0.291947;
+    public static final double hoodCoefC = 36.9933;
 
     // NEW Quartic hood values
     // public static final double hoodCoef4A = -1.4058e-8;

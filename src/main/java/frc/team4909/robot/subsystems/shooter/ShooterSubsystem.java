@@ -107,8 +107,8 @@ public class ShooterSubsystem extends SubsystemBase {
         if (velocityInRPM == 0) {
             setSpeed(0);
         }
-        shooterLeft.set(ControlMode.Velocity, (velocityInRPM / 600) * 2048);
-        speed = (velocityInRPM / 600) * 2048;
+        shooterLeft.set(ControlMode.Velocity, (velocityInRPM / 600.0) * 2048.0);
+        speed = (velocityInRPM / 600.0) * 2048.0;
     }
 
     //NOT RPM DUKMMY
