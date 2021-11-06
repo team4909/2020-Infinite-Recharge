@@ -27,7 +27,7 @@ public class AutoShootThreePickUpThree extends SequentialCommandGroup{
                 new ShootByDistance(),
                 new SetShooterVelocity(ShooterRPM)
             ).withTimeout(1.5),
-            
+
             new SetShooterVelocity(ShooterRPM).withTimeout(2), // spin up the flywheel
             new ParallelCommandGroup(
                 new SetShooterVelocity(ShooterRPM), 
@@ -48,7 +48,8 @@ public class AutoShootThreePickUpThree extends SequentialCommandGroup{
                 new SetShooterVelocity(ShooterRPM)),
             new ParallelCommandGroup(
                 new FollowTarget(Robot.turretSubsystem, Robot.vision),
-                new SetHoodFar(),
+                // new SetHoodFar(),
+                new ShootByDistance(),
                 new SetShooterVelocity(ShooterRPM)
             ).withTimeout(0.7), //horizontal alignment
             //new SetShooterVelocity(ShooterRPM).withTimeout(2), // spin up the flywheel
