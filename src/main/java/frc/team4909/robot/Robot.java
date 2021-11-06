@@ -1,6 +1,7 @@
 package frc.team4909.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -10,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team4909.robot.autos.AutoShootThreePickUpThree;
 import frc.team4909.robot.autos.ShootThree;
-import frc.team4909.robot.autos.SixBallAuto;
 import frc.team4909.robot.operator.controllers.BionicF310;
 import frc.team4909.robot.operator.controllers.FlightStick;
 import frc.team4909.robot.subsystems.camera.CameraSubsystem;
@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     shootersubsystem = new ShooterSubsystem();
-    shootersubsystem.setDefaultCommand(new SetShooterVelocity(0)); //10000 //(new FollowTarget(shootersubsystem, vision));
+    // shootersubsystem.setDefaultCommand(new SetShooterVelocity(0)); //10000 //(new FollowTarget(shootersubsystem, vision));
 
     indexerSubsystem = new IndexerSubsystem();
     //indexerSubsystem.setDefaultCommand(new SmartIndexerAndSorterUp());
@@ -106,10 +106,9 @@ public class Robot extends TimedRobot {
     // leds.setDefaultCommand(new LEDSetter());
 
     autoChooser = new SendableChooser<>();
-    // autoChooser.setDefaultOption("Do Nothing", null);
-    autoChooser.setDefaultOption("6 Ball Auto", new SixBallAuto());
+    autoChooser.addOption("Do Nothing", new CommandGroup());
+    autoChooser.setDefaultOption("6 Ball Auto", new AutoShootThreePickUpThree());
     autoChooser.addOption("Shoot 3", new ShootThree());
-    autoChooser.addOption("Shoot 3 Pickup 3 NO SHOOT", new AutoShootThreePickUpThree());
     SmartDashboard.putData("Autonomous Mode: ", autoChooser);
 
     // Initialize Controllers
@@ -131,7 +130,7 @@ public class Robot extends TimedRobot {
     manipulatorGamepad.buttonPressed(FlightStick.Three, new ParallelCommandGroup(new SetShooterVelocity(21000), new ZeroHoodInit())); //Turn of Shooter (Joystick: Button 3)
     //manipulatorGamepad.buttonPressed(FlightStick.Four, new SetHoodInit()); //Set Far Hood Angle (Joystick: Button 4)
     manipulatorGamepad.buttonToggled(FlightStick.Four, new SetHoodClose());
-    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(10000), false); //Set Shooter Speed 75% (Joystick: Button 5)
+    manipulatorGamepad.buttonToggled(FlightStick.Five, new SetShooterVelocity(5000), false); //Set Shooter Speed 75% (Joystick: Button 5)
     manipulatorGamepad.buttonPressed(FlightStick.Six, new SetHoodFar()); //Set Initial Hood Angle (Joystick: Button 6)
 
       //-- Base Buttons

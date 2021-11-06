@@ -9,10 +9,10 @@ public class RobotConstants {
     public static final double limelightPowerPortDiff = powerPortHeight - limelightHeight;
 
     //Shooter Constants
-    public static final double shooterkP = 0.00139;
+    public static final double shooterkP = 2; //1000 *x = 1;  where 1000 is worst case error
     public static final double shooterkI = 0;
-    public static final double shooterkD = 0;
-    public static final double shooterkF = 0.05815;
+    public static final double shooterkD = 100;
+    public static final double shooterkF = 0.05; //setpoint * kf = motorOutput 
 
     // OLD Quadratic hood values
     public static final double hoodCoefA = -0.0015916;

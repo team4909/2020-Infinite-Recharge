@@ -7,18 +7,18 @@ import frc.team4909.robot.subsystems.shooter.ShooterSubsystem;
 
 public class SetShooterVelocity extends CommandBase {
 
-    double velocity;
+    double velocityInRPM;
 
-    public SetShooterVelocity(double v) {
+    public SetShooterVelocity(double velocityInRPM) {
         super();
         addRequirements(Robot.shootersubsystem);
-        velocity = v;
+        this.velocityInRPM = velocityInRPM;
     }
 
     @Override
     public void initialize(){
         Robot.shootersubsystem.isReving = true;
-        Robot.shootersubsystem.setVelocity(velocity);
+        Robot.shootersubsystem.setVelocity(velocityInRPM);
         System.out.println("init shooter velocity");
     }
 
@@ -26,7 +26,7 @@ public class SetShooterVelocity extends CommandBase {
     public void end(boolean interrupted){
         Robot.shootersubsystem.isReving = false;
         System.out.println("shooter end" + interrupted);
-        Robot.shootersubsystem.setVelocity(3225);
+        Robot.shootersubsystem.setSpeed(0);
     }
 
     

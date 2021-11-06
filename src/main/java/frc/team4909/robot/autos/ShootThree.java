@@ -14,7 +14,7 @@ public class ShootThree extends SequentialCommandGroup{
         addCommands(
             new ParallelCommandGroup(
                 new FollowTarget(Robot.turretSubsystem, Robot.vision),
-                new ShootByDistance()).withTimeout(1),
+                new ShootByDistance()).withTimeout(1.5),
             new ShootBalls(10000).withTimeout(2), // spin up the flywheel
             new ParallelCommandGroup(
                 new ShootBalls(10_000), 

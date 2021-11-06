@@ -18,13 +18,13 @@ import frc.team4909.robot.util.Util;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    WPI_TalonFX shooter1, shooter2;
+    WPI_TalonFX shooterRight, shooterLeft;
     double speed = -500000;
     public boolean isAtSpeed = false;
     public boolean isAligned = false;
     public boolean isReving = false;
     public double shooterSetSpeed = 17000;
-    Orchestra orchestra = new Orchestra();
+
     
     CANSparkMax turnMotor;
 
@@ -32,29 +32,29 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public ShooterSubsystem() {
 
-        shooter1 = new WPI_TalonFX(6);
-        shooter2 = new WPI_TalonFX(5);
+        shooterRight = new WPI_TalonFX(5);
+        shooterLeft = new WPI_TalonFX(6); //leader
 
-        shooter1.configFactoryDefault();
-        shooter2.configFactoryDefault();
+        shooterRight.configFactoryDefault();
+        shooterLeft.configFactoryDefault();
 
-        shooter1.follow(shooter2);
-        shooter1.setInverted(true);
+        shooterLeft.setInverted(true);
+        shooterRight.follow(shooterLeft);
+        
 
-        shooter1.setNeutralMode(NeutralMode.Coast);
-        shooter2.setNeutralMode(NeutralMode.Coast);
+        shooterLeft.setNeutralMode(NeutralMode.Coast);
+        shooterRight.setNeutralMode(NeutralMode.Coast);
+
+        shooterLeft.config_kP(0, RobotConstants.shooterkP);
+        shooterLeft.config_kI(0, RobotConstants.shooterkI);
+        shooterLeft.config_kD(0, RobotConstants.shooterkD);
+        shooterLeft.config_kF(0, RobotConstants.shooterkF);
+
+        // shooterRight.configPeakOutputReverse(0);
+
 
         turnMotor = new CANSparkMax(10, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kBrake);
-
-        shooter2.config_kP(0, RobotConstants.shooterkP);
-        shooter2.config_kI(0, RobotConstants.shooterkI);
-        shooter2.config_kD(0, RobotConstants.shooterkD);
-        shooter2.config_kF(0, RobotConstants.shooterkF);
-
-        shooter2.configPeakOutputReverse(0);
-
-        orchestra.addInstrument(shooter1);
 
     }
 
@@ -67,8 +67,17 @@ public class ShooterSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Speed", getRPM());
         SmartDashboard.putBoolean("At Speed", isAtSpeed);
+        SmartDashboard.putNumber("Shooter/Speed", shooterLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Shooter/Speed RPM", getRPM());
         SmartDashboard.putNumber("Current Speed Setpoint", speed);
-        SmartDashboard.putNumber("Shooter Speed Output", shooter2.get());
+        SmartDashboard.putNumber("Shooter Speed Output", shooterLeft.get());
+        SmartDashboard.putNumber("Shooter/error", shooterLeft.getClosedLoopError());
+        SmartDashboard.putNumber("Shooter/error expected", shooterLeft.getClosedLoopTarget()-getRPM() );
+
+        SmartDashboard.putNumber("Shooter/target", shooterLeft.getClosedLoopTarget());
+
+        
+
         if (Math.abs(speed - getRPM()) < 250.00) {
             isAtSpeed = true;
         } else {
@@ -82,26 +91,30 @@ public class ShooterSubsystem extends SubsystemBase {
         // }
 
         // SmartDashboard.putNumber("shooter1 current", shooter1.getSupplyCurrent());
-        SmartDashboard.putNumber("shooter2 current", shooter2.getSupplyCurrent());
+        SmartDashboard.putNumber("shooter2 current", shooterLeft.getSupplyCurrent());
         SmartDashboard.putBoolean("Shooter Reving", isReving);
 
     }
 
     public void setSpeed(double speed) {
         // shooter1.set(speed);
-        shooter2.set(speed);
+        shooterLeft.set(ControlMode.PercentOutput, speed);
+        shooterRight.set(ControlMode.PercentOutput, speed);
         speed = 0;
     }
 
-    public void setVelocity(double velocity) {
-        shooter2.set(ControlMode.Velocity, velocity);
-        speed = velocity;
+    public void setVelocity(double velocityInRPM) {
+        if (velocityInRPM == 0) {
+            setSpeed(0);
+        }
+        shooterLeft.set(ControlMode.Velocity, (velocityInRPM / 600) * 2048);
+        speed = (velocityInRPM / 600) * 2048;
     }
 
     //NOT RPM DUKMMY
     public double getRPM() {
         // return Util.map(shooter2.getSelectedSensorVelocity(), 0.0, 21777.06, 0.0, 6380.0);
-        return 600*(shooter2.getSelectedSensorVelocity() / 2048);
+        return 600*((double)shooterLeft.getSelectedSensorVelocity() / 2048.0);
     }
 
 }
